@@ -462,7 +462,7 @@
             overflow: hidden;
             border-radius: 16px;
             border: 1px solid var(--border);
-            background: var(--surface);
+            background: #000;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
         }
 
@@ -473,6 +473,7 @@
             width: 100%;
             height: 100%;
             border-radius: 16px;
+            border: none;
         }
 
         .features-grid {
@@ -764,6 +765,36 @@
                     #050608 50%,
                     #0D1117 100%
                 );
+            }
+
+            nav {
+                padding: 12px 0;
+            }
+
+            .nav-content {
+                flex-wrap: wrap;
+                gap: 12px;
+            }
+
+            .logo {
+                font-size: 1rem;
+            }
+
+            .logo img {
+                width: 24px !important;
+                height: 24px !important;
+            }
+
+            .nav-links {
+                width: 100%;
+                justify-content: space-between;
+                gap: 8px;
+            }
+
+            .nav-links a {
+                font-size: 0.8125rem;
+                padding: 6px 8px;
+                white-space: nowrap;
             }
 
             .container {
