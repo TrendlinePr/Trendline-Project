@@ -334,6 +334,7 @@
         /* CHART SHOWCASE SECTION */
         .chart-showcase-section {
             padding: 80px 0;
+            scroll-margin-top: -150px;
         }
 
         .chart-showcase-wrapper {
@@ -476,15 +477,12 @@
                 min-width: 100%;
                 max-width: 100%;
                 flex-shrink: 0;
-                min-height: 400px;
-                display: flex;
-                align-items: center;
             }
 
             .carousel-item img {
                 width: 100%;
-                height: 100%;
-                object-fit: cover;
+                height: auto;
+                object-fit: contain;
             }
             
             .carousel-track {
@@ -1085,7 +1083,7 @@
             <h1>Quantum Ribbon <span class="accent-text">Pro</span></h1>
             <p>Multi-timeframe confirmation. Professional risk management. Bot-ready automation. Everything you need in one refined system.</p>
             <div class="btn-group">
-                <a href="#features" class="btn btn-primary">Explore Features</a>
+                <a href="#showcase" class="btn btn-primary">Explore Features</a>
                 <a href="#comparison" class="btn btn-secondary">Compare Versions</a>
             </div>
         </div>
@@ -1112,7 +1110,7 @@
     </section>
 
     <!-- CHART SHOWCASE -->
-    <section class="chart-showcase-section">
+    <section class="chart-showcase-section" id="showcase">
         <div class="container">
             <div class="chart-showcase-wrapper">
                 <img src="chart-showcase.png" alt="Quantum Ribbon Pro Features" class="chart-showcase-image">
