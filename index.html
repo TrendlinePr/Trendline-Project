@@ -473,7 +473,26 @@
             }
             
             .carousel-wrapper {
-                padding: 0 30px;
+                padding: 0 60px;
+            }
+
+            .carousel-track-container {
+                overflow: visible;
+                padding: 40px 0;
+            }
+
+            .carousel-btn {
+                width: 45px;
+                height: 45px;
+                font-size: 1.8rem;
+            }
+
+            .carousel-btn.prev {
+                left: 5px;
+            }
+
+            .carousel-btn.next {
+                right: 5px;
             }
         }
 
@@ -919,6 +938,38 @@
             font-size: 0.875rem;
         }
 
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 16px;
+            margin-bottom: 24px;
+        }
+
+        .social-icons a {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text-muted);
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+
+        .social-icons a:hover {
+            background: rgba(41, 168, 241, 0.1);
+            color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .social-icons svg {
+            width: 20px;
+            height: 20px;
+            fill: currentColor;
+        }
+
         /* RESPONSIVE */
         @media (max-width: 768px) {
             body {
@@ -1081,6 +1132,10 @@
             </div>
             <div class="carousel-indicators">
                 <span class="indicator active"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
                 <span class="indicator"></span>
             </div>
         </div>
@@ -1459,6 +1514,13 @@
     <!-- FOOTER -->
     <footer>
         <div class="container">
+            <div class="social-icons">
+                <a href="https://www.youtube.com/@TrendlineProject" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+                        <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/>
+                    </svg>
+                </a>
+            </div>
             <div class="footer-links">
                 <a href="privacy-policy.html">Privacy Policy</a>
                 <a href="terms-of-service.html">Terms of Service</a>
@@ -1497,7 +1559,7 @@
             }
         });
 
-        // 3-Image Carousel
+        // 3-Image Carousel (Desktop) / 1-Image (Mobile)
         const track = document.querySelector('.carousel-track');
         const items = Array.from(track?.children || []);
         const nextBtn = document.querySelector('.carousel-btn.next');
@@ -1505,7 +1567,7 @@
         const indicators = document.querySelectorAll('.indicator');
         
         let currentIndex = 0;
-        const totalSlides = 2; // 2 groups (3 images each)
+        const totalItems = items.length; // 6 total images
         
         function getItemsPerSlide() {
             if (window.innerWidth <= 640) return 1;
@@ -1513,25 +1575,45 @@
             return 3;
         }
 
+        function getTotalSlides() {
+            const itemsPerSlide = getItemsPerSlide();
+            return Math.ceil(totalItems / itemsPerSlide);
+        }
+
         function updateCarousel() {
             const itemsPerSlide = getItemsPerSlide();
             const itemWidth = items[0]?.offsetWidth || 0;
-            const gap = 24;
-            const moveAmount = (itemWidth + gap) * itemsPerSlide;
+            const gap = window.innerWidth <= 640 ? 0 : 24;
+            const moveAmount = (itemWidth + gap) * currentIndex;
             
-            track.style.transform = `translateX(-${currentIndex * moveAmount}px)`;
+            track.style.transform = `translateX(-${moveAmount}px)`;
             
+            // Update indicators based on screen size
             indicators.forEach((ind, idx) => {
-                ind.classList.toggle('active', idx === currentIndex);
+                if (window.innerWidth <= 640) {
+                    // Mobile: show all 6 indicators, highlight current image
+                    ind.style.display = 'block';
+                    ind.classList.toggle('active', idx === currentIndex);
+                } else if (window.innerWidth <= 968) {
+                    // Tablet: show 3 indicators for 3 groups of 2
+                    ind.style.display = idx < 3 ? 'block' : 'none';
+                    ind.classList.toggle('active', idx === currentIndex);
+                } else {
+                    // Desktop: show 2 indicators for 2 groups of 3
+                    ind.style.display = idx < 2 ? 'block' : 'none';
+                    ind.classList.toggle('active', idx === currentIndex);
+                }
             });
         }
 
         function nextSlide() {
+            const totalSlides = getTotalSlides();
             currentIndex = (currentIndex + 1) % totalSlides;
             updateCarousel();
         }
 
         function prevSlide() {
+            const totalSlides = getTotalSlides();
             currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
             updateCarousel();
         }
@@ -1541,8 +1623,11 @@
 
         indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => {
-                currentIndex = index;
-                updateCarousel();
+                const totalSlides = getTotalSlides();
+                if (index < totalSlides) {
+                    currentIndex = index;
+                    updateCarousel();
+                }
             });
         });
 
@@ -1560,7 +1645,10 @@
         });
 
         // Update on window resize
-        window.addEventListener('resize', updateCarousel);
+        window.addEventListener('resize', () => {
+            currentIndex = 0; // Reset to first slide on resize
+            updateCarousel();
+        });
     </script>
 
     <!-- COOKIE CONSENT POPUP -->
