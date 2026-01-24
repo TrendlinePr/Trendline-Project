@@ -347,6 +347,136 @@
             border-radius: 18px;
         }
 
+        /* FEATURE CAROUSEL - 3 Images */
+        .feature-carousel-section {
+            padding: 80px 0;
+        }
+
+        .carousel-wrapper {
+            position: relative;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 100px;
+        }
+
+        .carousel-track-container {
+            overflow: hidden;
+            padding: 60px 0;
+        }
+
+        .carousel-track {
+            display: flex;
+            gap: 24px;
+            transition: transform 0.5s ease-in-out;
+            will-change: transform;
+        }
+
+        .carousel-item {
+            min-width: calc((100% - 48px) / 3);
+            max-width: calc((100% - 48px) / 3);
+            flex-shrink: 0;
+            border-radius: 16px;
+            padding: 3px;
+            background: linear-gradient(135deg, 
+                rgba(41, 168, 241, 0.5) 0%, 
+                rgba(140, 168, 206, 0.35) 50%, 
+                rgba(236, 72, 153, 0.5) 100%);
+            box-shadow: 
+                0 10px 30px rgba(41, 168, 241, 0.2),
+                0 15px 40px rgba(236, 72, 153, 0.15),
+                0 0 50px rgba(41, 168, 241, 0.1);
+        }
+
+        .carousel-item img {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 14px;
+            object-fit: cover;
+        }
+
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background: rgba(28, 31, 38, 0.9);
+            border: 1px solid rgba(41, 168, 241, 0.3);
+            color: var(--accent);
+            font-size: 2rem;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            z-index: 10;
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+
+        .carousel-btn:hover {
+            background: rgba(41, 168, 241, 0.2);
+            border-color: var(--accent);
+            box-shadow: 0 0 20px rgba(41, 168, 241, 0.4);
+        }
+
+        .carousel-btn.prev {
+            left: 0;
+        }
+
+        .carousel-btn.next {
+            right: 0;
+        }
+
+        .carousel-indicators {
+            display: flex;
+            justify-content: center;
+            gap: 12px;
+            margin-top: 32px;
+        }
+
+        .indicator {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.3);
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .indicator.active {
+            background: var(--accent);
+            box-shadow: 0 0 10px rgba(41, 168, 241, 0.5);
+        }
+
+        .indicator:hover {
+            background: rgba(255, 255, 255, 0.6);
+        }
+
+        @media (max-width: 968px) {
+            .carousel-item {
+                min-width: calc((100% - 24px) / 2);
+                max-width: calc((100% - 24px) / 2);
+            }
+            
+            .carousel-wrapper {
+                padding: 0 40px;
+            }
+        }
+
+        @media (max-width: 640px) {
+            .carousel-item {
+                min-width: 100%;
+                max-width: 100%;
+            }
+            
+            .carousel-track {
+                gap: 0;
+            }
+            
+            .carousel-wrapper {
+                padding: 0 30px;
+            }
+        }
+
         /* DEMO VIDEO SECTION */
         .demo-section {
             padding: 80px 0;
@@ -920,6 +1050,42 @@
         </div>
     </section>
 
+    <!-- FEATURE CAROUSEL -->
+    <section class="feature-carousel-section">
+        <div class="container">
+            <div class="carousel-wrapper">
+                <button class="carousel-btn prev" aria-label="Previous">‹</button>
+                <div class="carousel-track-container">
+                    <div class="carousel-track">
+                        <div class="carousel-item">
+                            <img src="feature-1.jpg" alt="Momentum Confirmation">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="feature-3.jpg" alt="Ribbon Bounce Signals">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="feature-2.jpg" alt="Multi-Timeframe Confirmation">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="feature-4.jpg" alt="Customization & Alerts">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="feature-5.jpg" alt="Trading Hours Filter">
+                        </div>
+                        <div class="carousel-item">
+                            <img src="feature-6.jpg" alt="Custom Ribbon Settings">
+                        </div>
+                    </div>
+                </div>
+                <button class="carousel-btn next" aria-label="Next">›</button>
+            </div>
+            <div class="carousel-indicators">
+                <span class="indicator active"></span>
+                <span class="indicator"></span>
+            </div>
+        </div>
+    </section>
+
     <!-- WHY CHOOSE -->
     <section class="why-section" id="features">
         <div class="container">
@@ -1330,6 +1496,71 @@
                 nav.classList.remove('scrolled');
             }
         });
+
+        // 3-Image Carousel
+        const track = document.querySelector('.carousel-track');
+        const items = Array.from(track?.children || []);
+        const nextBtn = document.querySelector('.carousel-btn.next');
+        const prevBtn = document.querySelector('.carousel-btn.prev');
+        const indicators = document.querySelectorAll('.indicator');
+        
+        let currentIndex = 0;
+        const totalSlides = 2; // 2 groups (3 images each)
+        
+        function getItemsPerSlide() {
+            if (window.innerWidth <= 640) return 1;
+            if (window.innerWidth <= 968) return 2;
+            return 3;
+        }
+
+        function updateCarousel() {
+            const itemsPerSlide = getItemsPerSlide();
+            const itemWidth = items[0]?.offsetWidth || 0;
+            const gap = 24;
+            const moveAmount = (itemWidth + gap) * itemsPerSlide;
+            
+            track.style.transform = `translateX(-${currentIndex * moveAmount}px)`;
+            
+            indicators.forEach((ind, idx) => {
+                ind.classList.toggle('active', idx === currentIndex);
+            });
+        }
+
+        function nextSlide() {
+            currentIndex = (currentIndex + 1) % totalSlides;
+            updateCarousel();
+        }
+
+        function prevSlide() {
+            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            updateCarousel();
+        }
+
+        nextBtn?.addEventListener('click', nextSlide);
+        prevBtn?.addEventListener('click', prevSlide);
+
+        indicators.forEach((indicator, index) => {
+            indicator.addEventListener('click', () => {
+                currentIndex = index;
+                updateCarousel();
+            });
+        });
+
+        // Auto-play every 4 seconds
+        let autoplayInterval = setInterval(nextSlide, 4000);
+
+        // Pause on hover
+        const carouselWrapper = document.querySelector('.carousel-wrapper');
+        carouselWrapper?.addEventListener('mouseenter', () => {
+            clearInterval(autoplayInterval);
+        });
+
+        carouselWrapper?.addEventListener('mouseleave', () => {
+            autoplayInterval = setInterval(nextSlide, 4000);
+        });
+
+        // Update on window resize
+        window.addEventListener('resize', updateCarousel);
     </script>
 
     <!-- COOKIE CONSENT POPUP -->
