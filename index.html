@@ -1689,6 +1689,40 @@
             currentIndex = 0; // Reset to first slide on resize
             updateCarousel();
         });
+
+        // Google Analytics Event Tracking
+        document.addEventListener('DOMContentLoaded', function() {
+            // Track all LemonSqueezy checkout clicks
+            document.querySelectorAll('a[href*="lemonsqueezy.com"]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    gtag('event', 'checkout_click', {
+                        'event_category': 'conversion',
+                        'event_label': 'lemonsqueezy_checkout',
+                        'value': 129
+                    });
+                });
+            });
+
+            // Track Discord button clicks
+            document.querySelectorAll('a[href*="discord.gg"]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    gtag('event', 'discord_click', {
+                        'event_category': 'community',
+                        'event_label': 'discord_button'
+                    });
+                });
+            });
+
+            // Track YouTube icon click
+            document.querySelectorAll('a[href*="youtube.com"]').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    gtag('event', 'youtube_click', {
+                        'event_category': 'social',
+                        'event_label': 'footer_youtube'
+                    });
+                });
+            });
+        });
     </script>
 
     <!-- COOKIE CONSENT POPUP -->
