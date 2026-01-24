@@ -464,8 +464,9 @@
 
         @media (max-width: 640px) {
             .carousel-item {
-                min-width: 100%;
-                max-width: 100%;
+                min-width: calc(100% - 32px);
+                max-width: calc(100% - 32px);
+                margin: 0 16px;
             }
             
             .carousel-track {
@@ -1583,8 +1584,17 @@
         function updateCarousel() {
             const itemsPerSlide = getItemsPerSlide();
             const itemWidth = items[0]?.offsetWidth || 0;
-            const gap = window.innerWidth <= 640 ? 0 : 24;
-            const moveAmount = (itemWidth + gap) * currentIndex;
+            
+            let moveAmount;
+            if (window.innerWidth <= 640) {
+                // Mobile: move one image at a time with 32px gap
+                const gap = 32;
+                moveAmount = (itemWidth + gap) * currentIndex;
+            } else {
+                // Desktop/Tablet: move by groups
+                const gap = 24;
+                moveAmount = (itemWidth + gap) * itemsPerSlide * currentIndex;
+            }
             
             track.style.transform = `translateX(-${moveAmount}px)`;
             
