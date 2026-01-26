@@ -1,0 +1,804 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1C1F26">
+    <title>Quantum Ribbon Pro 2.0 - Complete Tutorial & Setup Guide</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Complete tutorial for Quantum Ribbon Pro 2.0. Learn how to use multi-timeframe confirmation, partial take-profits, TP RSI filtering, and all advanced features.">
+    <meta name="keywords" content="quantum ribbon tutorial, quantum ribbon pro guide, tradingview indicator tutorial, trend following setup, TP RSI confirmation">
+    <meta name="author" content="Trendline Project">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLKJNZ6GZV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RLKJNZ6GZV');
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --surface: #1C1F26;
+            --surface-hover: #23262E;
+            --accent: #29A8F1;
+            --accent-subtle: rgba(41, 168, 241, 0.1);
+            --text: #F0F0F0;
+            --text-secondary: #C5CBD3;
+            --text-muted: #8B92A0;
+            --border: rgba(255, 255, 255, 0.06);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%);
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            background: rgba(28, 31, 38, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        /* Header */
+        .tutorial-header {
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--accent-subtle);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .accent-text {
+            color: var(--accent);
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* Video Section */
+        .video-section {
+            padding: 40px 0 60px;
+        }
+
+        .video-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: #000;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin: 40px 0 16px;
+            color: var(--text);
+        }
+
+        h3:first-of-type {
+            margin-top: 0;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-size: 1.0625rem;
+        }
+
+        ul, ol {
+            margin: 20px 0 20px 24px;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 8px;
+        }
+
+        strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .info-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .info-box p {
+            margin-bottom: 0;
+            font-size: 0.9375rem;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: rgba(236, 72, 153, 0.05);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            border-left: 3px solid #EC4899;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .warning-box h4 {
+            color: #EC4899;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .warning-box p {
+            margin-bottom: 0;
+            font-size: 0.9375rem;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 40px 0 60px;
+        }
+
+        .toc h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .toc ul {
+            margin: 0;
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 12px;
+            padding-left: 0;
+        }
+
+        .toc a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: block;
+            padding: 8px 0;
+        }
+
+        .toc a:hover {
+            color: var(--accent);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: radial-gradient(ellipse at center, rgba(41, 168, 241, 0.08) 0%, transparent 60%);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(41, 168, 241, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .tutorial-header {
+                padding: 60px 0 40px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+            }
+
+            .content-section {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="../" class="logo">
+                    <img src="../../logo.png" alt="Trendline Project Logo">
+                    <span>Trendline Project</span>
+                </a>
+                <a href="../../" class="back-link">← Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <section class="tutorial-header">
+        <div class="container">
+            <span class="badge">Complete Tutorial</span>
+            <h1>Quantum Ribbon <span class="accent-text">Pro 2.0</span></h1>
+            <p class="subtitle">Master every feature: multi-timeframe confirmation, partial take-profits, TP RSI filtering, swing stops, and complete trade automation.</p>
+        </div>
+    </section>
+
+    <!-- VIDEO -->
+    <section class="video-section">
+        <div class="container">
+            <div class="video-wrapper">
+                <iframe 
+                    src="https://www.youtube-nocookie.com/embed/_CGMczJwQyQ" 
+                    title="Quantum Ribbon Pro Tutorial" 
+                    frameborder="0" 
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" 
+                    allowfullscreen>
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- TABLE OF CONTENTS -->
+    <div class="container">
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#lite-recap">Quick Lite Recap</a></li>
+                <li><a href="#pro-features">What Pro Adds</a></li>
+                <li><a href="#new-features">What's New in 2.0</a></li>
+                <li><a href="#mtf-confirmation">Multi-Timeframe Confirmation</a></li>
+                <li><a href="#partial-tp">Partial Take-Profits</a></li>
+                <li><a href="#break-even">Break-Even Stop</a></li>
+                <li><a href="#ribbon-bounce">Ribbon Bounce Signals</a></li>
+                <li><a href="#trading-hours">Trading Hours Filter</a></li>
+                <li><a href="#custom-ribbon">Custom Ribbon Settings</a></li>
+                <li><a href="#alerts">Alert Customization</a></li>
+                <li><a href="#tp-rsi">TP RSI Confirmation</a></li>
+                <li><a href="#range-filter">Quantum Range Filter</a></li>
+                <li><a href="#swing-stops">Swing-Based Stop Loss</a></li>
+                <li><a href="#weekend-alerts">Disable Weekend Alerts</a></li>
+                <li><a href="#trend-candles">Trend Candle Coloring</a></li>
+                <li><a href="#visual-custom">Visual Customization</a></li>
+                <li><a href="#disclaimer">Risk Disclaimer</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>Introduction</h2>
+            <p>Quantum Ribbon Pro 2.0 is the most complete version of the Quantum Ribbon system. It includes everything from the original Pro, plus built-in TP RSI confirmation, range filtering, swing-based stops, and full visual customization.</p>
+            
+            <p>This is a trend-following indicator that handles entries, exits, and risk management in one tool.</p>
+
+            <div class="info-box">
+                <h4>New to Quantum Ribbon?</h4>
+                <p>If you haven't used Quantum Ribbon before, start with <a href="https://www.tradingview.com/script/49ak1Mix-Quantum-Ribbon-Lite/" target="_blank" style="color: var(--accent); text-decoration: none;">Lite</a> - it's free. Get comfortable with the core system first, then upgrade to Pro when you're ready for more control.</p>
+            </div>
+
+            <p>This guide covers every feature in Pro 2.0. There's also an FAQ and setup guide on the <a href="../../" style="color: var(--accent); text-decoration: none;">product page</a> that walks you through activation and getting started.</p>
+        </section>
+
+        <!-- Lite Recap -->
+        <section class="content-section" id="lite-recap">
+            <h2>Quick Lite Recap</h2>
+            <p>If you've used Lite, you know the basics:</p>
+            <ul>
+                <li><strong>Five-layer ribbon system</strong> with ten EMAs creating gradient clouds</li>
+                <li><strong>Blue-teal = bullish</strong>, red-pink = bearish</li>
+                <li><strong>Signals require</strong> ribbon alignment, momentum confirmation, and volume participation</li>
+                <li><strong>Automatic stop loss</strong> based on ATR</li>
+                <li><strong>Take profit</strong> based on your chosen risk-reward ratio</li>
+                <li><strong>One-trade-at-a-time rule</strong> keeps you disciplined</li>
+            </ul>
+            <p>That foundation stays the same. Pro builds on top of it.</p>
+        </section>
+
+        <!-- Pro Features Overview -->
+        <section class="content-section" id="pro-features">
+            <h2>What Pro Adds - Overview</h2>
+            <p>Seven major additions separate Pro from Lite:</p>
+            <ol>
+                <li><strong>Multi-Timeframe Confirmation</strong> - Filter signals against higher timeframe trend direction</li>
+                <li><strong>Partial Take-Profits</strong> - Scale out of winners in stages instead of all-or-nothing exits</li>
+                <li><strong>Break-Even Stop Automation</strong> - Protect capital once you're in profit without manual intervention</li>
+                <li><strong>Ribbon Bounce Signals</strong> - Catch pullback entries in established trends for better timing</li>
+                <li><strong>Trading Hours Filter</strong> - Restrict signals to your preferred session</li>
+                <li><strong>Custom Ribbon Settings</strong> - Unlock full control over EMA configuration</li>
+                <li><strong>Alert Customization</strong> - Simple messages, detailed breakdowns, JSON for webhooks, or custom templates</li>
+            </ol>
+        </section>
+
+        <!-- 2.0 Features Overview -->
+        <section class="content-section" id="new-features">
+            <h2>What's New in 2.0</h2>
+            <p>Six additions in this update:</p>
+            <ol>
+                <li><strong>TP RSI Confirmation</strong> - Built directly into Pro now. No second indicator needed</li>
+                <li><strong>Quantum Range Filter</strong> - Blocks signals during choppy, low-volatility markets</li>
+                <li><strong>Swing-Based Stop Loss</strong> - Places stops at actual price structure instead of fixed ATR distance</li>
+                <li><strong>Disable Weekend Alerts</strong> - Stops notifications firing on Saturday and Sunday</li>
+                <li><strong>Trend Candle Coloring</strong> - Colors your candles based on ribbon state for instant visual feedback</li>
+                <li><strong>Visual Customization</strong> - Full control over label colors, line styles, and table appearance</li>
+            </ol>
+        </section>
+
+        <!-- Multi-Timeframe Confirmation -->
+        <section class="content-section" id="mtf-confirmation">
+            <h2>Multi-Timeframe Confirmation</h2>
+            <p>The higher timeframe filter lets you require ribbon alignment on a larger timeframe before taking any signal on your chart.</p>
+            
+            <p>If you're trading on the 15-minute chart, you can set the filter to 1-hour or 4-hour. Now buy signals only fire when the hourly ribbon is also bullish. Sell signals only fire when the hourly ribbon is bearish. You're trading with the bigger trend instead of against it.</p>
+
+            <p><strong>Available timeframe options:</strong></p>
+            <ul>
+                <li>15, 30, 60 minute</li>
+                <li>2-hour, 4-hour</li>
+                <li>Daily, Weekly</li>
+                <li>None (to disable the filter entirely)</li>
+            </ul>
+
+            <p>There's also a toggle to <strong>display the higher timeframe ribbon</strong> directly on your chart. Useful for seeing that bigger picture context visually without switching timeframes.</p>
+
+            <p>The stats table shows HTF status - green circle for bullish alignment, red for bearish, gray for neutral. At a glance you know whether longs or shorts are currently permitted.</p>
+        </section>
+
+        <!-- Partial Take-Profits -->
+        <section class="content-section" id="partial-tp">
+            <h2>Partial Take-Profits</h2>
+            <p>Lite uses all-or-nothing exits - price hits target, full position closes. Pro lets you scale out in stages like professional traders do.</p>
+            
+            <p>Enable partial take-profits and you get <strong>three exit levels:</strong></p>
+            <ul>
+                <li><strong>TP1</strong> closes a portion of your position at the first target</li>
+                <li><strong>TP2</strong> closes another portion at the second target</li>
+                <li><strong>Final</strong> - the remainder rides to the final target</li>
+            </ul>
+
+            <p><strong>Default settings:</strong> Close 50% at 1.5R, another 30% at 2R, and let the final 20% run to 2.5R. You can adjust all of these - the percentages and the R-multiples.</p>
+
+            <div class="info-box">
+                <h4>Why does this matter?</h4>
+                <p>It locks in profit early while keeping upside exposure. If the trade reverses after TP1, you've already banked half your position. If it keeps running, the remaining portion captures the extended move.</p>
+            </div>
+
+            <p>The chart shows all three levels with dotted lines. When each target gets hit, you see a label confirming which portion closed. The stats table tracks remaining position size so you always know where you stand.</p>
+        </section>
+
+        <!-- Break-Even Stop -->
+        <section class="content-section" id="break-even">
+            <h2>Break-Even Stop</h2>
+            <p>Once a trade moves in your favor, the break-even feature automatically moves your stop to entry price. No more watching a winning trade turn into a loss.</p>
+            
+            <p><strong>Three trigger options:</strong></p>
+            <ul>
+                <li>Move to break-even when TP1 hits</li>
+                <li>Move when TP2 hits</li>
+                <li>Set a custom R-multiple (e.g., 1R before any partial takes)</li>
+            </ul>
+
+            <p>When the stop moves, a 'BE' label appears on the chart at your entry level. The red stop line updates to reflect the new protected level. From that point, the worst case is a scratch trade, not a loss.</p>
+
+            <p>This pairs naturally with partial take-profits. Hit TP1, bank 50%, move to break-even. Now you're playing with house money on the remaining position.</p>
+        </section>
+
+        <!-- Ribbon Bounce Signals -->
+        <section class="content-section" id="ribbon-bounce">
+            <h2>Ribbon Bounce Signals</h2>
+            <p>Lite generates signals on trend confirmation - when everything aligns and momentum kicks in. Pro adds an alternative: ribbon bounce signals for pullback entries.</p>
+            
+            <p><strong>How it works:</strong></p>
+            <ul>
+                <li>In an established uptrend with all five ribbon layers bullish, price pulls back and dips below the top EMA</li>
+                <li>When it crosses back above, that's a bounce signal</li>
+                <li>You're entering the trend at a better price after a pullback rather than chasing the initial breakout</li>
+            </ul>
+
+            <p>Same logic inverted for shorts. Established downtrend, price bounces up into the ribbon, then crosses back below - that's your short entry on the pullback.</p>
+
+            <p>Toggle this on in settings and the indicator switches from breakout-style entries to pullback-style entries. Some traders prefer one, some prefer the other. Now you have the choice.</p>
+        </section>
+
+        <!-- Trading Hours Filter -->
+        <section class="content-section" id="trading-hours">
+            <h2>Trading Hours Filter</h2>
+            <p>Not everyone wants signals around the clock. The session filter restricts when signals can fire.</p>
+            
+            <p>Set your trading start and end times in EST. Default is 9:30 to 16:00 - regular US market hours. Outside that window, signals are blocked even if conditions are met.</p>
+
+            <p>Enable the <strong>highlight option</strong> and the chart shows a subtle background color during active trading hours. Visual confirmation you're in the zone.</p>
+
+            <p>The stats table updates too - during session it shows the active hours, outside session it displays 'Outside Hours' with a red background. No ambiguity about whether signals are live or blocked.</p>
+
+            <p>Useful if you trade specific sessions - London, New York, or overlap hours.</p>
+        </section>
+
+        <!-- Custom Ribbon Settings -->
+        <section class="content-section" id="custom-ribbon">
+            <h2>Custom Ribbon Settings</h2>
+            <p>Lite locks the ribbon configuration. Pro unlocks it for traders who want to experiment.</p>
+            
+            <p>Enable custom settings and you can adjust three parameters:</p>
+            <ul>
+                <li><strong>Top EMA</strong> - Controls the fastest moving average (lower = more responsive)</li>
+                <li><strong>Bottom EMA</strong> - Sets the slowest (higher = smoother trend definition)</li>
+                <li><strong>Pair Width</strong> - Determines spacing between each short and long EMA pair</li>
+            </ul>
+
+            <p><strong>Defaults:</strong> 21 for top, 60 for bottom, 7 for pair width. These work well across most markets and timeframes. But if you're trading very fast instruments or very slow ones, tweaking the ribbon can improve responsiveness or reduce noise.</p>
+        </section>
+
+        <!-- Alert Customization -->
+        <section class="content-section" id="alerts">
+            <h2>Alert Customization</h2>
+            <p>Pro gives you control over alert message format with four presets:</p>
+            
+            <h3>Simple</h3>
+            <p>Just the signal and ticker: <em>"Quantum Ribbon Pro: BUY BTCUSD."</em> Clean, minimal.</p>
+
+            <h3>Detailed</h3>
+            <p>Includes entry price, stop level, take profit target, and confidence score. Everything you need to execute the trade without opening the chart.</p>
+
+            <h3>JSON</h3>
+            <p>Structured data format for webhook integrations. If you're connecting to trading bots, Discord, Telegram, or other automation, this gives you properly formatted data to parse.</p>
+
+            <h3>Custom</h3>
+            <p>Build your own template using placeholders. Ticker, entry, stop, target, direction, confidence, ATR, risk-reward - arrange them however you want. Create the exact message format your workflow needs.</p>
+
+            <div class="info-box">
+                <h4>Full Trade Lifecycle Notifications</h4>
+                <p>Beyond entry alerts, Pro also fires alerts for TP1 hit, TP2 hit, break-even activation, stop hit, and final target reached.</p>
+            </div>
+        </section>
+
+        <!-- TP RSI Confirmation -->
+        <section class="content-section" id="tp-rsi">
+            <h2>TP RSI Confirmation - Built In</h2>
+            <p>If you've been combining Quantum Ribbon Lite with TP RSI - that strategy is now built directly into Pro. You don't need two indicators anymore.</p>
+            
+            <p>Enable TP RSI Confirmation in settings and the indicator requires TP RSI ribbon alignment before any signal fires:</p>
+            <ul>
+                <li>For longs, all five RSI ribbon pairs must be bullish</li>
+                <li>For shorts, all five must be bearish</li>
+                <li>If momentum isn't fully aligned, the signal gets blocked</li>
+            </ul>
+
+            <p>The stats table shows TP RSI status when enabled - green circle with the count when bullish, red when bearish, gray when mixed. At a glance you know whether momentum confirms your direction.</p>
+
+            <div class="warning-box">
+                <h4>The Trade-Off</h4>
+                <p>Will you miss some entries? Yes. The RSI ribbon might not be fully aligned when the price ribbon fires a signal. That's the trade-off - fewer signals, but the ones you get have momentum backing them.</p>
+            </div>
+
+            <p>If you still want the visual context of seeing the TP RSI ribbon on a separate pane, you're welcome to add TP RSI to your chart. But for signal filtering, it's all handled internally now.</p>
+        </section>
+
+        <!-- Quantum Range Filter -->
+        <section class="content-section" id="range-filter">
+            <h2>Quantum Range Filter</h2>
+            <p>This feature protects you from choppy markets.</p>
+            
+            <p>The Range Filter analyzes two things - volatility ratio and ribbon compression. When ATR is low compared to its average and the ribbon is squeezed tight, the market is ranging. Signals during these conditions have higher failure rates. The filter blocks them.</p>
+
+            <p><strong>Three sensitivity levels:</strong></p>
+            <ul>
+                <li><strong>Low</strong> - Only blocks extreme chop. You'll still get most signals</li>
+                <li><strong>Normal</strong> - The balanced default</li>
+                <li><strong>High</strong> - Strict. Only trades when the market is clearly trending</li>
+            </ul>
+
+            <p>The stats table shows filter status - "Clear to Trade" with a green background when conditions are good, "Ranging Market" with orange when signals are blocked.</p>
+
+            <div class="info-box">
+                <h4>Pro Tip: Pair with Ribbon Bounce</h4>
+                <p>If you're using Ribbon Bounce Signals, consider enabling Range Filter alongside it. Bounce entries rely on trending conditions, but they can false-trigger when price is just chopping around the ribbon without real direction. Range Filter catches the chop, Bounce Signals catch the pullbacks in real trends.</p>
+            </div>
+        </section>
+
+        <!-- Swing-Based Stops -->
+        <section class="content-section" id="swing-stops">
+            <h2>Swing-Based Stop Loss</h2>
+            <p>ATR stops adapt to volatility, but they don't see price structure. Swing stops do.</p>
+            
+            <p>Enable Swing as your stop method and the indicator places stops at recent swing lows for longs, swing highs for shorts. It looks back over a configurable period, finds the structure level, then adds an ATR buffer beyond it for protection against stop hunts.</p>
+
+            <p><strong>Two settings control it:</strong></p>
+            <ul>
+                <li><strong>Swing Detection Period</strong> - How far back to look (higher = only major swings, lower = more sensitive)</li>
+                <li><strong>Swing Buffer</strong> - Safety margin added beyond the swing point</li>
+            </ul>
+
+            <div class="info-box">
+                <h4>Why use this?</h4>
+                <p>Some traders prefer stops at structure levels rather than fixed distances. A stop placed just below a swing low has meaning - that's where buyers stepped in before. If price breaks it, the setup may be invalid.</p>
+            </div>
+
+            <p>ATR and Percentage methods work fine and adapt to volatility - Swing just gives you a structure-based alternative if that fits your style.</p>
+
+            <p>The indicator includes a safety check - if the swing would put your stop more than 20% from entry, it falls back to ATR. Keeps risk reasonable on weird price action.</p>
+        </section>
+
+        <!-- Weekend Alerts -->
+        <section class="content-section" id="weekend-alerts">
+            <h2>Disable Weekend Alerts</h2>
+            <p>Simple quality-of-life feature.</p>
+            
+            <p>Crypto trades 24/7 but weekends are low volume. Signals that fire Saturday or Sunday often lack follow-through. Enable this toggle and alerts won't fire on weekends.</p>
+
+            <p>Chart signals still appear - you can see what's setting up. But your phone won't buzz at 2am Sunday with a signal that probably won't work anyway.</p>
+
+            <p>The stats table shows "Weekend Mode" when this is active and it's Saturday or Sunday.</p>
+        </section>
+
+        <!-- Trend Candles -->
+        <section class="content-section" id="trend-candles">
+            <h2>Trend Candle Coloring</h2>
+            <p>This feature is visual. Enable Trend Candles and your chart candles change color based on ribbon state.</p>
+            
+            <ul>
+                <li><strong>Bright green</strong> - Four or five ribbon pairs bullish (strong uptrend)</li>
+                <li><strong>Light green</strong> - Three pairs bullish (moderate bull)</li>
+                <li><strong>Gray</strong> - Mixed (neutral, no clear direction)</li>
+                <li><strong>Light red</strong> - Bearish</li>
+                <li><strong>Bright red</strong> - Strongly bearish</li>
+            </ul>
+
+            <p>It's instant feedback without looking at the ribbon itself. Glance at recent candles and you know the trend state. Useful when you're scanning multiple charts quickly.</p>
+        </section>
+
+        <!-- Visual Customization -->
+        <section class="content-section" id="visual-custom">
+            <h2>Visual Customization</h2>
+            <p>Full control over how everything looks.</p>
+            
+            <h3>Label Styles</h3>
+            <p>Customize BUY, SELL, TP, and STOP labels independently. Color, opacity, size - match your chart theme or make signals pop however you want.</p>
+
+            <h3>Line Styles</h3>
+            <p>Control entry, stop loss, and take profit lines. Color, opacity, width. If you want subtle dotted lines or bold visible levels, it's your choice.</p>
+
+            <h3>Table Styles</h3>
+            <p>Adjust the stats panel. Background color and transparency, text color, border settings. Dark mode traders can flip it, minimal chart fans can make it nearly invisible.</p>
+
+            <p>None of this changes how the indicator works. It's purely aesthetic. But if you spend hours looking at charts, having it look right matters.</p>
+        </section>
+
+        <!-- Disclaimer -->
+        <section class="content-section" id="disclaimer">
+            <h2>Risk Disclaimer</h2>
+            
+            <div class="warning-box">
+                <h4>⚠️ Important: Read This Carefully</h4>
+                <p><strong>This is not financial advice.</strong> Trading carries real risk and you can lose money. If you decide to use this indicator, that's entirely your choice and your responsibility.</p>
+            </div>
+
+            <p>Past performance, backtests, win rates mentioned in this tutorial - none of that guarantees future results. Markets change. What worked yesterday might not work tomorrow.</p>
+
+            <p><strong>Stats table disclaimer:</strong> Whatever numbers you see in the performance table, high or low, don't take them as a promise. Performance constantly shifts with market conditions. The table shows you what happened, not what will happen.</p>
+
+            <p><strong>Break-even win rates after accounting for fees:</strong></p>
+            <ul>
+                <li>1.5R targets need roughly 40% winners</li>
+                <li>2R targets need around 34%</li>
+                <li>3R targets need about 25%</li>
+            </ul>
+
+            <p>The indicator doesn't guarantee you'll hit those numbers - it gives you the framework, markets decide the rest.</p>
+
+            <p>If you're not comfortable with that reality, trading probably isn't for you. If you understand the risk and want better tools to manage it, you can get started with the link below.</p>
+        </section>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="margin-bottom: 16px;">Ready to Get Started?</h2>
+            <p style="max-width: 600px; margin: 0 auto 32px; color: var(--text-secondary);">Get lifetime access to Quantum Ribbon Pro 2.0. One payment, all future updates included.</p>
+            <a href="../../#pricing" class="btn btn-primary">Get Quantum Ribbon Pro - €129</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="../../privacy-policy.html">Privacy Policy</a>
+                <a href="../../terms-of-service.html">Terms of Service</a>
+                <a href="../../cookie-policy.html">Cookie Policy</a>
+                <a href="../../contact.html">Contact</a>
+            </div>
+            <p class="copyright">© 2025 Quantum Ribbon Pro. Built by Trendline Project.</p>
+        </div>
+    </footer>
+</body>
+</html>
