@@ -191,6 +191,10 @@
             text-transform: uppercase;
             letter-spacing: 0.05em;
             margin-bottom: 24px;
+            min-height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         h1 {
@@ -808,16 +812,48 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 48px;
+            padding: 32px;
             text-align: center;
         }
 
+        .pricing-cards-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            max-width: 1000px;
+            margin: 60px auto 0;
+        }
+
+        .pricing-cards-grid .pricing-card {
+            max-width: none;
+            margin: 0;
+            padding: 32px 28px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .pricing-cards-grid .pricing-card .features-list {
+            flex-grow: 1;
+        }
+
+        .pricing-cards-grid .pricing-card .btn {
+            margin-top: 32px;
+        }
+
         .price {
-            font-size: 3.5rem;
+            font-size: 3rem;
             font-weight: 600;
             color: var(--accent);
-            margin: 24px 0;
+            margin: 16px 0 20px 0;
             letter-spacing: -0.04em;
+        }
+
+        .price-wrapper {
+            min-height: 100px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
         }
 
         .price small {
@@ -836,11 +872,11 @@
         .features-list {
             list-style: none;
             text-align: left;
-            margin: 32px 0;
+            margin: 24px 0 0 0;
         }
 
         .features-list li {
-            padding: 14px 0;
+            padding: 12px 0;
             color: var(--text-secondary);
             font-size: 0.9375rem;
             border-bottom: 1px solid var(--border);
@@ -1054,6 +1090,10 @@
                 gap: 20px;
                 font-size: 0.875rem;
             }
+
+            .pricing-cards-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
@@ -1070,7 +1110,7 @@
                 </div>
                 <div class="nav-links">
                     <a href="#features">Features</a>
-                    <a href="resources/quantum-ribbon-pro/">Resources</a>
+                    <a href="resources/">Resources</a>
                     <a href="#pricing">Pricing</a>
                     <a href="#faq">FAQ</a>
                 </div>
@@ -1404,23 +1444,49 @@
     <section class="pricing-section" id="pricing">
         <div class="container">
             <div class="section-label">Pricing</div>
-            <h2 class="section-title">One Payment, Lifetime Access</h2>
-            <p class="section-description">No subscription. No monthly fees. Just one purchase for lifetime access and all future updates.</p>
+            <h2 class="section-title">Choose Your Package</h2>
+            <p class="section-description">One payment, lifetime access. No subscriptions, no monthly fees.</p>
             
-            <div class="pricing-card">
-                <span class="badge">One-Time Payment</span>
-                <div class="price">€129<small> / lifetime</small></div>
-                
-                <ul class="features-list">
-                    <li>Multi-timeframe confirmation</li>
-                    <li>Partial take-profits & break-even</li>
-                    <li>Bot-ready JSON alerts</li>
-                    <li>Trading hours filter</li>
-                    <li>Complete customization</li>
-                    <li>Lifetime updates included</li>
-                </ul>
-                
-                <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/8bb4737c-a2c1-4162-9f8a-e5dd5cf52046" class="btn btn-primary" style="width: 100%;">Get Quantum Ribbon Pro</a>
+            <div class="pricing-cards-grid">
+                <!-- PRO INDICATOR ONLY -->
+                <div class="pricing-card">
+                    <span class="badge">Pro Indicator</span>
+                    <div class="price-wrapper">
+                        <div class="price">€129<small> / lifetime</small></div>
+                        <p style="color: transparent; font-size: 0.875rem; margin: 0; user-select: none;">Invisible placeholder text</p>
+                    </div>
+                    
+                    <ul class="features-list">
+                        <li>Multi-timeframe confirmation</li>
+                        <li>Partial take-profits & break-even</li>
+                        <li>Bot-ready JSON alerts</li>
+                        <li>Trading hours filter</li>
+                        <li>Complete customization</li>
+                        <li>Lifetime updates included</li>
+                    </ul>
+                    
+                    <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/8bb4737c-a2c1-4162-9f8a-e5dd5cf52046" class="btn btn-primary" style="width: 100%;">Get Pro Indicator</a>
+                </div>
+
+                <!-- PRO + BACKTESTER BUNDLE -->
+                <div class="pricing-card" style="border: 2px solid var(--accent); position: relative;">
+                    <span class="badge" style="background: var(--accent); color: #000;">Best Value • Save €59</span>
+                    <div class="price-wrapper">
+                        <div class="price">€169<small> / lifetime</small></div>
+                        <p style="text-decoration: line-through; color: var(--text-muted); font-size: 0.875rem; margin: 0;">€228 if bought separately</p>
+                    </div>
+                    
+                    <ul class="features-list">
+                        <li>Everything in Pro Indicator</li>
+                        <li>Strategy Backtester included</li>
+                        <li>Test on historical data</li>
+                        <li>Optimize settings before trading</li>
+                        <li>Analyze performance metrics</li>
+                        <li>Lifetime updates for both</li>
+                    </ul>
+                    
+                    <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/e82fa818-f647-422b-a665-e553f6587ea3" class="btn btn-primary" style="width: 100%;">Get Pro + Backtester Bundle</a>
+                </div>
             </div>
         </div>
     </section>
@@ -1702,7 +1768,7 @@
                     gtag('event', 'checkout_click', {
                         'event_category': 'conversion',
                         'event_label': 'lemonsqueezy_checkout',
-                        'value': 129
+                        'value': 149
                     });
                 });
             });
