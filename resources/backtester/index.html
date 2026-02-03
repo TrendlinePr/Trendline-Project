@@ -1,0 +1,630 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1C1F26">
+    <title>Quantum Ribbon Pro - Backtester Guide</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Complete guide for Quantum Ribbon Pro Backtester. Learn how to backtest strategies, analyze performance metrics, and optimize your trading system.">
+    <meta name="keywords" content="quantum ribbon backtester, tradingview strategy tester, backtest trading strategy, quantum ribbon performance">
+    <meta name="author" content="Trendline Project">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLKJNZ6GZV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RLKJNZ6GZV');
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --surface: #1C1F26;
+            --surface-hover: #23262E;
+            --accent: #29A8F1;
+            --accent-subtle: rgba(41, 168, 241, 0.1);
+            --text: #F0F0F0;
+            --text-secondary: #C5CBD3;
+            --text-muted: #8B92A0;
+            --border: rgba(255, 255, 255, 0.06);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%);
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            background: rgba(28, 31, 38, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        /* Header */
+        .tutorial-header {
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--accent-subtle);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .accent-text-pro {
+            color: var(--accent);
+        }
+
+        .accent-text {
+            color: var(--text);
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin: 40px 0 16px;
+            color: var(--text);
+        }
+
+        h3:first-of-type {
+            margin-top: 0;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-size: 1.0625rem;
+        }
+
+        ul, ol {
+            margin: 20px 0 20px 24px;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 8px;
+        }
+
+        strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .info-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .info-box p {
+            margin-bottom: 0;
+            font-size: 0.9375rem;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: rgba(236, 72, 153, 0.05);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            border-left: 3px solid #EC4899;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .warning-box h4 {
+            color: #EC4899;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .warning-box p {
+            margin-bottom: 0;
+            font-size: 0.9375rem;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 40px 0 60px;
+        }
+
+        .toc h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .toc ul {
+            margin: 0;
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 12px;
+            padding-left: 0;
+        }
+
+        .toc a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: block;
+            padding: 8px 0;
+        }
+
+        .toc a:hover {
+            color: var(--accent);
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: radial-gradient(ellipse at center, rgba(41, 168, 241, 0.08) 0%, transparent 60%);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(41, 168, 241, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .tutorial-header {
+                padding: 60px 0 40px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+            }
+
+            .content-section {
+                padding: 40px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="../../" class="logo">
+                    <img src="../../logo.png" alt="Trendline Project Logo">
+                    <span>Trendline Project</span>
+                </a>
+                <a href="../../" class="back-link">← Back to Home</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <section class="tutorial-header">
+        <div class="container">
+            <span class="badge">Strategy Backtester</span>
+            <h1>Quantum Ribbon <span class="accent-text-pro">Pro</span> - <span class="accent-text">Backtester</span></h1>
+            <p class="subtitle">Test every feature with historical data. Optimize settings, measure performance, and validate your strategy before risking capital.</p>
+        </div>
+    </section>
+
+    <!-- TABLE OF CONTENTS -->
+    <div class="container">
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#introduction">What Is This?</a></li>
+                <li><a href="#how-it-works">How It Works</a></li>
+                <li><a href="#setup">Setup & Installation</a></li>
+                <li><a href="#features">Key Features</a></li>
+                <li><a href="#metrics">Understanding the Metrics</a></li>
+                <li><a href="#optimization">Strategy Optimization</a></li>
+                <li><a href="#limitations">Backtest Limitations</a></li>
+                <li><a href="#faq">FAQ</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="container">
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>What Is This?</h2>
+            <p>The Quantum Ribbon Pro Backtester is a TradingView strategy that mirrors the Quantum Ribbon Pro indicator exactly - same signals, same logic, same risk management - but runs through historical data to show you what would have happened.</p>
+            
+            <p>This lets you test different settings, timeframes, and instruments before committing real capital.</p>
+
+            <div class="info-box">
+                <h4>Included with Pro Bundle</h4>
+                <p>The Backtester is only available as part of the Quantum Ribbon Pro Bundle. It's not sold separately.</p>
+            </div>
+
+            <p><strong>What it does:</strong></p>
+            <ul>
+                <li>Executes every Quantum Ribbon Pro signal on historical data</li>
+                <li>Tracks entries, exits, stops, and take-profits automatically</li>
+                <li>Calculates win rate, profit factor, drawdown, and other metrics</li>
+                <li>Shows trade-by-trade breakdown in TradingView's Strategy Tester</li>
+                <li>Supports partial take-profits, break-even stops, all Pro features</li>
+            </ul>
+        </section>
+
+        <!-- How It Works -->
+        <section class="content-section" id="how-it-works">
+            <h2>How It Works</h2>
+            <p>The Backtester is a Pine Script strategy (not an indicator). When you add it to your chart, TradingView automatically runs it through all historical bars and executes trades based on Quantum Ribbon Pro's logic.</p>
+
+            <h3>The Process</h3>
+            <ol>
+                <li><strong>Add to chart</strong> - TradingView loads historical data for your selected instrument and timeframe</li>
+                <li><strong>Strategy executes</strong> - Every bar is analyzed. When conditions match, trades are entered with stops and targets</li>
+                <li><strong>Results calculated</strong> - TradingView tracks all trades and computes performance metrics</li>
+                <li><strong>Review performance</strong> - Open the Strategy Tester tab to see detailed results</li>
+            </ol>
+
+            <div class="info-box">
+                <h4>Same Logic as the Indicator</h4>
+                <p>The Backtester is based on Quantum Ribbon Pro. If you see a signal in the indicator, the strategy would have taken that trade in the backtest.</p>
+            </div>
+        </section>
+
+        <!-- Setup -->
+        <section class="content-section" id="setup">
+            <h2>Setup & Installation</h2>
+            
+            <h3>Step 1: Add to TradingView</h3>
+            <p>After purchasing the bundle, you'll get access on TradingView.</p>
+
+            <h3>Step 2: Add to Chart</h3>
+            <ol>
+                <li>Open TradingView and load your chart</li>
+                <li>Click "Indicators" at the top</li>
+                <li>Search for "Quantum Ribbon Pro - Backtester" in your Invite-Only Scripts</li>
+                <li>Click to add it</li>
+            </ol>
+
+            <h3>Step 3: Configure Settings</h3>
+            <p>The strategy has the same settings as Quantum Ribbon Pro. Start with defaults, then adjust based on your testing.</p>
+
+            <h3>Step 4: Open Strategy Tester</h3>
+            <p>Click the "Strategy Tester" tab at the bottom of TradingView (next to Pine Editor). This shows all performance data.</p>
+
+            <div class="warning-box">
+                <h4>Initial Capital & Position Size</h4>
+                <p>By default, the strategy starts with $10,000 and risks 10% per trade. You can change this in the strategy's Properties panel (gear icon).</p>
+            </div>
+        </section>
+
+        <!-- Features -->
+        <section class="content-section" id="features">
+            <h2>Key Features</h2>
+            
+            <h3>Full QR Pro Logic</h3>
+            <p>Every feature from Quantum Ribbon Pro works in the Backtester:</p>
+            <ul>
+                <li>Multi-timeframe confirmation</li>
+                <li>Partial take-profits (TP1, TP2, Final)</li>
+                <li>Break-even stop automation</li>
+                <li>Ribbon bounce signals</li>
+                <li>TP RSI confirmation</li>
+                <li>Quantum Range Filter</li>
+                <li>Swing-based stops</li>
+                <li>Trading hours filter</li>
+                <li>All customization options</li>
+            </ul>
+
+            <h3>Adjustable Risk Parameters</h3>
+            <p>Test different position sizes, stop methods (ATR, Percentage, Swing), and risk-reward ratios to see what works best for your instrument and timeframe.</p>
+        </section>
+
+        <!-- Metrics -->
+        <section class="content-section" id="metrics">
+            <h2>Understanding the Metrics</h2>
+            <p>TradingView's Strategy Tester provides detailed performance data. Here's what to focus on:</p>
+
+            <h3>Net Profit</h3>
+            <p>Total profit or loss after all trades. This is your bottom line.</p>
+
+            <h3>Profit Factor</h3>
+            <p>Ratio of gross profit to gross loss. Above 1.5 is solid, above 2.0 is excellent. Below 1.0 indicates the strategy lost money over the test period.</p>
+
+            <h3>Win Rate %</h3>
+            <p>Percentage of trades that hit take-profit vs stop-loss. Higher isn't always better - a 40% win rate with 3R targets can outperform 60% at 1R.</p>
+
+            <h3>Max Drawdown</h3>
+            <p>Largest peak-to-valley equity decline. This tells you the worst losing streak. If you can't stomach a 20% drawdown, don't use settings that produce it.</p>
+
+            <h3>Average Trade %</h3>
+            <p>Average gain/loss per trade as percentage of account. Positive number = edge over time.</p>
+
+            <h3>Total Trades</h3>
+            <p>Sample size matters. 10 trades proves nothing. 100+ trades starts to be meaningful. 500+ trades is statistically significant.</p>
+
+            <div class="warning-box">
+                <h4>Win Rate Doesn't Tell the Whole Story</h4>
+                <p>A 35% win rate with 3R targets breaks even. A 50% win rate with 0.5R targets loses money. Focus on average trade % and profit factor, not just win rate.</p>
+            </div>
+        </section>
+
+        <!-- Optimization -->
+        <section class="content-section" id="optimization">
+            <h2>Strategy Optimization</h2>
+            
+            <h3>Testing Process</h3>
+            <ol>
+                <li><strong>Start with defaults</strong> - Run the strategy with default settings first</li>
+                <li><strong>Test on your instrument</strong> - Crypto, forex, and stocks behave differently</li>
+                <li><strong>Test on your timeframe</strong> - 15m, 1H, 4H each have different characteristics</li>
+                <li><strong>Adjust one variable at a time</strong> - Change signal sensitivity, then test. Change stop method, then test</li>
+                <li><strong>Look for consistency</strong> - Does changing the test period drastically change results? If yes, settings are overfit</li>
+            </ol>
+
+            <h3>What to Adjust</h3>
+            <p><strong>Signal Sensitivity:</strong> Controls signal frequency. Lower = more trades, higher = fewer selective trades.</p>
+            <p><strong>Stop Loss Method:</strong> ATR adapts to volatility, Percentage is fixed, Swing uses price structure. Test all three.</p>
+            <p><strong>Risk:Reward Ratio:</strong> Higher targets = lower win rate but bigger wins. Find the balance.</p>
+            <p><strong>Partial Take-Profits:</strong> Test different TP1/TP2 levels and percentages to lock in profit vs letting winners run.</p>
+
+            <h3>Multi-Timeframe Testing</h3>
+            <p>If you trade the 1-hour chart, test with 4-hour higher timeframe filter enabled. Compare results with and without HTF confirmation.</p>
+
+            <div class="info-box">
+                <h4>Overfitting Warning</h4>
+                <p>Don't optimize until you get perfect results. That's curve-fitting to past data. Find settings that work reasonably well across different periods and instruments.</p>
+            </div>
+        </section>
+
+        <!-- Limitations -->
+        <section class="content-section" id="limitations">
+            <h2>Backtest Limitations</h2>
+            <p>Backtesting is useful but not perfect. Understand these limitations:</p>
+
+            <h3>1. Historical Data ≠ Future Results</h3>
+            <p>Markets change. What worked in 2023 might not work in 2026. Use backtests to validate logic, not predict future returns.</p>
+
+            <h3>2. Slippage & Commissions</h3>
+            <p>The strategy includes 0.1% commission and 3 ticks slippage by default. Real trading might be worse during volatile periods or low liquidity.</p>
+
+            <h3>3. Order Fills</h3>
+            <p>TradingView assumes your orders fill at the close of the bar. In reality, limit orders might not fill, or you might get worse prices during fast markets.</p>
+
+            <h3>4. Look-Ahead Bias</h3>
+            <p>The strategy uses `barstate.isconfirmed` to avoid repainting. Signals only fire after bar close, not during.</p>
+
+            <h3>5. Psychological Reality</h3>
+            <p>It's easy to accept a 20% drawdown in backtest data. It's hard to keep trading through a real 20% drawdown when it's your money.</p>
+
+            <div class="warning-box">
+                <h4>Always Forward Test</h4>
+                <p>After backtesting, run the strategy on a demo account or with small size for at least 20-30 trades before scaling up. Forward testing reveals issues backtests miss.</p>
+            </div>
+        </section>
+
+        <!-- FAQ -->
+        <section class="content-section" id="faq">
+            <h2>FAQ</h2>
+
+            <h3>Why don't my backtest results match the indicator?</h3>
+            <p>The strategy and indicator use identical logic. If they differ, check that your settings match exactly - signal sensitivity, HTF filter, stop method, everything.</p>
+
+            <h3>What timeframe should I test?</h3>
+            <p>Test the timeframe you plan to trade. If you'll trade 1H charts, backtest on 1H. Results on 15m won't predict 4H performance.</p>
+
+            <h3>How much data do I need?</h3>
+            <p>Minimum 6 months, ideally 1-2 years. More data = more trades = better statistical confidence.</p>
+
+            <h3>Where can I see the Backtester on TradingView?</h3>
+            <p><a href="https://www.tradingview.com/script/I6FuFZfq-Quantum-Ribbon-Pro-Backtester/" target="_blank" style="color: var(--accent); text-decoration: none;">View the Backtester on TradingView →</a></p>
+            <p>After purchase, it will appear in your Invite-Only Scripts folder.</p>
+
+            <h3>Can I backtest with higher timeframe filter?</h3>
+            <p>Yes. Enable "Higher Timeframe Filter" in settings and select your HTF. The strategy will only take trades when HTF ribbon confirms direction.</p>
+
+            <h3>Should I optimize for maximum profit?</h3>
+            <p>No. Optimize for consistency and drawdown control. A strategy that makes 50% with 10% max drawdown is better than one that makes 80% with 40% drawdown.</p>
+        </section>
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="margin-bottom: 16px;">Get the Bundle</h2>
+            <p style="max-width: 600px; margin: 0 auto 32px; color: var(--text-secondary);">Quantum Ribbon Pro + Backtester. One payment, lifetime access.</p>
+            <a href="../../#pricing" class="btn btn-primary">View Bundle Options</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="../../resources/quantum-ribbon-pro/">QR Pro Guide</a>
+                <a href="../../privacy-policy.html">Privacy Policy</a>
+                <a href="../../terms-of-service.html">Terms of Service</a>
+                <a href="../../cookie-policy.html">Cookie Policy</a>
+                <a href="../../contact.html">Contact</a>
+            </div>
+            <p class="copyright">© 2025 Quantum Ribbon Pro. Built by Trendline Project.</p>
+        </div>
+    </footer>
+</body>
+</html>
