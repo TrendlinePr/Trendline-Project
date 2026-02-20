@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1C1F26">
+    <title>QR Pro Scanner - Multi-Instrument Dashboard Guide</title>
+    
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Complete guide for QR Pro Multi-Instrument Scanner. Monitor up to 20 symbols simultaneously using the full Quantum Ribbon Pro signal engine in a single dashboard.">
+    <meta name="keywords" content="QR Pro Scanner, quantum ribbon scanner, multi-instrument scanner, tradingview scanner, market dashboard, trading signals">
+    <meta name="author" content="Trendline Project">
+    <meta name="robots" content="index, follow">
+    
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLKJNZ6GZV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RLKJNZ6GZV');
+    </script>
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --surface: #1C1F26;
+            --surface-hover: #23262E;
+            --accent: #29A8F1;
+            --accent-subtle: rgba(41, 168, 241, 0.1);
+            --text: #F0F0F0;
+            --text-secondary: #C5CBD3;
+            --text-muted: #8B92A0;
+            --border: rgba(255, 255, 255, 0.06);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%);
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+            border-bottom: 1px solid var(--border);
+            background: rgba(28, 31, 38, 0.8);
+            backdrop-filter: blur(10px);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 32px;
+            height: 32px;
+        }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--accent);
+        }
+
+        /* Header */
+        .tutorial-header {
+            padding: 80px 0 40px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--accent-subtle);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .accent-text {
+            color: var(--accent);
+        }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* Content Sections */
+        .content-section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-section:last-of-type {
+            border-bottom: none;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin: 40px 0 16px;
+            color: var(--text);
+        }
+
+        h3:first-of-type {
+            margin-top: 0;
+        }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-size: 1.0625rem;
+        }
+
+        ul, ol {
+            margin: 20px 0 20px 24px;
+            color: var(--text-secondary);
+        }
+
+        li {
+            margin-bottom: 12px;
+            padding-left: 8px;
+        }
+
+        strong {
+            color: var(--text);
+            font-weight: 600;
+        }
+
+        /* Info Box */
+        .info-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .info-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .info-box p {
+            margin-bottom: 0;
+            font-size: 0.9375rem;
+        }
+
+        /* Warning Box */
+        .warning-box {
+            background: rgba(236, 72, 153, 0.05);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            border-left: 3px solid #EC4899;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .warning-box h4 {
+            color: #EC4899;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .warning-box p {
+            margin-bottom: 0;
+            font-size: 0.9375rem;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 40px 0 60px;
+        }
+
+        .toc h2 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+
+        .toc ul {
+            margin: 0;
+            list-style: none;
+        }
+
+        .toc li {
+            margin-bottom: 12px;
+            padding-left: 0;
+        }
+
+        .toc a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: block;
+            padding: 8px 0;
+        }
+
+        .toc a:hover {
+            color: var(--accent);
+        }
+
+        /* Dashboard Table Preview */
+        .dashboard-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            background: #18191E;
+            border-radius: 12px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin: 32px 0;
+            font-size: 0.875rem;
+        }
+
+        .dashboard-table thead {
+            background: rgba(41, 168, 241, 0.08);
+        }
+
+        .dashboard-table th {
+            padding: 14px 16px;
+            text-align: left;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            color: var(--accent);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dashboard-table td {
+            padding: 14px 16px;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .dashboard-table tbody tr:last-child td {
+            border-bottom: none;
+        }
+
+        .status-long {
+            display: inline-block;
+            background: rgba(0, 200, 100, 0.25);
+            color: #4ade80;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+        }
+
+        .status-short {
+            display: inline-block;
+            background: rgba(236, 72, 153, 0.25);
+            color: #f472b6;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+        }
+
+        .status-wait {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.08);
+            color: var(--text-muted);
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+        }
+
+        .trend-bull {
+            display: inline-block;
+            background: rgba(41, 168, 241, 0.2);
+            color: var(--accent);
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.8125rem;
+        }
+
+        .trend-bear {
+            display: inline-block;
+            background: rgba(236, 72, 153, 0.2);
+            color: #f472b6;
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.8125rem;
+        }
+
+        .trend-range {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.06);
+            color: var(--text-muted);
+            padding: 3px 10px;
+            border-radius: 4px;
+            font-size: 0.8125rem;
+        }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: radial-gradient(ellipse at center, rgba(41, 168, 241, 0.08) 0%, transparent 60%);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(41, 168, 241, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover {
+            color: var(--accent);
+        }
+
+        .copyright {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container {
+                padding: 0 20px;
+            }
+
+            .tutorial-header {
+                padding: 60px 0 40px;
+            }
+
+            h1 {
+                font-size: 2rem;
+            }
+
+            h2 {
+                font-size: 1.5rem;
+            }
+
+            h3 {
+                font-size: 1.25rem;
+            }
+
+            .content-section {
+                padding: 40px 0;
+            }
+
+            .dashboard-table {
+                display: block;
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="../../" class="logo">
+                    <img src="../../logo.png" alt="Trendline Project Logo">
+                    <span>Trendline Project</span>
+                </a>
+                <a href="../" class="back-link">← Back to Resources</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <section class="tutorial-header">
+        <div class="container">
+            <span class="badge">Complete Guide</span>
+            <h1>QR Pro <span class="accent-text">Scanner</span></h1>
+            <p class="subtitle">Monitor up to 20 symbols and timeframes simultaneously using the full Quantum Ribbon Pro signal engine — all in one dashboard, without switching charts.</p>
+        </div>
+    </section>
+
+    <!-- TABLE OF CONTENTS -->
+    <div class="container">
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#introduction">What Is QR Pro Scanner?</a></li>
+                <li><a href="#setup">Setup & Getting Started</a></li>
+                <li><a href="#symbols">Adding Symbols & Timeframes</a></li>
+                <li><a href="#dashboard">Dashboard Breakdown</a></li>
+                <li><a href="#signal-engine">Signal Engine Settings</a></li>
+                <li><a href="#risk-management">Risk Management</a></li>
+                <li><a href="#filters">Filters & Confirmation</a></li>
+                <li><a href="#alerts">Alert System</a></li>
+                <li><a href="#appearance">Table Appearance</a></li>
+                <li><a href="#important-notes">Important Notes</a></li>
+                <li><a href="#disclaimer">Risk Disclaimer</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="container">
+
+        <!-- Introduction -->
+        <section class="content-section" id="introduction">
+            <h2>What Is QR Pro Scanner?</h2>
+            <p>QR Pro Multi-Instrument Scanner is the companion tool to Quantum Ribbon Pro. It runs the full QR Pro signal engine across up to 20 symbols and timeframes simultaneously, displaying live trade status in a single dashboard table — without switching charts.</p>
+            <p>If you're already using Quantum Ribbon Pro on individual charts, this gives you market-wide visibility using the exact same logic, risk management, and alert system.</p>
+
+            <div class="info-box">
+                <h4>Companion Tool</h4>
+                <p>The Scanner is designed to complement Quantum Ribbon Pro, not replace it. For the best workflow, use the Scanner to monitor your watchlist, then switch to a chart with the main indicator to review signals in detail before executing.</p>
+            </div>
+
+            <p>You can also use it as a standalone scanner if you want multi-instrument monitoring without opening individual charts at all — all the signal logic runs internally.</p>
+        </section>
+
+        <!-- Setup -->
+        <section class="content-section" id="setup">
+            <h2>Setup & Getting Started</h2>
+            <p>After purchase, you'll receive access to the Scanner as an invite-only script on TradingView, just like the main indicator. It will appear in your <strong>Invite-Only Scripts</strong> folder.</p>
+
+            <p><strong>To add it to your chart:</strong></p>
+            <ol>
+                <li>Open any chart on TradingView — the underlying chart symbol doesn't matter for the scanner</li>
+                <li>Open the Indicators panel and go to <strong>Invite-Only Scripts</strong></li>
+                <li>Select <strong>QR Pro Multi-Instrument Scanner</strong></li>
+                <li>The dashboard table will appear on your chart immediately</li>
+            </ol>
+
+            <div class="info-box">
+                <h4>Which chart should I put it on?</h4>
+                <p>Since the scanner pulls data from its own symbol inputs, the chart you place it on doesn't affect results. Many traders use a low-timeframe chart like a 1-minute or 5-minute chart as their "scanner chart" to ensure the scanner updates frequently.</p>
+            </div>
+
+            <p>Once added, open the indicator settings to configure your symbols, timeframes, and signal preferences.</p>
+        </section>
+
+        <!-- Symbols -->
+        <section class="content-section" id="symbols">
+            <h2>Adding Symbols & Timeframes</h2>
+            <p>The scanner supports up to 20 instruments. Each row has three inputs: an enable checkbox, a symbol field, and a timeframe selector.</p>
+
+            <p><strong>The first 5 symbols are enabled by default</strong> with example instruments (EURUSD, BTCUSDT, SPX, Gold, RHM). Replace these with your own watchlist. Symbols 6–20 are disabled by default — check the enable box to activate each one.</p>
+
+            <p><strong>Entering symbols:</strong> Use TradingView's full symbol format including the exchange prefix. For example:</p>
+            <ul>
+                <li><strong>FX:EURUSD</strong> — Forex via FX data feed</li>
+                <li><strong>BYBIT:BTCUSDT.P</strong> — Bybit perpetual futures</li>
+                <li><strong>NASDAQ:AAPL</strong> — US stocks</li>
+                <li><strong>CAPITALCOM:GOLD</strong> — Gold CFD</li>
+                <li><strong>SP:SPX</strong> — S&P 500 index</li>
+            </ul>
+
+            <p><strong>Timeframe field:</strong> Leave blank to use the chart's current timeframe. Enter a value like <strong>15</strong>, <strong>60</strong>, <strong>240</strong>, or <strong>D</strong> to lock that row to a specific timeframe regardless of what chart you're on.</p>
+
+            <div class="warning-box">
+                <h4>⚠ Timeframe Limitation</h4>
+                <p>The scanner timeframe for each symbol cannot be lower than the chart's current timeframe. If your chart is on 1H, you cannot scan 15M timeframes for any symbol. Set the chart to a lower timeframe if you need to monitor shorter intervals.</p>
+            </div>
+        </section>
+
+        <!-- Dashboard -->
+        <section class="content-section" id="dashboard">
+            <h2>Dashboard Breakdown</h2>
+            <p>The live table shows seven columns for each enabled instrument. Here's what each one means:</p>
+
+            <table class="dashboard-table">
+                <thead>
+                    <tr>
+                        <th>Ticker</th>
+                        <th>TF</th>
+                        <th>Position</th>
+                        <th>Master Trend</th>
+                        <th>Conf.</th>
+                        <th>Entry</th>
+                        <th>SL / TP</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>FX:EURUSD</td>
+                        <td>15</td>
+                        <td><span class="status-wait">WAIT</span></td>
+                        <td><span class="trend-range">Filtered / Range</span></td>
+                        <td>70%</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>BYBIT:BTCUSDT.P</td>
+                        <td>15</td>
+                        <td><span class="status-short">SHORT</span></td>
+                        <td><span class="trend-range">Filtered / Range</span></td>
+                        <td>70%</td>
+                        <td>67506.20</td>
+                        <td>68306.42 / 65865.76</td>
+                    </tr>
+                    <tr>
+                        <td>SP:SPX</td>
+                        <td>15</td>
+                        <td><span class="status-wait">WAIT</span></td>
+                        <td><span class="trend-range">Filtered / Range</span></td>
+                        <td>85%</td>
+                        <td>—</td>
+                        <td>—</td>
+                    </tr>
+                    <tr>
+                        <td>CAPITALCOM:GOLD</td>
+                        <td>15</td>
+                        <td><span class="status-long">LONG</span></td>
+                        <td><span class="trend-bull">Strong Bull</span></td>
+                        <td>90%</td>
+                        <td>4926.54</td>
+                        <td>4807.90 / 4983.83</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Position Column</h3>
+            <p>Shows the current trade state for that instrument. <strong>LONG</strong> or <strong>SHORT</strong> means an active trade is open. <strong>WAIT</strong> means no position is active — the scanner is watching for a signal.</p>
+            <p>When a trade is active, additional indicators appear in brackets: <strong>(BE)</strong> means break-even stop has been moved to entry. <strong>(TP1✓)</strong> or <strong>(TP2✓)</strong> shows which partial take-profit levels have been hit.</p>
+
+            <h3>Master Trend Column</h3>
+            <p>Shows overall ribbon alignment for that symbol. The five possible states are <strong>Strong Bull</strong>, <strong>Bullish</strong>, <strong>Neutral</strong>, <strong>Bearish</strong>, and <strong>Strong Bear</strong>. When the range filter is active and blocking signals, it shows <strong>Filtered / Range</strong> instead.</p>
+
+            <h3>Confidence Column</h3>
+            <p>A market health score from 0–100% based on ribbon alignment strength, trend consistency, and volume participation. Higher percentages indicate stronger trending conditions. This is a context indicator — not a signal trigger by itself.</p>
+
+            <h3>Entry / SL / TP Columns</h3>
+            <p>Live price levels for the active trade. Entry shows the exact price where the position was opened. SL shows the current stop level (this updates if break-even automation moves it). TP shows the final take-profit target. These are blank when no position is open.</p>
+
+            <div class="info-box">
+                <h4>Table Position & Size</h4>
+                <p>You can reposition the table to any corner of the chart (top right, bottom left, etc.) and adjust text size from tiny to large via the Scanner Layout settings. Customize it to fit your screen setup.</p>
+            </div>
+        </section>
+
+        <!-- Signal Engine -->
+        <section class="content-section" id="signal-engine">
+            <h2>Signal Engine Settings</h2>
+            <p>The scanner uses the same signal logic as the main Quantum Ribbon Pro indicator. All signal settings apply globally — the same configuration runs across every symbol in your watchlist.</p>
+
+            <h3>Signal Sensitivity</h3>
+            <p>Controls how selective the signal engine is. Scale from 1 (most signals) to 10 (fewest signals). Higher sensitivity adds a longer cooldown between signals and requires stronger confirmation. Default is 5 — a balanced starting point for most markets.</p>
+
+            <h3>Ribbon Bounce Signals</h3>
+            <p>When disabled (default), signals fire on trend confirmation breakouts. When enabled, the scanner switches to pullback-entry mode — it looks for price dipping into the ribbon during an established trend and crossing back out. Toggle this based on your preferred entry style.</p>
+
+            <h3>Internal HTF Filter</h3>
+            <p>Requires higher timeframe ribbon alignment before any signal fires. Set to <strong>None</strong> to disable, or choose from 15, 30, 60, 120, 240 minute, Daily, or Weekly. If you're scanning 15-minute charts and set this to 60, only signals that align with the hourly ribbon direction will fire.</p>
+        </section>
+
+        <!-- Risk Management -->
+        <section class="content-section" id="risk-management">
+            <h2>Risk Management</h2>
+            <p>All risk management settings from Quantum Ribbon Pro are available in the scanner. Each symbol tracks its own independent trade state — stops, targets, and partial take-profits are calculated and managed per instrument.</p>
+
+            <h3>Stop Loss Method</h3>
+            <p>Three options: <strong>ATR</strong> (volatility-adjusted, default), <strong>Percentage</strong> (fixed % from entry), or <strong>Swing</strong> (placed at recent price structure). ATR adapts to each symbol's volatility automatically. Swing stops reference actual support/resistance levels and include an ATR buffer beyond the swing point.</p>
+
+            <h3>Stop Loss Distance</h3>
+            <p>For ATR method: <strong>Tight</strong> (1.5× ATR), <strong>Normal</strong> (2× ATR, default), or <strong>Wide</strong> (2.5× ATR). Tighter stops give better risk/reward but get hit more often. Wider stops stay in trades longer but risk more per trade.</p>
+
+            <h3>Take Profit Target</h3>
+            <p>Sets the final take-profit at 1.5R, 2R, or 3R. This is the risk multiple — if your stop is 100 points away, 2R targets 200 points of gain.</p>
+
+            <h3>Partial Take-Profits</h3>
+            <p>Enable this to scale out of positions in three stages instead of closing everything at one target. Configure the percentage to close at each level and the R-multiple for each. Default: close 50% at 1.5R, another 30% at 2R, let 20% run to the final target. The dashboard tracks which partials have hit per symbol.</p>
+
+            <h3>Break-Even Stop</h3>
+            <p>Automatically moves the stop to entry price once the trade reaches a defined profit level. Trigger options: when TP1 hits, when TP2 hits, or at a custom R-multiple. The dashboard shows <strong>(BE)</strong> in the position column once break-even is active for a trade.</p>
+
+            <h3>Ribbon Flip Exit</h3>
+            <p>Closes a position early when the ribbon flips against your direction, before the final take-profit or stop is reached. Only triggers if no partial take-profits have been hit yet. Flip Sensitivity (1–5) controls how many ribbon layers must flip — 5 requires all layers to flip (conservative), lower values exit earlier (aggressive).</p>
+        </section>
+
+        <!-- Filters -->
+        <section class="content-section" id="filters">
+            <h2>Filters & Confirmation</h2>
+
+            <h3>TP RSI Confirmation</h3>
+            <p>Requires all five RSI ribbon pairs to align with the signal direction before it fires. For longs, all five must be bullish. For shorts, all five must be bearish. This reduces signal frequency but adds momentum confirmation. If you've been running Quantum Ribbon Pro with TP RSI as a separate filter, enable this to replicate that setup inside the scanner.</p>
+
+            <h3>Quantum Range Filter</h3>
+            <p>Blocks signals during choppy, low-volatility conditions by analyzing volatility ratio and ribbon compression. When ATR is low compared to its average and the ribbon is squeezed, the instrument shows <strong>Filtered / Range</strong> in the Master Trend column and no signals fire. Three sensitivity levels: <strong>Low</strong> (only blocks extreme chop), <strong>Normal</strong> (balanced default), <strong>High</strong> (only trades in clearly trending markets).</p>
+
+            <h3>S/R Auto-Detection</h3>
+            <p>Restricts signals to moments when price is near a key support or resistance level. The scanner automatically detects pivot highs and lows based on your chosen strength setting — <strong>Weak</strong> for more levels, <strong>Strong</strong> for major swings only. The <strong>Touch Zone (%)</strong> defines how close price must be to a level to qualify. Useful for traders who only want to enter at structure.</p>
+
+            <h3>Session Filter</h3>
+            <p>Restricts signals to a defined trading window in EST. Set your start and end times to block alerts outside your preferred session. The scanner respects this filter independently — signals only fire during active hours.</p>
+
+            <h3>Disable Weekend Signals</h3>
+            <p>Prevents signals from firing on Saturday and Sunday. Useful for crypto traders who don't want low-volume weekend setups triggering alerts. The chart still processes and would show the signal visually, but no alerts fire.</p>
+        </section>
+
+        <!-- Alerts -->
+        <section class="content-section" id="alerts">
+            <h2>Alert System</h2>
+            <p>The scanner fires alerts for every event across all monitored instruments from a single alert setup. You don't need to create separate alerts for each symbol.</p>
+
+            <p><strong>To set up alerts:</strong> Right-click on the chart, select <strong>Add Alert</strong>, and choose <strong>QR Pro Scanner</strong> as the condition. Set it to fire on any alert() call. One alert handles everything.</p>
+
+            <p><strong>Alert events include:</strong></p>
+            <ul>
+                <li><strong>Entry</strong> — new long or short position opened</li>
+                <li><strong>TP1 / TP2</strong> — partial take-profit levels hit</li>
+                <li><strong>Final TP</strong> — final take-profit reached, trade closed</li>
+                <li><strong>Stop Loss</strong> — stop hit, trade closed</li>
+                <li><strong>Break-Even</strong> — stop moved to entry</li>
+                <li><strong>Ribbon Flip Exit</strong> — early exit on ribbon reversal</li>
+            </ul>
+
+            <p>Toggle each event type on or off independently. For example, disable TP alerts if you only want entry and stop notifications.</p>
+
+            <h3>Alert Formats</h3>
+            <p><strong>Simple</strong> — clean single-line message with symbol, timeframe, direction, and event type. Example: <em>[QR Scanner] BYBIT:BTCUSDT.P (15) SHORT ENTRY at 67506.20</em></p>
+            <p><strong>JSON</strong> — structured data with all price levels. Designed for webhook integrations with bots, Telegram, Discord, or automation platforms. Parses cleanly into any system that accepts JSON payloads.</p>
+            <p><strong>Custom Template</strong> — build your own message using placeholders: <code>{{ticker}}</code>, <code>{{tf}}</code>, <code>{{dir}}</code>, <code>{{type}}</code>, <code>{{price}}</code>, <code>{{sl}}</code>, <code>{{tp}}</code>. Arrange them however your workflow needs.</p>
+
+            <div class="info-box">
+                <h4>Deduplication Built In</h4>
+                <p>The scanner includes internal deduplication logic — the same symbol, timeframe, and event type won't fire twice on the same bar even if multiple data requests resolve simultaneously. You won't get duplicate alerts.</p>
+            </div>
+        </section>
+
+        <!-- Appearance -->
+        <section class="content-section" id="appearance">
+            <h2>Table Appearance</h2>
+            <p>Full control over how the dashboard looks. All color and style settings are in the <strong>Scanner Appearance</strong> group.</p>
+
+            <p><strong>Layout options</strong> (in Scanner Layout group):</p>
+            <ul>
+                <li><strong>Table Position</strong> — choose from top right, bottom right, top left, bottom left, middle right, middle left, or center</li>
+                <li><strong>Table Text Size</strong> — tiny, small, normal, or large</li>
+                <li><strong>Update Every N Bars</strong> — how frequently the table refreshes (1 = every bar, useful to reduce load on large watchlists)</li>
+            </ul>
+
+            <p><strong>Color controls:</strong> Background color, border color, header background and text color, row text color. Customize status colors for Long, Short, and Wait states. Trend colors for bullish, bearish, and filtered states are adjustable independently.</p>
+        </section>
+
+        <!-- Important Notes -->
+        <section class="content-section" id="important-notes">
+            <h2>Important Notes</h2>
+
+            <div class="warning-box">
+                <h4>⚠ Timeframe Rule</h4>
+                <p>The scanner timeframe for each symbol cannot be lower than the chart's current timeframe. If your chart is on 1H, you cannot scan 15M timeframes. Set the chart to a lower timeframe if you need to monitor shorter intervals.</p>
+            </div>
+
+            <div class="info-box">
+                <h4>Match Your Settings</h4>
+                <p>For best results, match your scanner settings to your main Quantum Ribbon Pro configuration. If you're trading with TP RSI confirmation enabled on the chart indicator, enable it in the scanner too. This keeps signal logic consistent across both tools.</p>
+            </div>
+
+            <p><strong>Mixed market types:</strong> Results may vary slightly between different chart symbols since markets operate on different schedules. Crypto runs 24/7 while stocks and forex have defined sessions — this can affect how signals appear across mixed watchlists, especially when using the session filter.</p>
+
+            <p><strong>TradingView plan:</strong> The scanner uses <code>request.security()</code> calls for each symbol. This works on all TradingView plans, but free plan users may experience slower table updates due to rate limits on data requests.</p>
+
+            <p><strong>Standalone use:</strong> The scanner works as a standalone tool for traders who want multi-instrument monitoring without opening individual charts. It's not required to have the main Quantum Ribbon Pro indicator on any chart for the scanner to function.</p>
+        </section>
+
+        <!-- Disclaimer -->
+        <section class="content-section" id="disclaimer">
+            <h2>Risk Disclaimer</h2>
+
+            <div class="warning-box">
+                <h4>⚠️ Important: Read This Carefully</h4>
+                <p><strong>This is not financial advice.</strong> Trading carries real risk and you can lose money. If you decide to use this tool, that's entirely your choice and your responsibility.</p>
+            </div>
+
+            <p>Past performance, win rates, or any metrics shown in the dashboard do not guarantee future results. Markets change. Conditions that generated signals historically may not continue to do so.</p>
+
+            <p>The scanner is a tool to assist your trading decisions. It does not guarantee profitable outcomes. Always use proper risk management and never trade with money you cannot afford to lose.</p>
+        </section>
+
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="margin-bottom: 16px;">Ready to Monitor the Market?</h2>
+            <p style="max-width: 600px; margin: 0 auto 32px; color: var(--text-secondary);">Get QR Pro Scanner alongside Quantum Ribbon Pro. One payment, lifetime access.</p>
+            <a href="../../#pricing" class="btn btn-primary">See Pricing Options</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="../../privacy-policy.html">Privacy Policy</a>
+                <a href="../../terms-of-service.html">Terms of Service</a>
+                <a href="../../cookie-policy.html">Cookie Policy</a>
+                <a href="../../contact.html">Contact</a>
+            </div>
+            <p class="copyright">© 2025 Quantum Ribbon Pro. Built by Trendline Project.</p>
+        </div>
+    </footer>
+</body>
+</html>
