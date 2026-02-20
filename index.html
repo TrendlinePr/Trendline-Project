@@ -45,11 +45,6 @@
     </script>
     
     <style>
-        /* ═══════════════════════════════════════════════════════════
-           QUANTUM RIBBON PRO - ULTRA REFINED DARK DESIGN
-           Inspired by Flux/BigBeluga, executed better
-           ═══════════════════════════════════════════════════════════ */
-
         * {
             margin: 0;
             padding: 0;
@@ -66,32 +61,24 @@
         }
 
         :root {
-            /* COLORS - Using Option A gradient */
-            --surface: #1C1F26;          /* More grey, less blue */
-            --surface-hover: #23262E;    /* Even lighter grey on hover */
-            
-            /* REFINED CYAN - More subtle */
-            --accent: #29A8F1;           /* OPTION 1: Bright cyan-blue */
-            --accent-muted: #29A8F1;     /* Same as accent for buttons */
+            --surface: #1C1F26;
+            --surface-hover: #23262E;
+            --accent: #29A8F1;
+            --accent-muted: #29A8F1;
             --accent-subtle: rgba(41, 168, 241, 0.1);
-            
-            /* TYPOGRAPHY */
-            --text: #F0F0F0;             /* Soft off-white (not harsh pure white) */
-            --text-secondary: #C5CBD3;   /* Brighter secondary (was #9CA3AF) */
-            --text-muted: #8B92A0;       /* Brighter muted (was #6B7280) */
-            
-            /* BORDERS - Barely visible */
+            --text: #F0F0F0;
+            --text-secondary: #C5CBD3;
+            --text-muted: #8B92A0;
             --border: rgba(255, 255, 255, 0.06);
             --border-hover: rgba(74, 159, 216, 0.3);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
-            /* OPTION A: Vertical gradient - lighter top, DARK middle, lighter bottom */
             background: linear-gradient(180deg, 
-                #1E2A3A 0%,      /* Lighter cyan-blue at top */
-                #050608 50%,     /* DARKEST in middle */
-                #0D1117 100%     /* Lighter again at bottom */
+                #1E2A3A 0%,
+                #050608 50%,
+                #0D1117 100%
             );
             background-attachment: fixed;
             color: var(--text);
@@ -105,7 +92,6 @@
             padding: 0;
         }
 
-        /* CONTAINER */
         .container {
             max-width: 1200px;
             margin: 0 auto;
@@ -160,7 +146,7 @@
             color: var(--accent);
         }
 
-        /* HERO - ULTRA MINIMAL */
+        /* HERO */
         .hero {
             padding: 140px 0 80px;
             text-align: center;
@@ -213,7 +199,6 @@
             line-height: 1.7;
         }
 
-        /* BUTTONS */
         .btn-group {
             display: flex;
             gap: 16px;
@@ -235,7 +220,7 @@
 
         .btn-primary {
             background: var(--accent-muted);
-            color: var(--bg);
+            color: #000;
             border: none;
         }
 
@@ -256,7 +241,6 @@
             color: var(--accent);
         }
 
-        /* SECTION HEADER */
         .section-label {
             font-size: 0.875rem;
             text-transform: uppercase;
@@ -303,9 +287,7 @@
             margin: 0 auto;
         }
 
-        .stat {
-            text-align: center;
-        }
+        .stat { text-align: center; }
 
         .stat-number {
             font-size: 2.5rem;
@@ -320,6 +302,75 @@
             color: var(--text-secondary);
         }
 
+        /* TESTIMONIALS */
+        .testimonials-section {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .testimonials-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 24px;
+            margin-top: 60px;
+        }
+
+        .testimonial-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            text-align: left;
+            transition: all 0.3s ease;
+        }
+
+        .testimonial-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(41, 168, 241, 0.15);
+        }
+
+        .stars { display: flex; gap: 4px; margin-bottom: 20px; }
+        .star { color: var(--accent); font-size: 1.25rem; }
+
+        .testimonial-text {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 24px;
+        }
+
+        .testimonial-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .testimonial-author { flex: 1; }
+
+        .author-name {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 4px;
+        }
+
+        .author-location {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+        }
+
+        .verified-badge {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            color: var(--accent);
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        .verified-badge svg { width: 16px; height: 16px; }
+
         /* WHY CHOOSE */
         .why-section {
             padding: 100px 0;
@@ -331,7 +382,7 @@
                 radial-gradient(ellipse at 100% 50%, rgba(236, 72, 153, 0.15) 0%, transparent 40%);
         }
 
-        /* CHART SHOWCASE SECTION */
+        /* CHART SHOWCASE */
         .chart-showcase-section {
             padding: 80px 0;
             scroll-margin-top: -150px;
@@ -357,10 +408,8 @@
             border-radius: 18px;
         }
 
-        /* FEATURE CAROUSEL - 3 Images */
-        .feature-carousel-section {
-            padding: 80px 0;
-        }
+        /* CAROUSEL */
+        .feature-carousel-section { padding: 80px 0; }
 
         .carousel-wrapper {
             position: relative;
@@ -428,13 +477,8 @@
             box-shadow: 0 0 20px rgba(41, 168, 241, 0.4);
         }
 
-        .carousel-btn.prev {
-            left: 0;
-        }
-
-        .carousel-btn.next {
-            right: 0;
-        }
+        .carousel-btn.prev { left: 0; }
+        .carousel-btn.next { right: 0; }
 
         .carousel-indicators {
             display: flex;
@@ -457,208 +501,16 @@
             box-shadow: 0 0 10px rgba(41, 168, 241, 0.5);
         }
 
-        .indicator:hover {
-            background: rgba(255, 255, 255, 0.6);
-        }
+        .indicator:hover { background: rgba(255, 255, 255, 0.6); }
 
-        @media (max-width: 968px) {
-            .carousel-item {
-                min-width: calc((100% - 24px) / 2);
-                max-width: calc((100% - 24px) / 2);
-            }
-            
-            .carousel-wrapper {
-                padding: 0 40px;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .carousel-item {
-                min-width: 100%;
-                max-width: 100%;
-                flex-shrink: 0;
-            }
-
-            .carousel-item img {
-                width: 100%;
-                height: auto;
-                object-fit: contain;
-            }
-            
-            .carousel-track {
-                gap: 16px;
-            }
-            
-            .carousel-wrapper {
-                padding: 0 20px;
-            }
-
-            .carousel-track-container {
-                overflow: hidden;
-                padding: 40px 0;
-            }
-
-            .carousel-btn {
-                width: 40px;
-                height: 40px;
-                font-size: 1.5rem;
-                background: rgba(28, 31, 38, 0.85);
-                z-index: 20;
-            }
-
-            .carousel-btn.prev {
-                left: 10px;
-            }
-
-            .carousel-btn.next {
-                right: 10px;
-            }
-        }
-
-        /* DEMO VIDEO SECTION */
-        .demo-section {
-            padding: 80px 0;
-            text-align: center;
-        }
-
-        /* SHOWCASE SECTION */
-        .showcase-section {
-            padding: 80px 0;
-            overflow: hidden;
-        }
-
-        .showcase-wrapper {
-            max-width: 1100px;
-            margin: 48px auto 0;
-            position: relative;
-            border-radius: 20px;
-            padding: 4px;
-            background: linear-gradient(135deg, #29A8F1 0%, #8CA8CE 50%, #EC4899 100%);
-            box-shadow: 
-                0 20px 60px rgba(41, 168, 241, 0.3),
-                0 30px 80px rgba(236, 72, 153, 0.2),
-                0 0 100px rgba(41, 168, 241, 0.1);
-        }
-
-        .showcase-bg {
-            display: block;
-            width: 100%;
-            height: auto;
-            border-radius: 18px;
-            position: relative;
-        }
-
-        /* Callout Boxes */
-        .callout {
-            position: absolute;
-            z-index: 10;
-        }
-
-        .callout-content {
-            background: rgba(28, 31, 38, 0.95);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(41, 168, 241, 0.3);
-            border-radius: 12px;
-            padding: 16px 20px;
-            box-shadow: 
-                0 8px 32px rgba(0, 0, 0, 0.5),
-                0 0 20px rgba(41, 168, 241, 0.2);
-            min-width: 200px;
-        }
-
-        .callout-content h4 {
-            color: var(--accent);
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 6px;
-            letter-spacing: -0.01em;
-        }
-
-        .callout-content p {
-            color: var(--text-secondary);
-            font-size: 0.875rem;
-            margin: 0;
-            line-height: 1.5;
-        }
-
-        .callout-pointer {
-            position: absolute;
-            width: 2px;
-            height: 40px;
-            background: linear-gradient(180deg, #29A8F1 0%, transparent 100%);
-        }
-
-        /* Callout Positions */
-        .callout-1 {
-            top: 50%;
-            left: 20%;
-            transform: translateY(-50%);
-        }
-
-        .callout-1 .callout-pointer {
-            top: 50%;
-            left: 100%;
-            transform: translateY(-50%);
-            width: 50px;
-            height: 2px;
-            background: linear-gradient(90deg, #29A8F1 0%, transparent 100%);
-        }
-
-        .callout-2 {
-            top: 15%;
-            right: 10%;
-        }
-
-        .callout-2 .callout-pointer {
-            top: 100%;
-            left: 30%;
-            height: 60px;
-        }
-
-        .callout-3 {
-            bottom: 15%;
-            left: 5%;
-        }
-
-        .callout-3 .callout-pointer {
-            bottom: 100%;
-            left: 50%;
-            height: 80px;
-            background: linear-gradient(0deg, #29A8F1 0%, transparent 100%);
-        }
-
-        .callout-4 {
-            top: 8%;
-            right: 25%;
-        }
-
-        .callout-4 .callout-pointer {
-            top: 100%;
-            right: 40%;
-            height: 50px;
-        }
-
-        /* Mobile adjustments */
-        @media (max-width: 968px) {
-            .callout {
-                position: static;
-                margin: 16px 0;
-            }
-
-            .callout-pointer {
-                display: none;
-            }
-
-            .showcase-wrapper {
-                padding: 16px;
-            }
-        }
+        /* DEMO VIDEO */
+        .demo-section { padding: 80px 0; text-align: center; }
 
         .video-wrapper {
             max-width: 900px;
             margin: 48px auto 0;
             position: relative;
-            padding-bottom: 56.25%; /* 16:9 aspect ratio */
+            padding-bottom: 56.25%;
             height: 0;
             overflow: hidden;
             border-radius: 16px;
@@ -706,13 +558,9 @@
             align-items: center;
             justify-content: center;
             margin-bottom: 20px;
-            position: relative;
         }
 
-        .feature-icon svg {
-            width: 36px;
-            height: 36px;
-        }
+        .feature-icon svg { width: 36px; height: 36px; }
 
         .feature-card h3 {
             font-size: 1.125rem;
@@ -730,7 +578,6 @@
         /* COMPARISON TABLE */
         .comparison-section {
             padding: 100px 0;
-            /* Remove separate background - blend with main gradient */
             position: relative;
         }
 
@@ -740,16 +587,13 @@
             margin: 60px auto 0;
             border-collapse: separate;
             border-spacing: 0;
-            background: #18191E;  /* More grey, less blue */
+            background: #18191E;
             border-radius: 12px;
             overflow: hidden;
             border: 1px solid var(--border);
-            overflow-x: auto;
         }
 
-        thead {
-            background: rgba(77, 212, 232, 0.05);
-        }
+        thead { background: rgba(77, 212, 232, 0.05); }
 
         th {
             padding: 20px 24px;
@@ -769,29 +613,16 @@
             border-bottom: 1px solid var(--border);
         }
 
-        tbody tr:last-child td {
-            border-bottom: none;
-        }
+        tbody tr:last-child td { border-bottom: none; }
+        tbody tr:hover { background: var(--surface); }
 
-        tbody tr:hover {
-            background: var(--surface);
-        }
+        .check { color: var(--accent); font-weight: 500; }
+        .check-pink { color: #EC4899; font-weight: 500; }
+        .dash { color: #EC4899; }
 
-        .check {
-            color: var(--accent);
-            font-weight: 500;
-        }
-        
-        .check-pink {
-            color: #EC4899;
-            font-weight: 500;
-        }
-
-        .dash {
-            color: #EC4899;
-        }
-
-        /* PRICING */
+        /* ═══════════════════════════════
+           PRICING - NEW SUBSCRIPTION
+           ═══════════════════════════════ */
         .pricing-section {
             padding: 100px 0;
             text-align: center;
@@ -802,101 +633,136 @@
                 radial-gradient(ellipse at 80% 70%, rgba(236, 72, 153, 0.12) 0%, transparent 40%);
         }
 
-        .pricing-card {
-            max-width: 500px;
-            margin: 60px auto 0;
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 32px;
-            text-align: center;
-        }
-
-        .pricing-cards-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 24px;
-            max-width: 1000px;
-            margin: 60px auto 0;
-        }
-
-        .pricing-cards-grid .pricing-card {
-            max-width: none;
-            margin: 0;
-            padding: 32px 28px;
+        /* TOGGLE */
+        .pricing-toggle {
             display: flex;
-            flex-direction: column;
-        }
-
-        .pricing-cards-grid .pricing-card .features-list {
-            flex-grow: 1;
-        }
-
-        .pricing-cards-grid .pricing-card .btn {
-            margin-top: 32px;
-        }
-
-        .price {
-            font-size: 3rem;
-            font-weight: 600;
-            color: var(--accent);
-            margin: 16px 0 20px 0;
-            letter-spacing: -0.04em;
-        }
-
-        .price-wrapper {
-            min-height: 100px;
-            display: flex;
-            flex-direction: column;
             align-items: center;
             justify-content: center;
+            gap: 8px;
+            margin: 40px auto 48px;
         }
 
-        .price small {
-            font-size: 1.25rem;
-            color: var(--text-secondary);
-            font-weight: 400;
+        .toggle-btn {
+            padding: 10px 28px;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            border: 1px solid var(--border);
+            background: transparent;
+            color: var(--text-muted);
+            font-family: inherit;
+        }
+
+        .toggle-btn.active {
+            background: var(--accent);
+            color: #000;
+            border-color: var(--accent);
+        }
+
+        .save-badge {
+            background: rgba(41, 168, 241, 0.15);
+            color: var(--accent);
+            border: 1px solid rgba(41, 168, 241, 0.35);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 700;
+            padding: 6px 14px;
             letter-spacing: 0.02em;
         }
 
-        .price-details {
+        /* SINGLE PRICING CARD */
+        .pricing-card-single {
+            max-width: 480px;
+            margin: 0 auto;
+        }
+
+        .pricing-card-inner {
+            background: var(--surface);
+            border: 1px solid rgba(41, 168, 241, 0.25);
+            border-radius: 16px;
+            padding: 40px 36px;
+            text-align: left;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 0 40px rgba(41, 168, 241, 0.08);
+        }
+
+        .pricing-card-inner::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: linear-gradient(90deg, #29A8F1, #EC4899);
+        }
+
+        .price-block { margin-bottom: 24px; }
+
+        .price-amount {
+            font-size: 3.5rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.04em;
+        }
+
+        .price-period {
+            font-size: 1.125rem;
+            color: var(--text-muted);
+            font-weight: 400;
+            margin-left: 4px;
+        }
+
+        .price-sub {
             color: var(--text-muted);
             font-size: 0.875rem;
-            margin-bottom: 32px;
+            margin: 6px 0 0 0;
         }
 
-        .features-list {
+        .pricing-divider {
+            height: 1px;
+            background: var(--border);
+            margin: 24px 0;
+        }
+
+        .features-list-new {
             list-style: none;
-            text-align: left;
-            margin: 24px 0 0 0;
+            margin: 0 0 32px 0;
+            padding: 0;
         }
 
-        .features-list li {
-            padding: 12px 0;
-            color: var(--text-secondary);
-            font-size: 0.9375rem;
-            border-bottom: 1px solid var(--border);
+        .features-list-new li {
             display: flex;
             align-items: center;
             gap: 12px;
+            padding: 11px 0;
+            color: var(--text-secondary);
+            font-size: 0.9375rem;
+            border-bottom: 1px solid var(--border);
         }
 
-        .features-list li:last-child {
-            border-bottom: none;
-        }
+        .features-list-new li:last-child { border-bottom: none; }
 
-        .features-list li::before {
-            content: '✓';
+        .check-icon {
             color: var(--accent);
-            font-weight: 600;
-            font-size: 1.125rem;
+            font-weight: 700;
+            font-size: 1rem;
+            flex-shrink: 0;
         }
 
-        /* FOOTER */
-        /* FAQ */
-        .faq-section {
-            padding: 100px 0;
+        .pricing-cta-btn {
+            display: block;
+            width: 100%;
+            text-align: center;
+            padding: 16px;
+            font-size: 1rem;
+            font-weight: 600;
         }
+
+        /* FAQ */
+        .faq-section { padding: 100px 0; }
 
         .faq-container {
             max-width: 800px;
@@ -912,9 +778,7 @@
             transition: all 0.3s ease;
         }
 
-        .faq-item:hover {
-            border-color: var(--border-hover);
-        }
+        .faq-item:hover { border-color: var(--border-hover); }
 
         .faq-question {
             padding: 24px 32px;
@@ -936,9 +800,7 @@
             margin-left: 16px;
         }
 
-        .faq-item.active .faq-icon {
-            transform: rotate(45deg);
-        }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
 
         .faq-answer {
             max-height: 0;
@@ -980,14 +842,9 @@
             transition: color 0.2s;
         }
 
-        .footer-links a:hover {
-            color: var(--accent);
-        }
+        .footer-links a:hover { color: var(--accent); }
 
-        .copyright {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
+        .copyright { color: var(--text-muted); font-size: 0.875rem; }
 
         .social-icons {
             display: flex;
@@ -1015,81 +872,45 @@
             transform: translateY(-2px);
         }
 
-        .social-icons svg {
-            width: 20px;
-            height: 20px;
-            fill: currentColor;
-        }
+        .social-icons svg { width: 20px; height: 20px; fill: currentColor; }
 
         /* RESPONSIVE */
+        @media (max-width: 968px) {
+            .carousel-item {
+                min-width: calc((100% - 24px) / 2);
+                max-width: calc((100% - 24px) / 2);
+            }
+            .carousel-wrapper { padding: 0 40px; }
+        }
+
+        @media (max-width: 640px) {
+            .carousel-item { min-width: 100%; max-width: 100%; flex-shrink: 0; }
+            .carousel-item img { width: 100%; height: auto; object-fit: contain; }
+            .carousel-track { gap: 16px; }
+            .carousel-wrapper { padding: 0 20px; }
+            .carousel-track-container { overflow: hidden; padding: 40px 0; }
+            .carousel-btn { width: 40px; height: 40px; font-size: 1.5rem; background: rgba(28, 31, 38, 0.85); z-index: 20; }
+            .carousel-btn.prev { left: 10px; }
+            .carousel-btn.next { right: 10px; }
+        }
+
         @media (max-width: 768px) {
             body {
-                /* Darker gradient for mobile to match desktop appearance */
-                background: linear-gradient(180deg, 
-                    #141D28 0%,      /* Darker on mobile */
-                    #050608 50%,
-                    #0D1117 100%
-                );
+                background: linear-gradient(180deg, #141D28 0%, #050608 50%, #0D1117 100%);
             }
-
-            nav {
-                padding: 12px 0;
-            }
-
-            .nav-content {
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-
-            .logo {
-                font-size: 1rem;
-            }
-
-            .logo img {
-                width: 24px !important;
-                height: 24px !important;
-            }
-
-            .nav-links {
-                width: 100%;
-                justify-content: space-between;
-                gap: 8px;
-            }
-
-            .nav-links a {
-                font-size: 0.8125rem;
-                padding: 6px 8px;
-                white-space: nowrap;
-            }
-
-            .container {
-                padding: 0 20px;
-            }
-
-            .hero {
-                padding: 100px 0 60px;
-            }
-
-            .btn-group {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-            }
-
-            .features-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .nav-links {
-                gap: 20px;
-                font-size: 0.875rem;
-            }
-
-            .pricing-cards-grid {
-                grid-template-columns: 1fr;
-            }
+            nav { padding: 12px 0; }
+            .nav-content { flex-wrap: wrap; gap: 12px; }
+            .logo { font-size: 1rem; }
+            .logo img { width: 24px !important; height: 24px !important; }
+            .nav-links { width: 100%; justify-content: space-between; gap: 8px; }
+            .nav-links a { font-size: 0.8125rem; padding: 6px 8px; white-space: nowrap; }
+            .container { padding: 0 20px; }
+            .hero { padding: 100px 0 60px; }
+            .btn-group { flex-direction: column; }
+            .btn { width: 100%; }
+            .features-grid { grid-template-columns: 1fr; }
+            .pricing-card-inner { padding: 32px 24px; }
+            .price-amount { font-size: 2.75rem; }
         }
     </style>
 </head>
@@ -1147,6 +968,64 @@
         </div>
     </section>
 
+    <!-- TESTIMONIALS -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="section-label">What Traders Say</div>
+            <h2 class="section-title">Trusted by Active Traders</h2>
+            <div class="testimonials-grid">
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    </div>
+                    <p class="testimonial-text">"Really solid indicator. I love the process-oriented approach—it helps massively with managing emotions and staying disciplined. Also, huge props to the developer: he responds very quickly to messages and implements feature requests in record time. Top-tier support!"</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-author">
+                            <div class="author-name">Christian</div>
+                            <div class="author-location">TradingView User</div>
+                        </div>
+                        <div class="verified-badge">
+                            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>Verified</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    </div>
+                    <p class="testimonial-text">"I've gotta say, the S/R auto detection has been very good at giving me winning swing trades lately. I think you've really done fantastic work with that latest addition so thank you for that."</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-author">
+                            <div class="author-name">Discord Member</div>
+                            <div class="author-location">Active Community User</div>
+                        </div>
+                        <div class="verified-badge">
+                            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>Verified</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="testimonial-card">
+                    <div class="stars">
+                        <span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span>
+                    </div>
+                    <p class="testimonial-text">"Great tool, thanks! Really helpful."</p>
+                    <div class="testimonial-footer">
+                        <div class="testimonial-author">
+                            <div class="author-name">Zetas</div>
+                            <div class="author-location">TradingView User</div>
+                        </div>
+                        <div class="verified-badge">
+                            <svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                            <span>Verified</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- CHART SHOWCASE -->
     <section class="chart-showcase-section" id="showcase">
         <div class="container">
@@ -1163,33 +1042,15 @@
                 <button class="carousel-btn prev" aria-label="Previous">‹</button>
                 <div class="carousel-track-container">
                     <div class="carousel-track">
-                        <div class="carousel-item">
-                            <img src="feature-1.jpg" alt="Momentum Confirmation">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="feature-3.jpg" alt="Ribbon Bounce Signals">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="feature-2.jpg" alt="Multi-Timeframe Confirmation">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="feature-4.jpg" alt="Customization & Alerts">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="feature-5.jpg" alt="Trading Hours Filter">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="feature-6.jpg" alt="Custom Ribbon Settings">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="feature-7.jpg" alt="Break-Even Stop Protection">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="feature-8.jpg" alt="Partial Take-Profits">
-                        </div>
-                        <div class="carousel-item">
-                            <img src="feature-9.jpg" alt="Quantum Range Filter">
-                        </div>
+                        <div class="carousel-item"><img src="feature-1.jpg" alt="Momentum Confirmation"></div>
+                        <div class="carousel-item"><img src="feature-3.jpg" alt="Ribbon Bounce Signals"></div>
+                        <div class="carousel-item"><img src="feature-2.jpg" alt="Multi-Timeframe Confirmation"></div>
+                        <div class="carousel-item"><img src="feature-4.jpg" alt="Customization & Alerts"></div>
+                        <div class="carousel-item"><img src="feature-5.jpg" alt="Trading Hours Filter"></div>
+                        <div class="carousel-item"><img src="feature-6.jpg" alt="Custom Ribbon Settings"></div>
+                        <div class="carousel-item"><img src="feature-7.jpg" alt="Break-Even Stop Protection"></div>
+                        <div class="carousel-item"><img src="feature-8.jpg" alt="Partial Take-Profits"></div>
+                        <div class="carousel-item"><img src="feature-9.jpg" alt="Quantum Range Filter"></div>
                     </div>
                 </div>
                 <button class="carousel-btn next" aria-label="Next">›</button>
@@ -1214,22 +1075,11 @@
             <div class="section-label">Why Quantum Ribbon <span class="highlight">Pro</span></div>
             <h2 class="section-title">Built for Traders Who Demand More</h2>
             <p class="section-description">Three core systems working together: confirmation logic to filter noise, professional risk tools to protect capital, and bot integration for automated execution.</p>
-            
             <div class="features-grid">
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="none">
-                            <defs>
-                                <linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1" />
-                                    <stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.8" />
-                                    <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
-                                </linearGradient>
-                                <radialGradient id="fade1">
-                                    <stop offset="50%" style="stop-opacity:1" />
-                                    <stop offset="100%" style="stop-opacity:0.3" />
-                                </radialGradient>
-                            </defs>
+                            <defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.8"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs>
                             <circle cx="12" cy="12" r="10" stroke="url(#grad1)" stroke-width="2" fill="none" opacity="0.6"/>
                             <circle cx="12" cy="12" r="6" stroke="url(#grad1)" stroke-width="2" fill="none" opacity="0.7"/>
                             <circle cx="12" cy="12" r="3" fill="url(#grad1)" opacity="0.9"/>
@@ -1238,17 +1088,10 @@
                     <h3>Multi-Layer Confirmation</h3>
                     <p>TP RSI ribbon, multi-timeframe analysis, and quantum range filter. Configure multiple layers of confirmation to match your strategy.</p>
                 </div>
-                
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="none">
-                            <defs>
-                                <linearGradient id="riskGrad" x1="0%" y1="100%" x2="0%" y2="0%">
-                                    <stop offset="0%" style="stop-color:#EC4899" />
-                                    <stop offset="50%" style="stop-color:#8CA8CE" />
-                                    <stop offset="100%" style="stop-color:#29A8F1" />
-                                </linearGradient>
-                            </defs>
+                            <defs><linearGradient id="riskGrad" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" style="stop-color:#EC4899"/><stop offset="50%" style="stop-color:#8CA8CE"/><stop offset="100%" style="stop-color:#29A8F1"/></linearGradient></defs>
                             <rect x="4" y="14" width="4" height="6" fill="url(#riskGrad)" opacity="0.9" rx="1"/>
                             <rect x="10" y="4" width="4" height="16" fill="url(#riskGrad)" opacity="0.9" rx="1"/>
                             <rect x="16" y="10" width="4" height="10" fill="url(#riskGrad)" opacity="0.9" rx="1"/>
@@ -1257,17 +1100,10 @@
                     <h3>Professional Risk Management</h3>
                     <p>ATR-based stops, swing detection, partial exits, and automatic break-even moves. Trade with the discipline of institutional traders.</p>
                 </div>
-                
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="none">
-                            <defs>
-                                <linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1" />
-                                    <stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.8" />
-                                    <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
+                            <defs><linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.8"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs>
                             <rect x="3" y="11" width="18" height="10" rx="2" stroke="url(#grad3)" stroke-width="2" fill="none" opacity="0.7"/>
                             <circle cx="8" cy="16" r="1.5" fill="url(#grad3)" opacity="0.9"/>
                             <circle cx="16" cy="16" r="1.5" fill="url(#grad3)" opacity="0.9"/>
@@ -1278,35 +1114,18 @@
                     <h3>Bot Integration Ready</h3>
                     <p>Webhook-ready alerts with full JSON support. Seamlessly integrate with trading bots and automation platforms.</p>
                 </div>
-                
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="none">
-                            <defs>
-                                <linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1" />
-                                    <stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.9" />
-                                    <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
-                            <!-- 8 gear teeth positioned at 45-degree intervals -->
-                            <!-- Top -->
+                            <defs><linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.9"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs>
                             <rect x="11" y="2" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.85"/>
-                            <!-- Top-right -->
                             <rect x="17" y="5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.8" transform="rotate(45 18 6.75)"/>
-                            <!-- Right -->
                             <rect x="18.5" y="11" width="3.5" height="2" rx="0.5" fill="url(#grad4)" opacity="0.85"/>
-                            <!-- Bottom-right -->
                             <rect x="17" y="15.5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.8" transform="rotate(135 18 17.25)"/>
-                            <!-- Bottom -->
                             <rect x="11" y="18.5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.85"/>
-                            <!-- Bottom-left -->
                             <rect x="5" y="15.5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.8" transform="rotate(-135 6 17.25)"/>
-                            <!-- Left -->
                             <rect x="2" y="11" width="3.5" height="2" rx="0.5" fill="url(#grad4)" opacity="0.85"/>
-                            <!-- Top-left -->
                             <rect x="5" y="5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.8" transform="rotate(-45 6 6.75)"/>
-                            <!-- Center circle -->
                             <circle cx="12" cy="12" r="4.5" stroke="url(#grad4)" stroke-width="2" fill="none" opacity="0.8"/>
                             <circle cx="12" cy="12" r="2.5" fill="url(#grad4)" opacity="0.9"/>
                         </svg>
@@ -1314,16 +1133,10 @@
                     <h3>Complete Customization</h3>
                     <p>Adjust signal sensitivity, customize visual style, set trading hours, control alert formats. Make it work exactly how you trade.</p>
                 </div>
-                
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="none">
-                            <defs>
-                                <linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
+                            <defs><linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs>
                             <circle cx="12" cy="12" r="10" stroke="url(#grad5)" stroke-width="2" fill="none"/>
                             <polyline points="12 6 12 12 16 14" stroke="url(#grad5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
@@ -1331,23 +1144,17 @@
                     <h3>Session Control</h3>
                     <p>Trade only during active market hours. Set your schedule, avoid low-volume periods, disable weekend alerts automatically.</p>
                 </div>
-                
                 <div class="feature-card">
                     <div class="feature-icon">
                         <svg viewBox="0 0 24 24" fill="none">
-                            <defs>
-                                <linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%">
-                                    <stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1" />
-                                    <stop offset="100%" style="stop-color:#EC4899;stop-opacity:1" />
-                                </linearGradient>
-                            </defs>
+                            <defs><linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs>
                             <path d="M23 4v6h-6" stroke="url(#grad6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M1 20v-6h6" stroke="url(#grad6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15" stroke="url(#grad6)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                         </svg>
                     </div>
-                    <h3>Lifetime Updates</h3>
-                    <p>One payment, forever access. All future features and improvements included. Price may increase for new buyers.</p>
+                    <h3>Always Improving</h3>
+                    <p>New features, refinements, and improvements ship regularly. Your subscription always includes the latest version.</p>
                 </div>
             </div>
         </div>
@@ -1371,7 +1178,7 @@
                 <a href="resources/quantum-ribbon-pro/" style="color: #29A8F1; text-decoration: none; font-size: 0.9375rem; transition: opacity 0.2s;" onmouseover="this.style.opacity='0.8'" onmouseout="this.style.opacity='1'">View complete setup guide →</a>
             </div>
             <div style="text-align: center; margin-top: 40px;">
-                <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/8bb4737c-a2c1-4162-9f8a-e5dd5cf52046" class="btn btn-primary">Ready to start? Get Access</a>
+                <a href="#pricing" class="btn btn-primary">Ready to start? Get Access</a>
             </div>
         </div>
     </section>
@@ -1381,7 +1188,6 @@
         <div class="container">
             <div class="section-label">Lite vs <span class="highlight">Pro</span></div>
             <h2 class="section-title">Choose Your Level</h2>
-            
             <table>
                 <thead>
                     <tr>
@@ -1391,97 +1197,65 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>MA Ribbon Signals</td>
-                        <td><span class="check-pink">✓</span> Basic</td>
-                        <td><span class="check">✓</span> Advanced</td>
-                    </tr>
-                    <tr>
-                        <td>Signal Sensitivity</td>
-                        <td><span class="dash">—</span></td>
-                        <td><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>TP RSI Confirmation</td>
-                        <td><span class="dash">—</span></td>
-                        <td><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Multi-Timeframe Filter</td>
-                        <td><span class="dash">—</span></td>
-                        <td><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Quantum Range Filter</td>
-                        <td><span class="dash">—</span></td>
-                        <td><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Partial Take-Profits</td>
-                        <td><span class="dash">—</span></td>
-                        <td><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Break-Even Automation</td>
-                        <td><span class="dash">—</span></td>
-                        <td><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Bot Alerts</td>
-                        <td><span class="check-pink">✓</span> Basic</td>
-                        <td><span class="check">✓</span> Advanced</td>
-                    </tr>
+                    <tr><td>MA Ribbon Signals</td><td><span class="check-pink">✓</span> Basic</td><td><span class="check">✓</span> Advanced</td></tr>
+                    <tr><td>Signal Sensitivity</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+                    <tr><td>TP RSI Confirmation</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+                    <tr><td>Multi-Timeframe Filter</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+                    <tr><td>Quantum Range Filter</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+                    <tr><td>Partial Take-Profits</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+                    <tr><td>Break-Even Automation</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+                    <tr><td>Multi-Instrument Scanner</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+                    <tr><td>Strategy Backtester</td><td><span class="dash">—</span></td><td><span class="check">✓</span></td></tr>
+                    <tr><td>Bot Alerts</td><td><span class="check-pink">✓</span> Basic</td><td><span class="check">✓</span> Advanced</td></tr>
                 </tbody>
             </table>
         </div>
     </section>
 
-    <!-- PRICING -->
+    <!-- ═══════════════════════════════════════
+         PRICING - SUBSCRIPTION WITH TOGGLE
+         ═══════════════════════════════════════ -->
     <section class="pricing-section" id="pricing">
         <div class="container">
             <div class="section-label">Pricing</div>
-            <h2 class="section-title">Choose Your Package</h2>
-            <p class="section-description">One payment, lifetime access. No subscriptions, no monthly fees.</p>
-            
-            <div class="pricing-cards-grid">
-                <!-- PRO INDICATOR ONLY -->
-                <div class="pricing-card">
-                    <span class="badge">Pro Indicator</span>
-                    <div class="price-wrapper">
-                        <div class="price">€129<small> / lifetime</small></div>
-                        <p style="color: transparent; font-size: 0.875rem; margin: 0; user-select: none;">Invisible placeholder text</p>
-                    </div>
-                    
-                    <ul class="features-list">
-                        <li>Multi-timeframe confirmation</li>
-                        <li>Partial take-profits & break-even</li>
-                        <li>Bot-ready JSON alerts</li>
-                        <li>Trading hours filter</li>
-                        <li>Complete customization</li>
-                        <li>Lifetime updates included</li>
-                    </ul>
-                    
-                    <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/8bb4737c-a2c1-4162-9f8a-e5dd5cf52046" class="btn btn-primary" style="width: 100%;">Get Pro Indicator</a>
-                </div>
+            <h2 class="section-title">Your Entire Trading Toolkit — One Plan</h2>
+            <p class="section-description">Every tool you need to trade like a pro. Cancel anytime.</p>
 
-                <!-- PRO + BACKTESTER BUNDLE -->
-                <div class="pricing-card" style="border: 2px solid var(--accent); position: relative;">
-                    <span class="badge" style="background: var(--accent); color: #000;">Best Value • Save €59</span>
-                    <div class="price-wrapper">
-                        <div class="price">€169<small> / lifetime</small></div>
-                        <p style="text-decoration: line-through; color: var(--text-muted); font-size: 0.875rem; margin: 0;">€228 if bought separately</p>
+            <!-- TOGGLE -->
+            <div class="pricing-toggle">
+                <button class="toggle-btn" id="btn-monthly" onclick="setPricing('monthly')">Monthly</button>
+                <button class="toggle-btn active" id="btn-annual" onclick="setPricing('annual')">Annual</button>
+            </div>
+
+            <!-- CARD -->
+            <div class="pricing-card-single">
+                <div class="pricing-card-inner">
+                    <div class="price-block">
+                        <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
+                            <div>
+                                <span class="price-amount" id="price-amount">$59</span>
+                                <span class="price-period">/month</span>
+                            </div>
+                            <span class="save-badge" id="save-badge">Save 40%</span>
+                        </div>
+                        <p class="price-sub" id="price-sub">$708 billed annually</p>
                     </div>
-                    
-                    <ul class="features-list">
-                        <li>Everything in Pro Indicator</li>
-                        <li>Strategy Backtester included</li>
-                        <li>Test on historical data</li>
-                        <li>Optimize settings before trading</li>
-                        <li>Analyze performance metrics</li>
-                        <li>Lifetime updates for both</li>
+
+                    <div class="pricing-divider"></div>
+
+                    <ul class="features-list-new">
+                        <li><span class="check-icon">✓</span> Quantum Ribbon Pro indicator</li>
+                        <li><span class="check-icon">✓</span> QR Pro Multi-Instrument Scanner</li>
+                        <li><span class="check-icon">✓</span> Strategy Backtester</li>
+                        <li><span class="check-icon">✓</span> Complete video tutorials & setup guides</li>
+                        <li><span class="check-icon">✓</span> Priority Discord support</li>
+                        <li><span class="check-icon">✓</span> Free updates & new features</li>
+                        <li><span class="check-icon">✓</span> <span id="feature-last">Save $480/year</span></li>
                     </ul>
-                    
-                    <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/e82fa818-f647-422b-a665-e553f6587ea3" class="btn btn-primary" style="width: 100%;">Get Pro + Backtester Bundle</a>
+
+                    <a id="pricing-cta" href="https://trendlineproject.lemonsqueezy.com/checkout/buy/910d7802-ed89-4def-b04a-a1c0b9a7739c" class="btn btn-primary pricing-cta-btn">
+                        Subscribe Now
+                    </a>
                 </div>
             </div>
         </div>
@@ -1492,148 +1266,54 @@
         <div class="container">
             <div class="section-label">Frequently Asked Questions</div>
             <h2 class="section-title">Everything You Need to Know</h2>
-            
             <div class="faq-container">
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Do you offer a free trial?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>No. <a href="https://www.tradingview.com/script/49ak1Mix-Quantum-Ribbon-Lite/" target="_blank" style="color: var(--accent); text-decoration: none;">Quantum Ribbon Lite</a> (free version) is available on TradingView for testing the core ribbon system. The Pro version includes advanced features like partial take-profits, break-even automation, multi-timeframe confirmation, and custom alerts.</p>
-                    </div>
+                    <div class="faq-question"><span>Do you offer a free trial?</span><span class="faq-icon">+</span></div>
+                    <div class="faq-answer"><p><a href="https://www.tradingview.com/script/49ak1Mix-Quantum-Ribbon-Lite/" target="_blank" style="color: var(--accent); text-decoration: none;">Quantum Ribbon Lite</a> (free version) is available on TradingView for testing the core ribbon system. The Pro subscription includes advanced features like partial take-profits, break-even automation, multi-timeframe confirmation, the Multi-Instrument Scanner, Backtester, and custom alerts.</p></div>
                 </div>
-
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Does this work on the free TradingView plan?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes! Quantum Ribbon Pro works perfectly on the FREE TradingView plan. You do not need to upgrade your TradingView account to use this indicator.</p>
-                    </div>
+                    <div class="faq-question"><span>Does this work on the free TradingView plan?</span><span class="faq-icon">+</span></div>
+                    <div class="faq-answer"><p>Yes! Quantum Ribbon Pro works perfectly on the FREE TradingView plan. You do not need to upgrade your TradingView account.</p></div>
                 </div>
-
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What's the difference between the Pro Indicator and the Bundle?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>The Pro Indicator (€129) includes the complete trading system with all features: multi-timeframe confirmation, partial take-profits, break-even automation, bot-ready alerts, and full customization.</p>
-                        <p style="margin-top: 12px;">The Bundle (€169) adds the Strategy Backtester, which lets you test and optimize all settings on historical data before live trading. Save €59 compared to buying separately (€228).</p>
-                    </div>
+                    <div class="faq-question"><span>What's the difference between Monthly and Annual?</span><span class="faq-icon">+</span></div>
+                    <div class="faq-answer"><p>Both plans include exactly the same features. Annual billing costs $59/month ($708/year) — a 40% saving compared to Monthly at $99/month.</p></div>
                 </div>
-
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Can I buy the Backtester separately later if I only get the Pro Indicator now?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes, but there's no retroactive bundle pricing. If you buy the Pro Indicator now (€129) and want the Backtester later, you'll pay the full Backtester price (€99), totaling €228. The Bundle at €169 saves you €59.</p>
-                    </div>
+                    <div class="faq-question"><span>Can I cancel anytime?</span><span class="faq-icon">+</span></div>
+                    <div class="faq-answer"><p>Yes. Monthly subscribers can cancel anytime and retain access until the end of the billing period. Annual subscribers can cancel to stop auto-renewal at the end of their year.</p></div>
                 </div>
-
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Do I need the Backtester?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Not required, but highly recommended. The Backtester lets you test different settings on historical data to find what works best for your trading style before risking real capital. It's a valuable tool for strategy optimization and validation.</p>
-                    </div>
+                    <div class="faq-question"><span>What's included in the subscription?</span><span class="faq-icon">+</span></div>
+                    <div class="faq-answer"><p>Your subscription includes: Quantum Ribbon Pro indicator, QR Pro Multi-Instrument Scanner (monitor up to 20 symbols simultaneously), Strategy Backtester, complete video tutorials and setup guides, priority Discord support, and all future updates and new features.</p></div>
                 </div>
-
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How does the Backtester work?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>The Backtester is a separate TradingView strategy that replicates all Pro indicator features. It runs on historical price data showing hypothetical performance metrics including win rates, profit factors, and drawdowns. Use it to optimize your settings and validate your strategy before live trading.</p>
-                    </div>
+                    <div class="faq-question"><span>How do I get access after subscribing?</span><span class="faq-icon">+</span></div>
+                    <div class="faq-answer"><p>After subscribing, you will receive an email confirmation. Email us your TradingView username and access will be granted within 24 hours. All tools will appear in your "Invite-Only Scripts" folder on TradingView. Check your spam folder if you don't see confirmation emails.</p></div>
                 </div>
-
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>How do I get access after paying?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>After payment, you will receive an email with your license key. Email it to us along with your TradingView username and access will be granted within 24 hours from purchase. The indicator will appear in your "Invite-Only Scripts" folder on TradingView. Check your spam folder if you don't see any confirmation emails.</p>
-                        <p style="margin-top: 12px;"><a href="https://www.tradingview.com/script/87vUKIrk-Quantum-Ribbon-Pro/" target="_blank" style="color: var(--accent); text-decoration: none;">View indicator details on TradingView →</a></p>
-                    </div>
+                    <div class="faq-question"><span>Do you offer refunds?</span><span class="faq-icon">+</span></div>
+                    <div class="faq-answer"><p>No. Due to the digital nature of this product (instant access to proprietary software), we do not offer refunds. Please review the <a href="https://www.tradingview.com/script/49ak1Mix-Quantum-Ribbon-Lite/" target="_blank" style="color: var(--accent); text-decoration: none;">Lite version</a>, live examples, and demo videos carefully before subscribing.</p></div>
                 </div>
-
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Do you offer refunds?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>No. Due to the digital nature of this product (instant access to proprietary software), we do not offer refunds. Please review the <a href="https://www.tradingview.com/script/49ak1Mix-Quantum-Ribbon-Lite/" target="_blank" style="color: var(--accent); text-decoration: none;">Lite version</a>, live examples, and demo videos carefully before purchasing to ensure this strategy fits your trading style.</p>
-                    </div>
+                    <div class="faq-question"><span>Is this guaranteed to make me profitable?</span><span class="faq-icon">+</span></div>
+                    <div class="faq-answer"><p>No. This is a tool to assist your trading decisions, not a guarantee of profits. Past performance does not guarantee future results. Always use proper risk management and never trade with money you cannot afford to lose.</p></div>
                 </div>
-
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Is this guaranteed to make me profitable?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>No. This is a tool to assist your trading decisions, not a guarantee of profits. Past performance does not guarantee future results. Always use proper risk management and never trade with money you cannot afford to lose.</p>
-                    </div>
+                    <div class="faq-question"><span>What platforms does this work on?</span><span class="faq-icon">+</span></div>
+                    <div class="faq-answer"><p>TradingView only. These are Pine Script indicators and strategies designed exclusively for the TradingView platform.</p></div>
                 </div>
-
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>What platforms does Quantum Ribbon Pro work on?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>TradingView only. This is a Pine Script indicator designed exclusively for the TradingView platform.</p>
-                    </div>
+                    <div class="faq-question"><span>Does this work on all timeframes and markets?</span><span class="faq-icon">+</span></div>
+                    <div class="faq-answer"><p>Yes. Quantum Ribbon Pro works on any timeframe and any market (stocks, crypto, forex, futures, indices). The indicator generally performs better on higher timeframes (15m+) due to reduced noise and more reliable signals.</p></div>
                 </div>
-
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Does this work on all timeframes and markets?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes. Quantum Ribbon Pro works on any timeframe and any market (stocks, crypto, forex, futures, indices). The indicator generally performs better on higher timeframes (15m+) due to reduced noise and more reliable signals.</p>
-                    </div>
+                    <div class="faq-question"><span>Can I use this with trading bots?</span><span class="faq-icon">+</span></div>
+                    <div class="faq-answer"><p>Yes. The indicator includes direction-specific JSON alerts designed for webhook integration with popular bot platforms like 3Commas, Alertatron, and custom webhook services.</p></div>
                 </div>
-
                 <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Can I use this with trading bots?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes. The indicator includes direction-specific JSON alerts designed for webhook integration with popular bot platforms like 3Commas, Alertatron, and custom webhook services.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Do I need coding knowledge to use this?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>No. The indicator is fully configured through TradingView's settings menu. No coding required.</p>
-                    </div>
-                </div>
-
-                <div class="faq-item">
-                    <div class="faq-question">
-                        <span>Do you offer support and updates?</span>
-                        <span class="faq-icon">+</span>
-                    </div>
-                    <div class="faq-answer">
-                        <p>Yes. All purchases include lifetime access to future updates and email support for technical questions.</p>
-                    </div>
+                    <div class="faq-question"><span>Do I need coding knowledge to use this?</span><span class="faq-icon">+</span></div>
+                    <div class="faq-answer"><p>No. All tools are fully configured through TradingView's settings menu. No coding required.</p></div>
                 </div>
             </div>
         </div>
@@ -1668,36 +1348,59 @@
             <p class="copyright">© 2025 Quantum Ribbon Pro. Built by Trendline Project.</p>
         </div>
     </footer>
+
     <script>
+        // ═══════════════════════════════════════
+        // PRICING TOGGLE
+        // ═══════════════════════════════════════
+        const ANNUAL_LINK = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/910d7802-ed89-4def-b04a-a1c0b9a7739c';
+        const MONTHLY_LINK = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/c3a6010f-ceaf-4d56-be73-1d33d101bb6e';
+
+        function setPricing(plan) {
+            const priceAmount = document.getElementById('price-amount');
+            const priceSub = document.getElementById('price-sub');
+            const featureLast = document.getElementById('feature-last');
+            const cta = document.getElementById('pricing-cta');
+            const btnMonthly = document.getElementById('btn-monthly');
+            const btnAnnual = document.getElementById('btn-annual');
+            const saveBadge = document.getElementById('save-badge');
+
+            if (plan === 'annual') {
+                priceAmount.textContent = '$59';
+                priceSub.textContent = '$708 billed annually';
+                featureLast.textContent = 'Save $480/year';
+                cta.href = ANNUAL_LINK;
+                btnAnnual.classList.add('active');
+                btnMonthly.classList.remove('active');
+                saveBadge.style.display = 'inline-block';
+            } else {
+                priceAmount.textContent = '$99';
+                priceSub.textContent = 'Billed monthly · Cancel anytime';
+                featureLast.textContent = 'Cancel anytime';
+                cta.href = MONTHLY_LINK;
+                btnMonthly.classList.add('active');
+                btnAnnual.classList.remove('active');
+                saveBadge.style.display = 'none';
+            }
+        }
+
         // FAQ Accordion
         document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', () => {
                 const item = question.parentElement;
                 const isActive = item.classList.contains('active');
-                
-                // Close all items
-                document.querySelectorAll('.faq-item').forEach(faqItem => {
-                    faqItem.classList.remove('active');
-                });
-                
-                // Open clicked item if it wasn't active
-                if (!isActive) {
-                    item.classList.add('active');
-                }
+                document.querySelectorAll('.faq-item').forEach(faqItem => faqItem.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
             });
         });
         
-        // Nav background on scroll
+        // Nav scroll
         const nav = document.querySelector('nav');
         window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
+            nav.classList.toggle('scrolled', window.scrollY > 50);
         });
 
-        // 3-Image Carousel (Desktop) / 1-Image (Mobile)
+        // Carousel
         const track = document.querySelector('.carousel-track');
         const items = Array.from(track?.children || []);
         const nextBtn = document.querySelector('.carousel-btn.next');
@@ -1705,7 +1408,7 @@
         const indicators = document.querySelectorAll('.indicator');
         
         let currentIndex = 0;
-        const totalItems = items.length; // 6 total images
+        const totalItems = items.length;
         
         function getItemsPerSlide() {
             if (window.innerWidth <= 640) return 1;
@@ -1714,39 +1417,27 @@
         }
 
         function getTotalSlides() {
-            const itemsPerSlide = getItemsPerSlide();
-            return Math.ceil(totalItems / itemsPerSlide);
+            return Math.ceil(totalItems / getItemsPerSlide());
         }
 
         function updateCarousel() {
             const itemsPerSlide = getItemsPerSlide();
             const itemWidth = items[0]?.offsetWidth || 0;
-            
-            let moveAmount;
-            if (window.innerWidth <= 640) {
-                // Mobile: move one image at a time with 16px gap
-                const gap = 16;
-                moveAmount = (itemWidth + gap) * currentIndex;
-            } else {
-                // Desktop/Tablet: move by groups
-                const gap = 24;
-                moveAmount = (itemWidth + gap) * itemsPerSlide * currentIndex;
-            }
+            const gap = window.innerWidth <= 640 ? 16 : 24;
+            const moveAmount = window.innerWidth <= 640
+                ? (itemWidth + gap) * currentIndex
+                : (itemWidth + gap) * itemsPerSlide * currentIndex;
             
             track.style.transform = `translateX(-${moveAmount}px)`;
             
-            // Update indicators based on screen size
             indicators.forEach((ind, idx) => {
                 if (window.innerWidth <= 640) {
-                    // Mobile: show all 9 indicators, highlight current image
                     ind.style.display = 'block';
                     ind.classList.toggle('active', idx === currentIndex);
                 } else if (window.innerWidth <= 968) {
-                    // Tablet: show 5 indicators for 5 groups of 2
                     ind.style.display = idx < 5 ? 'block' : 'none';
                     ind.classList.toggle('active', idx === currentIndex);
                 } else {
-                    // Desktop: show 3 indicators for 3 groups of 3
                     ind.style.display = idx < 3 ? 'block' : 'none';
                     ind.classList.toggle('active', idx === currentIndex);
                 }
@@ -1754,85 +1445,50 @@
         }
 
         function nextSlide() {
-            const totalSlides = getTotalSlides();
-            currentIndex = (currentIndex + 1) % totalSlides;
+            currentIndex = (currentIndex + 1) % getTotalSlides();
             updateCarousel();
         }
 
         function prevSlide() {
-            const totalSlides = getTotalSlides();
-            currentIndex = (currentIndex - 1 + totalSlides) % totalSlides;
+            currentIndex = (currentIndex - 1 + getTotalSlides()) % getTotalSlides();
             updateCarousel();
         }
 
         nextBtn?.addEventListener('click', nextSlide);
         prevBtn?.addEventListener('click', prevSlide);
-
         indicators.forEach((indicator, index) => {
             indicator.addEventListener('click', () => {
-                const totalSlides = getTotalSlides();
-                if (index < totalSlides) {
-                    currentIndex = index;
-                    updateCarousel();
-                }
+                if (index < getTotalSlides()) { currentIndex = index; updateCarousel(); }
             });
         });
 
-        // Auto-play every 4 seconds
         let autoplayInterval = setInterval(nextSlide, 4000);
-
-        // Pause on hover
         const carouselWrapper = document.querySelector('.carousel-wrapper');
-        carouselWrapper?.addEventListener('mouseenter', () => {
-            clearInterval(autoplayInterval);
-        });
+        carouselWrapper?.addEventListener('mouseenter', () => clearInterval(autoplayInterval));
+        carouselWrapper?.addEventListener('mouseleave', () => { autoplayInterval = setInterval(nextSlide, 4000); });
+        window.addEventListener('resize', () => { currentIndex = 0; updateCarousel(); });
 
-        carouselWrapper?.addEventListener('mouseleave', () => {
-            autoplayInterval = setInterval(nextSlide, 4000);
-        });
-
-        // Update on window resize
-        window.addEventListener('resize', () => {
-            currentIndex = 0; // Reset to first slide on resize
-            updateCarousel();
-        });
-
-        // Google Analytics Event Tracking
+        // GA Event Tracking
         document.addEventListener('DOMContentLoaded', function() {
-            // Track all LemonSqueezy checkout clicks
             document.querySelectorAll('a[href*="lemonsqueezy.com"]').forEach(function(btn) {
                 btn.addEventListener('click', function() {
-                    gtag('event', 'checkout_click', {
-                        'event_category': 'conversion',
-                        'event_label': 'lemonsqueezy_checkout',
-                        'value': 149
-                    });
+                    gtag('event', 'checkout_click', { 'event_category': 'conversion', 'event_label': 'lemonsqueezy_checkout' });
                 });
             });
-
-            // Track Discord button clicks
             document.querySelectorAll('a[href*="discord.gg"]').forEach(function(btn) {
                 btn.addEventListener('click', function() {
-                    gtag('event', 'discord_click', {
-                        'event_category': 'community',
-                        'event_label': 'discord_button'
-                    });
+                    gtag('event', 'discord_click', { 'event_category': 'community', 'event_label': 'discord_button' });
                 });
             });
-
-            // Track YouTube icon click
             document.querySelectorAll('a[href*="youtube.com"]').forEach(function(btn) {
                 btn.addEventListener('click', function() {
-                    gtag('event', 'youtube_click', {
-                        'event_category': 'social',
-                        'event_label': 'footer_youtube'
-                    });
+                    gtag('event', 'youtube_click', { 'event_category': 'social', 'event_label': 'footer_youtube' });
                 });
             });
         });
     </script>
 
-    <!-- COOKIE CONSENT POPUP -->
+    <!-- COOKIE CONSENT -->
     <div id="cookieConsent" class="cookie-consent">
         <div class="cookie-content">
             <h3>We Use Cookies</h3>
@@ -1847,158 +1503,44 @@
 
     <style>
         .cookie-consent {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            background: var(--surface);
-            border-top: 1px solid var(--border);
-            padding: 24px;
-            z-index: 9999;
-            display: none;
-            animation: slideUp 0.3s ease;
+            position: fixed; bottom: 0; left: 0; right: 0;
+            background: var(--surface); border-top: 1px solid var(--border);
+            padding: 24px; z-index: 9999; display: none; animation: slideUp 0.3s ease;
         }
-
-        .cookie-consent.show {
-            display: block;
-        }
-
-        @keyframes slideUp {
-            from {
-                transform: translateY(100%);
-            }
-            to {
-                transform: translateY(0);
-            }
-        }
-
+        .cookie-consent.show { display: block; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
         .cookie-content {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            align-items: center;
-            gap: 24px;
-            flex-wrap: wrap;
+            max-width: 1200px; margin: 0 auto; display: flex;
+            align-items: center; gap: 24px; flex-wrap: wrap;
         }
-
-        .cookie-content h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin: 0;
-            color: var(--text);
-            min-width: fit-content;
-        }
-
-        .cookie-content p {
-            flex: 1;
-            margin: 0;
-            color: var(--text-secondary);
-            font-size: 0.9375rem;
-            line-height: 1.6;
-            min-width: 300px;
-        }
-
-        .cookie-buttons {
-            display: flex;
-            gap: 12px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
-        .cookie-btn {
-            padding: 12px 24px;
-            border-radius: 8px;
-            font-size: 0.9375rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            border: none;
-            font-family: inherit;
-        }
-
-        .cookie-btn-accept {
-            background: var(--accent);
-            color: #000;
-        }
-
-        .cookie-btn-accept:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 20px rgba(91, 201, 245, 0.4);
-        }
-
-        .cookie-btn-reject {
-            background: transparent;
-            color: var(--text);
-            border: 1px solid var(--border);
-        }
-
-        .cookie-btn-reject:hover {
-            border-color: var(--accent);
-            color: var(--accent);
-        }
-
-        .cookie-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.875rem;
-            transition: color 0.2s;
-            white-space: nowrap;
-        }
-
-        .cookie-link:hover {
-            color: var(--accent);
-        }
-
+        .cookie-content h3 { font-size: 1.125rem; font-weight: 600; margin: 0; color: var(--text); min-width: fit-content; }
+        .cookie-content p { flex: 1; margin: 0; color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.6; min-width: 300px; }
+        .cookie-buttons { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+        .cookie-btn { padding: 12px 24px; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; border: none; font-family: inherit; }
+        .cookie-btn-accept { background: var(--accent); color: #000; }
+        .cookie-btn-accept:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(91, 201, 245, 0.4); }
+        .cookie-btn-reject { background: transparent; color: var(--text); border: 1px solid var(--border); }
+        .cookie-btn-reject:hover { border-color: var(--accent); color: var(--accent); }
+        .cookie-link { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; white-space: nowrap; }
+        .cookie-link:hover { color: var(--accent); }
         @media (max-width: 768px) {
-            .cookie-content {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 16px;
-            }
-
-            .cookie-content p {
-                min-width: 100%;
-            }
-
-            .cookie-buttons {
-                width: 100%;
-                flex-direction: column;
-            }
-
-            .cookie-btn {
-                width: 100%;
-            }
+            .cookie-content { flex-direction: column; align-items: flex-start; gap: 16px; }
+            .cookie-content p { min-width: 100%; }
+            .cookie-buttons { width: 100%; flex-direction: column; }
+            .cookie-btn { width: 100%; }
         }
     </style>
 
     <script>
-        // Cookie Consent Logic
         (function() {
             const cookieConsent = document.getElementById('cookieConsent');
             const acceptBtn = document.getElementById('acceptCookies');
             const rejectBtn = document.getElementById('rejectCookies');
-
-            // Check if user has already made a choice
-            const consentStatus = localStorage.getItem('cookieConsent');
-            
-            if (!consentStatus) {
-                // Show popup after 1 second
-                setTimeout(() => {
-                    cookieConsent.classList.add('show');
-                }, 1000);
+            if (!localStorage.getItem('cookieConsent')) {
+                setTimeout(() => cookieConsent.classList.add('show'), 1000);
             }
-
-            // Accept all cookies
-            acceptBtn.addEventListener('click', () => {
-                localStorage.setItem('cookieConsent', 'accepted');
-                cookieConsent.classList.remove('show');
-            });
-
-            // Reject non-essential cookies
-            rejectBtn.addEventListener('click', () => {
-                localStorage.setItem('cookieConsent', 'rejected');
-                cookieConsent.classList.remove('show');
-            });
+            acceptBtn.addEventListener('click', () => { localStorage.setItem('cookieConsent', 'accepted'); cookieConsent.classList.remove('show'); });
+            rejectBtn.addEventListener('click', () => { localStorage.setItem('cookieConsent', 'rejected'); cookieConsent.classList.remove('show'); });
         })();
     </script>
 </body>
