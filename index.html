@@ -1153,12 +1153,18 @@
                         <div class="carousel-item"><img src="feature-7.jpg" alt="Break-Even Stop Protection"></div>
                         <div class="carousel-item"><img src="feature-8.jpg" alt="Partial Take-Profits"></div>
                         <div class="carousel-item"><img src="feature-9.jpg" alt="Quantum Range Filter"></div>
+                        <div class="carousel-item"><img src="feature-10.jpg" alt="S/R Auto-Detection System"></div>
+                        <div class="carousel-item"><img src="feature-11.jpg" alt="TP RSI Confirmation"></div>
+                        <div class="carousel-item"><img src="feature-12.jpg" alt="Trend Candle Coloring"></div>
                     </div>
                 </div>
                 <button class="carousel-btn next" aria-label="Next">›</button>
             </div>
             <div class="carousel-indicators">
                 <span class="indicator active"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
+                <span class="indicator"></span>
                 <span class="indicator"></span>
                 <span class="indicator"></span>
                 <span class="indicator"></span>
@@ -1609,10 +1615,10 @@
                     ind.style.display = 'block';
                     ind.classList.toggle('active', idx === currentIndex);
                 } else if (window.innerWidth <= 968) {
-                    ind.style.display = idx < 5 ? 'block' : 'none';
+                    ind.style.display = idx < 6 ? 'block' : 'none';
                     ind.classList.toggle('active', idx === currentIndex);
                 } else {
-                    ind.style.display = idx < 3 ? 'block' : 'none';
+                    ind.style.display = idx < 4 ? 'block' : 'none';
                     ind.classList.toggle('active', idx === currentIndex);
                 }
             });
