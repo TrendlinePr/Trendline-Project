@@ -761,6 +761,103 @@
             font-weight: 600;
         }
 
+        /* BST SYSTEM SECTION */
+        .bst-section {
+            padding: 100px 0;
+            position: relative;
+        }
+
+        .bst-step {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 64px;
+            align-items: center;
+            margin-bottom: 100px;
+        }
+
+        .bst-step:last-of-type {
+            margin-bottom: 60px;
+        }
+
+        .bst-step-reverse {
+            direction: rtl;
+        }
+
+        .bst-step-reverse > * {
+            direction: ltr;
+        }
+
+        .bst-step-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .bst-step-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 12px;
+            line-height: 1.1;
+        }
+
+        .bst-step-subtitle {
+            font-size: 1.0625rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 16px;
+            line-height: 1.4;
+        }
+
+        .bst-step-desc {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+        }
+
+        .bst-video-wrapper {
+            border-radius: 16px;
+            padding: 3px;
+            background: linear-gradient(135deg, #29A8F1 0%, #8CA8CE 50%, #EC4899 100%);
+            box-shadow: 
+                0 20px 60px rgba(41, 168, 241, 0.25),
+                0 0 80px rgba(41, 168, 241, 0.1);
+        }
+
+        .bst-video-wrapper video {
+            width: 100%;
+            height: auto;
+            display: block;
+            border-radius: 14px;
+        }
+
+        .bst-cta {
+            text-align: center;
+            padding-top: 20px;
+        }
+
+        .bst-cta-label {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            margin-bottom: 24px;
+            font-weight: 500;
+        }
+
+        @media (max-width: 768px) {
+            .bst-step {
+                grid-template-columns: 1fr;
+                gap: 32px;
+                margin-bottom: 64px;
+            }
+
+            .bst-step-reverse {
+                direction: ltr;
+            }
+        }
+
         /* FAQ */
         .faq-section { padding: 100px 0; }
 
@@ -1065,6 +1162,66 @@
                 <span class="indicator"></span>
                 <span class="indicator"></span>
                 <span class="indicator"></span>
+            </div>
+        </div>
+    </section>
+
+    <!-- BST SYSTEM SECTION -->
+    <section class="bst-section">
+        <div class="container">
+            <div class="section-label">The Complete Workflow</div>
+            <h2 class="section-title">The BST System: From Testing to Execution</h2>
+            <p class="section-description">Stop guessing. Start trading with confidence using our complete three-step workflow.</p>
+
+            <!-- STEP 1 -->
+            <div class="bst-step">
+                <div class="bst-content">
+                    <div class="bst-step-label">Step 1</div>
+                    <h3 class="bst-step-title"><span class="accent-text">Backtest</span></h3>
+                    <p class="bst-step-subtitle">Test and optimize your settings before risking real money</p>
+                    <p class="bst-step-desc">Run your strategy against historical data. Adjust parameters. Find what actually works for your trading style. No more hoping your settings will perform — know before you trade.</p>
+                </div>
+                <div class="bst-video-wrapper">
+                    <video autoplay loop muted playsinline preload="auto">
+                        <source src="QR_BT.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <!-- STEP 2 -->
+            <div class="bst-step bst-step-reverse">
+                <div class="bst-content">
+                    <div class="bst-step-label">Step 2</div>
+                    <h3 class="bst-step-title"><span class="accent-text">Scan</span></h3>
+                    <p class="bst-step-subtitle">Find active setups across 20+ instruments instantly</p>
+                    <p class="bst-step-desc">Monitor multiple markets simultaneously. The scanner identifies high-probability setups matching your optimized settings. Never miss opportunities while manually checking charts.</p>
+                </div>
+                <div class="bst-video-wrapper">
+                    <video autoplay loop muted playsinline preload="auto">
+                        <source src="QR_Scanner.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <!-- STEP 3 -->
+            <div class="bst-step">
+                <div class="bst-content">
+                    <div class="bst-step-label">Step 3</div>
+                    <h3 class="bst-step-title"><span class="accent-text">Trade</span></h3>
+                    <p class="bst-step-subtitle">Execute with confidence using proven settings</p>
+                    <p class="bst-step-desc">Your strategy is tested. Your setups are identified. Now execute with clear signals and precise entry/exit levels. Works for both manual trading and automated bot execution.</p>
+                </div>
+                <div class="bst-video-wrapper">
+                    <video autoplay loop muted playsinline preload="auto">
+                        <source src="QR_Pro.mp4" type="video/mp4">
+                    </video>
+                </div>
+            </div>
+
+            <!-- BOTTOM CTA -->
+            <div class="bst-cta">
+                <p class="bst-cta-label">Complete system. Professional results.</p>
+                <a href="#pricing" class="btn btn-primary">Get Started</a>
             </div>
         </div>
     </section>
