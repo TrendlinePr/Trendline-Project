@@ -147,6 +147,32 @@
             margin: 0 auto 40px;
         }
 
+        .video-section {
+            padding: 40px 0 0;
+        }
+
+        .video-wrapper {
+            max-width: 800px;
+            margin: 0 auto;
+            position: relative;
+            padding-bottom: 56.25%;
+            height: 0;
+            overflow: hidden;
+            border-radius: 16px;
+            border: 1px solid var(--border);
+            background: #000;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+        }
+
+        .video-wrapper iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
         /* Content Sections */
         .content-section {
             padding: 60px 0;
@@ -488,6 +514,21 @@
             <span class="badge">Complete Guide</span>
             <h1>QR Pro <span class="accent-text">Scanner</span></h1>
             <p class="subtitle">Monitor up to 20 symbols and timeframes simultaneously using the full Quantum Ribbon Pro signal engine — all in one dashboard, without switching charts.</p>
+        </div>
+    </section>
+
+    <!-- VIDEO -->
+    <section class="video-section">
+        <div class="container">
+            <div class="video-wrapper">
+                <iframe
+                    src="https://www.youtube-nocookie.com/embed/AdZXSHEDmKY"
+                    title="QR Pro Scanner Tutorial"
+                    frameborder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowfullscreen>
+                </iframe>
+            </div>
         </div>
     </section>
 
