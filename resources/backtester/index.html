@@ -447,6 +447,8 @@
                 <li><a href="#features">Key Features</a></li>
                 <li><a href="#metrics">Understanding the Metrics</a></li>
                 <li><a href="#optimization">Strategy Optimization</a></li>
+                <li><a href="#walk-forward">Walk-Forward Analysis</a></li>
+                <li><a href="#optimization-hints">Optimization Hints</a></li>
                 <li><a href="#limitations">Backtest Limitations</a></li>
                 <li><a href="#faq">FAQ</a></li>
             </ul>
@@ -463,8 +465,8 @@
             <p>This lets you test different settings, timeframes, and instruments before committing real capital.</p>
 
             <div class="info-box">
-                <h4>Included with Pro Bundle</h4>
-                <p>The Backtester is only available as part of the Quantum Ribbon Pro Bundle. It's not sold separately.</p>
+                <h4>Included with Subscription</h4>
+                <p>The Backtester is included with all Quantum Ribbon Pro subscriptions alongside the main indicator and scanner.</p>
             </div>
 
             <p><strong>What it does:</strong></p>
@@ -536,6 +538,7 @@
                 <li>Ribbon bounce signals</li>
                 <li>TP RSI confirmation</li>
                 <li>Quantum Range Filter</li>
+                <li>S/R Auto-Detection</li>
                 <li>Swing-based stops</li>
                 <li>Trading hours filter</li>
                 <li>All customization options</li>
@@ -602,6 +605,63 @@
             </div>
         </section>
 
+        <!-- Walk-Forward Analysis -->
+        <section class="content-section" id="walk-forward">
+            <h2>Walk-Forward Analysis</h2>
+            <p>The Backtester includes a built-in Walk-Forward Analysis table that automatically splits your chart history into two periods and compares performance between them — helping you spot curve-fitted settings before you trade them live.</p>
+
+            <h3>How It Works</h3>
+            <p>Choose a split mode — <strong>50/50</strong>, <strong>60/40</strong>, <strong>70/30</strong>, or a <strong>Custom Date</strong> — and the table divides your historical data accordingly. Period 1 is your "in-sample" data, Period 2 is your "out-of-sample" data. If your settings are robust, both periods should show similar results.</p>
+
+            <h3>What the Table Shows</h3>
+            <ul>
+                <li><strong>Trades</strong> — number of trades in each period</li>
+                <li><strong>Win Rate</strong> — highlighted if Period 2 drops significantly vs Period 1</li>
+                <li><strong>Profit Factor</strong> — color-coded comparison between periods</li>
+                <li><strong>Net P&L</strong> — profit or loss per period</li>
+                <li><strong>WR Change</strong> — the delta between Period 1 and Period 2 win rates</li>
+            </ul>
+
+            <h3>Verdict Row</h3>
+            <p>The bottom row gives an automatic verdict:</p>
+            <ul>
+                <li><strong>✓ Settings are consistent</strong> — win rate and profit factor held up in Period 2. Good sign.</li>
+                <li><strong>✗ Possible curve-fit</strong> — Period 2 performance dropped significantly. Settings may be over-optimized for historical data.</li>
+                <li><strong>~ Mixed — retest advised</strong> — results are mixed, worth testing on a different instrument or timeframe.</li>
+                <li><strong>⚠ Need more trades</strong> — not enough trades to draw conclusions yet.</li>
+            </ul>
+
+            <div class="info-box">
+                <h4>Table Position & Size</h4>
+                <p>The Walk-Forward table can be repositioned to any corner of the chart and resized (Tiny, Normal, Large) via the Walk-Forward Analysis settings group.</p>
+            </div>
+        </section>
+
+        <!-- Optimization Hints -->
+        <section class="content-section" id="optimization-hints">
+            <h2>Optimization Hints</h2>
+            <p>The Optimization Hints table analyzes your backtest results in real time and gives you specific, actionable suggestions based on what it detects — no manual interpretation needed.</p>
+
+            <h3>What It Detects</h3>
+            <ul>
+                <li><strong>Insufficient trades</strong> — suggests lowering sensitivity or disabling filters to generate more signals</li>
+                <li><strong>Net losing strategy</strong> — identifies whether the issue is target size, signal quality, or stop placement</li>
+                <li><strong>Wins too small</strong> — flags when win rate is high but profit factor is weak, meaning winners aren't big enough</li>
+                <li><strong>Low win rate</strong> — suggests confirmation filters like RSI Ribbon, HTF, or S/R to improve entry quality</li>
+                <li><strong>Losses too large</strong> — detects when average loss significantly exceeds average win and suggests stop adjustments</li>
+                <li><strong>Over-trading</strong> — flags high trade count with mediocre results and suggests tightening filters</li>
+                <li><strong>Curve-fit warning</strong> — cross-references Walk-Forward results and flags settings that degrade out-of-sample</li>
+            </ul>
+
+            <h3>How to Read It</h3>
+            <p>Each detected issue shows a <strong>Primary Fix</strong> — the single most impactful change to try first — followed by <strong>Also Try</strong> alternatives. When no issues are detected, it shows a green <strong>✓ No issues detected</strong> with your key metrics displayed.</p>
+
+            <div class="info-box">
+                <h4>Use Both Tables Together</h4>
+                <p>The Optimization Hints table and Walk-Forward table are designed to work together. Hints tell you what to fix, Walk-Forward tells you whether your fix holds up across different time periods.</p>
+            </div>
+        </section>
+
         <!-- Limitations -->
         <section class="content-section" id="limitations">
             <h2>Backtest Limitations</h2>
@@ -656,9 +716,9 @@
     <!-- CTA -->
     <section class="cta-section">
         <div class="container">
-            <h2 style="margin-bottom: 16px;">Get the Bundle</h2>
-            <p style="max-width: 600px; margin: 0 auto 32px; color: var(--text-secondary);">Quantum Ribbon Pro + Backtester. One payment, lifetime access.</p>
-            <a href="../../#pricing" class="btn btn-primary">View Bundle Options</a>
+            <h2 style="margin-bottom: 16px;">Start Backtesting Today</h2>
+            <p style="max-width: 600px; margin: 0 auto 32px; color: var(--text-secondary);">The Backtester is included with every Quantum Ribbon Pro subscription alongside the indicator and scanner.</p>
+            <a href="../../#pricing" class="btn btn-primary">View Pricing</a>
         </div>
     </section>
 
