@@ -1,0 +1,658 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1C1F26">
+    <title>Getting Started - Quantum Ribbon Pro</title>
+
+    <!-- SEO Meta Tags -->
+    <meta name="description" content="Get started with Quantum Ribbon Pro. Learn how to access your tools, set up the BST workflow, and start trading with confidence.">
+    <meta name="keywords" content="quantum ribbon pro setup, getting started, tradingview setup, BST system guide">
+    <meta name="author" content="Trendline Project">
+    <meta name="robots" content="index, follow">
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLKJNZ6GZV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RLKJNZ6GZV');
+    </script>
+
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --surface: #1C1F26;
+            --surface-hover: #23262E;
+            --accent: #29A8F1;
+            --accent-subtle: rgba(41, 168, 241, 0.1);
+            --text: #F0F0F0;
+            --text-secondary: #C5CBD3;
+            --text-muted: #8B92A0;
+            --border: rgba(255, 255, 255, 0.06);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%);
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 0 32px;
+        }
+
+        /* Navigation */
+        nav {
+            padding: 20px 0;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: transparent;
+            z-index: 100;
+            transition: background 0.3s ease, backdrop-filter 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(28, 31, 38, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img { width: 32px; height: 32px; }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: var(--accent); }
+
+        /* Header */
+        .tutorial-header {
+            padding: 120px 0 40px;
+            text-align: center;
+        }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--accent-subtle);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .accent-text { color: var(--accent); }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        /* Table of Contents */
+        .toc {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 40px 0 60px;
+        }
+
+        .toc h2 { font-size: 1.5rem; margin-bottom: 20px; }
+
+        .toc ul { margin: 0; list-style: none; }
+
+        .toc li { margin-bottom: 12px; padding-left: 0; }
+
+        .toc a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: block;
+            padding: 8px 0;
+        }
+
+        .toc a:hover { color: var(--accent); }
+
+        /* Content Sections */
+        .content-section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-section:last-of-type { border-bottom: none; }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin: 40px 0 16px;
+            color: var(--text);
+        }
+
+        h3:first-of-type { margin-top: 0; }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-size: 1.0625rem;
+        }
+
+        ul, ol {
+            margin: 20px 0 20px 24px;
+            color: var(--text-secondary);
+        }
+
+        li { margin-bottom: 12px; padding-left: 8px; }
+
+        strong { color: var(--text); font-weight: 600; }
+
+        /* Info Box */
+        .info-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .info-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .info-box p { margin-bottom: 0; font-size: 0.9375rem; }
+
+        /* Warning Box */
+        .warning-box {
+            background: rgba(236, 72, 153, 0.05);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            border-left: 3px solid #EC4899;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .warning-box h4 {
+            color: #EC4899;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .warning-box p { margin-bottom: 0; font-size: 0.9375rem; }
+
+        /* Step cards */
+        .step-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+            margin: 32px 0;
+        }
+
+        .step-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 28px 24px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .step-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+        }
+
+        .step-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.03em;
+            margin-bottom: 8px;
+        }
+
+        .step-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--text);
+        }
+
+        .step-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin: 0;
+        }
+
+        /* Tool cards */
+        .tool-cards {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin: 32px 0;
+        }
+
+        .tool-card {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 24px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        .tool-card:hover {
+            border-color: var(--accent);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 30px rgba(41, 168, 241, 0.1);
+        }
+
+        .tool-card-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            color: var(--accent);
+            margin-bottom: 8px;
+        }
+
+        .tool-card h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: var(--text);
+            margin-bottom: 8px;
+        }
+
+        .tool-card p {
+            font-size: 0.875rem;
+            color: var(--text-muted);
+            margin: 0;
+            line-height: 1.5;
+        }
+
+        .tool-card .arrow {
+            color: var(--accent);
+            font-size: 1rem;
+            display: block;
+            margin-top: 12px;
+            transition: transform 0.2s;
+        }
+
+        .tool-card:hover .arrow { transform: translateX(4px); }
+
+        /* CTA Section */
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: radial-gradient(ellipse at center, rgba(41, 168, 241, 0.08) 0%, transparent 60%);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary {
+            background: var(--accent);
+            color: #000;
+            border: none;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(41, 168, 241, 0.4);
+        }
+
+        /* Footer */
+        footer {
+            padding: 40px 0;
+            border-top: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+        .copyright { color: var(--text-muted); font-size: 0.875rem; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .tutorial-header { padding: 100px 0 40px; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            h3 { font-size: 1.25rem; }
+            .content-section { padding: 40px 0; }
+            .step-grid { grid-template-columns: 1fr; }
+            .tool-cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVIGATION -->
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="../../" class="logo">
+                    <img src="../../logo.png" alt="Trendline Project Logo">
+                    <span>Trendline Project</span>
+                </a>
+                <a href="../" class="back-link">← Back to Resources</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HEADER -->
+    <section class="tutorial-header">
+        <div class="container">
+            <span class="badge">New Subscriber Guide</span>
+            <h1>Getting <span class="accent-text">Started</span></h1>
+            <p class="subtitle">Everything you need to go from purchase to your first trade. Follow these steps in order.</p>
+        </div>
+    </section>
+
+    <!-- TABLE OF CONTENTS -->
+    <div class="container">
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#access">Step 1 — Getting Access</a></li>
+                <li><a href="#find-tools">Step 2 — Finding Your Tools on TradingView</a></li>
+                <li><a href="#workflow">Step 3 — The BST Workflow</a></li>
+                <li><a href="#backtest">Step 4 — Start with the Backtester</a></li>
+                <li><a href="#trade">Step 5 — Trade with QR Pro</a></li>
+                <li><a href="#scanner">Step 6 — Scale Up with the Scanner</a></li>
+                <li><a href="#settings">The Key: Settings Consistency</a></li>
+                <li><a href="#next">Where to Go Next</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <!-- CONTENT -->
+    <div class="container">
+
+        <!-- Step 1: Getting Access -->
+        <section class="content-section" id="access">
+            <h2>Step 1 — Getting Access</h2>
+            <p>After subscribing, you'll receive a confirmation email from LemonSqueezy. Your tools are not automatically added to TradingView — you need to send us your TradingView username first.</p>
+
+            <ol>
+                <li>Check your inbox for a confirmation email from LemonSqueezy (check spam if you don't see it)</li>
+                <li>Email your <strong>TradingView username</strong> to <a id="contact-email" href="#" style="color: var(--accent); text-decoration: none;">our support address</a></li>
+                <li>Access will be granted within 24 hours — usually much faster depending on time zone</li>
+                <li>You'll receive a confirmation once access has been added</li>
+            </ol>
+
+            <div class="info-box">
+                <h4>Where to find your TradingView username</h4>
+                <p>Log into TradingView → click your profile icon (top right) → your username is displayed under your name. It looks like <strong>@yourusername</strong>. Send us just the username without the @ symbol.</p>
+            </div>
+
+            <div class="warning-box">
+                <h4>⚠ Access is tied to your TradingView account</h4>
+                <p>Make sure you send the correct TradingView username. Access cannot be transferred between accounts once granted.</p>
+            </div>
+        </section>
+
+        <!-- Step 2: Finding Tools -->
+        <section class="content-section" id="find-tools">
+            <h2>Step 2 — Finding Your Tools on TradingView</h2>
+            <p>Once access has been granted, all three tools will appear in your <strong>Invite-Only Scripts</strong> folder on TradingView.</p>
+
+            <ol>
+                <li>Open any chart on TradingView</li>
+                <li>Click <strong>Indicators</strong> at the top of the chart</li>
+                <li>In the search panel, click <strong>My scripts</strong> then <strong>Invite-Only Scripts</strong></li>
+                <li>You'll see three scripts: <strong>Quantum Ribbon Pro</strong>, <strong>QR Pro Backtester</strong>, and <strong>QR Pro Scanner</strong></li>
+            </ol>
+
+            <div class="info-box">
+                <h4>Don't see your scripts?</h4>
+                <p>Try refreshing TradingView or logging out and back in. If they still don't appear after 24 hours of receiving access confirmation, contact us and we'll check the access grant.</p>
+            </div>
+        </section>
+
+        <!-- Step 3: BST Workflow -->
+        <section class="content-section" id="workflow">
+            <h2>Step 3 — The BST Workflow</h2>
+            <p>The system is built around a simple three-step workflow. Follow it in order and you'll always be trading settings that have actually been validated.</p>
+
+            <div class="step-grid">
+                <div class="step-card">
+                    <div class="step-number">B</div>
+                    <h4>Backtest</h4>
+                    <p>Test your settings on historical data. Find what works before risking real money.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">S</div>
+                    <h4>Scan</h4>
+                    <p>Monitor multiple markets with your validated settings. Never miss a setup.</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-number">T</div>
+                    <h4>Trade</h4>
+                    <p>Execute with confidence. Your settings are tested and your setup is confirmed.</p>
+                </div>
+            </div>
+
+            <p>Most traders skip straight to trading. They add an indicator, start taking signals, and wonder why results are inconsistent. BST fixes that — you do the work upfront so every trade is backed by actual data.</p>
+        </section>
+
+        <!-- Step 4: Backtester -->
+        <section class="content-section" id="backtest">
+            <h2>Step 4 — Start with the Backtester</h2>
+            <p><strong>Always start here.</strong> Before trading live, run the Backtester on your chosen instrument and timeframe to find settings that perform well historically.</p>
+
+            <ol>
+                <li>Add <strong>QR Pro Backtester</strong> to a chart of the instrument you want to trade</li>
+                <li>Open the <strong>Strategy Tester</strong> tab at the bottom of TradingView</li>
+                <li>Start with default settings and note the results — win rate, profit factor, drawdown</li>
+                <li>Adjust one setting at a time: try different stop methods, signal sensitivity levels, and confirmation filters</li>
+                <li>Once you find settings that perform consistently, <strong>write them down</strong> — you'll use the same settings across all three tools</li>
+            </ol>
+
+            <div class="info-box">
+                <h4>What to look for</h4>
+                <p>Aim for a profit factor above 1.5 and at least 50–100 trades in your sample. The Walk-Forward Analysis table will tell you if your settings are robust or curve-fitted to historical data.</p>
+            </div>
+
+            <p>Full backtester documentation including Walk-Forward Analysis and Optimization Hints is in the <a href="../backtester/" style="color: var(--accent); text-decoration: none;">Backtester Guide →</a></p>
+        </section>
+
+        <!-- Step 5: Trade -->
+        <section class="content-section" id="trade">
+            <h2>Step 5 — Trade with QR Pro</h2>
+            <p>You've backtested your settings. Now apply them to the main indicator and start trading.</p>
+
+            <ol>
+                <li>Add <strong>Quantum Ribbon Pro</strong> to your chart</li>
+                <li>Enter the exact same settings you validated in the Backtester — signal sensitivity, stop method, filters, everything</li>
+                <li>When a signal appears, the chart shows your entry level, stop loss, and take-profit targets automatically</li>
+                <li>Manage the trade using your configured risk management rules — partial take-profits, break-even automation</li>
+            </ol>
+
+            <div class="info-box">
+                <h4>Match your settings exactly</h4>
+                <p>If you backtested with TP RSI confirmation enabled and ATR stops at Normal distance, use those same settings in QR Pro. Any mismatch means you're trading settings you haven't actually tested.</p>
+            </div>
+
+            <p>Full indicator documentation is in the <a href="../quantum-ribbon-pro/" style="color: var(--accent); text-decoration: none;">QR Pro Tutorial →</a></p>
+        </section>
+
+        <!-- Step 6: Scanner -->
+        <section class="content-section" id="scanner">
+            <h2>Step 6 — Scale Up with the Scanner</h2>
+            <p>Once you're comfortable with the core Backtest → Trade workflow, the Scanner lets you expand to multiple markets without manually monitoring each chart.</p>
+
+            <p>Add your instruments — BTC, S&P 500, Gold, forex pairs, whatever you trade — to the Scanner with the same settings you've validated. One dashboard shows you the current state across all of them: trend direction, confidence score, active positions, and entry/SL/TP levels.</p>
+
+            <p>When a setup triggers on any instrument, you get a single alert. Open that chart with QR Pro and execute.</p>
+
+            <div class="info-box">
+                <h4>Scanner is optional, not required</h4>
+                <p>The core workflow is Backtest → Trade. The Scanner is for traders who want to monitor multiple markets simultaneously. Start with the indicator on one market, get comfortable, then expand to the scanner when you're ready.</p>
+            </div>
+
+            <p>Full scanner documentation is in the <a href="../scanner/" style="color: var(--accent); text-decoration: none;">Scanner Guide →</a></p>
+        </section>
+
+        <!-- Settings Consistency -->
+        <section class="content-section" id="settings">
+            <h2>The Key: Settings Consistency</h2>
+            <p>This is the most important thing to understand about the BST system.</p>
+            <p><strong>Your Backtester settings, Scanner settings, and QR Pro settings must match exactly.</strong> Same signal sensitivity. Same stop method. Same filters. Same logic.</p>
+            <p>If you backtest with TP RSI confirmation enabled but trade with it disabled, you're not trading what you tested. The whole point of backtesting is to validate a specific configuration — that configuration only has value if you apply it consistently.</p>
+
+            <div class="info-box">
+                <h4>Keep a settings note</h4>
+                <p>Write down your validated configuration somewhere easy to reference. When you add the Scanner or switch to a new chart, check your note and apply the same settings. It takes 30 seconds and eliminates the most common source of inconsistency.</p>
+            </div>
+        </section>
+
+        <!-- Where to Go Next -->
+        <section class="content-section" id="next">
+            <h2>Where to Go Next</h2>
+            <p>You're set up and ready to trade. Use these guides when you need more detail on any specific tool.</p>
+
+            <div class="tool-cards">
+                <a href="../quantum-ribbon-pro/" class="tool-card">
+                    <div class="tool-card-label">Indicator</div>
+                    <h4>QR Pro Tutorial</h4>
+                    <p>Complete guide to every feature — signals, risk management, alerts, and customization.</p>
+                    <span class="arrow">→</span>
+                </a>
+                <a href="../backtester/" class="tool-card">
+                    <div class="tool-card-label">Strategy Testing</div>
+                    <h4>Backtester Guide</h4>
+                    <p>Walk-Forward Analysis, Optimization Hints, performance metrics explained.</p>
+                    <span class="arrow">→</span>
+                </a>
+                <a href="../scanner/" class="tool-card">
+                    <div class="tool-card-label">Multi-Instrument</div>
+                    <h4>Scanner Guide</h4>
+                    <p>Dashboard setup, symbol configuration, alert system, and appearance options.</p>
+                    <span class="arrow">→</span>
+                </a>
+            </div>
+        </section>
+
+    </div>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="margin-bottom: 16px;">Questions?</h2>
+            <p style="max-width: 500px; margin: 0 auto 32px; color: var(--text-secondary);">Join the Discord community for support, trade ideas, and feature discussions.</p>
+            <a href="https://discord.gg/hZp4NsjpwT" target="_blank" class="btn btn-primary">Join Discord</a>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="../../privacy-policy.html">Privacy Policy</a>
+                <a href="../../terms-of-service.html">Terms of Service</a>
+                <a href="../../cookie-policy.html">Cookie Policy</a>
+                <a href="../../contact.html">Contact</a>
+            </div>
+            <p class="copyright">© 2025 Quantum Ribbon Pro. Built by Trendline Project.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Nav scroll
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+
+        // Obfuscated email
+        const user = 'info';
+        const domain = 'trendlineproject.com';
+        const link = document.getElementById('contact-email');
+        link.href = 'mailto:' + user + '@' + domain;
+        link.textContent = user + '@' + domain;
+    </script>
+
+</body>
+</html>
