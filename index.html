@@ -661,6 +661,19 @@
             border-color: var(--accent);
         }
 
+        .toggle-btn-lifetime {
+            background: linear-gradient(135deg, rgba(41, 168, 241, 0.15), rgba(236, 72, 153, 0.15));
+            border: 1px solid rgba(236, 72, 153, 0.4);
+            color: #EC4899;
+            text-decoration: none;
+        }
+
+        .toggle-btn-lifetime:hover {
+            background: linear-gradient(135deg, rgba(41, 168, 241, 0.25), rgba(236, 72, 153, 0.25));
+            border-color: #EC4899;
+            color: #EC4899;
+        }
+
         .save-badge {
             background: rgba(41, 168, 241, 0.15);
             color: var(--accent);
@@ -1607,6 +1620,7 @@
             <div class="pricing-toggle">
                 <button class="toggle-btn" id="btn-monthly" onclick="setPricing('monthly')">Monthly</button>
                 <button class="toggle-btn active" id="btn-annual" onclick="setPricing('annual')">Annual</button>
+                <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/76fcac28-443c-49db-b0f7-4aaf882415b7" class="toggle-btn toggle-btn-lifetime">Lifetime — $799</a>
             </div>
 
             <!-- CARD -->
