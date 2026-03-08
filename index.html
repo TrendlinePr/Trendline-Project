@@ -1432,7 +1432,169 @@
         </div>
     </section>
 
-    <!-- ═══════════════════════════════════════
+    <!-- LIFETIME PROMO BANNER -->
+    <div class="promo-banner" id="promo-banner">
+        <div class="container">
+            <div class="promo-inner">
+                <div class="promo-left">
+                    <span class="promo-tag">Limited Time</span>
+                    <span class="promo-text"><strong>Lifetime Access — $799</strong> <span class="promo-sub">One payment. Access for life.</span></span>
+                </div>
+                <div class="promo-right">
+                    <div class="promo-countdown" id="promo-countdown">
+                        <div class="countdown-unit"><span id="cd-days">00</span><span class="cd-label">days</span></div>
+                        <div class="countdown-sep">:</div>
+                        <div class="countdown-unit"><span id="cd-hours">00</span><span class="cd-label">hrs</span></div>
+                        <div class="countdown-sep">:</div>
+                        <div class="countdown-unit"><span id="cd-mins">00</span><span class="cd-label">min</span></div>
+                        <div class="countdown-sep">:</div>
+                        <div class="countdown-unit"><span id="cd-secs">00</span><span class="cd-label">sec</span></div>
+                    </div>
+                    <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/LIFETIME_LINK" class="promo-btn">Get Lifetime Access</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        .promo-banner {
+            background: linear-gradient(135deg, rgba(41, 168, 241, 0.12) 0%, rgba(236, 72, 153, 0.12) 100%);
+            border-top: 1px solid rgba(41, 168, 241, 0.2);
+            border-bottom: 1px solid rgba(41, 168, 241, 0.2);
+            padding: 20px 0;
+        }
+
+        .promo-inner {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .promo-left {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .promo-tag {
+            background: rgba(236, 72, 153, 0.15);
+            border: 1px solid rgba(236, 72, 153, 0.3);
+            color: #EC4899;
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            padding: 4px 10px;
+            border-radius: 20px;
+            white-space: nowrap;
+        }
+
+        .promo-text {
+            font-size: 1rem;
+            color: var(--text);
+        }
+
+        .promo-sub {
+            color: var(--text-muted);
+            font-size: 0.875rem;
+            margin-left: 8px;
+        }
+
+        .promo-right {
+            display: flex;
+            align-items: center;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+
+        .promo-countdown {
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .countdown-unit {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-width: 40px;
+        }
+
+        .countdown-unit span:first-child {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--accent);
+            letter-spacing: -0.02em;
+            line-height: 1;
+        }
+
+        .cd-label {
+            font-size: 0.625rem;
+            text-transform: uppercase;
+            letter-spacing: 0.08em;
+            color: var(--text-muted);
+            margin-top: 2px;
+        }
+
+        .countdown-sep {
+            font-size: 1.25rem;
+            font-weight: 700;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+        }
+
+        .promo-btn {
+            background: linear-gradient(135deg, #29A8F1, #EC4899);
+            color: #fff;
+            font-size: 0.9375rem;
+            font-weight: 600;
+            padding: 12px 24px;
+            border-radius: 8px;
+            text-decoration: none;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+        }
+
+        .promo-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(41, 168, 241, 0.3);
+        }
+
+        @media (max-width: 768px) {
+            .promo-inner { flex-direction: column; align-items: flex-start; }
+            .promo-right { width: 100%; justify-content: space-between; }
+        }
+    </style>
+
+    <script>
+        // Countdown to March 22, 2026
+        (function() {
+            const deadline = new Date('2026-03-22T23:59:59');
+            function update() {
+                const now = new Date();
+                const diff = deadline - now;
+                if (diff <= 0) {
+                    document.getElementById('promo-banner').style.display = 'none';
+                    return;
+                }
+                const days = Math.floor(diff / 86400000);
+                const hours = Math.floor((diff % 86400000) / 3600000);
+                const mins = Math.floor((diff % 3600000) / 60000);
+                const secs = Math.floor((diff % 60000) / 1000);
+                document.getElementById('cd-days').textContent = String(days).padStart(2, '0');
+                document.getElementById('cd-hours').textContent = String(hours).padStart(2, '0');
+                document.getElementById('cd-mins').textContent = String(mins).padStart(2, '0');
+                document.getElementById('cd-secs').textContent = String(secs).padStart(2, '0');
+            }
+            update();
+            setInterval(update, 1000);
+        })();
+    </script>
+
+         <!-- ═══════════════════════════════════════
          PRICING - SUBSCRIPTION WITH TOGGLE
          ═══════════════════════════════════════ -->
     <section class="pricing-section" id="pricing">
