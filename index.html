@@ -1660,6 +1660,120 @@
          <!-- ═══════════════════════════════════════
          PRICING - SUBSCRIPTION WITH TOGGLE
          ═══════════════════════════════════════ -->
+
+    <!-- TP RSI PRO CALLOUT -->
+    <section class="tp-rsi-section">
+        <div class="container">
+            <div class="tp-rsi-inner">
+                <div class="tp-rsi-content">
+                    <div class="tp-rsi-label">Now Included <span class="new-badge" style="font-size:0.7rem; padding: 3px 9px;">New</span></div>
+                    <h2 class="tp-rsi-title">TP RSI <span style="color: var(--accent);">Pro</span></h2>
+                    <p class="tp-rsi-desc">A professional RSI indicator combining EMA Ribbon, Bollinger Bands, and RSI Volume Profile into a single pane. Unique BB breakout + pullback entry signals, divergence detection, and multi-timeframe RSI — everything you need to read momentum at a glance.</p>
+                    <ul class="tp-rsi-features">
+                        <li><span class="check-icon">✓</span> BB Breakout + Ribbon Rejection signals</li>
+                        <li><span class="check-icon">✓</span> Pullback entry signals for trend continuation</li>
+                        <li><span class="check-icon">✓</span> RSI Volume Profile with Point of Control</li>
+                        <li><span class="check-icon">✓</span> Regular & hidden divergence detection</li>
+                        <li><span class="check-icon">✓</span> Multi-timeframe RSI overlay</li>
+                        <li><span class="check-icon">✓</span> Webhook-ready alerts</li>
+                    </ul>
+                </div>
+                <div class="tp-rsi-image-wrapper">
+                    <div class="tp-rsi-image-frame">
+                        <img src="tp-rsi-pro-showcase.png" alt="TP RSI Pro Indicator" class="tp-rsi-image">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <style>
+        .tp-rsi-section {
+            padding: 80px 0 0;
+        }
+
+        .tp-rsi-inner {
+            display: grid;
+            grid-template-columns: 1fr 1.4fr;
+            gap: 64px;
+            align-items: center;
+        }
+
+        .tp-rsi-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.15em;
+            color: var(--text-muted);
+            margin-bottom: 12px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .tp-rsi-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 700;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            line-height: 1.1;
+            text-align: left;
+        }
+
+        .tp-rsi-desc {
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            line-height: 1.7;
+            margin-bottom: 24px;
+            text-align: left;
+        }
+
+        .tp-rsi-features {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .tp-rsi-features li {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 8px 0;
+            font-size: 0.9375rem;
+            color: var(--text-secondary);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .tp-rsi-features li:last-child { border-bottom: none; }
+
+        .tp-rsi-image-wrapper {
+            width: 100%;
+        }
+
+        .tp-rsi-image-frame {
+            border-radius: 16px;
+            padding: 3px;
+            background: linear-gradient(135deg, #29A8F1 0%, #8CA8CE 50%, #EC4899 100%);
+            box-shadow: 
+                0 20px 60px rgba(41, 168, 241, 0.25),
+                0 0 80px rgba(236, 72, 153, 0.15),
+                0 0 120px rgba(41, 168, 241, 0.1);
+        }
+
+        .tp-rsi-image {
+            display: block;
+            width: 100%;
+            height: auto;
+            border-radius: 13px;
+        }
+
+        @media (max-width: 768px) {
+            .tp-rsi-inner {
+                grid-template-columns: 1fr;
+                gap: 32px;
+            }
+        }
+    </style>
     <section class="pricing-section" id="pricing">
         <div class="container">
             <div class="section-label">Pricing</div>
