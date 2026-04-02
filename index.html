@@ -1627,7 +1627,27 @@
 
             <!-- SUBSCRIPTION CARD -->
             <div class="pricing-card-single" id="card-subscription">
-                <div class="pricing-card-inner">
+                <div class="pricing-card-inner" id="card-sub-inner">
+
+                    <!-- ANNUAL PROMO STRIP -->
+                    <div id="annual-promo-strip" style="display:none; margin-bottom: 20px; border-radius: 10px; padding: 14px 18px; background: linear-gradient(135deg, rgba(41,168,241,0.12) 0%, rgba(236,72,153,0.12) 100%); border: 1px solid rgba(41,168,241,0.25);">
+                        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:12px;">
+                            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                                <span style="background:rgba(236,72,153,0.15); border:1px solid rgba(236,72,153,0.3); color:#EC4899; font-size:0.7rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; padding:3px 9px; border-radius:20px; white-space:nowrap;">Limited Time</span>
+                                <span style="font-size:0.9rem; color:var(--text);"><strong>20% off Annual — <span style="text-decoration:line-through; opacity:0.5;">$708</span> $564/yr</strong></span>
+                            </div>
+                            <div style="display:flex; align-items:center; gap:8px; font-size:0.8rem; color:var(--accent); font-weight:700; font-variant-numeric:tabular-nums;">
+                                <span id="acd-days">00</span><span style="opacity:0.5;">d</span>
+                                <span style="opacity:0.4;">:</span>
+                                <span id="acd-hours">00</span><span style="opacity:0.5;">h</span>
+                                <span style="opacity:0.4;">:</span>
+                                <span id="acd-mins">00</span><span style="opacity:0.5;">m</span>
+                                <span style="opacity:0.4;">:</span>
+                                <span id="acd-secs">00</span><span style="opacity:0.5;">s</span>
+                            </div>
+                        </div>
+                    </div>
+
                     <div class="price-block">
                         <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
                             <div>
@@ -1787,6 +1807,10 @@
         const ANNUAL_LINK = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/910d7802-ed89-4def-b04a-a1c0b9a7739c';
         const MONTHLY_LINK = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/c3a6010f-ceaf-4d56-be73-1d33d101bb6e';
 
+        // Annual promo countdown — expires April 16 2026 23:59:59
+        const ANNUAL_PROMO_DEADLINE = new Date('2026-04-16T23:59:59');
+        const annualPromoActive = new Date() < ANNUAL_PROMO_DEADLINE;
+
         function setPricing(plan) {
             const priceAmount = document.getElementById('price-amount');
             const priceSub = document.getElementById('price-sub');
@@ -1798,6 +1822,7 @@
             const saveBadge = document.getElementById('save-badge');
             const cardSubscription = document.getElementById('card-subscription');
             const cardLifetime = document.getElementById('card-lifetime');
+            const annualStrip = document.getElementById('annual-promo-strip');
 
             btnMonthly.classList.remove('active');
             btnAnnual.classList.remove('active');
@@ -1811,9 +1836,19 @@
                 cardSubscription.style.display = 'block';
                 cardLifetime.style.display = 'none';
                 if (plan === 'annual') {
-                    priceAmount.textContent = '$59';
-                    priceSub.textContent = '$708 billed annually';
-                    featureLast.textContent = 'Save $480/year';
+                    if (annualPromoActive) {
+                        priceAmount.textContent = '$47';
+                        priceSub.textContent = '$564 billed annually — 20% off';
+                        featureLast.textContent = 'Save $564/year vs monthly';
+                        saveBadge.textContent = '20% Off';
+                        annualStrip.style.display = 'block';
+                    } else {
+                        priceAmount.textContent = '$59';
+                        priceSub.textContent = '$708 billed annually';
+                        featureLast.textContent = 'Save $480/year';
+                        saveBadge.textContent = 'Save 40%';
+                        annualStrip.style.display = 'none';
+                    }
                     cta.href = ANNUAL_LINK;
                     btnAnnual.classList.add('active');
                     saveBadge.style.display = 'inline-block';
@@ -1823,6 +1858,8 @@
                     featureLast.textContent = 'Cancel anytime';
                     cta.href = MONTHLY_LINK;
                     btnMonthly.classList.add('active');
+                    saveBadge.style.display = 'none';
+                    annualStrip.style.display = 'none';
                     saveBadge.style.display = 'none';
                 }
             }
@@ -1914,6 +1951,7 @@
 
         // GA Event Tracking
         document.addEventListener('DOMContentLoaded', function() {
+            setPricing('annual');
             document.querySelectorAll('a[href*="lemonsqueezy.com"]').forEach(function(btn) {
                 btn.addEventListener('click', function() {
                     gtag('event', 'checkout_click', { 'event_category': 'conversion', 'event_label': 'lemonsqueezy_checkout' });
@@ -1930,6 +1968,36 @@
                 });
             });
         });
+    </script>
+
+    <script>
+        // Annual promo countdown — expires April 16 2026
+        (function() {
+            const deadline = new Date('2026-04-16T23:59:59');
+            function updateAnnualCountdown() {
+                const now = new Date();
+                const diff = deadline - now;
+                if (diff <= 0) {
+                    const strip = document.getElementById('annual-promo-strip');
+                    if (strip) strip.style.display = 'none';
+                    return;
+                }
+                const days = Math.floor(diff / 86400000);
+                const hours = Math.floor((diff % 86400000) / 3600000);
+                const mins = Math.floor((diff % 3600000) / 60000);
+                const secs = Math.floor((diff % 60000) / 1000);
+                const d = document.getElementById('acd-days');
+                const h = document.getElementById('acd-hours');
+                const m = document.getElementById('acd-mins');
+                const s = document.getElementById('acd-secs');
+                if (d) d.textContent = String(days).padStart(2, '0');
+                if (h) h.textContent = String(hours).padStart(2, '0');
+                if (m) m.textContent = String(mins).padStart(2, '0');
+                if (s) s.textContent = String(secs).padStart(2, '0');
+            }
+            updateAnnualCountdown();
+            setInterval(updateAnnualCountdown, 1000);
+        })();
     </script>
 
     <!-- COOKIE CONSENT -->
