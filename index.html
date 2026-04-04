@@ -1855,6 +1855,7 @@
                 cardSubscription.style.display = 'block';
                 cardLifetime.style.display = 'none';
                 if (plan === 'annual') {
+                    document.getElementById('monthly-promo-strip').style.display = 'none';
                     if (annualPromoActive) {
                         priceAmount.textContent = '$47';
                         priceSub.textContent = '$564 billed annually — 20% off';
@@ -1872,6 +1873,7 @@
                     btnAnnual.classList.add('active');
                     saveBadge.style.display = 'inline-block';
                 } else {
+                    annualStrip.style.display = 'none';
                     if (annualPromoActive) {
                         priceAmount.textContent = '$89';
                         priceSub.textContent = 'Billed monthly · Cancel anytime';
