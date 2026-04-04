@@ -1670,7 +1670,7 @@
                     <div class="price-block">
                         <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
                             <div>
-                                <span class="price-amount" id="price-amount">$59</span>
+                                <span id="price-original" style="display:none; font-size:1.5rem; text-decoration:line-through; opacity:0.45; color:var(--text-secondary); margin-right:6px; vertical-align:middle;"></span><span class="price-amount" id="price-amount">$59</span>
                                 <span class="price-period">/month</span>
                             </div>
                             <span class="save-badge" id="save-badge">Save 40%</span>
@@ -1832,6 +1832,7 @@
 
         function setPricing(plan) {
             const priceAmount = document.getElementById('price-amount');
+            const priceOriginal = document.getElementById('price-original');
             const priceSub = document.getElementById('price-sub');
             const featureLast = document.getElementById('feature-last');
             const cta = document.getElementById('pricing-cta');
@@ -1858,12 +1859,15 @@
                     document.getElementById('monthly-promo-strip').style.display = 'none';
                     if (annualPromoActive) {
                         priceAmount.textContent = '$47';
+                        priceOriginal.textContent = '$59';
+                        priceOriginal.style.display = 'inline';
                         priceSub.textContent = '$564 billed annually — 20% off';
                         featureLast.textContent = 'Save $564/year vs monthly';
                         saveBadge.textContent = '20% Off';
                         annualStrip.style.display = 'block';
                     } else {
                         priceAmount.textContent = '$59';
+                        priceOriginal.style.display = 'none';
                         priceSub.textContent = '$708 billed annually';
                         featureLast.textContent = 'Save $480/year';
                         saveBadge.textContent = 'Save 40%';
@@ -1876,12 +1880,15 @@
                     annualStrip.style.display = 'none';
                     if (annualPromoActive) {
                         priceAmount.textContent = '$89';
+                        priceOriginal.textContent = '$99';
+                        priceOriginal.style.display = 'inline';
                         priceSub.textContent = 'Billed monthly · Cancel anytime';
                         featureLast.textContent = 'Cancel anytime';
                         saveBadge.textContent = '10% Off';
                         document.getElementById('monthly-promo-strip').style.display = 'block';
                     } else {
                         priceAmount.textContent = '$99';
+                        priceOriginal.style.display = 'none';
                         priceSub.textContent = 'Billed monthly · Cancel anytime';
                         featureLast.textContent = 'Cancel anytime';
                         saveBadge.textContent = 'Save 40%';
