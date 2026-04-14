@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1C1F26">
+    <title>Get Access — QR Pro</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLKJNZ6GZV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RLKJNZ6GZV');
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --surface: #1C1F26; --surface-hover: #23262E; --accent: #29A8F1;
+            --accent-subtle: rgba(41, 168, 241, 0.1); --text: #F0F0F0; --text-secondary: #C5CBD3;
+            --text-muted: #8B92A0; --border: rgba(255, 255, 255, 0.06);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%);
+            background-attachment: fixed; color: var(--text); line-height: 1.6;
+            -webkit-font-smoothing: antialiased; min-height: 100vh;
+        }
+        .container { max-width: 600px; margin: 0 auto; padding: 0 32px; }
+        nav { padding: 20px 0; }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; max-width: 600px; margin: 0 auto; padding: 0 32px; }
+        .logo { font-size: 1.125rem; font-weight: 600; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo img { width: 32px; height: 32px; }
+
+        .page-header { padding: 60px 0 40px; text-align: center; }
+        .step-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(41,168,241,0.1); border: 1px solid rgba(41,168,241,0.2); border-radius: 20px; font-size: 0.75rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 24px; }
+        h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 12px; line-height: 1.2; }
+        .accent-text { color: var(--accent); }
+        .subtitle { font-size: 1.0625rem; color: var(--text-secondary); margin-bottom: 0; }
+
+        .steps { display: flex; justify-content: center; gap: 0; margin: 40px 0; }
+        .step { display: flex; align-items: center; gap: 10px; }
+        .step-num { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(41,168,241,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 600; color: var(--accent); flex-shrink: 0; }
+        .step-num.done { background: rgba(41,168,241,0.15); border-color: var(--accent); }
+        .step-num.active { background: var(--accent); border-color: var(--accent); color: #000; }
+        .step-label { font-size: 0.8125rem; color: var(--text-muted); white-space: nowrap; }
+        .step-label.active { color: var(--text); font-weight: 500; }
+        .step-divider { width: 40px; height: 1px; background: var(--border); margin: 0 8px; flex-shrink: 0; }
+
+        .card { background: var(--surface); border: 1px solid rgba(41,168,241,0.2); border-radius: 16px; padding: 40px; margin-bottom: 24px; position: relative; overflow: hidden; box-shadow: 0 0 40px rgba(41,168,241,0.06); }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #29A8F1, #EC4899); }
+
+        .plan-tag { display: inline-block; background: rgba(41,168,241,0.1); border: 1px solid rgba(41,168,241,0.25); border-radius: 20px; padding: 4px 12px; font-size: 0.75rem; font-weight: 600; color: var(--accent); margin-bottom: 24px; }
+
+        .form-group { margin-bottom: 20px; }
+        label { display: block; font-size: 0.875rem; font-weight: 500; color: var(--text); margin-bottom: 8px; }
+        .label-hint { font-size: 0.8125rem; color: var(--text-muted); font-weight: 400; margin-left: 6px; }
+        input[type="text"], input[type="email"] {
+            width: 100%; padding: 12px 16px; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 8px; color: var(--text); font-size: 0.9375rem; font-family: inherit;
+            transition: border-color 0.2s; outline: none;
+        }
+        input[type="text"]:focus, input[type="email"]:focus { border-color: var(--accent); background: rgba(41,168,241,0.05); }
+        input::placeholder { color: var(--text-muted); }
+
+        .info-box { background: rgba(41,168,241,0.06); border: 1px solid rgba(41,168,241,0.15); border-radius: 8px; padding: 16px; margin-bottom: 24px; font-size: 0.875rem; color: var(--text-secondary); line-height: 1.6; }
+        .info-box strong { color: var(--text); }
+
+        .btn-submit { display: block; width: 100%; padding: 16px; background: var(--accent); color: #000; border: none; border-radius: 8px; font-size: 1rem; font-weight: 600; cursor: pointer; transition: all 0.2s; font-family: inherit; }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(41,168,241,0.4); }
+        .btn-submit:disabled { opacity: 0.6; cursor: not-allowed; transform: none; box-shadow: none; }
+
+        .thank-you { display: none; text-align: center; padding: 40px; }
+        .thank-you-icon { width: 64px; height: 64px; background: rgba(41,168,241,0.1); border: 1px solid rgba(41,168,241,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 1.75rem; }
+        .thank-you h2 { font-size: 1.5rem; font-weight: 600; margin-bottom: 12px; letter-spacing: -0.02em; }
+        .thank-you p { color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.7; margin-bottom: 8px; }
+
+        .help-text { text-align: center; font-size: 0.875rem; color: var(--text-muted); }
+        .help-text a { color: var(--accent); text-decoration: none; }
+        .help-text a:hover { text-decoration: underline; }
+
+        footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; margin-top: 60px; }
+        .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 16px; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent); }
+        .copyright { color: var(--text-muted); font-size: 0.875rem; }
+
+        @media (max-width: 768px) { .container { padding: 0 20px; } .nav-content { padding: 0 20px; } .card { padding: 28px 24px; } .step-label { display: none; } .step-divider { width: 24px; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <img src="logo.png" alt="Trendline Project Logo">
+                <span>Trendline Project</span>
+            </a>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <div class="step-badge">Step 2 of 3</div>
+            <h1>Almost there — enter your<br><span class="accent-text">TradingView username</span></h1>
+            <p class="subtitle">We'll grant access to your tools within 24 hours — usually much faster.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="steps">
+            <div class="step">
+                <div class="step-num done">✓</div>
+                <span class="step-label">Subscribe</span>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step">
+                <div class="step-num active">2</div>
+                <span class="step-label active">Enter username</span>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step">
+                <div class="step-num">3</div>
+                <span class="step-label">Access tools</span>
+            </div>
+        </div>
+
+        <div class="card" id="form-card">
+            <div class="plan-tag">QR Pro</div>
+
+            <form id="setup-form" action="https://formspree.io/f/xyklzgea" method="POST">
+                <div class="form-group">
+                    <label for="tv-username">TradingView Username</label>
+                    <input type="text" id="tv-username" name="tradingview_username" placeholder="e.g. JohnTrader" required autocomplete="off">
+                </div>
+                <div class="form-group">
+                    <label for="email">Email Address <span class="label-hint">(used at checkout)</span></label>
+                    <input type="email" id="email" name="email" placeholder="you@example.com" required>
+                </div>
+                <input type="hidden" name="plan" value="QR Pro">
+                <input type="hidden" name="_subject" value="New QR Pro Setup — TradingView Access Request">
+                <button type="submit" class="btn-submit" id="submit-btn">Submit & Get Access</button>
+            </form>
+
+            <div class="thank-you" id="thank-you">
+                <div class="thank-you-icon">✓</div>
+                <h2>You're all set!</h2>
+                <p>We've received your TradingView username and will grant access to your <strong>QR Pro</strong> tools shortly.</p>
+                <p>Once activated, open TradingView → Indicators → Invite-Only Scripts — your tools will appear there.</p>
+                <p style="margin-top: 16px;"><a href="resources/getting-started/" style="color: var(--accent); text-decoration: none;">Read the Getting Started guide →</a></p>
+            </div>
+        </div>
+
+        <p class="help-text">Questions? <a href="contact.html">Contact us</a> or join our <a href="https://discord.gg/hZp4NsjpwT" target="_blank">Discord</a>.</p>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p class="copyright">© 2025 Quantum Ribbon Pro. Built by Trendline Project.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.getElementById('setup-form').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const btn = document.getElementById('submit-btn');
+            btn.disabled = true;
+            btn.textContent = 'Submitting...';
+            try {
+                const response = await fetch(this.action, {
+                    method: 'POST',
+                    body: new FormData(this),
+                    headers: { 'Accept': 'application/json' }
+                });
+                if (response.ok) {
+                    window.location.href = 'thank-you-pro.html';
+                } else {
+                    btn.disabled = false;
+                    btn.textContent = 'Submit & Get Access';
+                    alert('Something went wrong. Please try again or contact us directly.');
+                }
+            } catch (err) {
+                btn.disabled = false;
+                btn.textContent = 'Submit & Get Access';
+                alert('Something went wrong. Please try again or contact us directly.');
+            }
+        });
+    </script>
+</body>
+</html>

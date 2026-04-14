@@ -1,0 +1,187 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1C1F26">
+    <title>You're In — QR Starter</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLKJNZ6GZV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RLKJNZ6GZV');
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --surface: #1C1F26; --accent: #29A8F1; --text: #F0F0F0;
+            --text-secondary: #C5CBD3; --text-muted: #8B92A0; --border: rgba(255, 255, 255, 0.06);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%);
+            background-attachment: fixed; color: var(--text); line-height: 1.6;
+            -webkit-font-smoothing: antialiased; min-height: 100vh;
+        }
+        .container { max-width: 600px; margin: 0 auto; padding: 0 32px; }
+        nav { padding: 20px 0; }
+        .nav-content { max-width: 600px; margin: 0 auto; padding: 0 32px; }
+        .logo { font-size: 1.125rem; font-weight: 600; color: var(--text); text-decoration: none; display: inline-flex; align-items: center; gap: 10px; }
+        .logo img { width: 32px; height: 32px; }
+
+        .page-header { padding: 60px 0 40px; text-align: center; }
+        .step-badge { display: inline-flex; align-items: center; gap: 8px; padding: 6px 14px; background: rgba(41,168,241,0.1); border: 1px solid rgba(41,168,241,0.2); border-radius: 20px; font-size: 0.75rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 24px; }
+        .success-icon { width: 72px; height: 72px; background: rgba(41,168,241,0.1); border: 1px solid rgba(41,168,241,0.3); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 24px; font-size: 2rem; }
+        h1 { font-size: clamp(1.75rem, 4vw, 2.5rem); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 12px; line-height: 1.2; }
+        .accent-text { color: var(--accent); }
+        .subtitle { font-size: 1.0625rem; color: var(--text-secondary); }
+
+        .steps { display: flex; justify-content: center; gap: 0; margin: 40px 0; }
+        .step { display: flex; align-items: center; gap: 10px; }
+        .step-num { width: 32px; height: 32px; border-radius: 50%; border: 1px solid rgba(41,168,241,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 600; color: var(--accent); flex-shrink: 0; }
+        .step-num.done { background: rgba(41,168,241,0.15); border-color: var(--accent); }
+        .step-num.active { background: var(--accent); border-color: var(--accent); color: #000; }
+        .step-label { font-size: 0.8125rem; color: var(--text-muted); white-space: nowrap; }
+        .step-label.active { color: var(--text); font-weight: 500; }
+        .step-divider { width: 40px; height: 1px; background: var(--border); margin: 0 8px; flex-shrink: 0; }
+
+        .card { background: var(--surface); border: 1px solid rgba(41,168,241,0.2); border-radius: 16px; padding: 40px; margin-bottom: 24px; position: relative; overflow: hidden; }
+        .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #29A8F1, #EC4899); }
+
+        .card-title { font-size: 1.125rem; font-weight: 600; margin-bottom: 24px; }
+
+        .instruction-step { display: flex; gap: 16px; align-items: flex-start; margin-bottom: 24px; }
+        .instruction-step:last-child { margin-bottom: 0; }
+        .instruction-num { width: 32px; height: 32px; border-radius: 50%; background: rgba(41,168,241,0.12); border: 1px solid rgba(41,168,241,0.3); display: flex; align-items: center; justify-content: center; font-size: 0.8rem; font-weight: 700; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+        .instruction-text { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
+        .instruction-text strong { color: var(--text); }
+
+        /* Placeholder for future screenshot */
+        .screenshot-placeholder { background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.1); border-radius: 8px; padding: 32px; text-align: center; margin-top: 16px; color: var(--text-muted); font-size: 0.875rem; }
+
+        .divider { height: 1px; background: var(--border); margin: 32px 0; }
+
+        .next-steps { margin-bottom: 24px; }
+        .next-steps-title { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 16px; }
+        .next-link { display: flex; align-items: center; justify-content: space-between; padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); transition: all 0.2s; margin-bottom: 10px; }
+        .next-link:hover { border-color: var(--accent); background: rgba(41,168,241,0.05); }
+        .next-link-text { font-size: 0.9375rem; font-weight: 500; }
+        .next-link-sub { font-size: 0.8125rem; color: var(--text-muted); margin-top: 2px; }
+        .next-link-arrow { color: var(--accent); font-size: 1.25rem; }
+
+        .help-text { text-align: center; font-size: 0.875rem; color: var(--text-muted); margin-bottom: 60px; }
+        .help-text a { color: var(--accent); text-decoration: none; }
+        .help-text a:hover { text-decoration: underline; }
+
+        footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+        .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 16px; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent); }
+        .copyright { color: var(--text-muted); font-size: 0.875rem; }
+
+        @media (max-width: 768px) { .container { padding: 0 20px; } .nav-content { padding: 0 20px; } .card { padding: 28px 24px; } .step-label { display: none; } .step-divider { width: 24px; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-content">
+            <a href="/" class="logo">
+                <img src="logo.png" alt="Trendline Project Logo">
+                <span>Trendline Project</span>
+            </a>
+        </div>
+    </nav>
+
+    <section class="page-header">
+        <div class="container">
+            <div class="success-icon">✓</div>
+            <div class="step-badge">Step 3 of 3</div>
+            <h1>You're in — access your<br><span class="accent-text">tools on TradingView</span></h1>
+            <p class="subtitle">Your request has been received. Here's how to find your tools once access is granted.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="steps">
+            <div class="step">
+                <div class="step-num done">✓</div>
+                <span class="step-label">Subscribe</span>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step">
+                <div class="step-num done">✓</div>
+                <span class="step-label">Enter username</span>
+            </div>
+            <div class="step-divider"></div>
+            <div class="step">
+                <div class="step-num active">3</div>
+                <span class="step-label active">Access tools</span>
+            </div>
+        </div>
+
+        <!-- Instructions card -->
+        <div class="card">
+            <div class="card-title">How to find your tools on TradingView</div>
+
+            <div class="instruction-step">
+                <div class="instruction-num">1</div>
+                <div class="instruction-text">Open <strong>TradingView</strong> and go to any chart</div>
+            </div>
+            <div class="instruction-step">
+                <div class="instruction-num">2</div>
+                <div class="instruction-text">Click the <strong>Indicators</strong> button at the top of the chart</div>
+            </div>
+            <div class="instruction-step">
+                <div class="instruction-num">3</div>
+                <div class="instruction-text">Select the <strong>Invite-Only Scripts</strong> tab on the left</div>
+            </div>
+            <div class="instruction-step">
+                <div class="instruction-num">4</div>
+                <div class="instruction-text">Your <strong>QR Starter</strong> tools will appear here once access is activated — if you don't see them yet, check back shortly or refresh TradingView</div>
+            </div>
+        </div>
+
+        <!-- Next steps -->
+        <div class="next-steps">
+            <div class="next-steps-title">While you wait</div>
+            <a href="resources/qr-starter/" class="next-link">
+                <div>
+                    <div class="next-link-text">QR Starter — Full Guide</div>
+                    <div class="next-link-sub">Learn every feature before you start trading</div>
+                </div>
+                <span class="next-link-arrow">→</span>
+            </a>
+            <a href="resources/qr-starter-backtester/" class="next-link">
+                <div>
+                    <div class="next-link-text">QR Starter Backtester Guide</div>
+                    <div class="next-link-sub">Test your settings before going live</div>
+                </div>
+                <span class="next-link-arrow">→</span>
+            </a>
+            <a href="https://discord.gg/hZp4NsjpwT" target="_blank" class="next-link">
+                <div>
+                    <div class="next-link-text">Join our Discord</div>
+                    <div class="next-link-sub">Connect with other traders and get support</div>
+                </div>
+                <span class="next-link-arrow">→</span>
+            </a>
+        </div>
+
+        <p class="help-text">Questions? <a href="contact.html">Contact us</a> or reach out on <a href="https://discord.gg/hZp4NsjpwT" target="_blank">Discord</a>.</p>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <p class="copyright">© 2025 Quantum Ribbon Pro. Built by Trendline Project.</p>
+        </div>
+    </footer>
+</body>
+</html>
