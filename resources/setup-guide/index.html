@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1C1F26">
+    <title>Setup Guide — Trendline Project</title>
+    <meta name="description" content="How to get access to your Quantum Ribbon tools and start trading on TradingView. Step-by-step setup guide.">
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLKJNZ6GZV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RLKJNZ6GZV');
+    </script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root {
+            --surface: #1C1F26; --accent: #29A8F1; --text: #F0F0F0;
+            --text-secondary: #C5CBD3; --text-muted: #8B92A0; --border: rgba(255,255,255,0.06);
+        }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%);
+            background-attachment: fixed; color: var(--text); line-height: 1.6;
+            -webkit-font-smoothing: antialiased; min-height: 100vh;
+        }
+        .container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
+
+        /* Nav */
+        nav { padding: 20px 0; position: fixed; top: 0; left: 0; right: 0; background: transparent; z-index: 1000; transition: background 0.3s ease; }
+        nav.scrolled { background: rgba(28,31,38,0.85); backdrop-filter: blur(10px); }
+        .nav-inner { max-width: 760px; margin: 0 auto; padding: 0 32px; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.0625rem; font-weight: 600; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo img { width: 28px; height: 28px; }
+        .nav-right { display: flex; gap: 20px; align-items: center; }
+        .nav-right a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+        .nav-right a:hover { color: var(--accent); }
+        .nav-right .btn-nav { color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 6px 14px; font-size: 0.8125rem; }
+
+        /* Header */
+        .page-header { padding: 120px 0 60px; }
+        .breadcrumb { display: flex; align-items: center; gap: 8px; font-size: 0.8125rem; color: var(--text-muted); margin-bottom: 24px; }
+        .breadcrumb a { color: var(--text-muted); text-decoration: none; transition: color 0.2s; }
+        .breadcrumb a:hover { color: var(--accent); }
+        .breadcrumb span { opacity: 0.4; }
+        h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.15; }
+        .accent-text { color: var(--accent); }
+        .page-subtitle { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; max-width: 600px; }
+
+        /* Overview steps */
+        .overview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 48px 0; }
+        .overview-step { background: rgba(41,168,241,0.05); border: 1px solid rgba(41,168,241,0.15); border-radius: 12px; padding: 20px; text-align: center; }
+        .overview-num { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+        .overview-label { font-size: 0.875rem; color: var(--text-secondary); }
+
+        /* Sections */
+        .guide-section { margin-bottom: 64px; }
+        .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+        .section-num { width: 40px; height: 40px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; color: #000; flex-shrink: 0; }
+        .section-title { font-size: 1.375rem; font-weight: 600; letter-spacing: -0.02em; }
+        .section-subtitle { font-size: 0.9375rem; color: var(--text-muted); margin-top: 2px; }
+
+        /* Steps within section */
+        .steps-list { display: flex; flex-direction: column; gap: 20px; }
+        .step-item { display: flex; gap: 16px; align-items: flex-start; }
+        .step-dot { width: 28px; height: 28px; border-radius: 50%; background: rgba(41,168,241,0.1); border: 1px solid rgba(41,168,241,0.25); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+        .step-content { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.65; }
+        .step-content strong { color: var(--text); }
+
+        /* Info box */
+        .info-box { background: rgba(41,168,241,0.06); border: 1px solid rgba(41,168,241,0.15); border-radius: 10px; padding: 18px 20px; margin: 24px 0; font-size: 0.9rem; color: var(--text-secondary); line-height: 1.65; }
+        .info-box strong { color: var(--text); }
+
+        /* Plan cards */
+        .plan-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
+        .plan-card { border-radius: 10px; padding: 20px; border: 1px solid var(--border); }
+        .plan-card.starter { background: rgba(20,112,168,0.08); border-color: rgba(20,112,168,0.2); }
+        .plan-card.pro { background: rgba(41,168,241,0.06); border-color: rgba(41,168,241,0.2); }
+        .plan-card-title { font-size: 0.9375rem; font-weight: 600; margin-bottom: 10px; color: var(--text); }
+        .plan-card ul { list-style: none; padding: 0; }
+        .plan-card li { font-size: 0.875rem; color: var(--text-secondary); padding: 4px 0; display: flex; gap: 8px; }
+        .plan-card li::before { content: '→'; color: var(--accent); flex-shrink: 0; }
+
+        /* Screenshot placeholder */
+        .img-placeholder { background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.1); border-radius: 10px; padding: 48px 32px; text-align: center; color: var(--text-muted); font-size: 0.875rem; margin: 24px 0; }
+
+        /* Resource links */
+        .resource-links { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
+        .resource-link { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); transition: all 0.2s; }
+        .resource-link:hover { border-color: var(--accent); background: rgba(41,168,241,0.05); }
+        .resource-link-text { font-size: 0.9375rem; font-weight: 500; }
+        .resource-link-sub { font-size: 0.8125rem; color: var(--text-muted); margin-top: 2px; }
+        .resource-link-arrow { color: var(--accent); font-size: 1.1rem; flex-shrink: 0; }
+
+        /* CTA */
+        .cta-box { background: var(--surface); border: 1px solid rgba(41,168,241,0.2); border-radius: 16px; padding: 40px; text-align: center; margin: 48px 0; position: relative; overflow: hidden; }
+        .cta-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #29A8F1, #EC4899); }
+        .cta-box h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 12px; }
+        .cta-box p { color: var(--text-secondary); margin-bottom: 24px; font-size: 0.9375rem; }
+        .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-size: 0.9375rem; font-weight: 600; text-decoration: none; transition: all 0.2s; cursor: pointer; }
+        .btn-primary { background: var(--accent); color: #000; border: none; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(41,168,241,0.4); }
+
+        footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; margin-top: 40px; }
+        .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 16px; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent); }
+        .copyright { color: var(--text-muted); font-size: 0.875rem; }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .nav-inner { padding: 0 20px; }
+            .overview { grid-template-columns: 1fr; }
+            .plan-cards { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+    <nav id="nav">
+        <div class="nav-inner">
+            <a href="../../" class="logo">
+                <img src="../../logo.png" alt="Trendline Project">
+                <span>Trendline Project</span>
+            </a>
+            <div style="display: flex; gap: 12px; align-items: center;">
+                <a href="https://discord.gg/hZp4NsjpwT" target="_blank" rel="noopener noreferrer" aria-label="Discord" style="color: var(--text-muted); transition: color 0.2s; display: flex;" onmouseover="this.style.color='#29A8F1'" onmouseout="this.style.color='var(--text-muted)'">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                </a>
+                <a href="https://www.youtube.com/@TrendlineProject" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="color: var(--text-muted); transition: color 0.2s; display: flex;" onmouseover="this.style.color='#29A8F1'" onmouseout="this.style.color='var(--text-muted)'">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+                <a href="https://www.tradingview.com/u/TrendlineProject/" target="_blank" rel="noopener noreferrer" aria-label="TradingView" style="color: var(--text-muted); transition: color 0.2s; display: flex;" onmouseover="this.style.color='#29A8F1'" onmouseout="this.style.color='var(--text-muted)'">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;fill:currentColor;"><path d="M15.8654 8.2789c0 1.3541-1.0978 2.4519-2.452 2.4519-1.354 0-2.4519-1.0978-2.4519-2.452 0-1.354 1.0978-2.4518 2.452-2.4518 1.3541 0 2.4519 1.0977 2.4519 2.4519zM9.75 6H0v4.9038h4.8462v7.2692H9.75Zm8.5962 0H24l-5.1058 12.173h-5.6538z"/></svg>
+                </a>
+            </div>
+            <div class="nav-right">
+                <a href="../../resources/">Resources</a>
+                <a href="../../#pricing" class="btn-nav">Get Access</a>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="page-header">
+            <div class="breadcrumb">
+                <a href="../../">Home</a>
+                <span>›</span>
+                <a href="../../resources/">Resources</a>
+                <span>›</span>
+                <span style="color: var(--text-secondary);">Setup Guide</span>
+            </div>
+            <h1>Setup Guide —<br><span class="accent-text">Quantum Ribbon</span></h1>
+            <p class="page-subtitle">Everything you need to go from purchase to your first trade — step by step.</p>
+        </div>
+
+        <!-- Overview -->
+        <div class="overview">
+            <div class="overview-step">
+                <div class="overview-num">1</div>
+                <div class="overview-label">Choose your plan</div>
+            </div>
+            <div class="overview-step">
+                <div class="overview-num">2</div>
+                <div class="overview-label">Submit your TradingView username</div>
+            </div>
+            <div class="overview-step">
+                <div class="overview-num">3</div>
+                <div class="overview-label">Access your tools & start trading</div>
+            </div>
+        </div>
+
+        <!-- STEP 1: Choose a plan -->
+        <div class="guide-section">
+            <div class="section-header">
+                <div class="section-num">1</div>
+                <div>
+                    <div class="section-title">Choose your plan</div>
+                    <div class="section-subtitle">Starter for beginners. Pro for the complete toolkit.</div>
+                </div>
+            </div>
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-dot">→</div>
+                    <div class="step-content">Go to the <a href="../../#pricing" style="color: var(--accent); text-decoration: none;">pricing section</a> and choose between <strong>QR Starter</strong> or <strong>QR Pro</strong>.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-dot">→</div>
+                    <div class="step-content">Click the plan button — you'll be taken to a secure checkout page powered by LemonSqueezy.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-dot">→</div>
+                    <div class="step-content">Complete your payment. You'll receive a receipt by email immediately after.</div>
+                </div>
+            </div>
+
+            <div class="plan-cards">
+                <div class="plan-card starter">
+                    <div class="plan-card-title">QR Starter — 2 tools</div>
+                    <ul>
+                        <li>QR Starter indicator</li>
+                        <li>QR Starter Backtester</li>
+                    </ul>
+                </div>
+                <div class="plan-card pro">
+                    <div class="plan-card-title">QR Pro — 4 tools</div>
+                    <ul>
+                        <li>QR Pro indicator</li>
+                        <li>TP RSI Pro</li>
+                        <li>Scanner</li>
+                        <li>QR Pro Backtester</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+        <!-- STEP 2: Submit username -->
+        <div class="guide-section">
+            <div class="section-header">
+                <div class="section-num">2</div>
+                <div>
+                    <div class="section-title">Submit your TradingView username</div>
+                    <div class="section-subtitle">This is how we grant you access to your tools.</div>
+                </div>
+            </div>
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-dot">1</div>
+                    <div class="step-content">After purchase, a confirmation will appear with a <strong>"Get Access Here"</strong> button — click it.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-dot">2</div>
+                    <div class="step-content">You'll land on our setup page. Enter your <strong>TradingView username</strong> and the email you used at checkout.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-dot">3</div>
+                    <div class="step-content">Hit <strong>Submit</strong> — that's it. We'll activate your access shortly. You'll also receive a confirmation email where you can access your order.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- STEP 3: Access on TradingView -->
+        <div class="guide-section">
+            <div class="section-header">
+                <div class="section-num">3</div>
+                <div>
+                    <div class="section-title">Access your tools on TradingView</div>
+                    <div class="section-subtitle">Once we've activated your access, here's where to find your tools.</div>
+                </div>
+            </div>
+            <div class="steps-list">
+                <div class="step-item">
+                    <div class="step-dot">1</div>
+                    <div class="step-content">Open <strong>TradingView</strong> and go to any chart.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-dot">2</div>
+                    <div class="step-content">Click the <strong>Indicators</strong> button at the top of the chart.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-dot">3</div>
+                    <div class="step-content">Select the <strong>Invite-Only Scripts</strong> tab on the left side of the panel.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-dot">4</div>
+                    <div class="step-content">Your tools will appear here. Click any of them to <strong>add to your chart</strong>.</div>
+                </div>
+                <div class="step-item">
+                    <div class="step-dot">5</div>
+                    <div class="step-content">If you don't see them yet — <strong>refresh TradingView</strong> or wait a moment and check again. Access is usually activated within a few hours of submitting your username.</div>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- STEP 4: Next steps -->
+        <div class="guide-section">
+            <div class="section-header">
+                <div class="section-num">4</div>
+                <div>
+                    <div class="section-title">Learn your tools</div>
+                    <div class="section-subtitle">Full guides for every indicator and tool in the system.</div>
+                </div>
+            </div>
+            <div class="resource-links">
+                <a href="../qr-starter/" class="resource-link">
+                    <div>
+                        <div class="resource-link-text">QR Starter — Full Guide</div>
+                        <div class="resource-link-sub">Every feature explained, from signals to presets</div>
+                    </div>
+                    <span class="resource-link-arrow">→</span>
+                </a>
+                <a href="../qr-starter-backtester/" class="resource-link">
+                    <div>
+                        <div class="resource-link-text">QR Starter Backtester Guide</div>
+                        <div class="resource-link-sub">Test your settings before going live</div>
+                    </div>
+                    <span class="resource-link-arrow">→</span>
+                </a>
+                <a href="../quantum-ribbon-pro/" class="resource-link">
+                    <div>
+                        <div class="resource-link-text">QR Pro — Full Guide</div>
+                        <div class="resource-link-sub">The complete indicator walkthrough</div>
+                    </div>
+                    <span class="resource-link-arrow">→</span>
+                </a>
+                <a href="../backtester/" class="resource-link">
+                    <div>
+                        <div class="resource-link-text">QR Pro Backtester Guide</div>
+                        <div class="resource-link-sub">Optimise settings with historical data</div>
+                    </div>
+                    <span class="resource-link-arrow">→</span>
+                </a>
+                <a href="../scanner/" class="resource-link">
+                    <div>
+                        <div class="resource-link-text">Multi-Instrument Scanner Guide</div>
+                        <div class="resource-link-sub">Monitor 20+ markets simultaneously</div>
+                    </div>
+                    <span class="resource-link-arrow">→</span>
+                </a>
+                <a href="../tp-rsi-pro/" class="resource-link">
+                    <div>
+                        <div class="resource-link-text">TP RSI Pro Guide</div>
+                        <div class="resource-link-sub">Master momentum confirmation</div>
+                    </div>
+                    <span class="resource-link-arrow">→</span>
+                </a>
+            </div>
+        </div>
+
+        <!-- CTA -->
+        <div class="cta-box">
+            <h2>Ready to get started?</h2>
+            <p>Choose your plan and get access to your tools today.</p>
+            <a href="../../#pricing" class="btn btn-primary">View Plans</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="../../resources/">Resources</a>
+                <a href="../../privacy-policy.html">Privacy Policy</a>
+                <a href="../../terms-of-service.html">Terms of Service</a>
+                <a href="../../contact.html">Contact</a>
+            </div>
+            <p class="copyright">© 2025 Quantum Ribbon Pro. Built by Trendline Project.</p>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.getElementById('nav');
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+    </script>
+</body>
+</html>
