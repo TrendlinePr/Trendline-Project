@@ -20,226 +20,51 @@
     </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
         :root {
-            --surface: #1C1F26;
-            --surface-hover: #23262E;
-            --accent: #29A8F1;
-            --accent-subtle: rgba(41, 168, 241, 0.1);
-            --text: #F0F0F0;
-            --text-secondary: #C5CBD3;
-            --text-muted: #8B92A0;
-            --border: rgba(255, 255, 255, 0.06);
+            --surface: #1C1F26; --surface-hover: #23262E; --accent: #29A8F1;
+            --accent-subtle: rgba(41, 168, 241, 0.1); --text: #F0F0F0;
+            --text-secondary: #C5CBD3; --text-muted: #8B92A0; --border: rgba(255, 255, 255, 0.06);
         }
-
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
             background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%);
-            background-attachment: fixed;
-            color: var(--text);
-            line-height: 1.7;
+            background-attachment: fixed; color: var(--text); line-height: 1.7;
             -webkit-font-smoothing: antialiased;
         }
-
         .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
-
-        nav {
-            padding: 20px 0;
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            background: transparent;
-            z-index: 100;
-            transition: background 0.3s ease, backdrop-filter 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(28, 31, 38, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
+        nav { padding: 20px 0; position: fixed; top: 0; left: 0; right: 0; background: transparent; z-index: 100; transition: background 0.3s ease, backdrop-filter 0.3s ease; }
+        nav.scrolled { background: rgba(28, 31, 38, 0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
-
-        .logo {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
+        .logo { font-size: 1.125rem; font-weight: 600; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; }
         .logo img { width: 32px; height: 32px; }
-
-        .back-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9375rem;
-            transition: color 0.2s;
-        }
-
+        .back-link { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; }
         .back-link:hover { color: var(--accent); }
-
         .resources-header { padding: 120px 0 60px; text-align: center; }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 12px;
-            background: var(--accent-subtle);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 24px;
-        }
-
-        h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 600;
-            letter-spacing: -0.03em;
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }
-
+        .badge { display: inline-block; padding: 6px 12px; background: var(--accent-subtle); border: 1px solid var(--border); border-radius: 20px; font-size: 0.75rem; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 24px; }
+        h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.2; }
         .accent-text { color: var(--accent); }
-
-        .subtitle {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        /* Tier group label */
-        .tier-group {
-            padding: 60px 0 0;
-        }
-
-        .tier-label {
-            font-size: 0.75rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.15em;
-            color: var(--text-muted);
-            margin-bottom: 24px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-
-        .tier-label::after {
-            content: '';
-            flex: 1;
-            height: 1px;
-            background: var(--border);
-        }
-
+        .subtitle { font-size: 1.125rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto; }
+        .tier-group { padding: 60px 0 0; }
+        .tier-label { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--text-muted); margin-bottom: 24px; display: flex; align-items: center; gap: 12px; }
+        .tier-label::after { content: ''; flex: 1; height: 1px; background: var(--border); }
         .tier-label .highlight { color: var(--accent); }
-
-        .resources-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-            gap: 24px;
-            padding-bottom: 60px;
-        }
-
-        .resource-card {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 40px 32px;
-            text-align: left;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: block;
-        }
-
-        .resource-card:hover {
-            border-color: var(--accent);
-            transform: translateY(-4px);
-            background: var(--surface-hover);
-            box-shadow: 0 10px 40px rgba(41, 168, 241, 0.15);
-        }
-
-        .resource-icon {
-            width: 48px;
-            height: 48px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 20px;
-            position: relative;
-        }
-
+        .resources-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(340px, 1fr)); gap: 24px; padding-bottom: 60px; }
+        .resource-card { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 40px 32px; text-align: left; transition: all 0.3s ease; text-decoration: none; display: block; }
+        .resource-card:hover { border-color: var(--accent); transform: translateY(-4px); background: var(--surface-hover); box-shadow: 0 10px 40px rgba(41, 168, 241, 0.15); }
+        .resource-icon { width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; margin-bottom: 20px; }
         .resource-icon svg { width: 36px; height: 36px; }
-
-        .resource-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-            letter-spacing: -0.02em;
-            color: var(--text);
-        }
-
-        .resource-card p {
-            font-size: 0.9375rem;
-            color: var(--text-secondary);
-            line-height: 1.6;
-            margin-bottom: 20px;
-        }
-
-        .resource-meta {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            font-size: 0.875rem;
-            color: var(--text-muted);
-        }
-
+        .resource-card h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 12px; letter-spacing: -0.02em; color: var(--text); }
+        .resource-card p { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; margin-bottom: 20px; }
+        .resource-meta { display: flex; align-items: center; gap: 16px; font-size: 0.875rem; color: var(--text-muted); }
         .resource-meta span { display: flex; align-items: center; gap: 6px; }
-
-        .arrow {
-            color: var(--accent);
-            font-size: 1.25rem;
-            transition: transform 0.3s ease;
-        }
-
+        .arrow { color: var(--accent); font-size: 1.25rem; transition: transform 0.3s ease; }
         .resource-card:hover .arrow { transform: translateX(4px); }
-
-        footer {
-            padding: 40px 0;
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.875rem;
-            transition: color 0.2s;
-        }
-
+        footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+        .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 20px; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
         .footer-links a:hover { color: var(--accent); }
         .copyright { color: var(--text-muted); font-size: 0.875rem; }
-
-        @media (max-width: 768px) {
-            .container { padding: 0 20px; }
-            .resources-header { padding: 60px 0 40px; }
-            .resources-grid { grid-template-columns: 1fr; }
-            h1 { font-size: 2rem; }
-        }
+        @media (max-width: 768px) { .container { padding: 0 20px; } .resources-header { padding: 60px 0 40px; } .resources-grid { grid-template-columns: 1fr; } h1 { font-size: 2rem; } }
     </style>
 </head>
 <body>
@@ -266,23 +91,41 @@
     <section>
         <div class="container">
 
-            <!-- GETTING STARTED -->
+            <!-- START HERE -->
             <div class="tier-group">
                 <div class="tier-label">Start Here</div>
                 <div class="resources-grid">
-                    <a href="getting-started/" class="resource-card">
+                    <a href="setup-guide/" class="resource-card">
                         <div class="resource-icon">
                             <svg viewBox="0 0 24 24" fill="none">
-                                <defs><linearGradient id="grad0" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.8"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs>
-                                <circle cx="12" cy="12" r="10" stroke="url(#grad0)" stroke-width="2" fill="none" opacity="0.7"/>
-                                <path d="M12 8v4l3 3" stroke="url(#grad0)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-                                <path d="M8 6l1.5 1.5" stroke="url(#grad0)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                                <defs><linearGradient id="grad0a" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.8"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs>
+                                <path d="M12 2L2 7L12 12L22 7L12 2Z" stroke="url(#grad0a)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+                                <path d="M2 17L12 22L22 17" stroke="url(#grad0a)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M2 12L12 17L22 12" stroke="url(#grad0a)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
                             </svg>
                         </div>
-                        <h3>Getting Started</h3>
-                        <p>New subscriber? Start here. How to get access, find your tools on TradingView, and follow the BST workflow from your first backtest to your first trade.</p>
+                        <h3>Setup Guide</h3>
+                        <p>New here? Start with this. How to get access after purchase and find your tools on TradingView.</p>
                         <div class="resource-meta">
                             <span>Start Here</span>
+                            <span>•</span>
+                            <span>⏱️ 3 min read</span>
+                            <span style="margin-left: auto;" class="arrow">→</span>
+                        </div>
+                    </a>
+                    <a href="bst-system/" class="resource-card">
+                        <div class="resource-icon">
+                            <svg viewBox="0 0 24 24" fill="none">
+                                <defs><linearGradient id="grad0b" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.8"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs>
+                                <circle cx="12" cy="12" r="10" stroke="url(#grad0b)" stroke-width="2" fill="none" opacity="0.7"/>
+                                <path d="M12 8v4l3 3" stroke="url(#grad0b)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                <path d="M8 6l1.5 1.5" stroke="url(#grad0b)" stroke-width="2" stroke-linecap="round" opacity="0.6"/>
+                            </svg>
+                        </div>
+                        <h3>The BST System</h3>
+                        <p>QR Pro users. The complete Backtest → Scan → Trade workflow — from validating your settings to your first live trade.</p>
+                        <div class="resource-meta">
+                            <span>QR Pro</span>
                             <span>•</span>
                             <span>⏱️ 5 min read</span>
                             <span style="margin-left: auto;" class="arrow">→</span>
@@ -313,7 +156,6 @@
                             <span style="margin-left: auto;" class="arrow">→</span>
                         </div>
                     </a>
-
                     <a href="qr-starter-backtester/" class="resource-card">
                         <div class="resource-icon">
                             <svg viewBox="0 0 24 24" fill="none">
@@ -358,7 +200,6 @@
                             <span style="margin-left: auto;" class="arrow">→</span>
                         </div>
                     </a>
-
                     <a href="backtester/" class="resource-card">
                         <div class="resource-icon">
                             <svg viewBox="0 0 24 24" fill="none">
@@ -378,7 +219,6 @@
                             <span style="margin-left: auto;" class="arrow">→</span>
                         </div>
                     </a>
-
                     <a href="scanner/" class="resource-card">
                         <div class="resource-icon">
                             <svg viewBox="0 0 24 24" fill="none">
@@ -398,7 +238,6 @@
                             <span style="margin-left: auto;" class="arrow">→</span>
                         </div>
                     </a>
-
                     <a href="tp-rsi-pro/" class="resource-card">
                         <div class="resource-icon">
                             <svg viewBox="0 0 24 24" fill="none">
@@ -437,9 +276,7 @@
 
     <script>
         const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 50);
-        });
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
     </script>
 </body>
 </html>
