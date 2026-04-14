@@ -1,0 +1,498 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1C1F26">
+    <title>QR Starter Backtester - Guide & Tutorial</title>
+    
+    <meta name="description" content="Complete guide to the QR Starter Backtester. Learn how to test your settings, read performance metrics, and validate your strategy before trading live.">
+    <meta name="keywords" content="QR starter backtester, quantum ribbon backtester guide, tradingview strategy testing, backtesting guide">
+    <meta name="author" content="Trendline Project">
+    <meta name="robots" content="index, follow">
+    
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLKJNZ6GZV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RLKJNZ6GZV');
+    </script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --surface: #1C1F26;
+            --surface-hover: #23262E;
+            --accent: #29A8F1;
+            --accent-subtle: rgba(41, 168, 241, 0.1);
+            --text: #F0F0F0;
+            --text-secondary: #C5CBD3;
+            --text-muted: #8B92A0;
+            --border: rgba(255, 255, 255, 0.06);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%);
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 32px; }
+
+        nav {
+            padding: 20px 0;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: transparent;
+            z-index: 100;
+            transition: background 0.3s ease, backdrop-filter 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(28, 31, 38, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img { width: 32px; height: 32px; }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: var(--accent); }
+
+        .tutorial-header { padding: 120px 0 40px; text-align: center; }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--accent-subtle);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .accent-text { color: var(--accent); }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .content-section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-section:last-of-type { border-bottom: none; }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin: 40px 0 16px;
+            color: var(--text);
+        }
+
+        h3:first-of-type { margin-top: 0; }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-size: 1.0625rem;
+        }
+
+        ul, ol {
+            margin: 20px 0 20px 24px;
+            color: var(--text-secondary);
+        }
+
+        li { margin-bottom: 12px; padding-left: 8px; }
+
+        strong { color: var(--text); font-weight: 600; }
+
+        .info-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .info-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .info-box p { margin-bottom: 0; font-size: 0.9375rem; }
+
+        .warning-box {
+            background: rgba(236, 72, 153, 0.05);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            border-left: 3px solid #EC4899;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .warning-box h4 {
+            color: #EC4899;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .warning-box p { margin-bottom: 0; font-size: 0.9375rem; }
+
+        .toc {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 40px 0 60px;
+        }
+
+        .toc h2 { font-size: 1.5rem; margin-bottom: 20px; }
+        .toc ul { margin: 0; list-style: none; }
+        .toc li { margin-bottom: 12px; padding-left: 0; }
+
+        .toc a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: block;
+            padding: 8px 0;
+        }
+
+        .toc a:hover { color: var(--accent); }
+
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: radial-gradient(ellipse at center, rgba(41, 168, 241, 0.08) 0%, transparent 60%);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary { background: var(--accent); color: #000; border: none; }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(41, 168, 241, 0.4);
+        }
+
+        footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+        .copyright { color: var(--text-muted); font-size: 0.875rem; }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .tutorial-header { padding: 100px 0 40px; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            h3 { font-size: 1.25rem; }
+            .content-section { padding: 40px 0; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="../../" class="logo">
+                    <img src="../../logo.png" alt="Trendline Project Logo">
+                    <span>Trendline Project</span>
+                </a>
+                <a href="../" class="back-link">← Back to Resources</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="tutorial-header">
+        <div class="container">
+            <span class="badge">Backtester Guide</span>
+            <h1>QR Starter <span class="accent-text">Backtester</span></h1>
+            <p class="subtitle">Test your settings against historical data, read performance metrics, and validate your strategy before risking real capital.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#adding">Adding the Backtester</a></li>
+                <li><a href="#matching-settings">Matching Your Settings</a></li>
+                <li><a href="#running">Running a Backtest</a></li>
+                <li><a href="#metrics">Reading the Metrics</a></li>
+                <li><a href="#interpreting">Interpreting Results</a></li>
+                <li><a href="#optimising">Optimising Settings</a></li>
+                <li><a href="#common-issues">Common Issues</a></li>
+                <li><a href="#disclaimer">Risk Disclaimer</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <section class="content-section" id="introduction">
+            <h2>Introduction</h2>
+            <p>The QR Starter Backtester is a separate TradingView strategy that mirrors the exact signal logic of the QR Starter indicator. You apply the same settings to both, run the backtester against historical data, and see how those settings would have performed before using them in live trading.</p>
+            <p>This is the first step in the BST workflow — Backtest, then Trade. No guessing whether your settings will work. You find out first.</p>
+
+            <div class="info-box">
+                <h4>Backtester vs Indicator</h4>
+                <p>The Backtester is a TradingView Strategy — it shows historical trade entries and exits and calculates performance statistics. The Indicator is what you use for live signals and alerts. They share the same logic, so what you test is what you trade.</p>
+            </div>
+        </section>
+
+        <section class="content-section" id="adding">
+            <h2>Adding the Backtester</h2>
+            <p>After subscribing, both the QR Starter indicator and Backtester will be added to your TradingView account. You'll find them under <strong>Invite-Only Scripts</strong> in the Indicators menu.</p>
+            <p>To add the Backtester to a chart:</p>
+            <ol>
+                <li>Open TradingView and navigate to your chart</li>
+                <li>Click the <strong>Indicators</strong> button at the top</li>
+                <li>Go to <strong>My scripts → Invite-Only Scripts</strong></li>
+                <li>Select <strong>QR Starter Backtester</strong></li>
+            </ol>
+            <p>The strategy will load and immediately run against the visible chart history. You'll see trade markers on the chart and a Strategy Tester panel at the bottom.</p>
+
+            <div class="info-box">
+                <h4>TradingView Strategy Tester</h4>
+                <p>TradingView's built-in Strategy Tester shows the performance report for any loaded strategy. The tabs — Overview, Performance Summary, List of Trades, and Properties — give you a full breakdown of historical results.</p>
+            </div>
+        </section>
+
+        <section class="content-section" id="matching-settings">
+            <h2>Matching Your Settings</h2>
+            <p>For a backtest to be meaningful, the Backtester settings must match what you plan to use on the live indicator. Open the Backtester settings and configure the same values you use in QR Starter:</p>
+            <ul>
+                <li>Trading Style preset (or Custom with matching individual settings)</li>
+                <li>Signal Frequency</li>
+                <li>Stop Loss Method and Distance</li>
+                <li>Take Profit Target or Ribbon Exit</li>
+                <li>Partial Take-Profits (if enabled)</li>
+                <li>Break-Even settings (if enabled)</li>
+                <li>S/R Auto-Detection (if enabled)</li>
+                <li>Ribbon Bounce (if enabled)</li>
+            </ul>
+
+            <div class="warning-box">
+                <h4>Keep settings in sync</h4>
+                <p>If you change settings on the live indicator, update the Backtester to match before running new tests. Testing one configuration while trading another will give you misleading results.</p>
+            </div>
+        </section>
+
+        <section class="content-section" id="running">
+            <h2>Running a Backtest</h2>
+            <p>Once the Backtester is added and settings are matched, it runs automatically. To get meaningful data:</p>
+
+            <h3>Choose your timeframe</h3>
+            <p>Run the backtest on the same timeframe you intend to trade. A backtest on the 1-hour chart tells you nothing about how the settings perform on the 15-minute chart.</p>
+
+            <h3>Use enough history</h3>
+            <p>More data is better. Zoom out to include at least 100–200 trades if possible. A backtest with 10 trades isn't statistically meaningful — it could be luck in either direction.</p>
+
+            <h3>Check the Strategy Properties</h3>
+            <p>In the Strategy Tester, click the <strong>Properties</strong> tab and set your order size to reflect realistic position sizing. For most testing purposes, setting a fixed contract size of 1 or a fixed percentage of equity works well. If you're seeing zero trades on futures instruments, check that the initial capital and margin settings are reasonable for the instrument.</p>
+
+            <div class="info-box">
+                <h4>Futures instruments (NQ, ES, etc.)</h4>
+                <p>If you're testing on futures and seeing zero trades, go to Strategy Properties and set order size to 1 Contract, then reduce the margin requirement to 1–5%. This is a TradingView display issue, not a problem with the strategy logic.</p>
+            </div>
+        </section>
+
+        <section class="content-section" id="metrics">
+            <h2>Reading the Metrics</h2>
+            <p>The Performance Summary tab gives you the key numbers. Here's what to focus on:</p>
+
+            <h3>Net Profit</h3>
+            <p>Total profit or loss over the test period. Positive is obviously what you want, but context matters — a small positive result over a short test period is less meaningful than a consistent positive result over years of data.</p>
+
+            <h3>Win Rate</h3>
+            <p>Percentage of trades that were profitable. Win rate alone doesn't tell you much — a 30% win rate can still be highly profitable with a good R:R ratio. Look at it together with profit factor.</p>
+
+            <h3>Profit Factor</h3>
+            <p>Gross profit divided by gross loss. Above 1.0 means the strategy made more than it lost overall. A profit factor of 1.5 or higher is a solid result. Below 1.0 means it lost money overall.</p>
+
+            <h3>Max Drawdown</h3>
+            <p>The largest peak-to-trough decline during the test period. This tells you the worst losing streak you'd have experienced. A strategy that doubles your account but has an 80% drawdown along the way isn't practical for most traders.</p>
+
+            <h3>Average Trade</h3>
+            <p>Average profit or loss per trade. Should be positive. If it's negative or near zero, the settings aren't generating enough edge to cover the friction of trading.</p>
+        </section>
+
+        <section class="content-section" id="interpreting">
+            <h2>Interpreting Results</h2>
+            <p>A few principles for reading backtest results honestly:</p>
+
+            <h3>Look for consistency, not just totals</h3>
+            <p>Check the List of Trades tab and scroll through. Are winners and losers distributed throughout the period, or did the strategy make all its money in one short stretch? Consistent performance across different market conditions is more reliable than a few big wins.</p>
+
+            <h3>Trending vs ranging periods</h3>
+            <p>The ribbon system is trend-following. It will underperform during extended sideways markets and outperform during strong trends. If your backtest period was unusually trendy or unusually choppy, results may not reflect typical conditions.</p>
+
+            <h3>Don't overfit</h3>
+            <p>Adjusting settings until the backtest looks perfect is overfitting — you're optimising for historical noise, not real edge. Find settings that perform reasonably well across multiple instruments and timeframes rather than ones that look perfect on one chart.</p>
+
+            <div class="warning-box">
+                <h4>Backtest results ≠ future performance</h4>
+                <p>A strong backtest improves confidence in your settings, but it doesn't guarantee future results. Markets evolve. Use backtesting to eliminate clearly bad settings, not to predict exact future returns.</p>
+            </div>
+        </section>
+
+        <section class="content-section" id="optimising">
+            <h2>Optimising Settings</h2>
+            <p>If your initial backtest results aren't satisfactory, here's a systematic approach to improving them:</p>
+
+            <h3>Low win rate</h3>
+            <p>Try switching to Fewer Signals frequency, enabling S/R Auto-Detection, or switching to Swing stop loss. Each of these adds an additional filter that reduces total trades but tends to improve trade quality.</p>
+
+            <h3>Low profit factor</h3>
+            <p>Consider increasing your R:R target — moving from 2R to 3R reduces the win rate needed to be profitable. Alternatively, try enabling Ribbon Bounce for pullback entries which often have better initial risk-reward positioning.</p>
+
+            <h3>High drawdown</h3>
+            <p>Tighter stop distances and lower R targets reduce individual trade variance. Enabling partial take-profits with break-even protection significantly reduces how much open profit gets given back on losing trades.</p>
+
+            <h3>Too few trades</h3>
+            <p>If you're not getting enough trades for meaningful results, try More Signals frequency, a lower timeframe, or disabling optional filters like S/R detection.</p>
+        </section>
+
+        <section class="content-section" id="common-issues">
+            <h2>Common Issues</h2>
+
+            <h3>Zero trades showing</h3>
+            <p>Usually a TradingView Strategy Properties issue on margin-based instruments. Set order size to 1 Contract and reduce the margin requirement to 1–5% in Properties.</p>
+
+            <h3>Results look different from the indicator</h3>
+            <p>Check that all settings match exactly between the Backtester and the live indicator. Even small differences in stop distance or signal frequency will produce different results.</p>
+
+            <h3>Very few bars of history</h3>
+            <p>TradingView limits how many bars load by default. On lower timeframes you may need a Premium plan to access deeper history. For most backtesting purposes, the Daily or 4-hour chart gives you years of data on a free plan.</p>
+
+            <h3>Strategy shows repainting warning</h3>
+            <p>All signals fire on bar close — there is no repainting. TradingView shows this warning on many indicators by default. The backtester uses confirmed bar data only.</p>
+        </section>
+
+        <section class="content-section" id="disclaimer">
+            <h2>Risk Disclaimer</h2>
+
+            <div class="warning-box">
+                <h4>⚠️ Important: Read This Carefully</h4>
+                <p><strong>This is not financial advice.</strong> Backtesting shows historical performance only. Past results do not guarantee future returns.</p>
+            </div>
+
+            <p>Backtests are run on historical data that has already happened. The strategy had no uncertainty about what came next — real trading does. This is called look-ahead bias, and it means backtest results will almost always look better than live results.</p>
+
+            <p>Use the Backtester to eliminate clearly poor settings and build confidence in your approach. Do not use it to predict future returns or size positions based on historical win rates.</p>
+
+            <p>Always trade with risk management in place and never commit capital you cannot afford to lose.</p>
+        </section>
+
+    </div>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="margin-bottom: 16px;">Ready to Start Testing?</h2>
+            <p style="max-width: 600px; margin: 0 auto 32px; color: var(--text-secondary);">The Backtester is included with every QR Starter subscription. Test your settings before you trade them.</p>
+            <a href="../../#pricing" class="btn btn-primary">Get QR Starter</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="../../privacy-policy.html">Privacy Policy</a>
+                <a href="../../terms-of-service.html">Terms of Service</a>
+                <a href="../../cookie-policy.html">Cookie Policy</a>
+                <a href="../../contact.html">Contact</a>
+            </div>
+            <p class="copyright">© 2025 Quantum Ribbon Pro. Built by Trendline Project.</p>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>
