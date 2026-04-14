@@ -128,20 +128,17 @@
         .check-pink { color: #EC4899; font-weight: 500; }
         .dash { color: #EC4899; }
         .pricing-section { padding: 100px 0; text-align: center; position: relative; overflow: hidden; background: radial-gradient(ellipse at 20% 30%, rgba(91, 201, 245, 0.12) 0%, transparent 40%), radial-gradient(ellipse at 80% 70%, rgba(236, 72, 153, 0.12) 0%, transparent 40%); }
-        .pricing-toggle { display: flex; align-items: center; justify-content: center; gap: 8px; margin: 40px auto 48px; }
         .toggle-btn { padding: 10px 28px; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; border: 1px solid var(--border); background: transparent; color: var(--text-muted); font-family: inherit; }
         .toggle-btn.active { background: var(--accent); color: #000; border-color: var(--accent); }
-        .toggle-btn-lifetime { background: linear-gradient(135deg, rgba(41, 168, 241, 0.15), rgba(236, 72, 153, 0.15)); border: 1px solid rgba(236, 72, 153, 0.4); color: #EC4899; text-decoration: none; }
+        .toggle-btn-lifetime { background: linear-gradient(135deg, rgba(41, 168, 241, 0.15), rgba(236, 72, 153, 0.15)); border: 1px solid rgba(236, 72, 153, 0.4); color: #EC4899; }
         .toggle-btn-lifetime:hover, .toggle-btn-lifetime.active { background: linear-gradient(135deg, rgba(41, 168, 241, 0.25), rgba(236, 72, 153, 0.25)); border-color: #EC4899; color: #EC4899; }
         .pricing-card-lifetime { border-color: rgba(236, 72, 153, 0.35) !important; box-shadow: 0 0 40px rgba(236, 72, 153, 0.08) !important; }
         .pricing-card-lifetime::before { background: linear-gradient(90deg, #EC4899, #29A8F1) !important; }
         .price-amount-lifetime { color: #EC4899 !important; }
-        .lifetime-badge { background: rgba(236, 72, 153, 0.15) !important; color: #EC4899 !important; border-color: rgba(236, 72, 153, 0.35) !important; }
         .check-icon-lifetime { color: #EC4899; font-weight: 700; font-size: 1rem; flex-shrink: 0; }
         .btn-lifetime-cta { background: linear-gradient(135deg, #29A8F1, #EC4899); color: #fff; font-weight: 600; }
         .btn-lifetime-cta:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(236, 72, 153, 0.4); }
         .save-badge { background: rgba(41, 168, 241, 0.15); color: var(--accent); border: 1px solid rgba(41, 168, 241, 0.35); border-radius: 20px; font-size: 0.875rem; font-weight: 700; padding: 6px 14px; letter-spacing: 0.02em; }
-        .pricing-card-single { max-width: 480px; margin: 0 auto; }
         .pricing-card-inner { background: var(--surface); border: 1px solid rgba(41, 168, 241, 0.25); border-radius: 16px; padding: 40px 36px; text-align: left; position: relative; overflow: hidden; box-shadow: 0 0 40px rgba(41, 168, 241, 0.08); }
         .pricing-card-inner::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #29A8F1, #EC4899); }
         .price-block { margin-bottom: 24px; }
@@ -317,36 +314,18 @@
             <h2 class="section-title">The BST System: From Testing to Execution</h2>
             <p class="section-description">Stop guessing. Start trading with confidence using our complete three-step workflow.</p>
             <div class="bst-step">
-                <div class="bst-content">
-                    <div class="bst-step-label">Step 1</div>
-                    <h3 class="bst-step-title"><span class="accent-text">Backtest</span></h3>
-                    <p class="bst-step-subtitle">Test and optimize your settings before risking real money</p>
-                    <p class="bst-step-desc">Run your strategy against historical data. Adjust parameters. Find what actually works for your trading style. No more hoping your settings will perform — know before you trade.</p>
-                </div>
+                <div class="bst-content"><div class="bst-step-label">Step 1</div><h3 class="bst-step-title"><span class="accent-text">Backtest</span></h3><p class="bst-step-subtitle">Test and optimize your settings before risking real money</p><p class="bst-step-desc">Run your strategy against historical data. Adjust parameters. Find what actually works for your trading style. No more hoping your settings will perform — know before you trade.</p></div>
                 <div class="bst-video-wrapper"><div class="bst-video-clip"><video autoplay loop muted playsinline preload="auto"><source src="QR_BT.mp4" type="video/mp4"></video></div></div>
             </div>
             <div class="bst-step bst-step-reverse">
-                <div class="bst-content">
-                    <div class="bst-step-label">Step 2</div>
-                    <h3 class="bst-step-title"><span class="accent-text">Scan</span></h3>
-                    <p class="bst-step-subtitle">Find active setups across 20+ instruments instantly</p>
-                    <p class="bst-step-desc">Monitor multiple markets simultaneously. The scanner identifies high-probability setups matching your optimized settings. Never miss opportunities while manually checking charts.</p>
-                </div>
+                <div class="bst-content"><div class="bst-step-label">Step 2</div><h3 class="bst-step-title"><span class="accent-text">Scan</span></h3><p class="bst-step-subtitle">Find active setups across 20+ instruments instantly</p><p class="bst-step-desc">Monitor multiple markets simultaneously. The scanner identifies high-probability setups matching your optimized settings. Never miss opportunities while manually checking charts.</p></div>
                 <div class="bst-video-wrapper"><div class="bst-video-clip"><video autoplay loop muted playsinline preload="auto"><source src="QR_Scanner.mp4" type="video/mp4"></video></div></div>
             </div>
             <div class="bst-step">
-                <div class="bst-content">
-                    <div class="bst-step-label">Step 3</div>
-                    <h3 class="bst-step-title"><span class="accent-text">Trade</span></h3>
-                    <p class="bst-step-subtitle">Execute with confidence using proven settings</p>
-                    <p class="bst-step-desc">Your strategy is tested. Your setups are identified. Now execute with clear signals and precise entry/exit levels. Works for both manual trading and automated bot execution.</p>
-                </div>
+                <div class="bst-content"><div class="bst-step-label">Step 3</div><h3 class="bst-step-title"><span class="accent-text">Trade</span></h3><p class="bst-step-subtitle">Execute with confidence using proven settings</p><p class="bst-step-desc">Your strategy is tested. Your setups are identified. Now execute with clear signals and precise entry/exit levels. Works for both manual trading and automated bot execution.</p></div>
                 <div class="bst-video-wrapper"><div class="bst-video-clip"><video autoplay loop muted playsinline preload="auto"><source src="QR_Pro.mp4" type="video/mp4"></video></div></div>
             </div>
-            <div class="bst-cta">
-                <p class="bst-cta-label">Complete system. Professional results.</p>
-                <a href="#pricing" class="btn btn-primary">Get Started</a>
-            </div>
+            <div class="bst-cta"><p class="bst-cta-label">Complete system. Professional results.</p><a href="#pricing" class="btn btn-primary">Get Started</a></div>
         </div>
     </section>
     <section class="why-section" id="features">
@@ -355,51 +334,15 @@
             <h2 class="section-title">Built for Traders Who Demand More</h2>
             <p class="section-description">A complete trading system — from signal generation to strategy validation.</p>
             <div class="features-grid">
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.8"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><circle cx="12" cy="12" r="10" stroke="url(#grad1)" stroke-width="2" fill="none" opacity="0.6"/><circle cx="12" cy="12" r="6" stroke="url(#grad1)" stroke-width="2" fill="none" opacity="0.7"/><circle cx="12" cy="12" r="3" fill="url(#grad1)" opacity="0.9"/></svg></div>
-                    <h3>Multi-Layer Confirmation</h3>
-                    <p>TP RSI ribbon, multi-timeframe analysis, and quantum range filter. Configure multiple layers of confirmation to match your strategy.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="riskGrad" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" style="stop-color:#EC4899"/><stop offset="50%" style="stop-color:#8CA8CE"/><stop offset="100%" style="stop-color:#29A8F1"/></linearGradient></defs><rect x="4" y="14" width="4" height="6" fill="url(#riskGrad)" opacity="0.9" rx="1"/><rect x="10" y="4" width="4" height="16" fill="url(#riskGrad)" opacity="0.9" rx="1"/><rect x="16" y="10" width="4" height="10" fill="url(#riskGrad)" opacity="0.9" rx="1"/></svg></div>
-                    <h3>Professional Risk Management</h3>
-                    <p>ATR-based stops, swing detection, partial exits, and automatic break-even moves. Trade with the discipline of institutional traders.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.8"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><rect x="3" y="11" width="18" height="10" rx="2" stroke="url(#grad3)" stroke-width="2" fill="none" opacity="0.7"/><circle cx="8" cy="16" r="1.5" fill="url(#grad3)" opacity="0.9"/><circle cx="16" cy="16" r="1.5" fill="url(#grad3)" opacity="0.9"/><path d="M9 7V11M15 7V11" stroke="url(#grad3)" stroke-width="2" stroke-linecap="round" opacity="0.6"/><path d="M9 7L12 4L15 7" stroke="url(#grad3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.8"/></svg></div>
-                    <h3>Bot Integration Ready</h3>
-                    <p>Webhook-ready alerts with full JSON support. Seamlessly integrate with trading bots and automation platforms.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.9"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><rect x="11" y="2" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.85"/><rect x="17" y="5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.8" transform="rotate(45 18 6.75)"/><rect x="18.5" y="11" width="3.5" height="2" rx="0.5" fill="url(#grad4)" opacity="0.85"/><rect x="17" y="15.5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.8" transform="rotate(135 18 17.25)"/><rect x="11" y="18.5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.85"/><rect x="5" y="15.5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.8" transform="rotate(-135 6 17.25)"/><rect x="2" y="11" width="3.5" height="2" rx="0.5" fill="url(#grad4)" opacity="0.85"/><rect x="5" y="5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.8" transform="rotate(-45 6 6.75)"/><circle cx="12" cy="12" r="4.5" stroke="url(#grad4)" stroke-width="2" fill="none" opacity="0.8"/><circle cx="12" cy="12" r="2.5" fill="url(#grad4)" opacity="0.9"/></svg></div>
-                    <h3>Complete Customization</h3>
-                    <p>Adjust signal sensitivity, customize visual style, set trading hours, control alert formats. Make it work exactly how you trade.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><circle cx="12" cy="12" r="10" stroke="url(#grad5)" stroke-width="2" fill="none"/><polyline points="12 6 12 12 16 14" stroke="url(#grad5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
-                    <h3>Session Control</h3>
-                    <p>Trade only during active market hours. Set your schedule, avoid low-volume periods, disable weekend alerts automatically.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><line x1="4" y1="8" x2="20" y2="8" stroke="url(#grad6)" stroke-width="2" stroke-linecap="round"/><line x1="4" y1="16" x2="20" y2="16" stroke="url(#grad6)" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="8" r="2.5" fill="url(#grad6)" opacity="0.9"/><circle cx="15" cy="16" r="2.5" fill="url(#grad6)" opacity="0.9"/></svg></div>
-                    <h3>S/R Auto-Detection</h3>
-                    <p>Automatically identifies key support and resistance levels. Filter signals to only fire near structure — avoid buying into resistance or selling into support.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad7" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><rect x="3" y="3" width="7" height="7" rx="1" stroke="url(#grad7)" stroke-width="2" fill="none" opacity="0.7"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="url(#grad7)" stroke-width="2" fill="none" opacity="0.7"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="url(#grad7)" stroke-width="2" fill="none" opacity="0.7"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="url(#grad7)" stroke-width="2" fill="none" opacity="0.7"/></svg></div>
-                    <h3>Multi-Instrument Scanner</h3>
-                    <p>Monitor up to 20 symbols and timeframes simultaneously in a single dashboard. Spot active setups across multiple markets without switching charts.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad8" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><path d="M3 3h8v8H3z" stroke="url(#grad8)" stroke-width="2" fill="none" rx="1" opacity="0.5"/><path d="M13 3h8v8h-8z" stroke="url(#grad8)" stroke-width="2" fill="none" rx="1" opacity="0.9"/><path d="M3 13h8v8H3z" stroke="url(#grad8)" stroke-width="2" fill="none" rx="1" opacity="0.9"/><path d="M13 13h8v8h-8z" stroke="url(#grad8)" stroke-width="2" fill="none" rx="1" opacity="0.5"/></svg></div>
-                    <h3>Walk-Forward Analysis</h3>
-                    <p>Automatically splits backtest history into training and testing periods. Validate your settings on unseen data — catch overfitting before you risk real capital.</p>
-                </div>
-                <div class="feature-card">
-                    <div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad9" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><circle cx="12" cy="12" r="9" stroke="url(#grad9)" stroke-width="2" fill="none" opacity="0.7"/><line x1="12" y1="8" x2="12" y2="12" stroke="url(#grad9)" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="15.5" r="1" fill="url(#grad9)"/></svg></div>
-                    <h3>Smart Diagnostics</h3>
-                    <p>Low win rate? Weak profit factor? Get specific, actionable guidance on which settings to adjust and why — based on your actual backtest results.</p>
-                </div>
+                <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad1" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.8"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><circle cx="12" cy="12" r="10" stroke="url(#grad1)" stroke-width="2" fill="none" opacity="0.6"/><circle cx="12" cy="12" r="6" stroke="url(#grad1)" stroke-width="2" fill="none" opacity="0.7"/><circle cx="12" cy="12" r="3" fill="url(#grad1)" opacity="0.9"/></svg></div><h3>Multi-Layer Confirmation</h3><p>TP RSI ribbon, multi-timeframe analysis, and quantum range filter. Configure multiple layers of confirmation to match your strategy.</p></div>
+                <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="riskGrad" x1="0%" y1="100%" x2="0%" y2="0%"><stop offset="0%" style="stop-color:#EC4899"/><stop offset="50%" style="stop-color:#8CA8CE"/><stop offset="100%" style="stop-color:#29A8F1"/></linearGradient></defs><rect x="4" y="14" width="4" height="6" fill="url(#riskGrad)" opacity="0.9" rx="1"/><rect x="10" y="4" width="4" height="16" fill="url(#riskGrad)" opacity="0.9" rx="1"/><rect x="16" y="10" width="4" height="10" fill="url(#riskGrad)" opacity="0.9" rx="1"/></svg></div><h3>Professional Risk Management</h3><p>ATR-based stops, swing detection, partial exits, and automatic break-even moves. Trade with the discipline of institutional traders.</p></div>
+                <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad3" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.8"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><rect x="3" y="11" width="18" height="10" rx="2" stroke="url(#grad3)" stroke-width="2" fill="none" opacity="0.7"/><circle cx="8" cy="16" r="1.5" fill="url(#grad3)" opacity="0.9"/><circle cx="16" cy="16" r="1.5" fill="url(#grad3)" opacity="0.9"/><path d="M9 7V11M15 7V11" stroke="url(#grad3)" stroke-width="2" stroke-linecap="round" opacity="0.6"/><path d="M9 7L12 4L15 7" stroke="url(#grad3)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none" opacity="0.8"/></svg></div><h3>Bot Integration Ready</h3><p>Webhook-ready alerts with full JSON support. Seamlessly integrate with trading bots and automation platforms.</p></div>
+                <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad4" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="50%" style="stop-color:#8CA8CE;stop-opacity:0.9"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><rect x="11" y="2" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.85"/><rect x="17" y="5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.8" transform="rotate(45 18 6.75)"/><rect x="18.5" y="11" width="3.5" height="2" rx="0.5" fill="url(#grad4)" opacity="0.85"/><rect x="17" y="15.5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.8" transform="rotate(135 18 17.25)"/><rect x="11" y="18.5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.85"/><rect x="5" y="15.5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.8" transform="rotate(-135 6 17.25)"/><rect x="2" y="11" width="3.5" height="2" rx="0.5" fill="url(#grad4)" opacity="0.85"/><rect x="5" y="5" width="2" height="3.5" rx="0.5" fill="url(#grad4)" opacity="0.8" transform="rotate(-45 6 6.75)"/><circle cx="12" cy="12" r="4.5" stroke="url(#grad4)" stroke-width="2" fill="none" opacity="0.8"/><circle cx="12" cy="12" r="2.5" fill="url(#grad4)" opacity="0.9"/></svg></div><h3>Complete Customization</h3><p>Adjust signal sensitivity, customize visual style, set trading hours, control alert formats. Make it work exactly how you trade.</p></div>
+                <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad5" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><circle cx="12" cy="12" r="10" stroke="url(#grad5)" stroke-width="2" fill="none"/><polyline points="12 6 12 12 16 14" stroke="url(#grad5)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg></div><h3>Session Control</h3><p>Trade only during active market hours. Set your schedule, avoid low-volume periods, disable weekend alerts automatically.</p></div>
+                <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad6" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><line x1="4" y1="8" x2="20" y2="8" stroke="url(#grad6)" stroke-width="2" stroke-linecap="round"/><line x1="4" y1="16" x2="20" y2="16" stroke="url(#grad6)" stroke-width="2" stroke-linecap="round"/><circle cx="9" cy="8" r="2.5" fill="url(#grad6)" opacity="0.9"/><circle cx="15" cy="16" r="2.5" fill="url(#grad6)" opacity="0.9"/></svg></div><h3>S/R Auto-Detection</h3><p>Automatically identifies key support and resistance levels. Filter signals to only fire near structure — avoid buying into resistance or selling into support.</p></div>
+                <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad7" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><rect x="3" y="3" width="7" height="7" rx="1" stroke="url(#grad7)" stroke-width="2" fill="none" opacity="0.7"/><rect x="14" y="3" width="7" height="7" rx="1" stroke="url(#grad7)" stroke-width="2" fill="none" opacity="0.7"/><rect x="3" y="14" width="7" height="7" rx="1" stroke="url(#grad7)" stroke-width="2" fill="none" opacity="0.7"/><rect x="14" y="14" width="7" height="7" rx="1" stroke="url(#grad7)" stroke-width="2" fill="none" opacity="0.7"/></svg></div><h3>Multi-Instrument Scanner</h3><p>Monitor up to 20 symbols and timeframes simultaneously in a single dashboard. Spot active setups across multiple markets without switching charts.</p></div>
+                <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad8" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><path d="M3 3h8v8H3z" stroke="url(#grad8)" stroke-width="2" fill="none" rx="1" opacity="0.5"/><path d="M13 3h8v8h-8z" stroke="url(#grad8)" stroke-width="2" fill="none" rx="1" opacity="0.9"/><path d="M3 13h8v8H3z" stroke="url(#grad8)" stroke-width="2" fill="none" rx="1" opacity="0.9"/><path d="M13 13h8v8h-8z" stroke="url(#grad8)" stroke-width="2" fill="none" rx="1" opacity="0.5"/></svg></div><h3>Walk-Forward Analysis</h3><p>Automatically splits backtest history into training and testing periods. Validate your settings on unseen data — catch overfitting before you risk real capital.</p></div>
+                <div class="feature-card"><div class="feature-icon"><svg viewBox="0 0 24 24" fill="none"><defs><linearGradient id="grad9" x1="0%" y1="0%" x2="100%" y2="100%"><stop offset="0%" style="stop-color:#29A8F1;stop-opacity:1"/><stop offset="100%" style="stop-color:#EC4899;stop-opacity:1"/></linearGradient></defs><circle cx="12" cy="12" r="9" stroke="url(#grad9)" stroke-width="2" fill="none" opacity="0.7"/><line x1="12" y1="8" x2="12" y2="12" stroke="url(#grad9)" stroke-width="2" stroke-linecap="round"/><circle cx="12" cy="15.5" r="1" fill="url(#grad9)"/></svg></div><h3>Smart Diagnostics</h3><p>Low win rate? Weak profit factor? Get specific, actionable guidance on which settings to adjust and why — based on your actual backtest results.</p></div>
             </div>
         </div>
     </section>
@@ -432,90 +375,20 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Access</td>
-                        <td style="text-align: center;"><span style="color: #EC4899; font-weight: 500;">Free</span></td>
-                        <td style="text-align: center;"><span class="check">Paid</span></td>
-                        <td style="text-align: center;"><span class="check">Paid</span></td>
-                    </tr>
-                    <tr>
-                        <td>MA Ribbon Signals</td>
-                        <td style="text-align: center;"><span class="check-pink">✓</span> Basic</td>
-                        <td style="text-align: center;"><span class="check">✓</span> Advanced</td>
-                        <td style="text-align: center;"><span class="check">✓</span> Advanced</td>
-                    </tr>
-                    <tr>
-                        <td>Trading Style Presets</td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Ribbon Bounce Signals</td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>S/R Auto-Detection</td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Partial Take-Profits</td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Break-Even Automation</td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Session / Trading Hours Filter</td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Bot Alerts</td>
-                        <td style="text-align: center;"><span class="check-pink">✓</span> Basic</td>
-                        <td style="text-align: center;"><span class="check">✓</span> Advanced</td>
-                        <td style="text-align: center;"><span class="check">✓</span> JSON/Webhook</td>
-                    </tr>
-                    <tr>
-                        <td>Strategy Backtester</td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span> Starter BT</td>
-                        <td style="text-align: center;"><span class="check">✓</span> Pro BT</td>
-                    </tr>
-                    <tr>
-                        <td>TP RSI Confirmation</td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Multi-Timeframe Filter</td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Quantum Range Filter</td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                    </tr>
-                    <tr>
-                        <td>Multi-Instrument Scanner</td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="dash">—</span></td>
-                        <td style="text-align: center;"><span class="check">✓</span></td>
-                    </tr>
+                    <tr><td>Access</td><td style="text-align: center;"><span style="color: #EC4899; font-weight: 500;">Free</span></td><td style="text-align: center;"><span class="check">Paid</span></td><td style="text-align: center;"><span class="check">Paid</span></td></tr>
+                    <tr><td>MA Ribbon Signals</td><td style="text-align: center;"><span class="check-pink">✓</span> Basic</td><td style="text-align: center;"><span class="check">✓</span> Advanced</td><td style="text-align: center;"><span class="check">✓</span> Advanced</td></tr>
+                    <tr><td>Trading Style Presets</td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="check">✓</span></td><td style="text-align: center;"><span class="check">✓</span></td></tr>
+                    <tr><td>Ribbon Bounce Signals</td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="check">✓</span></td><td style="text-align: center;"><span class="check">✓</span></td></tr>
+                    <tr><td>S/R Auto-Detection</td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="check">✓</span></td><td style="text-align: center;"><span class="check">✓</span></td></tr>
+                    <tr><td>Partial Take-Profits</td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="check">✓</span></td><td style="text-align: center;"><span class="check">✓</span></td></tr>
+                    <tr><td>Break-Even Automation</td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="check">✓</span></td><td style="text-align: center;"><span class="check">✓</span></td></tr>
+                    <tr><td>Session / Trading Hours Filter</td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="check">✓</span></td></tr>
+                    <tr><td>Bot Alerts</td><td style="text-align: center;"><span class="check-pink">✓</span> Basic</td><td style="text-align: center;"><span class="check">✓</span> Advanced</td><td style="text-align: center;"><span class="check">✓</span> JSON/Webhook</td></tr>
+                    <tr><td>Strategy Backtester</td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="check">✓</span> Starter BT</td><td style="text-align: center;"><span class="check">✓</span> Pro BT</td></tr>
+                    <tr><td>TP RSI Confirmation</td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="check">✓</span></td></tr>
+                    <tr><td>Multi-Timeframe Filter</td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="check">✓</span></td></tr>
+                    <tr><td>Quantum Range Filter</td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="check">✓</span></td></tr>
+                    <tr><td>Multi-Instrument Scanner</td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="dash">—</span></td><td style="text-align: center;"><span class="check">✓</span></td></tr>
                 </tbody>
             </table>
         </div>
@@ -559,161 +432,45 @@
         @media (max-width: 768px) { .tp-rsi-inner { grid-template-columns: 1fr; gap: 32px; } }
     </style>
     <style>
-        /* ── Pricing two-column layout ── */
-        .pricing-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 24px;
-            max-width: 960px;
-            margin: 0 auto;
-        }
-        .pricing-grid.single {
-            grid-template-columns: 1fr;
-            max-width: 480px;
-        }
-
-        /* Starter card — inverted: light surface, dark text */
-        .pricing-card-starter {
-            background: #E8EDF2;
-            border: 1px solid rgba(0, 0, 0, 0.08);
-            border-radius: 16px;
-            padding: 36px 32px;
-            text-align: left;
-            position: relative;
-            overflow: hidden;
-        }
-        .pricing-card-starter::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #29A8F1, #EC4899);
-        }
-        .pricing-card-starter .card-tier-label-starter {
-            color: #1C1F26;
-        }
-        .pricing-card-starter .price-amount-starter {
-            color: #1470A8;
-        }
-        .pricing-card-starter .price-period {
-            color: #4A5568;
-        }
-        .pricing-card-starter .price-sub {
-            color: #6B7280;
-        }
-        .pricing-card-starter .pricing-divider {
-            background: rgba(0, 0, 0, 0.1);
-        }
-        .pricing-card-starter .features-list-new li {
-            color: #2D3748;
-            border-bottom-color: rgba(0, 0, 0, 0.08);
-        }
-        .pricing-card-starter .card-subtitle {
-            color: #6B7280;
-        }
-        .price-amount-starter {
-            font-size: 3.5rem;
-            font-weight: 700;
-            letter-spacing: -0.04em;
-        }
-        .check-icon-starter {
-            color: #1470A8;
-            font-weight: 700;
-            font-size: 1rem;
-            flex-shrink: 0;
-        }
-        .btn-starter-cta {
-            background: #1470A8;
-            color: #fff;
-            border: none;
-        }
-        .btn-starter-cta:hover {
-            background: #29A8F1;
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(41, 168, 241, 0.4);
-        }
-
-        /* Pro card — full intensity, elevated */
-        .pricing-card-pro {
-            background: var(--surface);
-            border: 1px solid rgba(41, 168, 241, 0.3);
-            border-radius: 16px;
-            padding: 36px 32px;
-            text-align: left;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 0 50px rgba(41, 168, 241, 0.1);
-        }
-        .pricing-card-pro::before {
-            content: '';
-            position: absolute;
-            top: 0; left: 0; right: 0;
-            height: 2px;
-            background: linear-gradient(90deg, #29A8F1, #EC4899);
-        }
-
-        /* Recommended badge */
-        .recommended-badge {
-            position: absolute;
-            top: 16px; right: 16px;
-            background: rgba(41, 168, 241, 0.15);
-            border: 1px solid rgba(41, 168, 241, 0.35);
-            color: var(--accent);
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            letter-spacing: 0.08em;
-            padding: 4px 10px;
-            border-radius: 20px;
-        }
-
-        /* Card tier label */
-        .card-tier-label {
-            font-size: 1.375rem;
-            font-weight: 700;
-            letter-spacing: -0.02em;
-            color: var(--text);
-            margin-bottom: 20px;
-        }
-        .card-tier-label-starter {
-            color: #1C1F26;
-        }
-        .card-tier-label-pro {
-            color: var(--text);
-        }
-
-        @media (max-width: 768px) {
-            .pricing-grid { grid-template-columns: 1fr; max-width: 480px; }
-            .setup-grid { grid-template-columns: 1fr !important; gap: 40px !important; }
-            .setup-card { padding: 36px 24px !important; }
-        }
+        .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 960px; margin: 0 auto; }
+        .pricing-card-starter { background: #E8EDF2; border: 1px solid rgba(0,0,0,0.08); border-radius: 16px; padding: 36px 32px; text-align: left; position: relative; overflow: hidden; align-self: start; }
+        .pricing-card-starter::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #29A8F1, #EC4899); }
+        .pricing-card-starter .card-tier-label-starter { color: #1C1F26; }
+        .pricing-card-starter .price-amount-starter { color: #1470A8; }
+        .pricing-card-starter .price-period { color: #4A5568; }
+        .pricing-card-starter .price-sub { color: #6B7280; }
+        .pricing-card-starter .pricing-divider { background: rgba(0,0,0,0.1); }
+        .pricing-card-starter .features-list-new li { color: #2D3748; border-bottom-color: rgba(0,0,0,0.08); }
+        .pricing-card-starter .card-subtitle { color: #6B7280; }
+        .price-amount-starter { font-size: 3.5rem; font-weight: 700; letter-spacing: -0.04em; }
+        .check-icon-starter { color: #1470A8; font-weight: 700; font-size: 1rem; flex-shrink: 0; }
+        .btn-starter-cta { background: #1470A8; color: #fff; border: none; }
+        .btn-starter-cta:hover { background: #29A8F1; transform: translateY(-2px); box-shadow: 0 0 25px rgba(41,168,241,0.4); }
+        .pricing-card-pro { background: var(--surface); border: 1px solid rgba(41,168,241,0.3); border-radius: 16px; padding: 36px 32px; text-align: left; position: relative; overflow: hidden; box-shadow: 0 0 50px rgba(41,168,241,0.1); }
+        .pricing-card-pro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #29A8F1, #EC4899); }
+        .recommended-badge { position: absolute; top: 16px; right: 16px; background: rgba(41,168,241,0.15); border: 1px solid rgba(41,168,241,0.35); color: var(--accent); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 20px; }
+        .card-tier-label { font-size: 1.375rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin-bottom: 20px; }
+        .card-tier-label-starter { color: #1C1F26; }
+        .card-tier-label-pro { color: var(--text); }
+        @media (max-width: 768px) { .pricing-grid { grid-template-columns: 1fr; max-width: 480px; } .setup-grid { grid-template-columns: 1fr !important; gap: 40px !important; } .setup-card { padding: 36px 24px !important; } }
     </style>
-
     <section class="pricing-section" id="pricing">
         <div class="container">
             <div class="section-label">Pricing</div>
             <h2 class="section-title">Choose Your Plan</h2>
             <p class="section-description">Start with Starter, grow into Pro — or go all-in from day one.</p>
-
-            <!-- TWO-CARD GRID (Starter + Pro) -->
             <div class="pricing-grid" id="pricing-grid">
-
-                <!-- ── STARTER CARD ── -->
+                <!-- STARTER CARD -->
                 <div class="pricing-card-starter" style="margin-top: 52px; align-self: start;">
                     <div style="margin-bottom: 20px;">
                         <div class="card-tier-label card-tier-label-starter">QR Starter</div>
-                        <div class="card-subtitle" style="font-size: 0.8125rem; margin-top: -12px;">Essential ribbon trading, simplified</div>
-                        <div style="margin-top: 10px;">
-                            <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(20, 112, 168, 0.12); border: 1px solid rgba(20, 112, 168, 0.3); border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #1470A8;">
-                                <span style="font-size: 0.9rem;">⬡</span> 2 tools included
-                            </span>
+                        <div class="card-subtitle" style="font-size: 0.8125rem; margin-top: -12px;">Beginner-optimised, with presets and simplified controls</div>
+                        <div style="margin-top: 8px;">
+                            <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(20,112,168,0.12); border: 1px solid rgba(20,112,168,0.3); border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #1470A8;"><span style="font-size: 0.9rem;">⬡</span> 2 tools included</span>
                         </div>
                     </div>
                     <div class="price-block">
-                        <div style="margin-bottom: 6px;">
-                            <span class="price-amount-starter">$69</span>
-                            <span class="price-period">/month</span>
-                        </div>
+                        <div style="margin-bottom: 6px;"><span class="price-amount-starter">$69</span><span class="price-period">/month</span></div>
                         <p class="price-sub">Billed monthly · Cancel anytime</p>
                     </div>
                     <div class="pricing-divider"></div>
@@ -728,154 +485,124 @@
                     </ul>
                     <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/7707f0d9-a4f5-4531-9dce-e3288e004ed0" class="btn pricing-cta-btn btn-starter-cta">Get Starter</a>
                 </div>
-
-                <!-- ── PRO COLUMN (toggle + card, wrapper always visible) ── -->
+                <!-- PRO COLUMN -->
                 <div>
-                    <!-- Billing toggle — always visible, scoped above Pro card -->
                     <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;">
                         <button class="toggle-btn" id="btn-monthly" onclick="setPricing('monthly')" style="padding: 7px 18px; font-size: 0.875rem;">Monthly</button>
                         <button class="toggle-btn active" id="btn-annual" onclick="setPricing('annual')" style="padding: 7px 18px; font-size: 0.875rem;">Annual</button>
                         <button class="toggle-btn toggle-btn-lifetime" id="btn-lifetime" onclick="setPricing('lifetime')" style="padding: 7px 18px; font-size: 0.875rem;">Lifetime</button>
                     </div>
-
-                <!-- ── PRO CARD ── -->
-                <div class="pricing-card-pro" id="card-pro">
-                    <span class="recommended-badge">Recommended</span>
-                    <div style="margin-bottom: 20px;">
-                        <div class="card-tier-label card-tier-label-pro">QR Pro</div>
-                        <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: -12px;">Complete professional system</div>
-                        <div style="margin-top: 10px;">
-                            <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(41, 168, 241, 0.12); border: 1px solid rgba(41, 168, 241, 0.3); border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #29A8F1;">
-                                <span style="font-size: 0.9rem;">⬡</span> 4 tools included
-                            </span>
-                        </div>
-                    </div>
-                    <div id="annual-promo-strip" style="display:none; margin-bottom: 20px; border-radius: 10px; padding: 12px 16px; background: linear-gradient(135deg, rgba(41,168,241,0.12) 0%, rgba(236,72,153,0.12) 100%); border: 1px solid rgba(41,168,241,0.25);">
-                        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-                            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                                <span style="background:rgba(236,72,153,0.15); border:1px solid rgba(236,72,153,0.3); color:#EC4899; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; padding:3px 8px; border-radius:20px; white-space:nowrap;">Limited Time</span>
-                                <span style="font-size:0.875rem; color:var(--text);"><strong>20% off Annual — <span style="text-decoration:line-through; opacity:0.5;">$708</span> $564/yr</strong></span>
-                            </div>
-                            <div style="display:flex; align-items:center; gap:6px; font-size:0.8rem; color:var(--accent); font-weight:700; font-variant-numeric:tabular-nums;">
-                                <span id="acd-days">00</span><span style="opacity:0.5;">d</span>
-                                <span style="opacity:0.4;">:</span>
-                                <span id="acd-hours">00</span><span style="opacity:0.5;">h</span>
-                                <span style="opacity:0.4;">:</span>
-                                <span id="acd-mins">00</span><span style="opacity:0.5;">m</span>
-                                <span style="opacity:0.4;">:</span>
-                                <span id="acd-secs">00</span><span style="opacity:0.5;">s</span>
+                    <!-- PRO CARD -->
+                    <div class="pricing-card-pro" id="card-pro">
+                        <span class="recommended-badge">Recommended</span>
+                        <div style="margin-bottom: 20px;">
+                            <div class="card-tier-label card-tier-label-pro">QR Pro</div>
+                            <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: -12px;">The complete system — everything Starter has, plus more</div>
+                            <div style="margin-top: 10px;">
+                                <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(41,168,241,0.12); border: 1px solid rgba(41,168,241,0.3); border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #29A8F1;"><span style="font-size: 0.9rem;">⬡</span> 4 tools included</span>
                             </div>
                         </div>
-                    </div>
-
-                    <!-- Monthly promo strip -->
-                    <div id="monthly-promo-strip" style="display:none; margin-bottom: 20px; border-radius: 10px; padding: 12px 16px; background: linear-gradient(135deg, rgba(41,168,241,0.12) 0%, rgba(236,72,153,0.12) 100%); border: 1px solid rgba(41,168,241,0.25);">
-                        <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-                            <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                                <span style="background:rgba(236,72,153,0.15); border:1px solid rgba(236,72,153,0.3); color:#EC4899; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; padding:3px 8px; border-radius:20px; white-space:nowrap;">Limited Time</span>
-                                <span style="font-size:0.875rem; color:var(--text);"><strong>10% off Monthly — <span style="text-decoration:line-through; opacity:0.5;">$99</span> $89/mo</strong></span>
-                            </div>
-                            <div style="display:flex; align-items:center; gap:6px; font-size:0.8rem; color:var(--accent); font-weight:700; font-variant-numeric:tabular-nums;">
-                                <span id="mcd-days">00</span><span style="opacity:0.5;">d</span>
-                                <span style="opacity:0.4;">:</span>
-                                <span id="mcd-hours">00</span><span style="opacity:0.5;">h</span>
-                                <span style="opacity:0.4;">:</span>
-                                <span id="mcd-mins">00</span><span style="opacity:0.5;">m</span>
-                                <span style="opacity:0.4;">:</span>
-                                <span id="mcd-secs">00</span><span style="opacity:0.5;">s</span>
+                        <div id="annual-promo-strip" style="display:none; margin-bottom: 20px; border-radius: 10px; padding: 12px 16px; background: linear-gradient(135deg, rgba(41,168,241,0.12) 0%, rgba(236,72,153,0.12) 100%); border: 1px solid rgba(41,168,241,0.25);">
+                            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                                    <span style="background:rgba(236,72,153,0.15); border:1px solid rgba(236,72,153,0.3); color:#EC4899; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; padding:3px 8px; border-radius:20px; white-space:nowrap;">Limited Time</span>
+                                    <span style="font-size:0.875rem; color:var(--text);"><strong>20% off Annual — <span style="text-decoration:line-through; opacity:0.5;">$708</span> $564/yr</strong></span>
+                                </div>
+                                <div style="display:flex; align-items:center; gap:6px; font-size:0.8rem; color:var(--accent); font-weight:700; font-variant-numeric:tabular-nums;">
+                                    <span id="acd-days">00</span><span style="opacity:0.5;">d</span><span style="opacity:0.4;">:</span><span id="acd-hours">00</span><span style="opacity:0.5;">h</span><span style="opacity:0.4;">:</span><span id="acd-mins">00</span><span style="opacity:0.5;">m</span><span style="opacity:0.4;">:</span><span id="acd-secs">00</span><span style="opacity:0.5;">s</span>
+                                </div>
                             </div>
                         </div>
-                    </div>
-
-                    <div class="price-block">
-                        <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px;">
-                            <div>
-                                <span id="price-original" style="display:none; font-size:1.5rem; text-decoration:line-through; opacity:0.45; color:var(--text-secondary); margin-right:6px; vertical-align:middle;"></span><span class="price-amount" id="price-amount">$59</span>
-                                <span class="price-period">/month</span>
-                            </div>
-                            <span class="save-badge" id="save-badge">Save 40%</span>
-                        </div>
-                        <p class="price-sub" id="price-sub">$708 billed annually</p>
-                    </div>
-                    <div class="pricing-divider"></div>
-                    <ul class="features-list-new" style="margin-bottom: 28px;">
-                        <li><span class="check-icon">✓</span> Quantum Ribbon Pro indicator</li>
-                        <li><span class="check-icon">✓</span> TP RSI Pro indicator <span class="new-badge">New</span></li>
-                        <li><span class="check-icon">✓</span> QR Pro Multi-Instrument Scanner</li>
-                        <li><span class="check-icon">✓</span> QR Pro Backtester</li>
-                        <li><span class="check-icon">✓</span> Bot-ready alerts</li>
-                        <li><span class="check-icon">✓</span> Setup guides & resources</li>
-                        <li><span class="check-icon">✓</span> Discord community access</li>
-                        <li><span class="check-icon">✓</span> Free updates</li>
-                    </ul>
-                    <a id="pricing-cta" href="https://trendlineproject.lemonsqueezy.com/checkout/buy/910d7802-ed89-4def-b04a-a1c0b9a7739c" class="btn btn-primary pricing-cta-btn">Get Pro</a>
-                </div>
-                <!-- LIFETIME CARD (replaces Pro card in grid when Lifetime selected) -->
-                <div class="pricing-card-inner pricing-card-lifetime" id="card-lifetime" style="display: none; border-radius: 16px; padding: 36px 32px;">
-                    <div style="margin-bottom: 20px;">
-                        <div class="card-tier-label card-tier-label-pro">QR Pro</div>
-                        <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: -12px;">Complete professional system — one-time</div>
-                        <div style="margin-top: 10px;">
-                            <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(41, 168, 241, 0.12); border: 1px solid rgba(41, 168, 241, 0.3); border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #29A8F1;">
-                                <span style="font-size: 0.9rem;">⬡</span> 4 tools included
-                            </span>
-                        </div>
-                    </div>
-                    <div class="price-block">
-                        <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
-                            <div>
-                                <span class="price-amount price-amount-lifetime" style="background: linear-gradient(135deg, #29A8F1, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">$899</span>
-                                <span class="price-period"> one-time</span>
+                        <div id="monthly-promo-strip" style="display:none; margin-bottom: 20px; border-radius: 10px; padding: 12px 16px; background: linear-gradient(135deg, rgba(41,168,241,0.12) 0%, rgba(236,72,153,0.12) 100%); border: 1px solid rgba(41,168,241,0.25);">
+                            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                                    <span style="background:rgba(236,72,153,0.15); border:1px solid rgba(236,72,153,0.3); color:#EC4899; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; padding:3px 8px; border-radius:20px; white-space:nowrap;">Limited Time</span>
+                                    <span style="font-size:0.875rem; color:var(--text);"><strong>10% off Monthly — <span style="text-decoration:line-through; opacity:0.5;">$99</span> $89/mo</strong></span>
+                                </div>
+                                <div style="display:flex; align-items:center; gap:6px; font-size:0.8rem; color:var(--accent); font-weight:700; font-variant-numeric:tabular-nums;">
+                                    <span id="mcd-days">00</span><span style="opacity:0.5;">d</span><span style="opacity:0.4;">:</span><span id="mcd-hours">00</span><span style="opacity:0.5;">h</span><span style="opacity:0.4;">:</span><span id="mcd-mins">00</span><span style="opacity:0.5;">m</span><span style="opacity:0.4;">:</span><span id="mcd-secs">00</span><span style="opacity:0.5;">s</span>
+                                </div>
                             </div>
                         </div>
-                        <p class="price-sub">Access for as long as the product exists. No recurring charges.</p>
+                        <div class="price-block">
+                            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px;">
+                                <div><span id="price-original" style="display:none; font-size:1.5rem; text-decoration:line-through; opacity:0.45; color:var(--text-secondary); margin-right:6px; vertical-align:middle;"></span><span class="price-amount" id="price-amount">$59</span><span class="price-period">/month</span></div>
+                                <span class="save-badge" id="save-badge">Save 40%</span>
+                            </div>
+                            <p class="price-sub" id="price-sub">$708 billed annually</p>
+                        </div>
+                        <div class="pricing-divider"></div>
+                        <ul class="features-list-new" style="margin-bottom: 28px;">
+                            <li><span class="check-icon">✓</span> Quantum Ribbon Pro indicator</li>
+                            <li><span class="check-icon">✓</span> TP RSI Pro indicator <span class="new-badge">New</span></li>
+                            <li><span class="check-icon">✓</span> QR Pro Multi-Instrument Scanner</li>
+                            <li><span class="check-icon">✓</span> QR Pro Backtester</li>
+                            <li><span class="check-icon">✓</span> Bot-ready alerts</li>
+                            <li><span class="check-icon">✓</span> Setup guides & resources</li>
+                            <li><span class="check-icon">✓</span> Discord community access</li>
+                            <li><span class="check-icon">✓</span> Free updates</li>
+                        </ul>
+                        <a id="pricing-cta" href="https://trendlineproject.lemonsqueezy.com/checkout/buy/910d7802-ed89-4def-b04a-a1c0b9a7739c" class="btn btn-primary pricing-cta-btn">Get Pro</a>
                     </div>
-                    <div class="pricing-divider"></div>
-                    <ul class="features-list-new" style="margin-bottom: 28px;">
-                        <li><span class="check-icon-lifetime">✓</span> Quantum Ribbon Pro indicator</li>
-                        <li><span class="check-icon-lifetime">✓</span> TP RSI Pro indicator <span class="new-badge">New</span></li>
-                        <li><span class="check-icon-lifetime">✓</span> QR Pro Multi-Instrument Scanner</li>
-                        <li><span class="check-icon-lifetime">✓</span> QR Pro Backtester</li>
-                        <li><span class="check-icon-lifetime">✓</span> Bot-ready alerts</li>
-                        <li><span class="check-icon-lifetime">✓</span> Setup guides & resources</li>
-                        <li><span class="check-icon-lifetime">✓</span> Discord community access</li>
-                        <li><span class="check-icon-lifetime">✓</span> Free updates</li>
-                    </ul>
-                    <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/76fcac28-443c-49db-b0f7-4aaf882415b7" class="btn pricing-cta-btn btn-lifetime-cta">Get Lifetime Access</a>
-                </div>
-                </div><!-- end pro column wrapper -->
-
+                    <!-- LIFETIME CARD -->
+                    <div class="pricing-card-inner pricing-card-lifetime" id="card-lifetime" style="display: none; border-radius: 16px; padding: 36px 32px;">
+                        <div style="margin-bottom: 20px;">
+                            <div class="card-tier-label card-tier-label-pro">QR Pro</div>
+                            <div style="font-size: 0.8125rem; color: var(--text-muted); margin-top: -12px;">Complete professional system — one-time</div>
+                            <div style="margin-top: 10px;">
+                                <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(41,168,241,0.12); border: 1px solid rgba(41,168,241,0.3); border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #29A8F1;"><span style="font-size: 0.9rem;">⬡</span> 4 tools included</span>
+                            </div>
+                        </div>
+                        <div class="price-block">
+                            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
+                                <div><span class="price-amount price-amount-lifetime" style="background: linear-gradient(135deg, #29A8F1, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">$899</span><span class="price-period"> one-time</span></div>
+                            </div>
+                            <p class="price-sub">Access for as long as the product exists. No recurring charges.</p>
+                        </div>
+                        <div class="pricing-divider"></div>
+                        <ul class="features-list-new" style="margin-bottom: 28px;">
+                            <li><span class="check-icon-lifetime">✓</span> Quantum Ribbon Pro indicator</li>
+                            <li><span class="check-icon-lifetime">✓</span> TP RSI Pro indicator <span class="new-badge">New</span></li>
+                            <li><span class="check-icon-lifetime">✓</span> QR Pro Multi-Instrument Scanner</li>
+                            <li><span class="check-icon-lifetime">✓</span> QR Pro Backtester</li>
+                            <li><span class="check-icon-lifetime">✓</span> Bot-ready alerts</li>
+                            <li><span class="check-icon-lifetime">✓</span> Setup guides & resources</li>
+                            <li><span class="check-icon-lifetime">✓</span> Discord community access</li>
+                            <li><span class="check-icon-lifetime">✓</span> Free updates</li>
+                        </ul>
+                        <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/76fcac28-443c-49db-b0f7-4aaf882415b7" class="btn pricing-cta-btn btn-lifetime-cta">Get Lifetime Access</a>
+                    </div>
+                </div><!-- end pro column -->
             </div><!-- end pricing-grid -->
         </div>
     </section>
-
-    <!-- GET SET UP IN MINUTES -->
+    <!-- GET ACCESS & START TRADING -->
     <section style="padding: 80px 0; border-top: 1px solid var(--border);">
         <div class="container">
             <div class="setup-card" style="max-width: 900px; margin: 0 auto; background: var(--surface); border: 1px solid rgba(41,168,241,0.2); border-radius: 16px; padding: 56px 64px;">
                 <div class="setup-grid" style="display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center;">
-                <div>
-                    <h2 style="font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.2;">Get Access &<br>Start Trading</h2>
-                    <p style="color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.7;">Runs on TradingView — the world's most popular chart analysis platform.</p>
+                    <div>
+                        <h2 style="font-size: clamp(1.75rem, 3vw, 2.25rem); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.2;">Get Access &<br>Start Trading</h2>
+                        <p style="color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.7;">Runs on TradingView — the world's most popular chart analysis platform.</p>
+                    </div>
+                    <div style="display: flex; flex-direction: column; gap: 28px;">
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(41,168,241,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600; color: var(--accent); flex-shrink: 0;">1</div>
+                            <p style="font-size: 0.9375rem; color: var(--text-secondary); margin: 0;"><strong style="color: var(--text); font-weight: 600;">Choose your plan</strong></p>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(41,168,241,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600; color: var(--accent); flex-shrink: 0;">2</div>
+                            <p style="font-size: 0.9375rem; color: var(--text-secondary); margin: 0;">Enter your <strong style="color: var(--text); font-weight: 600;">TradingView username</strong></p>
+                        </div>
+                        <div style="display: flex; align-items: center; gap: 20px;">
+                            <div style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(41,168,241,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600; color: var(--accent); flex-shrink: 0;">3</div>
+                            <p style="font-size: 0.9375rem; color: var(--text-secondary); margin: 0;">Access your tools <strong style="color: var(--text); font-weight: 600;">on TradingView</strong></p>
+                        </div>
+                    </div>
                 </div>
-                <div style="display: flex; flex-direction: column; gap: 28px;">
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <div style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(41,168,241,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600; color: var(--accent); flex-shrink: 0;">1</div>
-                        <p style="font-size: 0.9375rem; color: var(--text-secondary); margin: 0;"><strong style="color: var(--text); font-weight: 600;">Choose your plan</strong></p>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <div style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(41,168,241,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600; color: var(--accent); flex-shrink: 0;">2</div>
-                        <p style="font-size: 0.9375rem; color: var(--text-secondary); margin: 0;">Enter your <strong style="color: var(--text); font-weight: 600;">TradingView username</strong></p>
-                    </div>
-                    <div style="display: flex; align-items: center; gap: 20px;">
-                        <div style="width: 40px; height: 40px; border-radius: 50%; border: 1px solid rgba(41,168,241,0.4); display: flex; align-items: center; justify-content: center; font-size: 0.875rem; font-weight: 600; color: var(--accent); flex-shrink: 0;">3</div>
-                        <p style="font-size: 0.9375rem; color: var(--text-secondary); margin: 0;">Access your tools <strong style="color: var(--text); font-weight: 600;">on TradingView</strong></p>
-                    </div>
-                </div>
-            </div><!-- end card -->
+            </div>
         </div>
     </section>
-
     <section class="faq-section" id="faq">
         <div class="container">
             <div class="section-label">Frequently Asked Questions</div>
@@ -963,42 +690,25 @@
                 if (plan === 'annual') {
                     document.getElementById('monthly-promo-strip').style.display = 'none';
                     if (annualPromoActive) {
-                        priceAmount.textContent = '$47';
-                        priceOriginal.textContent = '$59';
-                        priceOriginal.style.display = 'inline';
-                        priceSub.textContent = '$564 billed annually — 20% off';
-                        saveBadge.textContent = '20% Off';
-                        annualStrip.style.display = 'block';
+                        priceAmount.textContent = '$47'; priceOriginal.textContent = '$59'; priceOriginal.style.display = 'inline';
+                        priceSub.textContent = '$564 billed annually — 20% off'; saveBadge.textContent = '20% Off'; annualStrip.style.display = 'block';
                     } else {
-                        priceAmount.textContent = '$59';
-                        priceOriginal.style.display = 'none';
-                        priceSub.textContent = '$708 billed annually';
-                        saveBadge.textContent = 'Save 40%';
-                        annualStrip.style.display = 'none';
+                        priceAmount.textContent = '$59'; priceOriginal.style.display = 'none';
+                        priceSub.textContent = '$708 billed annually'; saveBadge.textContent = 'Save 40%'; annualStrip.style.display = 'none';
                     }
-                    cta.href = ANNUAL_LINK;
-                    btnAnnual.classList.add('active');
-                    saveBadge.style.display = 'inline-block';
+                    cta.href = ANNUAL_LINK; btnAnnual.classList.add('active'); saveBadge.style.display = 'inline-block';
                 } else {
                     annualStrip.style.display = 'none';
                     if (annualPromoActive) {
-                        priceAmount.textContent = '$89';
-                        priceOriginal.textContent = '$99';
-                        priceOriginal.style.display = 'inline';
-                        priceSub.textContent = 'Billed monthly · Cancel anytime';
-                        saveBadge.textContent = '10% Off';
+                        priceAmount.textContent = '$89'; priceOriginal.textContent = '$99'; priceOriginal.style.display = 'inline';
+                        priceSub.textContent = 'Billed monthly · Cancel anytime'; saveBadge.textContent = '10% Off';
                         document.getElementById('monthly-promo-strip').style.display = 'block';
                     } else {
-                        priceAmount.textContent = '$99';
-                        priceOriginal.style.display = 'none';
-                        priceSub.textContent = 'Billed monthly · Cancel anytime';
-                        saveBadge.textContent = 'Save 40%';
+                        priceAmount.textContent = '$99'; priceOriginal.style.display = 'none';
+                        priceSub.textContent = 'Billed monthly · Cancel anytime'; saveBadge.textContent = 'Save 40%';
                         document.getElementById('monthly-promo-strip').style.display = 'none';
                     }
-                    cta.href = MONTHLY_LINK;
-                    btnMonthly.classList.add('active');
-                    saveBadge.style.display = 'none';
-                    annualStrip.style.display = 'none';
+                    cta.href = MONTHLY_LINK; btnMonthly.classList.add('active'); saveBadge.style.display = 'none'; annualStrip.style.display = 'none';
                 }
             }
         }
@@ -1054,8 +764,7 @@
         (function() {
             const deadline = new Date('2026-04-16T23:59:59');
             function updateCountdowns() {
-                const now = new Date();
-                const diff = deadline - now;
+                const now = new Date(); const diff = deadline - now;
                 if (diff <= 0) { const as = document.getElementById('annual-promo-strip'); const ms = document.getElementById('monthly-promo-strip'); if (as) as.style.display = 'none'; if (ms) ms.style.display = 'none'; return; }
                 const days = String(Math.floor(diff / 86400000)).padStart(2, '0');
                 const hours = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
@@ -1066,8 +775,7 @@
                     if (d) d.textContent = days; if (h) h.textContent = hours; if (m) m.textContent = mins; if (s) s.textContent = secs;
                 });
             }
-            updateCountdowns();
-            setInterval(updateCountdowns, 1000);
+            updateCountdowns(); setInterval(updateCountdowns, 1000);
         })();
     </script>
     <div id="cookieConsent" class="cookie-consent">
@@ -1077,7 +785,7 @@
             <div class="cookie-buttons">
                 <button id="acceptCookies" class="cookie-btn cookie-btn-accept">Accept All</button>
                 <button id="rejectCookies" class="cookie-btn cookie-btn-reject">Reject Non-Essential</button>
-                <a href="cookie-policy.html" class="cookie-link">Learn More</a>
+                <a href="cookie-policy.html" content="cookie-link">Learn More</a>
             </div>
         </div>
     </div>
