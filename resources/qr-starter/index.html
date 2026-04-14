@@ -1,0 +1,591 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="theme-color" content="#1C1F26">
+    <title>QR Starter - Complete Tutorial & Setup Guide</title>
+    
+    <meta name="description" content="Complete tutorial for QR Starter. Learn how to use Trading Style presets, S/R Auto-Detection, partial take-profits, break-even automation, and all features.">
+    <meta name="keywords" content="QR starter tutorial, quantum ribbon starter guide, tradingview indicator tutorial, ribbon trading setup">
+    <meta name="author" content="Trendline Project">
+    <meta name="robots" content="index, follow">
+    
+    <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
+    
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLKJNZ6GZV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-RLKJNZ6GZV');
+    </script>
+    
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        :root {
+            --surface: #1C1F26;
+            --surface-hover: #23262E;
+            --accent: #29A8F1;
+            --accent-subtle: rgba(41, 168, 241, 0.1);
+            --text: #F0F0F0;
+            --text-secondary: #C5CBD3;
+            --text-muted: #8B92A0;
+            --border: rgba(255, 255, 255, 0.06);
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%);
+            background-attachment: fixed;
+            color: var(--text);
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 900px; margin: 0 auto; padding: 0 32px; }
+
+        nav {
+            padding: 20px 0;
+            position: fixed;
+            top: 0; left: 0; right: 0;
+            background: transparent;
+            z-index: 100;
+            transition: background 0.3s ease, backdrop-filter 0.3s ease;
+        }
+
+        nav.scrolled {
+            background: rgba(28, 31, 38, 0.8);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+        }
+
+        .nav-content { display: flex; justify-content: space-between; align-items: center; }
+
+        .logo {
+            font-size: 1.125rem;
+            font-weight: 600;
+            color: var(--text);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img { width: 32px; height: 32px; }
+
+        .back-link {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-size: 0.9375rem;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover { color: var(--accent); }
+
+        .tutorial-header { padding: 120px 0 40px; text-align: center; }
+
+        .badge {
+            display: inline-block;
+            padding: 6px 12px;
+            background: var(--accent-subtle);
+            border: 1px solid var(--border);
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: var(--accent);
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            margin-bottom: 24px;
+        }
+
+        h1 {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: 600;
+            letter-spacing: -0.03em;
+            margin-bottom: 16px;
+            line-height: 1.2;
+        }
+
+        .accent-text { color: var(--accent); }
+
+        .subtitle {
+            font-size: 1.125rem;
+            color: var(--text-secondary);
+            max-width: 700px;
+            margin: 0 auto 40px;
+        }
+
+        .content-section {
+            padding: 60px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        .content-section:last-of-type { border-bottom: none; }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin-bottom: 24px;
+            color: var(--text);
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+            margin: 40px 0 16px;
+            color: var(--text);
+        }
+
+        h3:first-of-type { margin-top: 0; }
+
+        p {
+            margin-bottom: 20px;
+            color: var(--text-secondary);
+            font-size: 1.0625rem;
+        }
+
+        ul, ol {
+            margin: 20px 0 20px 24px;
+            color: var(--text-secondary);
+        }
+
+        li { margin-bottom: 12px; padding-left: 8px; }
+
+        strong { color: var(--text); font-weight: 600; }
+
+        .info-box {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-left: 3px solid var(--accent);
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .info-box h4 {
+            color: var(--accent);
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .info-box p { margin-bottom: 0; font-size: 0.9375rem; }
+
+        .warning-box {
+            background: rgba(236, 72, 153, 0.05);
+            border: 1px solid rgba(236, 72, 153, 0.2);
+            border-left: 3px solid #EC4899;
+            border-radius: 8px;
+            padding: 24px;
+            margin: 32px 0;
+        }
+
+        .warning-box h4 {
+            color: #EC4899;
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .warning-box p { margin-bottom: 0; font-size: 0.9375rem; }
+
+        .toc {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 32px;
+            margin: 40px 0 60px;
+        }
+
+        .toc h2 { font-size: 1.5rem; margin-bottom: 20px; }
+        .toc ul { margin: 0; list-style: none; }
+        .toc li { margin-bottom: 12px; padding-left: 0; }
+
+        .toc a {
+            color: var(--text-secondary);
+            text-decoration: none;
+            transition: color 0.2s;
+            display: block;
+            padding: 8px 0;
+        }
+
+        .toc a:hover { color: var(--accent); }
+
+        .cta-section {
+            text-align: center;
+            padding: 80px 0;
+            background: radial-gradient(ellipse at center, rgba(41, 168, 241, 0.08) 0%, transparent 60%);
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 14px 32px;
+            border-radius: 8px;
+            font-size: 0.9375rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            text-decoration: none;
+            letter-spacing: -0.01em;
+        }
+
+        .btn-primary { background: var(--accent); color: #000; border: none; }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(41, 168, 241, 0.4);
+        }
+
+        footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 32px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.875rem;
+            transition: color 0.2s;
+        }
+
+        .footer-links a:hover { color: var(--accent); }
+        .copyright { color: var(--text-muted); font-size: 0.875rem; }
+
+        @media (max-width: 768px) {
+            .container { padding: 0 20px; }
+            .tutorial-header { padding: 100px 0 40px; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            h3 { font-size: 1.25rem; }
+            .content-section { padding: 40px 0; }
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <div class="nav-content">
+                <a href="../../" class="logo">
+                    <img src="../../logo.png" alt="Trendline Project Logo">
+                    <span>Trendline Project</span>
+                </a>
+                <a href="../" class="back-link">← Back to Resources</a>
+            </div>
+        </div>
+    </nav>
+
+    <section class="tutorial-header">
+        <div class="container">
+            <span class="badge">Complete Tutorial</span>
+            <h1>Quantum Ribbon <span class="accent-text">Starter</span></h1>
+            <p class="subtitle">Everything you need to get up and running — ribbon signals, risk management, S/R detection, and bot-ready alerts explained from start to finish.</p>
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="toc">
+            <h2>Table of Contents</h2>
+            <ul>
+                <li><a href="#introduction">Introduction</a></li>
+                <li><a href="#ribbon-system">The Ribbon System</a></li>
+                <li><a href="#trading-styles">Trading Style Presets</a></li>
+                <li><a href="#signal-frequency">Signal Frequency</a></li>
+                <li><a href="#ribbon-bounce">Ribbon Bounce Signals</a></li>
+                <li><a href="#sr-detection">S/R Auto-Detection</a></li>
+                <li><a href="#stop-loss">Stop Loss Methods</a></li>
+                <li><a href="#take-profit">Take Profit Targets</a></li>
+                <li><a href="#partial-tp">Partial Take-Profits</a></li>
+                <li><a href="#break-even">Break-Even Stop</a></li>
+                <li><a href="#alerts">Bot-Ready Alerts</a></li>
+                <li><a href="#trend-candles">Trend Candle Coloring</a></li>
+                <li><a href="#stats-table">Stats Table</a></li>
+                <li><a href="#visual-custom">Visual Customization</a></li>
+                <li><a href="#disclaimer">Risk Disclaimer</a></li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="container">
+
+        <section class="content-section" id="introduction">
+            <h2>Introduction</h2>
+            <p>QR Starter is the entry point into the Quantum Ribbon system. It gives you the core ribbon engine — signals, risk management, S/R detection, and alerts — in a streamlined package designed to be approachable without being basic.</p>
+            <p>If you're new to systematic trading, Starter gives you everything you need to trade with a clear process. If you already have experience, it's a clean, no-noise tool that gets out of your way.</p>
+
+            <div class="info-box">
+                <h4>Want to try before you buy?</h4>
+                <p><a href="https://www.tradingview.com/script/49ak1Mix-Quantum-Ribbon-Lite/" target="_blank" style="color: var(--accent); text-decoration: none;">Quantum Ribbon Lite</a> is available free on TradingView. It uses the same ribbon engine so you can get a feel for how signals work before committing to Starter.</p>
+            </div>
+
+            <p>This guide walks through every feature. If you need help with activation or finding your tools on TradingView after subscribing, check the <a href="../../#faq" style="color: var(--accent); text-decoration: none;">FAQ on the product page</a>.</p>
+        </section>
+
+        <section class="content-section" id="ribbon-system">
+            <h2>The Ribbon System</h2>
+            <p>The ribbon is built from ten EMAs arranged in five pairs. Each pair creates a cloud — short EMA on top, long EMA below. When the short crosses above the long, that pair is bullish. When it crosses below, bearish.</p>
+            <p>The five pairs together give you a gradient picture of trend strength:</p>
+            <ul>
+                <li><strong>All five bullish</strong> — strong uptrend, blue-teal clouds</li>
+                <li><strong>Mixed</strong> — transitioning or ranging market, neutral gray</li>
+                <li><strong>All five bearish</strong> — strong downtrend, red-pink clouds</li>
+            </ul>
+            <p>Signals require ribbon alignment, momentum confirmation, and volume participation. All three need to agree before a signal fires. This keeps the indicator from reacting to every small move.</p>
+
+            <div class="info-box">
+                <h4>One trade at a time</h4>
+                <p>QR Starter only holds one trade at a time. A new signal won't appear until the current trade has closed via stop loss or take profit. This keeps risk controlled and forces you to manage the trade you're in before taking a new one.</p>
+            </div>
+        </section>
+
+        <section class="content-section" id="trading-styles">
+            <h2>Trading Style Presets</h2>
+            <p>Instead of manually adjusting every setting, Trading Style presets configure the indicator for your approach in one click. There are five options:</p>
+            <ul>
+                <li><strong>Scalping</strong> — Fast signals, tight ATR-based stops, 1.5R target. Built for quick in-and-out trades on lower timeframes.</li>
+                <li><strong>Day Trading</strong> — Balanced signals, swing-based stops, 2R target. The middle ground for intraday traders.</li>
+                <li><strong>Swing Trading</strong> — Selective signals, wide swing-based stops, 3R target with partial take-profits enabled. Designed for holding trades over multiple sessions.</li>
+                <li><strong>QR Mode</strong> — Pure ribbon trading. Entry and exit are both driven by ribbon shifts, no fixed take profit target.</li>
+                <li><strong>Custom</strong> — Full manual control. All individual settings are available to adjust.</li>
+            </ul>
+
+            <div class="info-box">
+                <h4>Where to start</h4>
+                <p>If you're unsure, start with Day Trading. It's the most balanced preset and works well across a wide range of markets and timeframes. Once you've run a backtest and seen how it performs on your instrument, you can switch to Custom and fine-tune from there.</p>
+            </div>
+        </section>
+
+        <section class="content-section" id="signal-frequency">
+            <h2>Signal Frequency</h2>
+            <p>Signal Frequency controls how often the indicator can fire new signals by adjusting the cooldown period between trades.</p>
+            <ul>
+                <li><strong>More Signals</strong> — Shorter cooldown. More opportunities, but also more exposure to marginal setups.</li>
+                <li><strong>Balanced</strong> — The recommended default. A sensible gap between signals that filters out noise without missing major moves.</li>
+                <li><strong>Fewer Signals</strong> — Longer cooldown. Only the strongest setups get through. Better for traders who want fewer, higher-conviction trades.</li>
+            </ul>
+            <p>This setting is only available in Custom mode — the presets set it automatically based on your chosen style.</p>
+        </section>
+
+        <section class="content-section" id="ribbon-bounce">
+            <h2>Ribbon Bounce Signals</h2>
+            <p>By default, QR Starter signals on trend confirmation — when ribbon alignment, momentum, and volume all agree. Ribbon Bounce gives you an alternative: pullback entries inside an established trend.</p>
+            <p><strong>How it works for longs:</strong></p>
+            <ul>
+                <li>All five ribbon pairs are bullish — confirmed uptrend</li>
+                <li>Price pulls back and dips below the top EMA layer</li>
+                <li>Price crosses back above — that's your entry</li>
+            </ul>
+            <p>The same logic inverted applies for shorts. You're entering the trend at a better price after a pullback, rather than chasing the initial move.</p>
+            <p>Toggle this on in settings to switch from breakout-style to pullback-style entries. Which you prefer depends on your trading style — both are valid approaches.</p>
+        </section>
+
+        <section class="content-section" id="sr-detection">
+            <h2>S/R Auto-Detection</h2>
+            <p>When enabled, QR Starter automatically identifies key support and resistance levels from recent price structure and uses them to filter signals.</p>
+            <p>A buy signal will only fire if price is near a support level. A sell signal will only fire near resistance. This stops you from buying straight into overhead resistance or selling into solid support below.</p>
+
+            <p><strong>Three settings control detection sensitivity:</strong></p>
+            <ul>
+                <li><strong>S/R Strength</strong> — Weak finds more levels, Strong only uses major swing points</li>
+                <li><strong>Touch Zone (%)</strong> — How close price needs to be to the level to qualify. Smaller = more precise, fewer signals. Larger = more flexible, more signals.</li>
+                <li><strong>Show S/R Zones</strong> — Toggle visual boxes on the chart to see where detected levels sit</li>
+            </ul>
+
+            <div class="info-box">
+                <h4>Stats table integration</h4>
+                <p>When S/R filter is active, the stats table shows the nearest level and how far price is from it. When price enters the touch zone, it shows "AT S/R" — a quick confirmation that the filter condition is met for the next signal.</p>
+            </div>
+
+            <p>You can use S/R detection standalone or pair it with Ribbon Bounce. Bounce entries near structure levels tend to have stronger follow-through than those taken in open space.</p>
+        </section>
+
+        <section class="content-section" id="stop-loss">
+            <h2>Stop Loss Methods</h2>
+            <p>QR Starter offers two stop loss methods:</p>
+
+            <h3>ATR-Based</h3>
+            <p>Stop is placed at a multiple of ATR from your entry. Three distance options — Tight (1.5×), Normal (2×), Wide (2.5×). ATR adapts to current volatility, so the stop automatically widens in volatile conditions and tightens when markets are calm.</p>
+
+            <h3>Swing-Based</h3>
+            <p>Stop is placed at a recent swing low (for longs) or swing high (for shorts), with an ATR buffer beyond it for protection against stop hunts. You're placing your stop at a meaningful price structure level — where buyers or sellers previously stepped in.</p>
+            <ul>
+                <li><strong>Swing Detection Period</strong> — How far back to look. Higher values find only major swings, lower values are more reactive.</li>
+                <li><strong>Swing Buffer</strong> — ATR margin added beyond the swing point</li>
+            </ul>
+
+            <div class="info-box">
+                <h4>Safety cap</h4>
+                <p>If a swing stop would place risk more than 20% from entry, the indicator falls back to ATR automatically. This prevents oversized stops on unusual price action.</p>
+            </div>
+        </section>
+
+        <section class="content-section" id="take-profit">
+            <h2>Take Profit Targets</h2>
+            <p>Target is set as a multiple of your risk (R). Five options:</p>
+            <ul>
+                <li><strong>1R</strong> — Target equals your risk. Break-even after fees over time requires a high win rate.</li>
+                <li><strong>1.5R</strong> — Modest reward. Works with more frequent wins.</li>
+                <li><strong>2R</strong> — The standard default. Solid risk-reward that doesn't require an exceptionally high win rate.</li>
+                <li><strong>3R</strong> — Extended target. Fewer wins needed to be profitable, but more trades will reverse before hitting it.</li>
+                <li><strong>Ribbon Exit</strong> — No fixed target. Trade stays open until the ribbon shifts against your position. Lets winners run as long as trend continues.</li>
+            </ul>
+
+            <div class="warning-box">
+                <h4>Ribbon Exit trade-off</h4>
+                <p>Ribbon Exit can capture large moves, but it also gives back more open profit when the trend turns. Use the backtester to compare fixed targets vs Ribbon Exit on your specific instrument before deciding.</p>
+            </div>
+        </section>
+
+        <section class="content-section" id="partial-tp">
+            <h2>Partial Take-Profits</h2>
+            <p>Instead of closing the full position at one target, partial take-profits let you scale out in stages — locking in profit early while keeping some exposure to further upside.</p>
+            <p><strong>Three exit levels:</strong></p>
+            <ul>
+                <li><strong>TP1</strong> — Closes 50% of position at the first target (default 1.5R)</li>
+                <li><strong>TP2</strong> — Closes 30% at the second target (default 2R)</li>
+                <li><strong>Final</strong> — Remaining 20% runs to the final target (default 2.5R)</li>
+            </ul>
+            <p>All three levels and percentages are adjustable. The chart displays dotted lines at each level, and labels confirm when each portion closes. The stats table tracks remaining position size throughout the trade.</p>
+
+            <div class="info-box">
+                <h4>Pairs well with Break-Even</h4>
+                <p>A common approach: enable partial TPs and set break-even to trigger at TP1. You bank 50% of the position and move your stop to entry at the same time. From that point, the worst outcome on the remaining position is a scratch trade.</p>
+            </div>
+        </section>
+
+        <section class="content-section" id="break-even">
+            <h2>Break-Even Stop</h2>
+            <p>Once enabled, the indicator automatically moves your stop to entry price when a specified profit level is reached. A winning trade can no longer turn into a loss.</p>
+            <p><strong>Two trigger options:</strong></p>
+            <ul>
+                <li><strong>TP1</strong> — Stop moves to entry when the first partial target is hit</li>
+                <li><strong>TP2</strong> — Stop moves to entry when the second partial target is hit</li>
+            </ul>
+            <p>When break-even activates, a "BE" label appears on the chart at entry level and the stop line updates. The stats table reflects the new stop price.</p>
+        </section>
+
+        <section class="content-section" id="alerts">
+            <h2>Bot-Ready Alerts</h2>
+            <p>QR Starter includes a full set of alerts covering the complete trade lifecycle — not just entries.</p>
+            <p><strong>Available alert conditions:</strong></p>
+            <ul>
+                <li>Long Entry / Short Entry</li>
+                <li>Long Entry @ S/R / Short Entry @ S/R</li>
+                <li>TP1 Hit / TP2 Hit (long and short separately)</li>
+                <li>Break-Even activated (long and short)</li>
+                <li>Stop Hit (long and short)</li>
+                <li>Final Target reached (long and short)</li>
+                <li>Ribbon Exit (long and short)</li>
+            </ul>
+            <p>Dynamic alerts fire automatically with the ticker symbol and relevant price levels included in the message — no manual setup per instrument needed. These work with webhook-based automation platforms like 3Commas, Alertatron, and custom services.</p>
+
+            <div class="info-box">
+                <h4>Setting up alerts on TradingView</h4>
+                <p>Right-click the indicator on your chart, select "Add alert on QR Starter", choose your condition, and set your webhook URL if using automation. Each condition fires once per bar close to avoid duplicate triggers.</p>
+            </div>
+        </section>
+
+        <section class="content-section" id="trend-candles">
+            <h2>Trend Candle Coloring</h2>
+            <p>Enable this and your chart candles change color based on the current ribbon state — instant visual feedback without needing to read the ribbon itself.</p>
+            <ul>
+                <li><strong>Bright blue</strong> — Four or five pairs bullish (strong uptrend)</li>
+                <li><strong>Faded blue</strong> — Three pairs bullish (moderate bull)</li>
+                <li><strong>Faded red</strong> — Two pairs bearish (moderate bear)</li>
+                <li><strong>Bright red</strong> — One or fewer pairs bullish (strong downtrend)</li>
+            </ul>
+            <p>Useful when scanning multiple charts quickly — trend state is visible at a glance without examining the ribbon closely. All four colors are customizable in settings.</p>
+        </section>
+
+        <section class="content-section" id="stats-table">
+            <h2>Stats Table</h2>
+            <p>The on-chart stats table gives you a live view of everything relevant to your current trading session.</p>
+            <p><strong>What it shows:</strong></p>
+            <ul>
+                <li><strong>Market DNA</strong> — Whether the market is trending or ranging, and an overall health score</li>
+                <li><strong>Status</strong> — In Long, In Short, or Waiting for Signal</li>
+                <li><strong>Ribbon</strong> — Current ribbon state (Strong Bull, Bullish, Neutral, Bearish, Strong Bear)</li>
+                <li><strong>S/R Status</strong> — Distance to nearest level, or "AT S/R" when in the touch zone (only when filter is enabled)</li>
+                <li><strong>Performance</strong> — Win/loss record and win rate for the current chart session</li>
+                <li><strong>P&L</strong> — Live profit or loss on open trade</li>
+                <li><strong>Trade Levels</strong> — Entry, stop, and take profit prices when in a trade</li>
+            </ul>
+            <p>Position, size, and colors are all customizable. You can move it to any corner, adjust the text size, and change background and border colors to match your chart theme.</p>
+        </section>
+
+        <section class="content-section" id="visual-custom">
+            <h2>Visual Customization</h2>
+            <p>QR Starter gives you full control over how the indicator looks on your chart.</p>
+
+            <h3>Label Styles</h3>
+            <p>BUY, SELL, TP, and STOP labels each have independent color and size settings. Make signals prominent or subtle depending on your preference.</p>
+
+            <h3>Line Styles</h3>
+            <p>Entry, stop loss, and take profit lines are all configurable — color, width, and style. If you want clean minimal lines or bold visible levels, it's your call.</p>
+
+            <h3>Candle Colors</h3>
+            <p>The four trend candle colors (strong bull, bull, bear, strong bear) are individually customizable if you prefer different shades to the defaults.</p>
+
+            <h3>Table Styles</h3>
+            <p>Background color, text color, border color and width, text size, and table position are all adjustable. If you're on a light chart or have a particular theme, you can make the table fit without it clashing.</p>
+        </section>
+
+        <section class="content-section" id="disclaimer">
+            <h2>Risk Disclaimer</h2>
+
+            <div class="warning-box">
+                <h4>⚠️ Important: Read This Carefully</h4>
+                <p><strong>This is not financial advice.</strong> Trading carries real risk and you can lose money. If you decide to use this indicator, that's entirely your choice and your responsibility.</p>
+            </div>
+
+            <p>Past performance, backtests, and win rates shown on your chart do not guarantee future results. Markets change. What worked in a backtest may not work going forward.</p>
+
+            <p><strong>Break-even win rates after accounting for fees:</strong></p>
+            <ul>
+                <li>1.5R targets need roughly 40% winners</li>
+                <li>2R targets need around 34%</li>
+                <li>3R targets need about 25%</li>
+            </ul>
+
+            <p>The indicator gives you a framework and clear signals. What the market does with them is outside anyone's control. Always use proper position sizing and never risk more than you can afford to lose.</p>
+        </section>
+
+    </div>
+
+    <section class="cta-section">
+        <div class="container">
+            <h2 style="margin-bottom: 16px;">Ready to Get Started?</h2>
+            <p style="max-width: 600px; margin: 0 auto 32px; color: var(--text-secondary);">Get access to QR Starter and start trading with a clear, structured system.</p>
+            <a href="../../#pricing" class="btn btn-primary">Get QR Starter</a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-links">
+                <a href="../../privacy-policy.html">Privacy Policy</a>
+                <a href="../../terms-of-service.html">Terms of Service</a>
+                <a href="../../cookie-policy.html">Cookie Policy</a>
+                <a href="../../contact.html">Contact</a>
+            </div>
+            <p class="copyright">© 2025 Quantum Ribbon Pro. Built by Trendline Project.</p>
+        </div>
+    </footer>
+
+    <script>
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => {
+            nav.classList.toggle('scrolled', window.scrollY > 50);
+        });
+    </script>
+</body>
+</html>
