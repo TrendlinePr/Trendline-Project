@@ -5,15 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#1C1F26">
     <title>QR Starter Backtester - Guide & Tutorial</title>
-    
     <meta name="description" content="Complete guide to the QR Starter Backtester. Learn how to test your settings, read performance metrics, and validate your strategy before trading live.">
     <meta name="keywords" content="QR starter backtester, quantum ribbon backtester guide, tradingview strategy testing, backtesting guide">
     <meta name="author" content="Trendline Project">
     <meta name="robots" content="index, follow">
-    
     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
-    
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLKJNZ6GZV"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -21,254 +18,61 @@
         gtag('js', new Date());
         gtag('config', 'G-RLKJNZ6GZV');
     </script>
-    
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-
-        :root {
-            --surface: #1C1F26;
-            --surface-hover: #23262E;
-            --accent: #29A8F1;
-            --accent-subtle: rgba(41, 168, 241, 0.1);
-            --text: #F0F0F0;
-            --text-secondary: #C5CBD3;
-            --text-muted: #8B92A0;
-            --border: rgba(255, 255, 255, 0.06);
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
-            background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%);
-            background-attachment: fixed;
-            color: var(--text);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-        }
-
+        :root { --surface: #1C1F26; --surface-hover: #23262E; --accent: #29A8F1; --accent-subtle: rgba(41,168,241,0.1); --text: #F0F0F0; --text-secondary: #C5CBD3; --text-muted: #8B92A0; --border: rgba(255,255,255,0.06); }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif; background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%); background-attachment: fixed; color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
         .container { max-width: 900px; margin: 0 auto; padding: 0 32px; }
-
-        nav {
-            padding: 20px 0;
-            position: fixed;
-            top: 0; left: 0; right: 0;
-            background: transparent;
-            z-index: 100;
-            transition: background 0.3s ease, backdrop-filter 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(28, 31, 38, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .nav-content { display: flex; justify-content: space-between; align-items: center; }
-
-        .logo {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
+        nav { padding: 20px 0; position: fixed; top: 0; left: 0; right: 0; background: transparent; z-index: 100; transition: background 0.3s ease, backdrop-filter 0.3s ease; }
+        nav.scrolled { background: rgba(28,31,38,0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .logo { font-size: 1.125rem; font-weight: 600; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; }
         .logo img { width: 32px; height: 32px; }
-
-        .back-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9375rem;
-            transition: color 0.2s;
-        }
-
-        .back-link:hover { color: var(--accent); }
-
+        .nav-social { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; align-items: center; }
+        .nav-right { display: flex; gap: 20px; align-items: center; }
+        .nav-right a { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+        .nav-right a:hover { color: var(--accent); }
+        .nav-right .btn-nav { color: var(--accent); border: 1px solid var(--accent); border-radius: 8px; padding: 8px 20px; font-size: 0.875rem; }
+        .social-icons { display: flex; justify-content: center; gap: 16px; margin-bottom: 24px; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); color: var(--text-muted); transition: all 0.2s; text-decoration: none; }
+        .social-icons a:hover { background: rgba(41,168,241,0.1); color: var(--accent); transform: translateY(-2px); }
+        .social-icons svg { width: 20px; height: 20px; fill: currentColor; }
         .tutorial-header { padding: 120px 0 40px; text-align: center; }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 12px;
-            background: var(--accent-subtle);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 24px;
-        }
-
-        h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 600;
-            letter-spacing: -0.03em;
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }
-
+        .badge { display: inline-block; padding: 6px 12px; background: var(--accent-subtle); border: 1px solid var(--border); border-radius: 20px; font-size: 0.75rem; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 24px; }
+        h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.2; }
         .accent-text { color: var(--accent); }
-
-        .subtitle {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
-
-        .content-section {
-            padding: 60px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
+        .subtitle { font-size: 1.125rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 40px; }
+        .content-section { padding: 60px 0; border-bottom: 1px solid var(--border); }
         .content-section:last-of-type { border-bottom: none; }
-
-        h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            margin-bottom: 24px;
-            color: var(--text);
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            margin: 40px 0 16px;
-            color: var(--text);
-        }
-
+        h2 { font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 24px; color: var(--text); }
+        h3 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; margin: 40px 0 16px; color: var(--text); }
         h3:first-of-type { margin-top: 0; }
-
-        p {
-            margin-bottom: 20px;
-            color: var(--text-secondary);
-            font-size: 1.0625rem;
-        }
-
-        ul, ol {
-            margin: 20px 0 20px 24px;
-            color: var(--text-secondary);
-        }
-
+        p { margin-bottom: 20px; color: var(--text-secondary); font-size: 1.0625rem; }
+        ul, ol { margin: 20px 0 20px 24px; color: var(--text-secondary); }
         li { margin-bottom: 12px; padding-left: 8px; }
-
         strong { color: var(--text); font-weight: 600; }
-
-        .info-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-left: 3px solid var(--accent);
-            border-radius: 8px;
-            padding: 24px;
-            margin: 32px 0;
-        }
-
-        .info-box h4 {
-            color: var(--accent);
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
+        .info-box { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 24px; margin: 32px 0; }
+        .info-box h4 { color: var(--accent); font-size: 1rem; font-weight: 600; margin-bottom: 12px; }
         .info-box p { margin-bottom: 0; font-size: 0.9375rem; }
-
-        .warning-box {
-            background: rgba(236, 72, 153, 0.05);
-            border: 1px solid rgba(236, 72, 153, 0.2);
-            border-left: 3px solid #EC4899;
-            border-radius: 8px;
-            padding: 24px;
-            margin: 32px 0;
-        }
-
-        .warning-box h4 {
-            color: #EC4899;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
+        .warning-box { background: rgba(236,72,153,0.05); border: 1px solid rgba(236,72,153,0.2); border-left: 3px solid #EC4899; border-radius: 8px; padding: 24px; margin: 32px 0; }
+        .warning-box h4 { color: #EC4899; font-size: 1rem; font-weight: 600; margin-bottom: 12px; }
         .warning-box p { margin-bottom: 0; font-size: 0.9375rem; }
-
-        .toc {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 32px;
-            margin: 40px 0 60px;
-        }
-
+        .toc { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 40px 0 60px; }
         .toc h2 { font-size: 1.5rem; margin-bottom: 20px; }
         .toc ul { margin: 0; list-style: none; }
         .toc li { margin-bottom: 12px; padding-left: 0; }
-
-        .toc a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.2s;
-            display: block;
-            padding: 8px 0;
-        }
-
+        .toc a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; display: block; padding: 8px 0; }
         .toc a:hover { color: var(--accent); }
-
-        .cta-section {
-            text-align: center;
-            padding: 80px 0;
-            background: radial-gradient(ellipse at center, rgba(41, 168, 241, 0.08) 0%, transparent 60%);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 14px 32px;
-            border-radius: 8px;
-            font-size: 0.9375rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            letter-spacing: -0.01em;
-        }
-
+        .cta-section { text-align: center; padding: 80px 0; background: radial-gradient(ellipse at center, rgba(41,168,241,0.08) 0%, transparent 60%); }
+        .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; text-decoration: none; letter-spacing: -0.01em; }
         .btn-primary { background: var(--accent); color: #000; border: none; }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(41, 168, 241, 0.4);
-        }
-
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(41,168,241,0.4); }
         footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.875rem;
-            transition: color 0.2s;
-        }
-
+        .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 20px; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
         .footer-links a:hover { color: var(--accent); }
         .copyright { color: var(--text-muted); font-size: 0.875rem; }
-
-        @media (max-width: 768px) {
-            .container { padding: 0 20px; }
-            .tutorial-header { padding: 100px 0 40px; }
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.5rem; }
-            h3 { font-size: 1.25rem; }
-            .content-section { padding: 40px 0; }
-        }
+        @media (max-width: 768px) { .container { padding: 0 20px; } .tutorial-header { padding: 100px 0 40px; } h1 { font-size: 2rem; } h2 { font-size: 1.5rem; } h3 { font-size: 1.25rem; } .content-section { padding: 40px 0; } }
     </style>
 </head>
 <body>
@@ -279,7 +83,15 @@
                     <img src="../../logo.png" alt="Trendline Project Logo">
                     <span>Trendline Project</span>
                 </a>
-                <a href="../" class="back-link">← Back to Resources</a>
+                <div class="nav-social">
+                    <a href="https://discord.gg/hZp4NsjpwT" target="_blank" rel="noopener noreferrer" aria-label="Discord" style="color: var(--text-muted); transition: color 0.2s; display: flex;" onmouseover="this.style.color='#29A8F1'" onmouseout="this.style.color='var(--text-muted)'"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+                    <a href="https://www.youtube.com/@TrendlineProject" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="color: var(--text-muted); transition: color 0.2s; display: flex;" onmouseover="this.style.color='#29A8F1'" onmouseout="this.style.color='var(--text-muted)'"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                    <a href="https://www.tradingview.com/u/TrendlineProject/" target="_blank" rel="noopener noreferrer" aria-label="TradingView" style="color: var(--text-muted); transition: color 0.2s; display: flex;" onmouseover="this.style.color='#29A8F1'" onmouseout="this.style.color='var(--text-muted)'"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;fill:currentColor;"><path d="M15.8654 8.2789c0 1.3541-1.0978 2.4519-2.452 2.4519-1.354 0-2.4519-1.0978-2.4519-2.452 0-1.354 1.0978-2.4518 2.452-2.4518 1.3541 0 2.4519 1.0977 2.4519 2.4519zM9.75 6H0v4.9038h4.8462v7.2692H9.75Zm8.5962 0H24l-5.1058 12.173h-5.6538z"/></svg></a>
+                </div>
+                <div class="nav-right">
+                    <a href="../">Resources</a>
+                    <a href="../../#pricing" class="btn-nav">Get Access</a>
+                </div>
             </div>
         </div>
     </nav>
@@ -310,12 +122,10 @@
     </div>
 
     <div class="container">
-
         <section class="content-section" id="introduction">
             <h2>Introduction</h2>
             <p>The QR Starter Backtester is a separate TradingView strategy that mirrors the exact signal logic of the QR Starter indicator. You apply the same settings to both, run the backtester against historical data, and see how those settings would have performed before using them in live trading.</p>
             <p>This is the first step in the BST workflow — Backtest, then Trade. No guessing whether your settings will work. You find out first.</p>
-
             <div class="info-box">
                 <h4>Backtester vs Indicator</h4>
                 <p>The Backtester is a TradingView Strategy — it shows historical trade entries and exits and calculates performance statistics. The Indicator is what you use for live signals and alerts. They share the same logic, so what you test is what you trade.</p>
@@ -333,7 +143,6 @@
                 <li>Select <strong>QR Starter Backtester</strong></li>
             </ol>
             <p>The strategy will load and immediately run against the visible chart history. You'll see trade markers on the chart and a Strategy Tester panel at the bottom.</p>
-
             <div class="info-box">
                 <h4>TradingView Strategy Tester</h4>
                 <p>TradingView's built-in Strategy Tester shows the performance report for any loaded strategy. The tabs — Overview, Performance Summary, List of Trades, and Properties — give you a full breakdown of historical results.</p>
@@ -353,7 +162,6 @@
                 <li>S/R Auto-Detection (if enabled)</li>
                 <li>Ribbon Bounce (if enabled)</li>
             </ul>
-
             <div class="warning-box">
                 <h4>Keep settings in sync</h4>
                 <p>If you change settings on the live indicator, update the Backtester to match before running new tests. Testing one configuration while trading another will give you misleading results.</p>
@@ -363,16 +171,12 @@
         <section class="content-section" id="running">
             <h2>Running a Backtest</h2>
             <p>Once the Backtester is added and settings are matched, it runs automatically. To get meaningful data:</p>
-
             <h3>Choose your timeframe</h3>
             <p>Run the backtest on the same timeframe you intend to trade. A backtest on the 1-hour chart tells you nothing about how the settings perform on the 15-minute chart.</p>
-
             <h3>Use enough history</h3>
             <p>More data is better. Zoom out to include at least 100–200 trades if possible. A backtest with 10 trades isn't statistically meaningful — it could be luck in either direction.</p>
-
             <h3>Check the Strategy Properties</h3>
             <p>In the Strategy Tester, click the <strong>Properties</strong> tab and set your order size to reflect realistic position sizing. For most testing purposes, setting a fixed contract size of 1 or a fixed percentage of equity works well. If you're seeing zero trades on futures instruments, check that the initial capital and margin settings are reasonable for the instrument.</p>
-
             <div class="info-box">
                 <h4>Futures instruments (NQ, ES, etc.)</h4>
                 <p>If you're testing on futures and seeing zero trades, go to Strategy Properties and set order size to 1 Contract, then reduce the margin requirement to 1–5%. This is a TradingView display issue, not a problem with the strategy logic.</p>
@@ -382,19 +186,14 @@
         <section class="content-section" id="metrics">
             <h2>Reading the Metrics</h2>
             <p>The Performance Summary tab gives you the key numbers. Here's what to focus on:</p>
-
             <h3>Net Profit</h3>
             <p>Total profit or loss over the test period. Positive is obviously what you want, but context matters — a small positive result over a short test period is less meaningful than a consistent positive result over years of data.</p>
-
             <h3>Win Rate</h3>
             <p>Percentage of trades that were profitable. Win rate alone doesn't tell you much — a 30% win rate can still be highly profitable with a good R:R ratio. Look at it together with profit factor.</p>
-
             <h3>Profit Factor</h3>
             <p>Gross profit divided by gross loss. Above 1.0 means the strategy made more than it lost overall. A profit factor of 1.5 or higher is a solid result. Below 1.0 means it lost money overall.</p>
-
             <h3>Max Drawdown</h3>
             <p>The largest peak-to-trough decline during the test period. This tells you the worst losing streak you'd have experienced. A strategy that doubles your account but has an 80% drawdown along the way isn't practical for most traders.</p>
-
             <h3>Average Trade</h3>
             <p>Average profit or loss per trade. Should be positive. If it's negative or near zero, the settings aren't generating enough edge to cover the friction of trading.</p>
         </section>
@@ -402,16 +201,12 @@
         <section class="content-section" id="interpreting">
             <h2>Interpreting Results</h2>
             <p>A few principles for reading backtest results honestly:</p>
-
             <h3>Look for consistency, not just totals</h3>
             <p>Check the List of Trades tab and scroll through. Are winners and losers distributed throughout the period, or did the strategy make all its money in one short stretch? Consistent performance across different market conditions is more reliable than a few big wins.</p>
-
             <h3>Trending vs ranging periods</h3>
             <p>The ribbon system is trend-following. It will underperform during extended sideways markets and outperform during strong trends. If your backtest period was unusually trendy or unusually choppy, results may not reflect typical conditions.</p>
-
             <h3>Don't overfit</h3>
             <p>Adjusting settings until the backtest looks perfect is overfitting — you're optimising for historical noise, not real edge. Find settings that perform reasonably well across multiple instruments and timeframes rather than ones that look perfect on one chart.</p>
-
             <div class="warning-box">
                 <h4>Backtest results ≠ future performance</h4>
                 <p>A strong backtest improves confidence in your settings, but it doesn't guarantee future results. Markets evolve. Use backtesting to eliminate clearly bad settings, not to predict exact future returns.</p>
@@ -421,51 +216,38 @@
         <section class="content-section" id="optimising">
             <h2>Optimising Settings</h2>
             <p>If your initial backtest results aren't satisfactory, here's a systematic approach to improving them:</p>
-
             <h3>Low win rate</h3>
             <p>Try switching to Fewer Signals frequency, enabling S/R Auto-Detection, or switching to Swing stop loss. Each of these adds an additional filter that reduces total trades but tends to improve trade quality.</p>
-
             <h3>Low profit factor</h3>
             <p>Consider increasing your R:R target — moving from 2R to 3R reduces the win rate needed to be profitable. Alternatively, try enabling Ribbon Bounce for pullback entries which often have better initial risk-reward positioning.</p>
-
             <h3>High drawdown</h3>
             <p>Tighter stop distances and lower R targets reduce individual trade variance. Enabling partial take-profits with break-even protection significantly reduces how much open profit gets given back on losing trades.</p>
-
             <h3>Too few trades</h3>
             <p>If you're not getting enough trades for meaningful results, try More Signals frequency, a lower timeframe, or disabling optional filters like S/R detection.</p>
         </section>
 
         <section class="content-section" id="common-issues">
             <h2>Common Issues</h2>
-
             <h3>Zero trades showing</h3>
             <p>Usually a TradingView Strategy Properties issue on margin-based instruments. Set order size to 1 Contract and reduce the margin requirement to 1–5% in Properties.</p>
-
             <h3>Results look different from the indicator</h3>
             <p>Check that all settings match exactly between the Backtester and the live indicator. Even small differences in stop distance or signal frequency will produce different results.</p>
-
             <h3>Very few bars of history</h3>
             <p>TradingView limits how many bars load by default. On lower timeframes you may need a Premium plan to access deeper history. For most backtesting purposes, the Daily or 4-hour chart gives you years of data on a free plan.</p>
-
             <h3>Strategy shows repainting warning</h3>
             <p>All signals fire on bar close — there is no repainting. TradingView shows this warning on many indicators by default. The backtester uses confirmed bar data only.</p>
         </section>
 
         <section class="content-section" id="disclaimer">
             <h2>Risk Disclaimer</h2>
-
             <div class="warning-box">
                 <h4>⚠️ Important: Read This Carefully</h4>
                 <p><strong>This is not financial advice.</strong> Backtesting shows historical performance only. Past results do not guarantee future returns.</p>
             </div>
-
             <p>Backtests are run on historical data that has already happened. The strategy had no uncertainty about what came next — real trading does. This is called look-ahead bias, and it means backtest results will almost always look better than live results.</p>
-
             <p>Use the Backtester to eliminate clearly poor settings and build confidence in your approach. Do not use it to predict future returns or size positions based on historical win rates.</p>
-
             <p>Always trade with risk management in place and never commit capital you cannot afford to lose.</p>
         </section>
-
     </div>
 
     <section class="cta-section">
@@ -478,7 +260,13 @@
 
     <footer>
         <div class="container">
+            <div class="social-icons">
+                <a href="https://discord.gg/hZp4NsjpwT" target="_blank" rel="noopener noreferrer" aria-label="Discord"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+                <a href="https://www.youtube.com/@TrendlineProject" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                <a href="https://www.tradingview.com/u/TrendlineProject/" target="_blank" rel="noopener noreferrer" aria-label="TradingView"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;fill:currentColor;"><path d="M15.8654 8.2789c0 1.3541-1.0978 2.4519-2.452 2.4519-1.354 0-2.4519-1.0978-2.4519-2.452 0-1.354 1.0978-2.4518 2.452-2.4518 1.3541 0 2.4519 1.0977 2.4519 2.4519zM9.75 6H0v4.9038h4.8462v7.2692H9.75Zm8.5962 0H24l-5.1058 12.173h-5.6538z"/></svg></a>
+            </div>
             <div class="footer-links">
+                <a href="../">Resources</a>
                 <a href="../../privacy-policy.html">Privacy Policy</a>
                 <a href="../../terms-of-service.html">Terms of Service</a>
                 <a href="../../cookie-policy.html">Cookie Policy</a>
@@ -490,9 +278,7 @@
 
     <script>
         const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            nav.classList.toggle('scrolled', window.scrollY > 50);
-        });
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
     </script>
 </body>
 </html>
