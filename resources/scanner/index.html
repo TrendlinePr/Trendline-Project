@@ -5,18 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#1C1F26">
     <title>QR Pro Scanner - Multi-Instrument Dashboard Guide</title>
-    
-    <!-- SEO Meta Tags -->
     <meta name="description" content="Complete guide for QR Pro Multi-Instrument Scanner. Monitor up to 20 symbols simultaneously using the full Quantum Ribbon Pro signal engine in a single dashboard.">
     <meta name="keywords" content="QR Pro Scanner, quantum ribbon scanner, multi-instrument scanner, tradingview scanner, market dashboard, trading signals">
     <meta name="author" content="Trendline Project">
     <meta name="robots" content="index, follow">
-    
-    <!-- Favicons -->
     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
     <link rel="icon" type="image/png" sizes="32x32" href="../../favicon-32x32.png">
-    
-    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLKJNZ6GZV"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -24,478 +18,79 @@
         gtag('js', new Date());
         gtag('config', 'G-RLKJNZ6GZV');
     </script>
-    
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        :root {
-            --surface: #1C1F26;
-            --surface-hover: #23262E;
-            --accent: #29A8F1;
-            --accent-subtle: rgba(41, 168, 241, 0.1);
-            --text: #F0F0F0;
-            --text-secondary: #C5CBD3;
-            --text-muted: #8B92A0;
-            --border: rgba(255, 255, 255, 0.06);
-        }
-
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
-            background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%);
-            background-attachment: fixed;
-            color: var(--text);
-            line-height: 1.7;
-            -webkit-font-smoothing: antialiased;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 0 32px;
-        }
-
-        /* Navigation */
-        nav {
-            padding: 20px 0;
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            background: transparent;
-            z-index: 100;
-            transition: background 0.3s ease, backdrop-filter 0.3s ease;
-        }
-
-        nav.scrolled {
-            background: rgba(28, 31, 38, 0.8);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-        }
-
-        .nav-content {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .logo {
-            font-size: 1.125rem;
-            font-weight: 600;
-            color: var(--text);
-            text-decoration: none;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .logo img {
-            width: 32px;
-            height: 32px;
-        }
-
-        .back-link {
-            color: var(--text-secondary);
-            text-decoration: none;
-            font-size: 0.9375rem;
-            transition: color 0.2s;
-        }
-
-        .back-link:hover {
-            color: var(--accent);
-        }
-
-        /* Header */
-        .tutorial-header {
-            padding: 120px 0 40px;
-            text-align: center;
-        }
-
-        .badge {
-            display: inline-block;
-            padding: 6px 12px;
-            background: var(--accent-subtle);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            font-size: 0.75rem;
-            font-weight: 500;
-            color: var(--accent);
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            margin-bottom: 24px;
-        }
-
-        h1 {
-            font-size: clamp(2rem, 5vw, 3rem);
-            font-weight: 600;
-            letter-spacing: -0.03em;
-            margin-bottom: 16px;
-            line-height: 1.2;
-        }
-
-        .accent-text {
-            color: var(--accent);
-        }
-
-        .subtitle {
-            font-size: 1.125rem;
-            color: var(--text-secondary);
-            max-width: 700px;
-            margin: 0 auto 40px;
-        }
-
-        .video-section {
-            padding: 40px 0 0;
-        }
-
-        .video-wrapper {
-            max-width: 800px;
-            margin: 0 auto;
-            position: relative;
-            padding-bottom: 56.25%;
-            height: 0;
-            overflow: hidden;
-            border-radius: 16px;
-            border: 1px solid var(--border);
-            background: #000;
-            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
-        }
-
-        .video-wrapper iframe {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
-
-        /* Content Sections */
-        .content-section {
-            padding: 60px 0;
-            border-bottom: 1px solid var(--border);
-        }
-
-        .content-section:last-of-type {
-            border-bottom: none;
-        }
-
-        h2 {
-            font-size: 2rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            margin-bottom: 24px;
-            color: var(--text);
-        }
-
-        h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            letter-spacing: -0.02em;
-            margin: 40px 0 16px;
-            color: var(--text);
-        }
-
-        h3:first-of-type {
-            margin-top: 0;
-        }
-
-        p {
-            margin-bottom: 20px;
-            color: var(--text-secondary);
-            font-size: 1.0625rem;
-        }
-
-        ul, ol {
-            margin: 20px 0 20px 24px;
-            color: var(--text-secondary);
-        }
-
-        li {
-            margin-bottom: 12px;
-            padding-left: 8px;
-        }
-
-        strong {
-            color: var(--text);
-            font-weight: 600;
-        }
-
-        /* Info Box */
-        .info-box {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-left: 3px solid var(--accent);
-            border-radius: 8px;
-            padding: 24px;
-            margin: 32px 0;
-        }
-
-        .info-box h4 {
-            color: var(--accent);
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .info-box p {
-            margin-bottom: 0;
-            font-size: 0.9375rem;
-        }
-
-        /* Warning Box */
-        .warning-box {
-            background: rgba(236, 72, 153, 0.05);
-            border: 1px solid rgba(236, 72, 153, 0.2);
-            border-left: 3px solid #EC4899;
-            border-radius: 8px;
-            padding: 24px;
-            margin: 32px 0;
-        }
-
-        .warning-box h4 {
-            color: #EC4899;
-            font-size: 1rem;
-            font-weight: 600;
-            margin-bottom: 12px;
-        }
-
-        .warning-box p {
-            margin-bottom: 0;
-            font-size: 0.9375rem;
-        }
-
-        /* Table of Contents */
-        .toc {
-            background: var(--surface);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 32px;
-            margin: 40px 0 60px;
-        }
-
-        .toc h2 {
-            font-size: 1.5rem;
-            margin-bottom: 20px;
-        }
-
-        .toc ul {
-            margin: 0;
-            list-style: none;
-        }
-
-        .toc li {
-            margin-bottom: 12px;
-            padding-left: 0;
-        }
-
-        .toc a {
-            color: var(--text-secondary);
-            text-decoration: none;
-            transition: color 0.2s;
-            display: block;
-            padding: 8px 0;
-        }
-
-        .toc a:hover {
-            color: var(--accent);
-        }
-
-        /* Dashboard Table Preview */
-        .dashboard-table {
-            width: 100%;
-            border-collapse: separate;
-            border-spacing: 0;
-            background: #18191E;
-            border-radius: 12px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            margin: 32px 0;
-            font-size: 0.875rem;
-        }
-
-        .dashboard-table thead {
-            background: rgba(41, 168, 241, 0.08);
-        }
-
-        .dashboard-table th {
-            padding: 14px 16px;
-            text-align: left;
-            font-size: 0.8125rem;
-            font-weight: 600;
-            text-transform: uppercase;
-            letter-spacing: 0.05em;
-            color: var(--accent);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .dashboard-table td {
-            padding: 14px 16px;
-            font-size: 0.875rem;
-            color: var(--text-secondary);
-            border-bottom: 1px solid var(--border);
-        }
-
-        .dashboard-table tbody tr:last-child td {
-            border-bottom: none;
-        }
-
-        .status-long {
-            display: inline-block;
-            background: rgba(0, 200, 100, 0.25);
-            color: #4ade80;
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 0.8125rem;
-            font-weight: 600;
-        }
-
-        .status-short {
-            display: inline-block;
-            background: rgba(236, 72, 153, 0.25);
-            color: #f472b6;
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 0.8125rem;
-            font-weight: 600;
-        }
-
-        .status-wait {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.08);
-            color: var(--text-muted);
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 0.8125rem;
-            font-weight: 600;
-        }
-
-        .trend-bull {
-            display: inline-block;
-            background: rgba(41, 168, 241, 0.2);
-            color: var(--accent);
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 0.8125rem;
-        }
-
-        .trend-bear {
-            display: inline-block;
-            background: rgba(236, 72, 153, 0.2);
-            color: #f472b6;
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 0.8125rem;
-        }
-
-        .trend-range {
-            display: inline-block;
-            background: rgba(255, 255, 255, 0.06);
-            color: var(--text-muted);
-            padding: 3px 10px;
-            border-radius: 4px;
-            font-size: 0.8125rem;
-        }
-
-        /* CTA Section */
-        .cta-section {
-            text-align: center;
-            padding: 80px 0;
-            background: radial-gradient(ellipse at center, rgba(41, 168, 241, 0.08) 0%, transparent 60%);
-        }
-
-        .btn {
-            display: inline-block;
-            padding: 14px 32px;
-            border-radius: 8px;
-            font-size: 0.9375rem;
-            font-weight: 500;
-            cursor: pointer;
-            transition: all 0.2s ease;
-            text-decoration: none;
-            letter-spacing: -0.01em;
-        }
-
-        .btn-primary {
-            background: var(--accent);
-            color: #000;
-            border: none;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 0 25px rgba(41, 168, 241, 0.4);
-        }
-
-        /* Footer */
-        footer {
-            padding: 40px 0;
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 32px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .footer-links a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.875rem;
-            transition: color 0.2s;
-        }
-
-        .footer-links a:hover {
-            color: var(--accent);
-        }
-
-        .copyright {
-            color: var(--text-muted);
-            font-size: 0.875rem;
-        }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .container {
-                padding: 0 20px;
-            }
-
-            .tutorial-header {
-                padding: 60px 0 40px;
-            }
-
-            h1 {
-                font-size: 2rem;
-            }
-
-            h2 {
-                font-size: 1.5rem;
-            }
-
-            h3 {
-                font-size: 1.25rem;
-            }
-
-            .content-section {
-                padding: 40px 0;
-            }
-
-            .dashboard-table {
-                display: block;
-                overflow-x: auto;
-            }
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        :root { --surface: #1C1F26; --surface-hover: #23262E; --accent: #29A8F1; --accent-subtle: rgba(41,168,241,0.1); --text: #F0F0F0; --text-secondary: #C5CBD3; --text-muted: #8B92A0; --border: rgba(255,255,255,0.06); }
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif; background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%); background-attachment: fixed; color: var(--text); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+        .container { max-width: 900px; margin: 0 auto; padding: 0 32px; }
+        nav { padding: 20px 0; position: fixed; top: 0; left: 0; right: 0; background: transparent; z-index: 100; transition: background 0.3s ease, backdrop-filter 0.3s ease; }
+        nav.scrolled { background: rgba(28,31,38,0.8); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
+        .nav-content { display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .logo { font-size: 1.125rem; font-weight: 600; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; }
+        .logo img { width: 32px; height: 32px; }
+        .nav-social { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; align-items: center; }
+        .nav-right { display: flex; gap: 20px; align-items: center; }
+        .nav-right a { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+        .nav-right a:hover { color: var(--accent); }
+        .nav-right .btn-nav { color: var(--accent); border: 1px solid var(--accent); border-radius: 8px; padding: 8px 20px; font-size: 0.875rem; }
+        .social-icons { display: flex; justify-content: center; gap: 16px; margin-bottom: 24px; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255,255,255,0.05); color: var(--text-muted); transition: all 0.2s; text-decoration: none; }
+        .social-icons a:hover { background: rgba(41,168,241,0.1); color: var(--accent); transform: translateY(-2px); }
+        .social-icons svg { width: 20px; height: 20px; fill: currentColor; }
+        .tutorial-header { padding: 120px 0 40px; text-align: center; }
+        .badge { display: inline-block; padding: 6px 12px; background: var(--accent-subtle); border: 1px solid var(--border); border-radius: 20px; font-size: 0.75rem; font-weight: 500; color: var(--accent); text-transform: uppercase; letter-spacing: 0.05em; margin-bottom: 24px; }
+        h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.2; }
+        .accent-text { color: var(--accent); }
+        .subtitle { font-size: 1.125rem; color: var(--text-secondary); max-width: 700px; margin: 0 auto 40px; }
+        .video-section { padding: 40px 0 0; }
+        .video-wrapper { max-width: 800px; margin: 0 auto; position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 16px; border: 1px solid var(--border); background: #000; box-shadow: 0 20px 60px rgba(0,0,0,0.5); }
+        .video-wrapper iframe { position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none; }
+        .content-section { padding: 60px 0; border-bottom: 1px solid var(--border); }
+        .content-section:last-of-type { border-bottom: none; }
+        h2 { font-size: 2rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 24px; color: var(--text); }
+        h3 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; margin: 40px 0 16px; color: var(--text); }
+        h3:first-of-type { margin-top: 0; }
+        p { margin-bottom: 20px; color: var(--text-secondary); font-size: 1.0625rem; }
+        ul, ol { margin: 20px 0 20px 24px; color: var(--text-secondary); }
+        li { margin-bottom: 12px; padding-left: 8px; }
+        strong { color: var(--text); font-weight: 600; }
+        code { background: rgba(255,255,255,0.08); padding: 2px 6px; border-radius: 4px; font-size: 0.9em; }
+        .info-box { background: var(--surface); border: 1px solid var(--border); border-left: 3px solid var(--accent); border-radius: 8px; padding: 24px; margin: 32px 0; }
+        .info-box h4 { color: var(--accent); font-size: 1rem; font-weight: 600; margin-bottom: 12px; }
+        .info-box p { margin-bottom: 0; font-size: 0.9375rem; }
+        .warning-box { background: rgba(236,72,153,0.05); border: 1px solid rgba(236,72,153,0.2); border-left: 3px solid #EC4899; border-radius: 8px; padding: 24px; margin: 32px 0; }
+        .warning-box h4 { color: #EC4899; font-size: 1rem; font-weight: 600; margin-bottom: 12px; }
+        .warning-box p { margin-bottom: 0; font-size: 0.9375rem; }
+        .toc { background: var(--surface); border: 1px solid var(--border); border-radius: 12px; padding: 32px; margin: 40px 0 60px; }
+        .toc h2 { font-size: 1.5rem; margin-bottom: 20px; }
+        .toc ul { margin: 0; list-style: none; }
+        .toc li { margin-bottom: 12px; padding-left: 0; }
+        .toc a { color: var(--text-secondary); text-decoration: none; transition: color 0.2s; display: block; padding: 8px 0; }
+        .toc a:hover { color: var(--accent); }
+        .dashboard-table { width: 100%; border-collapse: separate; border-spacing: 0; background: #18191E; border-radius: 12px; overflow: hidden; border: 1px solid var(--border); margin: 32px 0; font-size: 0.875rem; }
+        .dashboard-table thead { background: rgba(41,168,241,0.08); }
+        .dashboard-table th { padding: 14px 16px; text-align: left; font-size: 0.8125rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.05em; color: var(--accent); border-bottom: 1px solid var(--border); }
+        .dashboard-table td { padding: 14px 16px; font-size: 0.875rem; color: var(--text-secondary); border-bottom: 1px solid var(--border); }
+        .dashboard-table tbody tr:last-child td { border-bottom: none; }
+        .status-long { display: inline-block; background: rgba(0,200,100,0.25); color: #4ade80; padding: 3px 10px; border-radius: 4px; font-size: 0.8125rem; font-weight: 600; }
+        .status-short { display: inline-block; background: rgba(236,72,153,0.25); color: #f472b6; padding: 3px 10px; border-radius: 4px; font-size: 0.8125rem; font-weight: 600; }
+        .status-wait { display: inline-block; background: rgba(255,255,255,0.08); color: var(--text-muted); padding: 3px 10px; border-radius: 4px; font-size: 0.8125rem; font-weight: 600; }
+        .trend-bull { display: inline-block; background: rgba(41,168,241,0.2); color: var(--accent); padding: 3px 10px; border-radius: 4px; font-size: 0.8125rem; }
+        .trend-bear { display: inline-block; background: rgba(236,72,153,0.2); color: #f472b6; padding: 3px 10px; border-radius: 4px; font-size: 0.8125rem; }
+        .trend-range { display: inline-block; background: rgba(255,255,255,0.06); color: var(--text-muted); padding: 3px 10px; border-radius: 4px; font-size: 0.8125rem; }
+        .cta-section { text-align: center; padding: 80px 0; background: radial-gradient(ellipse at center, rgba(41,168,241,0.08) 0%, transparent 60%); }
+        .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; text-decoration: none; letter-spacing: -0.01em; }
+        .btn-primary { background: var(--accent); color: #000; border: none; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(41,168,241,0.4); }
+        footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; }
+        .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 20px; flex-wrap: wrap; }
+        .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
+        .footer-links a:hover { color: var(--accent); }
+        .copyright { color: var(--text-muted); font-size: 0.875rem; }
+        @media (max-width: 768px) { .container { padding: 0 20px; } .tutorial-header { padding: 60px 0 40px; } h1 { font-size: 2rem; } h2 { font-size: 1.5rem; } h3 { font-size: 1.25rem; } .content-section { padding: 40px 0; } .dashboard-table { display: block; overflow-x: auto; } }
     </style>
 </head>
 <body>
-    <!-- NAVIGATION -->
     <nav>
         <div class="container">
             <div class="nav-content">
@@ -503,12 +98,19 @@
                     <img src="../../logo.png" alt="Trendline Project Logo">
                     <span>Trendline Project</span>
                 </a>
-                <a href="../" class="back-link">← Back to Resources</a>
+                <div class="nav-social">
+                    <a href="https://discord.gg/hZp4NsjpwT" target="_blank" rel="noopener noreferrer" aria-label="Discord" style="color: var(--text-muted); transition: color 0.2s; display: flex;" onmouseover="this.style.color='#29A8F1'" onmouseout="this.style.color='var(--text-muted)'"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+                    <a href="https://www.youtube.com/@TrendlineProject" target="_blank" rel="noopener noreferrer" aria-label="YouTube" style="color: var(--text-muted); transition: color 0.2s; display: flex;" onmouseover="this.style.color='#29A8F1'" onmouseout="this.style.color='var(--text-muted)'"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" style="width:18px;height:18px;fill:currentColor;"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                    <a href="https://www.tradingview.com/u/TrendlineProject/" target="_blank" rel="noopener noreferrer" aria-label="TradingView" style="color: var(--text-muted); transition: color 0.2s; display: flex;" onmouseover="this.style.color='#29A8F1'" onmouseout="this.style.color='var(--text-muted)'"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:18px;height:18px;fill:currentColor;"><path d="M15.8654 8.2789c0 1.3541-1.0978 2.4519-2.452 2.4519-1.354 0-2.4519-1.0978-2.4519-2.452 0-1.354 1.0978-2.4518 2.452-2.4518 1.3541 0 2.4519 1.0977 2.4519 2.4519zM9.75 6H0v4.9038h4.8462v7.2692H9.75Zm8.5962 0H24l-5.1058 12.173h-5.6538z"/></svg></a>
+                </div>
+                <div class="nav-right">
+                    <a href="../">Resources</a>
+                    <a href="../../#pricing" class="btn-nav">Get Access</a>
+                </div>
             </div>
         </div>
     </nav>
 
-    <!-- HEADER -->
     <section class="tutorial-header">
         <div class="container">
             <span class="badge">Complete Guide</span>
@@ -517,22 +119,14 @@
         </div>
     </section>
 
-    <!-- VIDEO -->
     <section class="video-section">
         <div class="container">
             <div class="video-wrapper">
-                <iframe
-                    src="https://www.youtube-nocookie.com/embed/AdZXSHEDmKY"
-                    title="QR Pro Scanner Tutorial"
-                    frameborder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                    allowfullscreen>
-                </iframe>
+                <iframe src="https://www.youtube-nocookie.com/embed/AdZXSHEDmKY" title="QR Pro Scanner Tutorial" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
     </section>
 
-    <!-- TABLE OF CONTENTS -->
     <div class="container">
         <div class="toc">
             <h2>Table of Contents</h2>
@@ -552,28 +146,21 @@
         </div>
     </div>
 
-    <!-- CONTENT -->
     <div class="container">
-
-        <!-- Introduction -->
         <section class="content-section" id="introduction">
             <h2>What Is QR Pro Scanner?</h2>
             <p>QR Pro Multi-Instrument Scanner is the companion tool to Quantum Ribbon Pro. It runs the full QR Pro signal engine across up to 20 symbols and timeframes simultaneously, displaying live trade status in a single dashboard table — without switching charts.</p>
             <p>If you're already using Quantum Ribbon Pro on individual charts, this gives you market-wide visibility using the exact same logic, risk management, and alert system.</p>
-
             <div class="info-box">
                 <h4>Companion Tool</h4>
                 <p>The Scanner is designed to complement Quantum Ribbon Pro, not replace it. For the best workflow, use the Scanner to monitor your watchlist, then switch to a chart with the main indicator to review signals in detail before executing.</p>
             </div>
-
             <p>You can also use it as a standalone scanner if you want multi-instrument monitoring without opening individual charts at all — all the signal logic runs internally.</p>
         </section>
 
-        <!-- Setup -->
         <section class="content-section" id="setup">
             <h2>Setup & Getting Started</h2>
             <p>After purchase, you'll receive access to the Scanner as an invite-only script on TradingView, just like the main indicator. It will appear in your <strong>Invite-Only Scripts</strong> folder.</p>
-
             <p><strong>To add it to your chart:</strong></p>
             <ol>
                 <li>Open any chart on TradingView — the underlying chart symbol doesn't matter for the scanner</li>
@@ -581,22 +168,17 @@
                 <li>Select <strong>QR Pro Multi-Instrument Scanner</strong></li>
                 <li>The dashboard table will appear on your chart immediately</li>
             </ol>
-
             <div class="info-box">
                 <h4>Which chart should I put it on?</h4>
                 <p>Since the scanner pulls data from its own symbol inputs, the chart you place it on doesn't affect results. Many traders use a low-timeframe chart like a 1-minute or 5-minute chart as their "scanner chart" to ensure the scanner updates frequently.</p>
             </div>
-
             <p>Once added, open the indicator settings to configure your symbols, timeframes, and signal preferences.</p>
         </section>
 
-        <!-- Symbols -->
         <section class="content-section" id="symbols">
             <h2>Adding Symbols & Timeframes</h2>
             <p>The scanner supports up to 20 instruments. Each row has three inputs: an enable checkbox, a symbol field, and a timeframe selector.</p>
-
             <p><strong>The first 5 symbols are enabled by default</strong> with example instruments (EURUSD, BTCUSDT, SPX, Gold, RHM). Replace these with your own watchlist. Symbols 6–20 are disabled by default — check the enable box to activate each one.</p>
-
             <p><strong>Entering symbols:</strong> Use TradingView's full symbol format including the exchange prefix. For example:</p>
             <ul>
                 <li><strong>FX:EURUSD</strong> — Forex via FX data feed</li>
@@ -605,20 +187,16 @@
                 <li><strong>CAPITALCOM:GOLD</strong> — Gold CFD</li>
                 <li><strong>SP:SPX</strong> — S&P 500 index</li>
             </ul>
-
             <p><strong>Timeframe field:</strong> Leave blank to use the chart's current timeframe. Enter a value like <strong>15</strong>, <strong>60</strong>, <strong>240</strong>, or <strong>D</strong> to lock that row to a specific timeframe regardless of what chart you're on.</p>
-
             <div class="warning-box">
                 <h4>⚠ Timeframe Limitation</h4>
                 <p>The scanner timeframe for each symbol cannot be lower than the chart's current timeframe. If your chart is on 1H, you cannot scan 15M timeframes for any symbol. Set the chart to a lower timeframe if you need to monitor shorter intervals.</p>
             </div>
         </section>
 
-        <!-- Dashboard -->
         <section class="content-section" id="dashboard">
             <h2>Dashboard Breakdown</h2>
             <p>The live table shows seven columns for each enabled instrument. Here's what each one means:</p>
-
             <table class="dashboard-table">
                 <thead>
                     <tr>
@@ -670,92 +248,67 @@
                     </tr>
                 </tbody>
             </table>
-
             <h3>Position Column</h3>
             <p>Shows the current trade state for that instrument. <strong>LONG</strong> or <strong>SHORT</strong> means an active trade is open. <strong>WAIT</strong> means no position is active — the scanner is watching for a signal.</p>
             <p>When a trade is active, additional indicators appear in brackets: <strong>(BE)</strong> means break-even stop has been moved to entry. <strong>(TP1✓)</strong> or <strong>(TP2✓)</strong> shows which partial take-profit levels have been hit.</p>
-
             <h3>Master Trend Column</h3>
             <p>Shows overall ribbon alignment for that symbol. The five possible states are <strong>Strong Bull</strong>, <strong>Bullish</strong>, <strong>Neutral</strong>, <strong>Bearish</strong>, and <strong>Strong Bear</strong>. When the range filter is active and blocking signals, it shows <strong>Filtered / Range</strong> instead.</p>
-
             <h3>Confidence Column</h3>
             <p>A market health score from 0–100% based on ribbon alignment strength, trend consistency, and volume participation. Higher percentages indicate stronger trending conditions. This is a context indicator — not a signal trigger by itself.</p>
-
             <h3>Entry / SL / TP Columns</h3>
             <p>Live price levels for the active trade. Entry shows the exact price where the position was opened. SL shows the current stop level (this updates if break-even automation moves it). TP shows the final take-profit target. These are blank when no position is open.</p>
-
             <div class="info-box">
                 <h4>Table Position & Size</h4>
                 <p>You can reposition the table to any corner of the chart (top right, bottom left, etc.) and adjust text size from tiny to large via the Scanner Layout settings. Customize it to fit your screen setup.</p>
             </div>
         </section>
 
-        <!-- Signal Engine -->
         <section class="content-section" id="signal-engine">
             <h2>Signal Engine Settings</h2>
             <p>The scanner uses the same signal logic as the main Quantum Ribbon Pro indicator. All signal settings apply globally — the same configuration runs across every symbol in your watchlist.</p>
-
             <h3>Signal Sensitivity</h3>
             <p>Controls how selective the signal engine is. Scale from 1 (most signals) to 10 (fewest signals). Higher sensitivity adds a longer cooldown between signals and requires stronger confirmation. Default is 5 — a balanced starting point for most markets.</p>
-
             <h3>Ribbon Bounce Signals</h3>
             <p>When disabled (default), signals fire on trend confirmation breakouts. When enabled, the scanner switches to pullback-entry mode — it looks for price dipping into the ribbon during an established trend and crossing back out. Toggle this based on your preferred entry style.</p>
-
             <h3>Internal HTF Filter</h3>
             <p>Requires higher timeframe ribbon alignment before any signal fires. Set to <strong>None</strong> to disable, or choose from 15, 30, 60, 120, 240 minute, Daily, or Weekly. If you're scanning 15-minute charts and set this to 60, only signals that align with the hourly ribbon direction will fire.</p>
         </section>
 
-        <!-- Risk Management -->
         <section class="content-section" id="risk-management">
             <h2>Risk Management</h2>
             <p>All risk management settings from Quantum Ribbon Pro are available in the scanner. Each symbol tracks its own independent trade state — stops, targets, and partial take-profits are calculated and managed per instrument.</p>
-
             <h3>Stop Loss Method</h3>
             <p>Three options: <strong>ATR</strong> (volatility-adjusted, default), <strong>Percentage</strong> (fixed % from entry), or <strong>Swing</strong> (placed at recent price structure). ATR adapts to each symbol's volatility automatically. Swing stops reference actual support/resistance levels and include an ATR buffer beyond the swing point.</p>
-
             <h3>Stop Loss Distance</h3>
             <p>For ATR method: <strong>Tight</strong> (1.5× ATR), <strong>Normal</strong> (2× ATR, default), or <strong>Wide</strong> (2.5× ATR). Tighter stops give better risk/reward but get hit more often. Wider stops stay in trades longer but risk more per trade.</p>
-
             <h3>Take Profit Target</h3>
             <p>Sets the final take-profit at 1.5R, 2R, or 3R. This is the risk multiple — if your stop is 100 points away, 2R targets 200 points of gain.</p>
-
             <h3>Partial Take-Profits</h3>
             <p>Enable this to scale out of positions in three stages instead of closing everything at one target. Configure the percentage to close at each level and the R-multiple for each. Default: close 50% at 1.5R, another 30% at 2R, let 20% run to the final target. The dashboard tracks which partials have hit per symbol.</p>
-
             <h3>Break-Even Stop</h3>
             <p>Automatically moves the stop to entry price once the trade reaches a defined profit level. Trigger options: when TP1 hits, when TP2 hits, or at a custom R-multiple. The dashboard shows <strong>(BE)</strong> in the position column once break-even is active for a trade.</p>
-
             <h3>Ribbon Flip Exit</h3>
             <p>Closes a position early when the ribbon flips against your direction, before the final take-profit or stop is reached. Only triggers if no partial take-profits have been hit yet. Flip Sensitivity (1–5) controls how many ribbon layers must flip — 5 requires all layers to flip (conservative), lower values exit earlier (aggressive).</p>
         </section>
 
-        <!-- Filters -->
         <section class="content-section" id="filters">
             <h2>Filters & Confirmation</h2>
-
             <h3>TP RSI Confirmation</h3>
             <p>Requires all five RSI ribbon pairs to align with the signal direction before it fires. For longs, all five must be bullish. For shorts, all five must be bearish. This reduces signal frequency but adds momentum confirmation. If you've been running Quantum Ribbon Pro with TP RSI as a separate filter, enable this to replicate that setup inside the scanner.</p>
-
             <h3>Quantum Range Filter</h3>
             <p>Blocks signals during choppy, low-volatility conditions by analyzing volatility ratio and ribbon compression. When ATR is low compared to its average and the ribbon is squeezed, the instrument shows <strong>Filtered / Range</strong> in the Master Trend column and no signals fire. Three sensitivity levels: <strong>Low</strong> (only blocks extreme chop), <strong>Normal</strong> (balanced default), <strong>High</strong> (only trades in clearly trending markets).</p>
-
             <h3>S/R Auto-Detection</h3>
             <p>Restricts signals to moments when price is near a key support or resistance level. The scanner automatically detects pivot highs and lows based on your chosen strength setting — <strong>Weak</strong> for more levels, <strong>Strong</strong> for major swings only. The <strong>Touch Zone (%)</strong> defines how close price must be to a level to qualify. Useful for traders who only want to enter at structure.</p>
-
             <h3>Session Filter</h3>
             <p>Restricts signals to a defined trading window in EST. Set your start and end times to block alerts outside your preferred session. The scanner respects this filter independently — signals only fire during active hours.</p>
-
             <h3>Disable Weekend Signals</h3>
             <p>Prevents signals from firing on Saturday and Sunday. Useful for crypto traders who don't want low-volume weekend setups triggering alerts. The chart still processes and would show the signal visually, but no alerts fire.</p>
         </section>
 
-        <!-- Alerts -->
         <section class="content-section" id="alerts">
             <h2>Alert System</h2>
             <p>The scanner fires alerts for every event across all monitored instruments from a single alert setup. You don't need to create separate alerts for each symbol.</p>
-
             <p><strong>To set up alerts:</strong> Right-click on the chart, select <strong>Add Alert</strong>, and choose <strong>QR Pro Scanner</strong> as the condition. Set it to fire on any alert() call. One alert handles everything.</p>
-
             <p><strong>Alert events include:</strong></p>
             <ul>
                 <li><strong>Entry</strong> — new long or short position opened</li>
@@ -765,66 +318,50 @@
                 <li><strong>Break-Even</strong> — stop moved to entry</li>
                 <li><strong>Ribbon Flip Exit</strong> — early exit on ribbon reversal</li>
             </ul>
-
             <p>Toggle each event type on or off independently. For example, disable TP alerts if you only want entry and stop notifications.</p>
-
             <h3>Alert Formats</h3>
             <p><strong>Simple</strong> — clean single-line message with symbol, timeframe, direction, and event type. Example: <em>[QR Scanner] BYBIT:BTCUSDT.P (15) SHORT ENTRY at 67506.20</em></p>
             <p><strong>JSON</strong> — structured data with all price levels. Designed for webhook integrations with bots, Telegram, Discord, or automation platforms. Parses cleanly into any system that accepts JSON payloads.</p>
             <p><strong>Custom Template</strong> — build your own message using placeholders: <code>{{ticker}}</code>, <code>{{tf}}</code>, <code>{{dir}}</code>, <code>{{type}}</code>, <code>{{price}}</code>, <code>{{sl}}</code>, <code>{{tp}}</code>. Arrange them however your workflow needs.</p>
-
             <div class="info-box">
                 <h4>Deduplication Built In</h4>
                 <p>The scanner includes internal deduplication logic — the same symbol, timeframe, and event type won't fire twice on the same bar even if multiple data requests resolve simultaneously. You won't get duplicate alerts.</p>
             </div>
         </section>
 
-        <!-- Appearance -->
         <section class="content-section" id="appearance">
             <h2>Table Appearance</h2>
             <p>Full control over how the dashboard looks. All color and style settings are in the <strong>Scanner Appearance</strong> group.</p>
-
             <p><strong>Layout options</strong> (in Scanner Layout group):</p>
             <ul>
                 <li><strong>Table Position</strong> — choose from top right, bottom right, top left, bottom left, middle right, middle left, or center</li>
                 <li><strong>Table Text Size</strong> — tiny, small, normal, or large</li>
                 <li><strong>Update Every N Bars</strong> — how frequently the table refreshes (1 = every bar, useful to reduce load on large watchlists)</li>
             </ul>
-
             <p><strong>Color controls:</strong> Background color, border color, header background and text color, row text color. Customize status colors for Long, Short, and Wait states. Trend colors for bullish, bearish, and filtered states are adjustable independently.</p>
         </section>
 
-        <!-- Important Notes -->
         <section class="content-section" id="important-notes">
             <h2>Important Notes</h2>
-
             <div class="info-box">
                 <h4>Match Your Settings</h4>
                 <p>For best results, match your scanner settings to your main Quantum Ribbon Pro configuration. If you're trading with TP RSI confirmation enabled on the chart indicator, enable it in the scanner too. This keeps signal logic consistent across both tools.</p>
             </div>
-
             <p><strong>Mixed market types:</strong> Results may vary slightly between different chart symbols since markets operate on different schedules. Crypto runs 24/7 while stocks and forex have defined sessions — this can affect how signals appear across mixed watchlists, especially when using the session filter.</p>
-
             <p><strong>Standalone use:</strong> The scanner works as a standalone tool for traders who want multi-instrument monitoring without opening individual charts. It's not required to have the main Quantum Ribbon Pro indicator on any chart for the scanner to function.</p>
         </section>
 
-        <!-- Disclaimer -->
         <section class="content-section" id="disclaimer">
             <h2>Risk Disclaimer</h2>
-
             <div class="warning-box">
                 <h4>⚠️ Important: Read This Carefully</h4>
                 <p><strong>This is not financial advice.</strong> Trading carries real risk and you can lose money. If you decide to use this tool, that's entirely your choice and your responsibility.</p>
             </div>
-
             <p>Past performance, win rates, or any metrics shown in the dashboard do not guarantee future results. Markets change. Conditions that generated signals historically may not continue to do so.</p>
-
             <p>The scanner is a tool to assist your trading decisions. It does not guarantee profitable outcomes. Always use proper risk management and never trade with money you cannot afford to lose.</p>
         </section>
-
     </div>
 
-    <!-- CTA -->
     <section class="cta-section">
         <div class="container">
             <h2 style="margin-bottom: 16px;">Ready to Monitor the Market?</h2>
@@ -833,10 +370,15 @@
         </div>
     </section>
 
-    <!-- FOOTER -->
     <footer>
         <div class="container">
+            <div class="social-icons">
+                <a href="https://discord.gg/hZp4NsjpwT" target="_blank" rel="noopener noreferrer" aria-label="Discord"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg></a>
+                <a href="https://www.youtube.com/@TrendlineProject" target="_blank" rel="noopener noreferrer" aria-label="YouTube"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg></a>
+                <a href="https://www.tradingview.com/u/TrendlineProject/" target="_blank" rel="noopener noreferrer" aria-label="TradingView"><svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;fill:currentColor;"><path d="M15.8654 8.2789c0 1.3541-1.0978 2.4519-2.452 2.4519-1.354 0-2.4519-1.0978-2.4519-2.452 0-1.354 1.0978-2.4518 2.452-2.4518 1.3541 0 2.4519 1.0977 2.4519 2.4519zM9.75 6H0v4.9038h4.8462v7.2692H9.75Zm8.5962 0H24l-5.1058 12.173h-5.6538z"/></svg></a>
+            </div>
             <div class="footer-links">
+                <a href="../">Resources</a>
                 <a href="../../privacy-policy.html">Privacy Policy</a>
                 <a href="../../terms-of-service.html">Terms of Service</a>
                 <a href="../../cookie-policy.html">Cookie Policy</a>
@@ -845,16 +387,10 @@
             <p class="copyright">© 2025 Quantum Ribbon Pro. Built by Trendline Project.</p>
         </div>
     </footer>
+
     <script>
         const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => {
-            if (window.scrollY > 50) {
-                nav.classList.add('scrolled');
-            } else {
-                nav.classList.remove('scrolled');
-            }
-        });
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
     </script>
-
 </body>
 </html>
