@@ -82,7 +82,11 @@
         .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
         .footer-links a:hover { color: var(--accent); }
         .copyright { color: var(--text-muted); font-size: 0.875rem; }
-        @media (max-width: 768px) { .container { padding: 0 20px; } .tutorial-header { padding: 100px 0 40px; } h1 { font-size: 2rem; } h2 { font-size: 1.5rem; } .component-grid { grid-template-columns: 1fr; } .content-section { padding: 40px 0; } }
+        @media (max-width: 768px) { .container { padding: 0 20px;
+            .logo span { display: none; }
+            .nav-social { position: static; transform: none; gap: 8px; }
+            .nav-right .btn-nav { display: none; }
+        } .tutorial-header { padding: 100px 0 40px; } h1 { font-size: 2rem; } h2 { font-size: 1.5rem; } .component-grid { grid-template-columns: 1fr; } .content-section { padding: 40px 0; } }
     </style>
 </head>
 <body>
