@@ -71,12 +71,12 @@
         .copyright { color: var(--text-muted); font-size: 0.875rem; }
         @media (max-width: 768px) {
             .container { padding: 0 20px; }
-            .resources-header { padding: 60px 0 40px; }
+            .resources-header { padding: 100px 0 40px; }
             .resources-grid { grid-template-columns: 1fr; }
             h1 { font-size: 2rem; }
             .logo span { display: none; }
-            .nav-social { display: none; }
-            .nav-right a:not(.btn-nav) { display: none; }
+            .nav-social { position: static; transform: none; gap: 8px; }
+            .nav-right .btn-nav { display: none; }
         }
     </style>
 </head>
