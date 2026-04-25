@@ -564,9 +564,22 @@
                                 <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(41,168,241,0.12); border: 1px solid rgba(41,168,241,0.3); border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #29A8F1;"><span style="font-size: 0.9rem;">⬡</span> 4 tools included</span>
                             </div>
                         </div>
+                        <div id="lifetime-promo-strip" style="margin-bottom: 20px; border-radius: 10px; padding: 12px 16px; background: linear-gradient(135deg, rgba(41,168,241,0.12) 0%, rgba(236,72,153,0.12) 100%); border: 1px solid rgba(236,72,153,0.25);">
+                            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
+                                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
+                                    <span style="background:rgba(236,72,153,0.15); border:1px solid rgba(236,72,153,0.3); color:#EC4899; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; padding:3px 8px; border-radius:20px; white-space:nowrap;">Limited Offer</span>
+                                    <span style="font-size:0.875rem; color:var(--text);"><strong>25% off Lifetime</strong></span>
+                                </div>
+                                <div style="display:flex; align-items:center; gap:6px; font-size:0.8rem; color:#EC4899; font-weight:700; font-variant-numeric:tabular-nums;">
+                                    <span id="lcd-days">00</span><span style="opacity:0.5;">d</span><span style="opacity:0.4;">:</span><span id="lcd-hours">00</span><span style="opacity:0.5;">h</span><span style="opacity:0.4;">:</span><span id="lcd-mins">00</span><span style="opacity:0.5;">m</span><span style="opacity:0.4;">:</span><span id="lcd-secs">00</span><span style="opacity:0.5;">s</span>
+                                </div>
+                            </div>
+                        </div>
                         <div class="price-block">
                             <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
-                                <div><span class="price-amount price-amount-lifetime" style="background: linear-gradient(135deg, #29A8F1, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">$899</span><span class="price-period"> one-time</span></div>
+                                <div>
+                                    <span style="font-size:1.5rem; text-decoration:line-through; opacity:0.45; color:var(--text-secondary); margin-right:6px; vertical-align:middle;">$899</span><span class="price-amount price-amount-lifetime" style="background: linear-gradient(135deg, #29A8F1, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">$674</span><span class="price-period"> one-time</span>
+                                </div>
                             </div>
                             <p class="price-sub">Access for as long as the product exists. No recurring charges.</p>
                         </div>
@@ -775,14 +788,16 @@
     <script>
         (function() {
             const deadline = new Date('2026-04-16T23:59:59');
+            const lifetimeDeadline = new Date('2026-05-02T23:59:59');
             function updateCountdowns() {
-                const now = new Date(); const diff = deadline - now;
+                const now = new Date();
+                // existing annual/monthly promo
+                const diff = deadline - now;
                 if (diff <= 0) {
                     const as = document.getElementById('annual-promo-strip');
                     const ms = document.getElementById('monthly-promo-strip');
                     if (as) as.style.display = 'none';
                     if (ms) ms.style.display = 'none';
-                    // Also reset prices to non-promo values once expired
                     const pa = document.getElementById('price-amount');
                     const po = document.getElementById('price-original');
                     const ps = document.getElementById('price-sub');
@@ -796,16 +811,31 @@
                         pa.textContent = '$99'; if (po) po.style.display = 'none';
                         if (ps) ps.textContent = 'Billed monthly · Cancel anytime';
                     }
-                    return;
+                } else {
+                    const days = String(Math.floor(diff / 86400000)).padStart(2, '0');
+                    const hours = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+                    const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+                    const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+                    ['acd', 'mcd'].forEach(function(prefix) {
+                        const d = document.getElementById(prefix + '-days'); const h = document.getElementById(prefix + '-hours'); const m = document.getElementById(prefix + '-mins'); const s = document.getElementById(prefix + '-secs');
+                        if (d) d.textContent = days; if (h) h.textContent = hours; if (m) m.textContent = mins; if (s) s.textContent = secs;
+                    });
                 }
-                const days = String(Math.floor(diff / 86400000)).padStart(2, '0');
-                const hours = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-                const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-                const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-                ['acd', 'mcd'].forEach(function(prefix) {
-                    const d = document.getElementById(prefix + '-days'); const h = document.getElementById(prefix + '-hours'); const m = document.getElementById(prefix + '-mins'); const s = document.getElementById(prefix + '-secs');
-                    if (d) d.textContent = days; if (h) h.textContent = hours; if (m) m.textContent = mins; if (s) s.textContent = secs;
-                });
+                // lifetime promo countdown
+                const ldiff = lifetimeDeadline - now;
+                const lstrip = document.getElementById('lifetime-promo-strip');
+                if (ldiff <= 0) {
+                    if (lstrip) lstrip.style.display = 'none';
+                } else {
+                    const ld = String(Math.floor(ldiff / 86400000)).padStart(2, '0');
+                    const lh = String(Math.floor((ldiff % 86400000) / 3600000)).padStart(2, '0');
+                    const lm = String(Math.floor((ldiff % 3600000) / 60000)).padStart(2, '0');
+                    const ls = String(Math.floor((ldiff % 60000) / 1000)).padStart(2, '0');
+                    const lcd_d = document.getElementById('lcd-days'); const lcd_h = document.getElementById('lcd-hours');
+                    const lcd_m = document.getElementById('lcd-mins'); const lcd_s = document.getElementById('lcd-secs');
+                    if (lcd_d) lcd_d.textContent = ld; if (lcd_h) lcd_h.textContent = lh;
+                    if (lcd_m) lcd_m.textContent = lm; if (lcd_s) lcd_s.textContent = ls;
+                }
             }
             updateCountdowns(); setInterval(updateCountdowns, 1000);
         })();
@@ -817,7 +847,7 @@
             <div class="cookie-buttons">
                 <button id="acceptCookies" class="cookie-btn cookie-btn-accept">Accept All</button>
                 <button id="rejectCookies" class="cookie-btn cookie-btn-reject">Reject Non-Essential</button>
-                <a href="cookie-policy.html" content="cookie-link">Learn More</a>
+                <a href="cookie-policy.html" content="cookie-link" style="color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;" onmouseover="this.style.color='#29A8F1'" onmouseout="this.style.color='var(--text-muted)'">Learn More</a>
             </div>
         </div>
     </div>
