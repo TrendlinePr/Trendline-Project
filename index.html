@@ -578,7 +578,7 @@
                         <div class="price-block">
                             <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
                                 <div>
-                                    <span style="font-size:1.5rem; text-decoration:line-through; opacity:0.45; color:var(--text-secondary); margin-right:6px; vertical-align:middle;">$899</span><span class="price-amount price-amount-lifetime" style="background: linear-gradient(135deg, #29A8F1, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">$674</span><span class="price-period"> one-time</span>
+                                    <span id="lifetime-price-original" style="font-size:1.5rem; text-decoration:line-through; opacity:0.45; color:var(--text-secondary); margin-right:6px; vertical-align:middle;">$899</span><span id="lifetime-price-amount" class="price-amount price-amount-lifetime" style="background: linear-gradient(135deg, #29A8F1, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">$674</span><span class="price-period"> one-time</span>
                                 </div>
                             </div>
                             <p class="price-sub">Access for as long as the product exists. No recurring charges.</p>
@@ -826,6 +826,10 @@
                 const lstrip = document.getElementById('lifetime-promo-strip');
                 if (ldiff <= 0) {
                     if (lstrip) lstrip.style.display = 'none';
+                    const loriginal = document.getElementById('lifetime-price-original');
+                    const lprice = document.getElementById('lifetime-price-amount');
+                    if (loriginal) loriginal.style.display = 'none';
+                    if (lprice) lprice.textContent = '$899';
                 } else {
                     const ld = String(Math.floor(ldiff / 86400000)).padStart(2, '0');
                     const lh = String(Math.floor((ldiff % 86400000) / 3600000)).padStart(2, '0');
