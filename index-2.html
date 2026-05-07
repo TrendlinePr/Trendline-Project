@@ -1,0 +1,553 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Creator Collaboration Agreement — Trendline Project</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:              #0a0a0a;
+      --surface:         #1C1F26;
+      --card:            #1e222d;
+      --accent:          #29A8F1;
+      --pink:            #EC4899;
+      --yellow:          #F0B429;
+      --text:            #F0F0F0;
+      --text-secondary:  #C5CBD3;
+      --text-muted:      #8B92A0;
+      --border:          rgba(255, 255, 255, 0.06);
+      --gradient:        linear-gradient(135deg, #29A8F1 0%, #8CA8CE 50%, #EC4899 100%);
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* NAV */
+    nav {
+      border-bottom: 1px solid var(--border);
+      padding: 0 2rem;
+      height: 64px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      position: sticky;
+      top: 0;
+      background: rgba(10,10,10,0.95);
+      backdrop-filter: blur(8px);
+      z-index: 100;
+    }
+
+    .nav-logo {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      text-decoration: none;
+    }
+
+    .nav-logo-icon {
+      width: 32px;
+      height: 32px;
+    }
+
+    .nav-logo-text {
+      font-size: 15px;
+      font-weight: 600;
+      color: #F0F0F0;
+    }
+
+    /* HERO */
+    .hero {
+      text-align: center;
+      padding: 64px 2rem 48px;
+      max-width: 720px;
+      margin: 0 auto;
+    }
+
+    .hero-badge {
+      display: inline-block;
+      background: rgba(41, 168, 241, 0.1);
+      border: 1px solid rgba(41, 168, 241, 0.3);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+
+    .hero h1 {
+      font-size: clamp(28px, 5vw, 42px);
+      font-weight: 700;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .hero h1 span {
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--text-secondary);
+      font-size: 17px;
+      max-width: 560px;
+      margin: 0 auto;
+    }
+
+    /* OFFER CARDS */
+    .offer-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      max-width: 720px;
+      margin: 0 auto 48px;
+      padding: 0 2rem;
+    }
+
+    .offer-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 24px 20px;
+      text-align: center;
+    }
+
+    .offer-card .offer-icon {
+      font-size: 28px;
+      margin-bottom: 10px;
+    }
+
+    .offer-card .offer-value {
+      font-size: 22px;
+      font-weight: 700;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .offer-card .offer-label {
+      font-size: 13px;
+      color: var(--text-muted);
+    }
+
+    /* AGREEMENT BOX */
+    .agreement-section {
+      max-width: 720px;
+      margin: 0 auto 48px;
+      padding: 0 2rem;
+    }
+
+    .agreement-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 32px;
+    }
+
+    .agreement-box h2 {
+      font-size: 16px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .term {
+      margin-bottom: 20px;
+    }
+
+    .term-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--accent);
+      margin-bottom: 4px;
+    }
+
+    .term p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* FORM */
+    .form-section {
+      max-width: 720px;
+      margin: 0 auto 80px;
+      padding: 0 2rem;
+    }
+
+    .form-section h2 {
+      font-size: 20px;
+      font-weight: 700;
+      margin-bottom: 24px;
+    }
+
+    .form-section h2 span {
+      color: var(--accent);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-group input {
+      width: 100%;
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 12px 16px;
+      color: var(--text);
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus {
+      border-color: var(--accent);
+    }
+
+    .form-group input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    @media (max-width: 560px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+
+    /* CHECKBOX */
+    .checkbox-group {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin: 28px 0;
+      background: rgba(41, 168, 241, 0.05);
+      border: 1px solid rgba(41, 168, 241, 0.15);
+      border-radius: 10px;
+      padding: 16px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      width: 18px;
+      height: 18px;
+      min-width: 18px;
+      accent-color: var(--accent);
+      cursor: pointer;
+      margin-top: 2px;
+    }
+
+    .checkbox-group label {
+      font-size: 14px;
+      color: var(--text-secondary);
+      cursor: pointer;
+      line-height: 1.5;
+    }
+
+    .checkbox-group label a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+
+    /* SUBMIT BUTTON */
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: var(--gradient);
+      border: none;
+      border-radius: 10px;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: opacity 0.2s, transform 0.1s;
+      letter-spacing: 0.02em;
+    }
+
+    .submit-btn:hover { opacity: 0.9; }
+    .submit-btn:active { transform: scale(0.99); }
+    .submit-btn:disabled { opacity: 0.4; cursor: not-allowed; }
+
+    .form-note {
+      text-align: center;
+      font-size: 13px;
+      color: var(--text-muted);
+      margin-top: 14px;
+    }
+
+    /* SUCCESS STATE */
+    .success-box {
+      display: none;
+      background: var(--card);
+      border: 1px solid rgba(41, 168, 241, 0.3);
+      border-radius: 16px;
+      padding: 48px 32px;
+      text-align: center;
+    }
+
+    .success-box .success-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .success-box h3 {
+      font-size: 22px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .success-box p {
+      color: var(--text-secondary);
+      font-size: 15px;
+      max-width: 480px;
+      margin: 0 auto;
+      line-height: 1.6;
+    }
+
+    /* FOOTER */
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 32px 2rem;
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 13px;
+    }
+
+    footer a {
+      color: var(--accent);
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="https://trendlineproject.com" class="nav-logo">
+      <!-- Replace src with your actual logo path -->
+      <img src="logo.png" class="nav-logo-icon" alt="Trendline Project" />
+      <span class="nav-logo-text">Trendline Project</span>
+    </a>
+  </nav>
+
+  <!-- AGREEMENT HEADER -->
+  <div style="max-width:720px;margin:48px auto 32px;padding:0 2rem;text-align:center;">
+    <div class="hero-badge">Creator Collaboration Agreement</div>
+    <h1 style="font-size:clamp(22px,4vw,32px);font-weight:700;color:var(--text);margin:16px 0 8px;">Trendline Project <span style="background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">× Creator</span></h1>
+    <p style="color:var(--text-muted);font-size:15px;margin:0;">Please review the terms below and complete the form to confirm your participation.</p>
+  </div>
+
+  <!-- AGREEMENT TERMS -->
+  <div class="agreement-section">
+    <div class="agreement-box">
+      <h2>Agreement Terms</h2>
+
+      <div class="term">
+        <div class="term-title">1. Deliverable</div>
+        <p>You agree to publish one in-depth video review featuring Quantum Ribbon Pro on your YouTube channel within 21 days of submitting this form. The video must be at least 8 minutes and cover the following: a review of the key features, how the tools can be combined together, and a live demonstration showing them in action.</p>
+      </div>
+
+      <div class="term">
+        <div class="term-title">2. Flat Fee</div>
+        <p>We will pay a total flat fee of $200 USD, split as follows: <strong style="color:var(--text);">$100 upon agreement submission</strong> and <strong style="color:var(--text);">$100 after your video is published and verified live.</strong> Please send your invoice directly via PayPal to <strong style="color: var(--text);">[YOUR PAYPAL EMAIL]</strong> — use the standard PayPal invoice feature from your PayPal account. Each payment will be processed within 5 business days of the respective milestone.</p>
+      </div>
+
+      <div class="term">
+        <div class="term-title">3. Affiliate Commission</div>
+        <p>You earn 30% commission on every sale — including subscription renewals — made through your unique affiliate link, paid monthly. To receive your link, apply to our affiliate programme at <a href="https://trendlineproject.lemonsqueezy.com/affiliates" target="_blank" style="color: var(--accent);">trendlineproject.lemonsqueezy.com/affiliates</a>. Once approved, you will receive your personal tracking link automatically.</p>
+      </div>
+
+      <div class="term">
+        <div class="term-title">4. TradingView Access</div>
+        <p>We will grant you full access to Quantum Ribbon Pro on TradingView after this form is submitted. Access is tied to the TradingView username you provide below.</p>
+      </div>
+
+      <div class="term">
+        <div class="term-title">5. Content Requirements</div>
+        <p>Your video must be at least 8 minutes and include: a walkthrough of Quantum Ribbon Pro's key features, a demonstration of how the tools work together, and a live example showing them in action on a chart. You must disclose this as a paid collaboration in both the video and description, in line with FTC/ASA guidelines.</p>
+      </div>
+
+      <div class="term">
+        <div class="term-title">6. No Exclusivity</div>
+        <p>This agreement does not prevent you from reviewing other indicators or tools.</p>
+      </div>
+
+      <div class="term">
+        <div class="term-title">7. Video Availability</div>
+        <p>Your video must remain publicly available on your YouTube channel for a minimum of 1 year from the date of posting. Removal before this period without prior written consent from Trendline Project constitutes a breach of this agreement.</p>
+      </div>
+
+      <div class="term">
+        <div class="term-title">8. Confidentiality</div>
+        <p>You agree to keep confidential any non-public information shared by Trendline Project, including but not limited to business strategies, sales data, pricing, customer information, and marketing materials. This obligation continues after the termination of this agreement.</p>
+      </div>
+
+      <div class="term">
+        <div class="term-title">9. Usage Rights</div>
+        <p>By submitting this form, you grant Trendline Project a perpetual, worldwide, non-exclusive licence to use, reproduce, and repurpose your video content and associated materials (including clips, thumbnails, and quotes) for marketing and promotional purposes across all channels.</p>
+      </div>
+
+      <div class="term">
+        <div class="term-title">10. Indicator Confidentiality & Restrictions</div>
+        <p>Access to Quantum Ribbon Pro is granted solely for the purpose of producing the agreed video content. You may not share, reproduce, resell, redistribute, copy, reverse-engineer, or use the indicator or any part of it for any commercial purpose. Access is personal and non-transferable. Breach of this clause will result in immediate termination of access and may result in legal action.</p>
+      </div>
+
+      <div class="term">
+        <div class="term-title">11. Termination</div>
+        <p>Trendline Project reserves the right to terminate this agreement immediately in the event of a breach of any of these terms. In the event of termination due to breach, the initial $100 payment already made must be returned in full within 14 days. The second $100 payment will not be issued. TradingView access will be revoked immediately upon termination.</p>
+      </div>
+
+      <div class="term">
+        <div class="term-title">12. Independent Contractor</div>
+        <p>You are an independent contractor. Nothing in this agreement creates an employment, agency, or partnership relationship between you and Trendline Project.</p>
+      </div>
+
+      <div class="term" style="margin-bottom:0;">
+        <div class="term-title">13. Acceptance</div>
+        <p>Submitting this form constitutes your agreement to these terms.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- FORM -->
+  <div class="form-section">
+    <h2>Your <span>Details</span></h2>
+
+    <form id="agreementForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+
+      <!-- Hidden fields -->
+      <input type="hidden" name="_subject" value="New Creator Agreement Submission — Trendline Project" />
+      <input type="hidden" name="_replyto" id="replyToField" value="" />
+      <input type="hidden" name="_cc" value="[YOUR EMAIL]" />
+      <input type="hidden" name="_next" value="" /> <!-- handled by JS -->
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="firstName">First Name</label>
+          <input type="text" id="firstName" name="first_name" placeholder="Jane" required />
+        </div>
+        <div class="form-group">
+          <label for="lastName">Last Name</label>
+          <input type="text" id="lastName" name="last_name" placeholder="Smith" required />
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="jane@yourchannel.com" required />
+      </div>
+
+      <div class="form-group">
+        <label for="youtube">YouTube Channel URL</label>
+        <input type="url" id="youtube" name="youtube_channel" placeholder="https://youtube.com/@yourchannel" required />
+      </div>
+
+      <div class="form-group">
+        <label for="tvUsername">TradingView Username</label>
+        <input type="text" id="tvUsername" name="tradingview_username" placeholder="your_tv_username" required />
+      </div>
+
+      <div class="form-group">
+        <label for="paypal">PayPal Email (for invoice & payment)</label>
+        <input type="email" id="paypal" name="paypal_email" placeholder="jane@paypal.com" required />
+      </div>
+
+      <div class="checkbox-group">
+        <input type="checkbox" id="agreeTerms" name="agreed_to_terms" value="yes" required />
+        <label for="agreeTerms">
+          I have read and agree to the collaboration terms above, including the video requirements, payment process, and disclosure obligations.
+        </label>
+      </div>
+
+      <button type="submit" class="submit-btn" id="submitBtn">Accept & Submit →</button>
+      <p class="form-note">We'll grant your TradingView access and send your first payment shortly.</p>
+
+    </form>
+
+    <!-- SUCCESS STATE -->
+    <div class="success-box" id="successBox">
+      <div class="success-icon">✅</div>
+      <h3>You're in — welcome aboard!</h3>
+      <p>Check your inbox for next steps including your affiliate link and TradingView access. Send your $200 PayPal invoice to <strong>[YOUR PAYPAL EMAIL]</strong> whenever you're ready.</p>
+    </div>
+  </div>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>© 2026 Trendline Project · <a href="https://trendlineproject.com">trendlineproject.com</a></p>
+  </footer>
+
+  <script>
+    const form = document.getElementById('agreementForm');
+    const submitBtn = document.getElementById('submitBtn');
+    const successBox = document.getElementById('successBox');
+    const emailInput = document.getElementById('email');
+    const replyToField = document.getElementById('replyToField');
+
+    // Keep _replyto in sync with email field so Formspree sends copy to creator
+    emailInput.addEventListener('input', function() {
+      replyToField.value = emailInput.value;
+    });
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      try {
+        const response = await fetch(form.action, {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          form.style.display = 'none';
+          successBox.style.display = 'block';
+          window.scrollTo({ top: successBox.offsetTop - 80, behavior: 'smooth' });
+        } else {
+          submitBtn.disabled = false;
+          submitBtn.textContent = 'Accept Agreement & Submit Details →';
+          alert('Something went wrong. Please try again or email us directly.');
+        }
+      } catch (err) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Accept Agreement & Submit Details →';
+        alert('Network error. Please try again.');
+      }
+    });
+  </script>
+
+</body>
+</html>
