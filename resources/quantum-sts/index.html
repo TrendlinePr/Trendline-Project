@@ -142,7 +142,6 @@
                 <li><a href="#backtester-logic">Entry and Exit Logic</a></li>
                 <li><a href="#per-session-rr">Per-Session Stop and TP</a></li>
                 <li><a href="#workflow">Using Them Together</a></li>
-                <li><a href="#capital-note">Capital and Margin Note</a></li>
                 <li><a href="#disclaimer">Risk Disclaimer</a></li>
             </ul>
         </div>
@@ -343,14 +342,7 @@
             </div>
         </section>
 
-        <section class="content-section" id="capital-note">
-            <h2>Capital and Margin Note</h2>
-            <p>The backtester defaults to $100,000 initial capital with a fixed quantity of 1 contract and $0.35 commission per contract — standard for MNQ1. Futures positions are margin-based, meaning TradingView requires sufficient simulated capital relative to the contract's notional value to allow entries.</p>
-            <div class="warning-box">
-                <h4>⚠️ If you increase order quantity, increase starting capital</h4>
-                <p>If you change the default quantity to 2 or more contracts, you must increase the initial capital in Strategy Properties accordingly. If the simulated account doesn't have enough margin to cover the position, TradingView will skip those entries silently.</p>
-            </div>
-        </section>
+
 
         <section class="content-section" id="disclaimer">
             <h2>Risk Disclaimer</h2>
