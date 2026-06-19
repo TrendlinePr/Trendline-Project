@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#1C1F26">
     <title>Quantum STS — Session Trading System Guide</title>
-    <meta name="description" content="Complete guide to Quantum STS and Q-STS Backtester. Learn session fakeout logic, entry levels, R:R configuration, and how to validate settings before going live.">
-    <meta name="keywords" content="quantum STS, Q-STS backtester, session trading system, tradingview session indicator, session fakeout, trendline project">
+    <meta name="description" content="Complete guide to Quantum STS and Q-STS Backtester. Session fakeout levels, the Opening Range breakout, the trend ribbon, key levels and VWAP, plus how to validate every setting in the backtester before trading live.">
+    <meta name="keywords" content="quantum STS, Q-STS backtester, session trading system, opening range breakout, tradingview session indicator, session fakeout, ORB, trendline project">
     <meta name="author" content="Trendline Project">
     <meta name="robots" content="index, follow">
     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
@@ -121,7 +121,7 @@
         <div class="container">
             <span class="badge">Complete Guide</span>
             <h1>Quantum <span class="accent-text">STS</span></h1>
-            <p class="subtitle">Session Trading System — how the indicator works, how to configure entry levels and R:R, and how to use the backtester to validate your settings before trading live.</p>
+            <p class="subtitle">Session Trading System — two mechanical edges you can rest orders on, a set of discretionary tools for reading the chart yourself, and a backtester that validates every setting before you trade it live.</p>
         </div>
     </section>
 
@@ -130,15 +130,19 @@
             <h2>Table of Contents</h2>
             <ul>
                 <li><a href="#concept">The Core Concept</a></li>
+                <li><a href="#two-ways">Two Ways to Trade</a></li>
                 <li><a href="#sessions">The Five Sessions</a></li>
-                <li><a href="#how-levels-work">How Entry Levels Are Generated</a></li>
-                <li><a href="#indicator-features">Quantum STS — Indicator Features</a></li>
-                <li><a href="#rr-boxes">R:R Boxes</a></li>
+                <li><a href="#how-levels-work">Session Fakeout — How Levels Are Generated</a></li>
+                <li><a href="#fakeout-features">Session Fakeout — Boxes, Lines &amp; R:R</a></li>
+                <li><a href="#sizing">Stop &amp; TP Sizing — Fixed or ATR</a></li>
+                <li><a href="#opening-range">The Opening Range</a></li>
+                <li><a href="#ribbon">The Trend Ribbon</a></li>
                 <li><a href="#key-levels">Key Static Levels</a></li>
+                <li><a href="#dynamic-sr">Dynamic Support &amp; Resistance</a></li>
                 <li><a href="#hl-extensions">Session H/L Extensions</a></li>
                 <li><a href="#vwap">VWAP</a></li>
                 <li><a href="#alerts">Alerts</a></li>
-                <li><a href="#backtester">Q-STS Backtester — How It Works</a></li>
+                <li><a href="#backtester">Q-STS Backtester — The Three Modes</a></li>
                 <li><a href="#backtester-logic">Entry and Exit Logic</a></li>
                 <li><a href="#per-session-rr">Per-Session Stop and TP</a></li>
                 <li><a href="#workflow">Using Them Together</a></li>
@@ -151,18 +155,34 @@
 
         <section class="content-section" id="concept">
             <h2>The Core Concept</h2>
-            <p>Price frequently sweeps beyond session highs and lows before reversing. This is a structural pattern that repeats across instruments — particularly in futures markets — driven by stop runs, liquidity grabs, and institutional order flow. Quantum STS is built around this behaviour.</p>
-            <p>Each session establishes a high and a low. When the session closes, the indicator marks entry levels at configurable offsets beyond those extremes — short above the high, long below the low. If price sweeps to those levels in the following session and reverses, that's the trade.</p>
-            <p>The two tools in this system serve different roles. <strong>Quantum STS</strong> is the live indicator — it draws sessions, marks levels, shows R:R boxes, and fires alerts in real time. <strong>Q-STS Backtester</strong> runs the same logic on historical data so you can measure how your offset, stop, and TP settings have performed before committing real capital to them.</p>
+            <p>Price frequently sweeps beyond a session high or low and then reverses. Quantum STS was built to trade that pattern, which recurs across instruments and is most pronounced in futures.</p>
+            <p>The tool grew from there. It started as a session fakeout system and now bundles a second mechanical edge — the Opening Range breakout — alongside a set of discretionary tools for traders who'd rather read the chart and time entries themselves. Every part is a module with its own on/off switch, so you run what you use and hide the rest to keep the chart clean.</p>
+            <p>The system ships as two tools. <strong>Quantum STS</strong> is the live indicator — it draws sessions, marks levels, prints R:R boxes, runs the Opening Range and the trend ribbon, and fires alerts in real time. <strong>Q-STS Backtester</strong> runs the same mechanical logic on historical bars so you can measure how your offset, stop, and target settings have performed before committing real capital.</p>
             <div class="info-box">
                 <h4>Default settings are sized for MNQ1!</h4>
-                <p>Both tools ship with settings configured for Micro E-mini Nasdaq futures. If you're trading a different instrument, review your stop and TP point values before using either tool live. What's a reasonable stop on MNQ can be either too tight or wildly oversized on ES, NQ, or other contracts.</p>
+                <p>Both tools ship with point values configured for Micro E-mini Nasdaq futures. If you're trading a different instrument, review your stop and TP point values before going live. A reasonable stop on MNQ can be far too tight or wildly oversized on ES, NQ, or other contracts.</p>
             </div>
+        </section>
+
+        <section class="content-section" id="two-ways">
+            <h2>Two Ways to Trade</h2>
+            <p>The settings are organised into four numbered modules, which fall into two camps depending on how hands-on you want to be.</p>
+            <div class="session-grid">
+                <div class="session-card">
+                    <h4><span class="session-dot" style="background:#29A8F1;"></span>Set and forget</h4>
+                    <p>The Session Fakeout levels and the Opening Range are both built for resting orders. The tool calculates the level, draws an R:R box around it, and you place your order where it shows.</p>
+                </div>
+                <div class="session-card">
+                    <h4><span class="session-dot" style="background:#EC4899;"></span>Read the chart</h4>
+                    <p>Key levels, dynamic support/resistance, the trend ribbon, and VWAP give you confluence and context, so you can analyse a setup in depth and time entries your own way.</p>
+                </div>
+            </div>
+            <p>The module groups in the settings are: <strong>1 · Session Fakeout</strong>, <strong>2 · Opening Range</strong>, <strong>3 · Levels &amp; S/R</strong>, and <strong>4 · Trend Context</strong> (ribbon and VWAP). Each has a master switch at the top of its section.</p>
         </section>
 
         <section class="content-section" id="sessions">
             <h2>The Five Sessions</h2>
-            <p>Both tools use the same five sessions. Each has its own timezone, start and end time, color, and independent entry and R:R configuration.</p>
+            <p>The day is split into Asia, London, and the New York session, with New York broken into three windows: Pre-Open, AM, and PM. Every session can be shown or hidden independently, so you can trade a single window or collapse New York back into one block by hiding the ones you don't use.</p>
             <div class="session-grid">
                 <div class="session-card">
                     <h4><span class="session-dot" style="background:#2962aa;"></span>Asia</h4>
@@ -185,164 +205,205 @@
                     <p>Default: 13:00–16:00 New York. Sets levels used for the next Asia session.</p>
                 </div>
             </div>
-            <p>Each session can be shown or hidden independently. Session names, colors, and times are all configurable. The cascade order is fixed — each session's extremes feed directly into the next session's entry levels.</p>
+            <p>Each session has its own timezone, start and end time, and colour, and can be configured independently. The cascade order is fixed — Asia feeds London, London feeds Pre-Open, Pre-Open feeds AM, AM feeds PM, and PM feeds the next day's Asia. Every session hands its range forward to the next one.</p>
         </section>
 
         <section class="content-section" id="how-levels-work">
-            <h2>How Entry Levels Are Generated</h2>
-            <p>At the close of each session, the indicator takes that session's confirmed high and low and calculates two entry prices:</p>
+            <h2>Session Fakeout — How Levels Are Generated</h2>
+            <p>At the close of each session, the indicator takes that session's confirmed high and low and calculates two entry prices for the next session in the cascade:</p>
             <ul>
                 <li><strong>Short level</strong> — session high + short offset (in points)</li>
                 <li><strong>Long level</strong> — session low − long offset (in points)</li>
             </ul>
-            <p>An offset of 0 means the entry is placed exactly at the session extreme. Increasing the offset means price has to travel further beyond the level before the entry triggers. This filters out minor sweeps and requires a more decisive move.</p>
-            <p>Each direction can be enabled or disabled independently. If you only want to trade longs from a particular session, turn off short entries for that group. The levels that are disabled simply won't be drawn or traded.</p>
+            <p>These appear as dotted lines, labelled <strong>L</strong> for long and <strong>S</strong> for short. An offset of 0 places the entry exactly at the session extreme. Increasing the offset means price has to travel further beyond the level before the entry triggers, which filters out small, meaningless pokes and waits for a more decisive sweep. Each direction can be enabled or disabled independently — if you only want to trade longs from a session, turn off short entries for that group.</p>
             <div class="info-box">
-                <h4>Offset tuning</h4>
-                <p>Start with 0. After reviewing results in the backtester, increase offset only if you're seeing a high rate of entries that immediately reverse without reaching your TP. Adding offset reduces signal frequency but improves entry quality on instruments with noisy sweeps.</p>
+                <h4>The level belongs to one session — the offset and R:R belong to another</h4>
+                <p>This trips people up. The level itself is anchored to the <em>previous</em> session's range — Asia's high and low set London's levels, for example. But the offset and the R:R box you apply belong to the session you're actually <em>trading</em>. So to trade London, you set London's offset and London's stop and target inside the London group, even though the line is drawn off Asia's range. Each session you trade is sized in its own settings, because London moves differently than Asia.</p>
             </div>
         </section>
 
-        <section class="content-section" id="indicator-features">
-            <h2>Quantum STS — Indicator Features</h2>
-            <p>Quantum STS is the live, chart-side component. It handles everything you need during a session: session boxes, entry level lines, R:R visualization, key levels, VWAP, and alerts.</p>
+        <section class="content-section" id="fakeout-features">
+            <h2>Session Fakeout — Boxes, Lines &amp; R:R</h2>
+            <p>The Session Fakeout module handles everything on the chart side: session boxes, the entry level lines, and the R:R visualization.</p>
 
             <h3>Session Boxes</h3>
-            <p>Each active session is drawn as a colored box that expands in real time as the high and low update. When the session closes, the box locks. A history setting controls how many past boxes remain visible — the default keeps the last five sessions per type. If the chart gets cluttered, reduce this number.</p>
-            <p>Box borders are off by default. Enable them in Box Styling if you want a harder edge on each session range. Label size is adjustable between tiny, small, and normal.</p>
+            <p>Each active session draws as a coloured box that expands in real time as the high and low update, then locks when the session closes. A history setting controls how many past boxes stay visible — the default keeps the last five per session type. Reduce it if the chart gets crowded. Box borders are off by default; enable them in Box Styling for a harder edge. Label size is adjustable between tiny, small, and normal.</p>
 
             <h3>Order Lines</h3>
-            <p>When a session ends, the indicator draws dotted lines at the calculated entry levels for the next session. Each line is labeled — L for long, S for short — with color-coded dots matching direction. Line width, label size, and the number of bars the line extends are all configurable under Order Lines settings.</p>
+            <p>When a session ends, dotted lines are drawn at the calculated entry levels for the next session, each labelled L or S in the direction's colour. Line width, label size, and how many bars the line extends are all configurable under Order Lines.</p>
+
+            <h3>R:R Boxes</h3>
+            <p>Each level can draw an R:R box, and it draws <em>before</em> price gets there — so the whole trade is laid out in advance. There's a blue zone from the entry to the take profit and a pink zone from the entry to the stop. You rest a limit order at the level and set your stop and target to the edges of the box. A single <strong>Show R:R Boxes</strong> toggle turns the boxes on or off across all sessions, and the box uses the same sizing logic the backtester uses — once you've matched them, what you see on the chart is exactly what you tested.</p>
         </section>
 
-        <section class="content-section" id="rr-boxes">
-            <h2>R:R Boxes</h2>
-            <p>Each entry level can display an R:R box showing the stop and take profit zones visually on the chart. The box is drawn at the moment the level is created — before price reaches it — so you can assess the setup before it triggers.</p>
-            <p>The box shows two zones: a green fill between the entry and TP, and a red fill between the entry and stop. Stop and TP sizes are pulled from the per-session R:R settings — the same values you configure in the backtester. This means what you see on the chart matches exactly what the backtester is simulating.</p>
-            <p>R:R boxes can be toggled on or off per direction per session. If you only want to see the short setup visualized for London, disable the long R:R box for that session group without affecting the level line itself.</p>
+        <section class="content-section" id="sizing">
+            <h2>Stop &amp; TP Sizing — Fixed or ATR</h2>
+            <p>Every R:R box — sessions and the Opening Range alike — can be sized one of two ways:</p>
+            <ul>
+                <li><strong>Fixed points</strong> — you set one stop and target distance per session, applied to both directions. Predictable and constant.</li>
+                <li><strong>ATR Auto Stop/TP</strong> — the stop is set from the Average True Range and the target is a multiple of it, so stop and target scale with volatility.</li>
+            </ul>
+            <p>In the indicator, the sessions have their own ATR toggle in the R:R Box Styling section and the Opening Range has its own toggle in its section; both share the same ATR Length, multiplier, and target R-multiple. Either way, the chart box and the backtester use the same logic, so a setting you validate carries straight across.</p>
+        </section>
+
+        <section class="content-section" id="opening-range">
+            <h2>The Opening Range</h2>
+            <p>The second mechanical edge. The module marks the high and low of the first stretch after a session open — fifteen minutes by default — and trades the break of that range. It runs per session: enable an Opening Range on any of the five sessions, each with its own stop and target, and it uses that session's open time from the Session Fakeout module. London and NY AM are enabled by default.</p>
+            <p>When a range completes, the tool prints the same style of R:R box at each edge, sized from your fixed points or from ATR. From there you choose direction, filters, entry, and exit.</p>
+
+            <h3>Direction and filters</h3>
+            <p>Global <strong>Long</strong> and <strong>Short</strong> toggles set which breakout directions the module takes across every enabled session. Two optional filters gate entries:</p>
+            <ul>
+                <li><strong>Ribbon Trend Filter</strong> — only take longs when the trend cloud is bullish and shorts when it's bearish.</li>
+                <li><strong>Volume Filter</strong> — only take a break when the breakout bar's volume is at least a set multiple of its average over a set number of bars.</li>
+            </ul>
+
+            <h3>Break or retest</h3>
+            <p>The <strong>Require Retest</strong> toggle controls when the signal fires. With it off, you get a signal on the raw break — the moment a candle closes beyond the edge. With it on, the signal waits for price to break and then close back at the edge, confirming the retest first. Fewer false starts, but you can miss moves that break and never look back. The break markers are signals you can trade manually, drive an alert from, or wire to a bot.</p>
+
+            <h3>Fixed TP or Ribbon Flip</h3>
+            <p>Two exit modes. <strong>Fixed TP</strong> closes the trade at the target distance. <strong>Ribbon Flip</strong> drops the fixed target and holds the trade until the EMA trend cloud flips against it — a long closes when the cloud turns bearish, a short when it turns bullish. The stop stays live in both modes, so a Ribbon Flip trade exits on the stop or the flip, whichever hits first.</p>
+            <div class="info-box">
+                <h4>Ribbon Flip is Opening Range only</h4>
+                <p>The Ribbon Flip exit applies to the Opening Range only. The session levels always use their fixed R:R boxes.</p>
+            </div>
+        </section>
+
+        <section class="content-section" id="ribbon">
+            <h2>The Trend Ribbon</h2>
+            <p>An EMA trend cloud built from a fast and a slow EMA (8 and 9 by default). It fills blue when bullish — fast above slow — and pink when bearish. The slow EMA is always forced above the fast internally, so widening the gap gives you an earlier flip and narrowing it gives a smoother, later one.</p>
+            <p>The ribbon does three jobs. It drives the Opening Range's Ribbon Flip exit, it gates ORB entries when the Ribbon Trend Filter is on, and it works as standalone trend context — read it on its own for a quick bullish/bearish read. It's off by default.</p>
         </section>
 
         <section class="content-section" id="key-levels">
             <h2>Key Static Levels</h2>
-            <p>Under Key Levels, you can overlay structural price references that update automatically:</p>
+            <p>Under Key Levels you can overlay structural price references that update automatically:</p>
             <ul>
-                <li><strong>Prev Day H/L</strong> — Previous day's high and low, drawn as solid lines. Default on.</li>
-                <li><strong>Prev Week H/L</strong> — Previous week's high and low.</li>
-                <li><strong>Prev Month H/L</strong> — Previous month's high and low.</li>
-                <li><strong>Day Open / Week Open / Month Open</strong> — Opening prices for each period, drawn as dashed lines.</li>
-                <li><strong>Round Numbers</strong> — Automatically draws dotted lines at configurable point intervals (default every 50 points). Useful for identifying psychological levels.</li>
+                <li><strong>Prev Day H/L</strong> — previous day's high and low, drawn as solid lines. Default on.</li>
+                <li><strong>Prev Week H/L</strong> — previous week's high and low.</li>
+                <li><strong>Prev Month H/L</strong> — previous month's high and low.</li>
+                <li><strong>Day Open / Week Open / Month Open</strong> — opening prices for each period, drawn as dashed lines.</li>
+                <li><strong>Round Numbers</strong> — dotted lines at a configurable interval (default every 50 points), for psychological levels.</li>
             </ul>
-            <p>Each level type has its own color. Lines are persistent and extend to the right edge of the chart. They update on each new bar when TradingView recalculates.</p>
+            <p>Each level type has its own colour. Lines are persistent and extend to the right edge of the chart, updating as TradingView recalculates.</p>
+        </section>
+
+        <section class="content-section" id="dynamic-sr">
+            <h2>Dynamic Support &amp; Resistance</h2>
+            <p>An automatic S/R layer that finds recent pivot highs and lows, draws them as zones that widen with volatility, and flips a level's colour — resistance to support, or back — when price closes through it. It keeps a rolling set of the most recent levels, and the zone width scales from ATR so it adapts to your instrument and timeframe.</p>
+            <div class="info-box">
+                <h4>Display only</h4>
+                <p>Dynamic S/R does not fire signals and does not change what any other module does. It's there for confluence — when a session level lines up with a flipped support zone or the previous day's high, you can judge whether the setup is worth taking. It's off by default.</p>
+            </div>
         </section>
 
         <section class="content-section" id="hl-extensions">
             <h2>Session H/L Extensions</h2>
-            <p>When enabled per session, dotted lines extend rightward from the session high and low after it closes. These persist until the same session starts again the following day. The purpose is to keep the previous session's range visible during the next session — useful for reading where price is relative to the range it's already swept.</p>
-            <p>Extensions are on by default for all five sessions. Toggle them off per session in that session's group settings if you find them cluttering the chart.</p>
+            <p>When enabled per session, dotted lines extend rightward from the session high and low after it closes, and persist until that same session starts again the following day. The purpose is to carry the previous session's range forward, so you can read where price sits relative to the range it's already swept. Extensions are on by default for all five sessions and toggle off per session in each session's group.</p>
         </section>
 
         <section class="content-section" id="vwap">
             <h2>VWAP</h2>
-            <p>An optional VWAP plot with three anchor options:</p>
+            <p>A single anchored VWAP line with three anchor options:</p>
             <ul>
-                <li><strong>Session</strong> — Resets at the start of each session. Gives you a VWAP relative to the current session's traded volume.</li>
-                <li><strong>Week</strong> — Resets each Monday. Standard weekly VWAP.</li>
-                <li><strong>Month</strong> — Resets on the first bar of each calendar month.</li>
+                <li><strong>Session</strong> — resets at the start of each session. The most useful anchor given how this system is built.</li>
+                <li><strong>Week</strong> — resets each Monday.</li>
+                <li><strong>Month</strong> — resets on the first bar of each calendar month.</li>
             </ul>
-            <p>VWAP is off by default. Color and line thickness are configurable. If you use VWAP as a bias filter — only taking longs above, shorts below — the Session anchor is the most useful given the structure of this system.</p>
+            <p>Use it as a bias filter — longs above, shorts below. Colour and thickness are configurable, and the indicator fires alerts when price crosses above or below the line. VWAP is off by default.</p>
         </section>
 
         <section class="content-section" id="alerts">
             <h2>Alerts</h2>
-            <p>Quantum STS includes two layers of alerts: named conditions that appear in TradingView's alert dropdown, and dynamic alerts that fire with price and session context embedded in the message.</p>
-            <p><strong>Session alerts fire when:</strong></p>
+            <p>Quantum STS provides named conditions in TradingView's alert dropdown plus dynamic alerts that carry price and session context in the message. They cover:</p>
             <ul>
-                <li>Any session starts</li>
-                <li>Any session ends and new entry levels are drawn (includes the session high and low in the message)</li>
+                <li><strong>Session start</strong> — fires when any session begins.</li>
+                <li><strong>Session end / levels drawn</strong> — fires when a session closes and new entry levels are drawn, with the session high and low in the message.</li>
+                <li><strong>Level touch</strong> — fires when price reaches the active session's long or short entry level. Fires once per level per session cycle.</li>
+                <li><strong>Opening Range breaks</strong> — fires on the OR break up or down.</li>
+                <li><strong>Ribbon Flip exits</strong> — fires when the ribbon flips against a live ORB trade.</li>
+                <li><strong>VWAP crosses</strong> — fires when price crosses above or below VWAP.</li>
             </ul>
-            <p><strong>Level touch alerts fire when:</strong></p>
-            <ul>
-                <li>Price crosses the long entry level or the short entry level for the active session</li>
-                <li>Each level fires once per bar close — it won't re-trigger on the same level in the same session</li>
-            </ul>
-            <p><strong>VWAP alerts fire when:</strong></p>
-            <ul>
-                <li>Price crosses above or below VWAP</li>
-            </ul>
-            <p>To set up an alert, right-click the indicator on your chart, select "Add alert on Quantum STS", and choose the condition you want. For webhook automation, paste your webhook URL in the Notifications tab. The dynamic messages include the ticker symbol and relevant prices, so a single alert setup works across multiple instruments if you add the indicator to different charts.</p>
+            <p>To set one up, right-click the indicator, select "Add alert on Quantum STS", and choose the condition. The dynamic messages include the ticker and the relevant prices, so a single setup works across every chart you add the indicator to, and you can route them to a webhook for automation.</p>
             <div class="info-box">
                 <h4>Level touch alert behaviour</h4>
-                <p>Alert state resets when a new session starts and levels are recalculated. If price crosses a level, pulls back, and crosses it again within the same session cycle, the second cross will not fire another alert. This is intentional — it prevents duplicate notifications on choppy price action around a level.</p>
+                <p>Alert state resets when a new session starts and levels recalculate. If price crosses a level, pulls back, and crosses again within the same session cycle, the second cross won't fire — intentional, to prevent duplicate notifications on choppy price around a level.</p>
             </div>
         </section>
 
         <section class="content-section" id="backtester">
-            <h2>Q-STS Backtester — How It Works</h2>
-            <p>The backtester runs the same session cascade logic as the indicator on historical bars. When a session closes, it places limit orders at the calculated entry levels for the next session. If price reaches those levels, a position is simulated. Stop loss and take profit are applied, and the result is logged through TradingView's built-in strategy tester.</p>
-            <p>This gives you a direct performance record for any combination of offset, stop, and TP settings on your chosen instrument and timeframe — before you use those settings on a live or funded account.</p>
+            <h2>Q-STS Backtester — The Three Modes</h2>
+            <p>Validate settings in the backtester first, then carry them to the live indicator.</p>
+            <p>The first thing to notice is the mode switch at the top. The backtester tests <strong>one edge at a time</strong>, and you choose which:</p>
+            <ul>
+                <li><strong>Session Fakeout</strong> — runs the session cascade. When a session closes, it places limit orders at the calculated levels for the next session.</li>
+                <li><strong>Opening Range</strong> — runs the OR breakout, with the same per-session enables, direction and filter options, and sizing. One trade per enabled session per day.</li>
+                <li><strong>Combined</strong> — runs both edges on one account as a single strategy. First fill wins: if a session trade is open the Opening Range stands down, and if the ORB fills first the overlapping session orders are cancelled and sessions lock out until you're flat.</li>
+            </ul>
+            <p>Session Fakeout and Opening Range are kept separate by default so trades from one don't net against the other and your statistics stay clean. Each session also has its own Enable toggle, so you can isolate one session at a time and read its stats on their own. The discretionary tools and VWAP are not backtested here, by design — they're judgment calls rather than a fixed rule set.</p>
             <div class="warning-box">
-                <h4>⚠️ One position per direction per session</h4>
-                <p>The backtester is limited to one long and one short per session cycle. All open positions are force-closed at the end of each session cycle regardless of profit or loss. This is intentional — it enforces clean, measurable results and prevents overlapping trades from distorting the equity curve.</p>
+                <h4>⚠️ One trade per cycle, force-closed at the end</h4>
+                <p>In Session Fakeout mode the backtester takes at most one long and one short per session, and force-closes anything still open at the end of each session cycle, win or lose. Opening Range mode takes one trade per enabled session per day. This keeps results clean and stops overlapping trades from distorting the equity curve.</p>
             </div>
         </section>
 
         <section class="content-section" id="backtester-logic">
             <h2>Entry and Exit Logic</h2>
-            <p>When a session ends, the backtester cancels any unfilled orders from the previous cycle, closes any open position, resets the trade flags, and places two new limit orders at the calculated levels for the upcoming session.</p>
-            <p>When price fills a limit order, the position is opened. The direction flag is set and the other order is cancelled — so only one trade per direction runs at a time. Exit orders are placed immediately using the stop and TP values for that session group. If your TP or stop is hit intrabar, the fill is registered at that level.</p>
-
+            <p>In Session Fakeout mode, when a session ends the backtester cancels unfilled orders from the previous cycle, closes any open position, resets the trade flags, and places two new limit orders at the calculated levels. When price fills one, the position opens, the direction flag is set, and the opposite order is cancelled — so only one trade per direction runs at a time. Exit orders go in immediately using that session group's stop and TP. If the stop or target is hit intrabar, the fill registers at that level.</p>
+            <p>In Opening Range mode, a raw break uses resting stop orders at the edges; a retest uses a limit order back at the broken edge once a close beyond it confirms. The exit follows the chosen mode — Fixed R:R keeps the full stop and target, while Ribbon Flip keeps the stop, drops the fixed target, and closes the trade when the trend cloud flips against it.</p>
+            <p>Because the ORB entries are identical whether you exit on a fixed target or on the ribbon, you get a clean side-by-side on the exact same trades — whether trailing the cloud actually beats a fixed target on your instrument.</p>
+            <h3>Sizing — adaptive vs fixed</h3>
+            <p>The backtester defaults to ATR sizing, with the stop at two times the ATR and the target at one-and-a-half times the risk. You can switch to fixed point values and compare: run one, note the result, switch to the other, and see whether adaptive or fixed suits your instrument better.</p>
         </section>
 
         <section class="content-section" id="per-session-rr">
             <h2>Per-Session Stop and TP</h2>
-            <p>Stop loss and take profit are configured separately for longs and shorts within each session group. That means you can set tighter parameters for Asia — which typically has a narrower range — and wider parameters for NY AM, which can move significantly more in the same timeframe.</p>
-            <p>All values are in points. The settings work correctly across different futures contracts as long as you input values appropriate for the instrument you're testing.</p>
-            <p><strong>Per-session R:R settings in the backtester:</strong></p>
-            <ul>
-                <li>Short Stop (pts) / Short TP (pts)</li>
-                <li>Long Stop (pts) / Long TP (pts)</li>
-            </ul>
-            <p>These are independent for each of the five session groups. You're not locked into a single R:R profile for all sessions — you can and should tune them separately based on each session's historical behaviour on your instrument.</p>
+            <p>On fixed sizing, each session group has one stop and one take profit, applied to both its long and short. You can set tighter values for Asia — which typically has a narrower range — and wider values for NY AM, which can move significantly more in the same time. All values are in points and work across different futures contracts as long as you input values appropriate for the instrument.</p>
+            <p>The setting per session is a single <strong>Stop (pts) / TP (pts)</strong> pair, used for both directions. These are independent for each of the five session groups — you're not locked into one R:R profile for all sessions; tune them separately based on each session's historical behaviour on your instrument.</p>
         </section>
 
         <section class="content-section" id="workflow">
             <h2>Using Them Together</h2>
-            <p>The correct sequence is: configure and test in the backtester, then apply validated settings to the live indicator. They share the same session logic and the same input structure, so settings transfer directly.</p>
+            <p>The correct sequence is: configure and test in the backtester, then apply validated settings to the live indicator. They share the same logic and input structure, so settings transfer directly.</p>
             <div class="workflow-steps">
                 <div class="workflow-step">
                     <div class="workflow-step-content">
-                        <h4>Add Q-STS Backtester to the same chart and timeframe you intend to trade</h4>
-                        <p>Run it on the same timeframe you intend to trade.</p>
+                        <h4>Add Q-STS Backtester to your exact chart and timeframe</h4>
+                        <p>Use the same instrument and timeframe you intend to trade. Start on Session Fakeout mode.</p>
                     </div>
                 </div>
                 <div class="workflow-step">
                     <div class="workflow-step-content">
-                        <h4>Configure session times and offsets</h4>
-                        <p>Start with offsets at 0 and the default stop/TP values. Check the Strategy Tester results — net profit, win rate, and drawdown.</p>
+                        <h4>Start with the defaults and read the Strategy Tester</h4>
+                        <p>Begin with offsets at 0 and default sizing. Check net profit, win rate, and especially drawdown.</p>
                     </div>
                 </div>
                 <div class="workflow-step">
                     <div class="workflow-step-content">
-                        <h4>Tune per-session R:R settings</h4>
-                        <p>Open each session group and adjust stop and TP to match that session's typical range on your instrument. Compare results.</p>
+                        <h4>Tune per-session R:R</h4>
+                        <p>Go session by session, adjusting each one's stop and target to fit that session's typical range. Compare adaptive ATR vs fixed points. If a lot of entries trigger and immediately reverse without reaching target, add a little offset.</p>
+                    </div>
+                </div>
+                <div class="workflow-step">
+                    <div class="workflow-step-content">
+                        <h4>Test the Opening Range and Combined modes</h4>
+                        <p>Switch modes to validate the ORB break vs retest and Fixed TP vs Ribbon Flip, then try Combined to see the two edges run as one system.</p>
                     </div>
                 </div>
                 <div class="workflow-step">
                     <div class="workflow-step-content">
                         <h4>Transfer settings to Quantum STS</h4>
-                        <p>Copy your session times, offsets, and per-session stop/TP values into the live indicator. The inputs are structured identically. What you validated in the backtester is exactly what the indicator will visualize and alert on.</p>
+                        <p>Copy your session times, offsets, and per-session stop/TP values into the live indicator. The inputs are structured identically — what you validated is exactly what the indicator visualizes and alerts on.</p>
                     </div>
                 </div>
                 <div class="workflow-step">
                     <div class="workflow-step-content">
                         <h4>Use the indicator for live execution</h4>
-                        <p>Monitor R:R boxes to preview setups before they trigger. Set alerts to fire once per bar when price reaches an entry level. Track live sessions with VWAP and key levels for additional context.</p>
+                        <p>Watch the R:R boxes to preview setups before they trigger, let the alerts tell you when price arrives, and use the key levels, dynamic S/R, ribbon, and VWAP alongside it for whenever you want to read the chart yourself.</p>
                     </div>
                 </div>
             </div>
         </section>
-
-
 
         <section class="content-section" id="disclaimer">
             <h2>Risk Disclaimer</h2>
@@ -351,7 +412,7 @@
                 <p><strong>This is not financial advice.</strong> Trading carries real risk and you can lose money. If you decide to use these tools, that is your choice and your responsibility.</p>
             </div>
             <p>Backtests do not guarantee future performance. Markets change — what worked over the past six months may not work over the next six. Use the backtester to understand the behaviour of your settings, not to predict future results.</p>
-            <p>The default settings are a starting point, not a finished system. Expect to spend time on the backtester before treating any configuration as ready for live trading. If you are using a funded or prop firm account, understand the drawdown limits and make sure your position sizing and stop distances are compatible with those limits before running anything live.</p>
+            <p>The default settings are a starting point, not a finished system. Expect to spend time on the backtester before treating any configuration as ready for live trading. If you're using a funded or prop firm account, understand the drawdown limits and make sure your position sizing and stop distances are compatible with those limits before running anything live.</p>
         </section>
 
     </div>
@@ -378,13 +439,14 @@
                 <a href="../../cookie-policy.html">Cookie Policy</a>
                 <a href="../../contact.html">Contact</a>
             </div>
-            <p class="copyright">© 2026 Quantum Pro Suite. Built by Trendline Project.</p>
+            <p class="copyright">© <span id="year">2025</span> Quantum Ribbon Pro. Built by Trendline Project.</p>
         </div>
     </footer>
 
     <script>
         const nav = document.querySelector('nav');
         window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+        document.getElementById('year').textContent = new Date().getFullYear();
     </script>
 </body>
 </html>
