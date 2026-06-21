@@ -521,12 +521,14 @@
         @media (max-width: 768px) { .tp-rsi-inner { grid-template-columns: 1fr; gap: 32px; } }
     </style>
     <style>
-        .pricing-grid { display: grid; grid-template-columns: 1fr; gap: 24px; max-width: 560px; margin: 0 auto; }
+        .pricing-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; max-width: 1144px; margin: 0 auto; align-items: start; }
         .pricing-card-pro { background: var(--surface); border: 1px solid rgba(41,168,241,0.3); border-radius: 16px; padding: 36px 32px; text-align: left; position: relative; overflow: hidden; box-shadow: 0 0 50px rgba(41,168,241,0.1); }
         .pricing-card-pro::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #29A8F1, #EC4899); }
-        .recommended-badge { position: absolute; top: 16px; right: 16px; background: rgba(41,168,241,0.15); border: 1px solid rgba(41,168,241,0.35); color: var(--accent); font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; padding: 4px 10px; border-radius: 20px; }
         .card-tier-label { font-size: 1.75rem; font-weight: 700; letter-spacing: -0.02em; color: var(--text); margin-bottom: 6px; }
         .card-tier-label-pro { color: var(--text); }
+        .pricing-card-desc { font-size: 0.8125rem; color: var(--text-muted); line-height: 1.5; margin: 8px 0 16px; font-style: italic; }
+        .sts-cta:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(41, 168, 241, 0.4), 0 0 35px rgba(255, 255, 255, 0.15); }
+        .suite-cta:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(41, 168, 241, 0.4), 0 0 35px rgba(236, 72, 153, 0.2); }
         @media (max-width: 900px) { .pricing-grid { grid-template-columns: 1fr; max-width: 480px; } }
         @media (max-width: 768px) { .setup-grid { grid-template-columns: 1fr !important; gap: 40px !important; } .setup-card { padding: 36px 24px !important; } }
     </style>
@@ -536,6 +538,37 @@
             <h2 class="section-title">Choose Your Plan</h2>
             <p class="section-description">Choose the option that works for you.</p>
             <div class="pricing-grid" id="pricing-grid">
+                <!-- STS STANDALONE CARD -->
+                <div style="display: flex; flex-direction: column;">
+                    <div style="height: 34px; margin-bottom: 12px;"></div>
+                    <div class="pricing-card-pro" style="flex: 1; border-color: rgba(255,255,255,0.15); box-shadow: 0 0 50px rgba(255,255,255,0.04);">
+                        <div style="position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #ffffff, #29A8F1);"></div>
+                        <div style="margin-bottom: 20px;">
+                            <div class="card-tier-label card-tier-label-pro">Quantum STS</div>
+                            <div style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5; margin-top: 6px; margin-bottom: 10px;">For futures and prop firm challenge traders. Built around Session Fakeouts and the Opening Range Breakout — optimised for futures, works on any TradingView instrument.</div>
+                            <div style="margin-top: 10px;">
+                                <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(41,168,241,0.12); border: 1px solid rgba(41,168,241,0.3); border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #29A8F1;"><span style="font-size: 0.9rem;">⬡</span> 2 tools included</span>
+                            </div>
+                        </div>
+                        <div class="price-block">
+                            <div style="margin-bottom: 6px;">
+                                <span class="price-amount" style="background: linear-gradient(135deg, #ffffff, #29A8F1); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">$59</span><span class="price-period">/month</span>
+                            </div>
+                            <p class="price-sub">Billed monthly · Cancel anytime</p>
+                        </div>
+                        <div class="pricing-divider"></div>
+                        <ul class="features-list-new" style="margin-bottom: 28px;">
+                            <li><span class="check-icon">✓</span> Quantum STS indicator</li>
+                            <li><span class="check-icon">✓</span> Q-STS Backtester</li>
+                            <li><span class="check-icon">✓</span> Bot-ready alerts</li>
+                            <li><span class="check-icon">✓</span> Setup guides & resources</li>
+                            <li><span class="check-icon">✓</span> Discord community access</li>
+                            <li><span class="check-icon">✓</span> Free updates</li>
+                        </ul>
+                        <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/19ba3ae9-a9bd-4c8e-a543-ce111ec1bd86" class="btn pricing-cta-btn sts-cta" style="background: linear-gradient(135deg, #ffffff, #29A8F1); color: #000; font-weight: 600; display: block; width: 100%; text-align: center; padding: 16px; font-size: 1rem; border: none; border-radius: 8px;">Get Quantum STS</a>
+                    </div>
+                </div>
+                <!-- PRO SUITE COLUMN -->
                 <div>
                     <div style="display: flex; justify-content: center; gap: 8px; margin-bottom: 12px;">
                         <button class="toggle-btn" id="btn-monthly" onclick="setPricing('monthly')" style="padding: 7px 18px; font-size: 0.875rem;">Monthly</button>
@@ -543,7 +576,7 @@
                         <button class="toggle-btn toggle-btn-lifetime" id="btn-lifetime" onclick="setPricing('lifetime')" style="padding: 7px 18px; font-size: 0.875rem;">Lifetime</button>
                     </div>
                     <!-- PRO CARD -->
-                    <div class="pricing-card-pro" id="card-pro" style="flex: 1;">
+                    <div class="pricing-card-pro" id="card-pro">
                         <div style="margin-bottom: 20px;">
                             <div class="card-tier-label card-tier-label-pro">Quantum Pro Suite</div>
                             <div style="font-size: 0.875rem; color: var(--text-secondary); line-height: 1.5; margin-top: 6px; margin-bottom: 10px;">The complete system — six professional tools covering trend, momentum, sessions, scanning, and strategy validation.</div>
@@ -551,98 +584,40 @@
                                 <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(41,168,241,0.12); border: 1px solid rgba(41,168,241,0.3); border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #29A8F1;"><span style="font-size: 0.9rem;">⬡</span> 6 tools included</span>
                             </div>
                         </div>
-                        <div id="annual-promo-strip" style="display:none; margin-bottom: 20px; border-radius: 10px; padding: 12px 16px; background: linear-gradient(135deg, rgba(41,168,241,0.12) 0%, rgba(236,72,153,0.12) 100%); border: 1px solid rgba(41,168,241,0.25);">
+                        <div id="annual-promo" style="margin-bottom: 20px; border-radius: 10px; padding: 12px 16px; background: linear-gradient(135deg, rgba(41,168,241,0.12) 0%, rgba(236,72,153,0.12) 100%); border: 1px solid rgba(236,72,153,0.25);">
                             <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
                                 <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
                                     <span style="background:rgba(236,72,153,0.15); border:1px solid rgba(236,72,153,0.3); color:#EC4899; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; padding:3px 8px; border-radius:20px; white-space:nowrap;">Limited Offer</span>
-                                    <span style="font-size:0.875rem; color:var(--text);"><strong>20% off Annual</strong></span>
+                                    <span style="font-size:0.875rem; color:var(--text);"><strong>25% off Annual</strong></span>
                                 </div>
-                                <div style="display:flex; align-items:center; gap:6px; font-size:0.8rem; color:var(--accent); font-weight:700; font-variant-numeric:tabular-nums;">
+                                <div style="display:flex; align-items:center; gap:6px; font-size:0.8rem; color:#EC4899; font-weight:700; font-variant-numeric:tabular-nums;">
                                     <span id="acd-days">00</span><span style="opacity:0.5;">d</span><span style="opacity:0.4;">:</span><span id="acd-hours">00</span><span style="opacity:0.5;">h</span><span style="opacity:0.4;">:</span><span id="acd-mins">00</span><span style="opacity:0.5;">m</span><span style="opacity:0.4;">:</span><span id="acd-secs">00</span><span style="opacity:0.5;">s</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div id="monthly-promo-strip" style="display:none; margin-bottom: 20px; border-radius: 10px; padding: 12px 16px; background: linear-gradient(135deg, rgba(41,168,241,0.12) 0%, rgba(236,72,153,0.12) 100%); border: 1px solid rgba(41,168,241,0.25);">
-                            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-                                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                                    <span style="background:rgba(236,72,153,0.15); border:1px solid rgba(236,72,153,0.3); color:#EC4899; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; padding:3px 8px; border-radius:20px; white-space:nowrap;">Limited Offer</span>
-                                    <span style="font-size:0.875rem; color:var(--text);"><strong>10% off Monthly</strong></span>
-                                </div>
-                                <div style="display:flex; align-items:center; gap:6px; font-size:0.8rem; color:var(--accent); font-weight:700; font-variant-numeric:tabular-nums;">
-                                    <span id="mcd-days">00</span><span style="opacity:0.5;">d</span><span style="opacity:0.4;">:</span><span id="mcd-hours">00</span><span style="opacity:0.5;">h</span><span style="opacity:0.4;">:</span><span id="mcd-mins">00</span><span style="opacity:0.5;">m</span><span style="opacity:0.4;">:</span><span id="mcd-secs">00</span><span style="opacity:0.5;">s</span>
                                 </div>
                             </div>
                         </div>
                         <div class="price-block">
                             <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 6px;">
-                                <div><span id="price-original" style="display:none; font-size:1.5rem; text-decoration:line-through; opacity:0.45; color:var(--text-secondary); margin-right:6px; vertical-align:middle;"></span><span class="price-amount" id="price-amount">$59</span><span class="price-period">/month</span></div>
-                                <span class="save-badge" id="save-badge">Save 40%</span>
+                                <div><span id="price-original" style="display:none; font-size:1.5rem; text-decoration:line-through; opacity:0.45; color:var(--text-secondary); margin-right:6px; vertical-align:middle;">$59</span><span class="price-amount" id="price-amount">$99</span><span class="price-period" id="price-period">/month</span></div>
                             </div>
                             <p class="price-sub" id="price-sub">$708 billed annually</p>
                         </div>
                         <div class="pricing-divider"></div>
                         <ul class="features-list-new" style="margin-bottom: 28px;">
                             <li><span class="check-icon">✓</span> Quantum Ribbon Pro indicator</li>
-                            <li><span class="check-icon">✓</span> TP RSI Pro indicator <span class="new-badge">New</span></li>
+                            <li><span class="check-icon">✓</span> QR Pro Backtester</li>
+                            <li><span class="check-icon">✓</span> QR Pro Multi-Instrument Scanner</li>
                             <li><span class="check-icon">✓</span> Quantum STS indicator <span class="new-badge">New</span></li>
                             <li><span class="check-icon">✓</span> Q-STS Backtester <span class="new-badge">New</span></li>
-                            <li><span class="check-icon">✓</span> QR Pro Multi-Instrument Scanner</li>
-                            <li><span class="check-icon">✓</span> QR Pro Backtester</li>
+                            <li><span class="check-icon">✓</span> TP RSI Pro indicator</li>
                             <li><span class="check-icon">✓</span> Bot-ready alerts</li>
                             <li><span class="check-icon">✓</span> Setup guides & resources</li>
                             <li><span class="check-icon">✓</span> Discord community access</li>
                             <li><span class="check-icon">✓</span> Free updates</li>
                         </ul>
-                        <a id="pricing-cta" href="https://trendlineproject.lemonsqueezy.com/checkout/buy/910d7802-ed89-4def-b04a-a1c0b9a7739c" class="btn btn-primary pricing-cta-btn">Get Pro Suite</a>
-                        <div id="pro-monthly-code" style="display:none; margin-top: 12px; padding: 10px 14px; background: rgba(41,168,241,0.08); border: 1px solid rgba(41,168,241,0.25); border-radius: 8px; text-align: center;">
-                            <span style="font-size: 0.8125rem; color: var(--text-muted);">Use code </span><strong style="font-size: 0.875rem; color: var(--accent); letter-spacing: 0.05em;">XQRP20</strong><span style="font-size: 0.8125rem; color: var(--text-muted);"> for 20% off your first month</span>
-                        </div>
+                        <a id="pricing-cta" href="#" class="btn suite-cta pricing-cta-btn" style="background: linear-gradient(135deg, #29A8F1, #EC4899); color: #000; font-weight: 600; display: block; width: 100%; text-align: center; padding: 16px; font-size: 1rem; border: none; border-radius: 8px;">Get Pro Suite</a>
                     </div>
-                    <!-- LIFETIME CARD -->
-                    <div class="pricing-card-inner pricing-card-lifetime" id="card-lifetime" style="display: none; border-radius: 16px; padding: 36px 32px;">
-                        <div style="margin-bottom: 20px;">
-                            <div class="card-tier-label card-tier-label-pro">Quantum Pro Suite</div>
-                            <div style="font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; margin-top: 6px; margin-bottom: 10px;">The complete system — one-time payment, no recurring charges.</div>
-                            <div style="margin-top: 10px;">
-                                <span style="display: inline-flex; align-items: center; gap: 6px; background: rgba(41,168,241,0.12); border: 1px solid rgba(41,168,241,0.3); border-radius: 20px; padding: 4px 12px; font-size: 0.8rem; font-weight: 600; color: #29A8F1;"><span style="font-size: 0.9rem;">⬡</span> 6 tools included</span>
-                            </div>
-                        </div>
-                        <div id="lifetime-promo-strip" style="margin-bottom: 20px; border-radius: 10px; padding: 12px 16px; background: linear-gradient(135deg, rgba(41,168,241,0.12) 0%, rgba(236,72,153,0.12) 100%); border: 1px solid rgba(236,72,153,0.25);">
-                            <div style="display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:10px;">
-                                <div style="display:flex; align-items:center; gap:10px; flex-wrap:wrap;">
-                                    <span style="background:rgba(236,72,153,0.15); border:1px solid rgba(236,72,153,0.3); color:#EC4899; font-size:0.65rem; font-weight:700; text-transform:uppercase; letter-spacing:0.08em; padding:3px 8px; border-radius:20px; white-space:nowrap;">Mid-2026 Sale</span>
-                                    <span style="font-size:0.875rem; color:var(--text);"><strong>30% off Lifetime</strong></span>
-                                </div>
-                                <div style="display:flex; align-items:center; gap:6px; font-size:0.8rem; color:#EC4899; font-weight:700; font-variant-numeric:tabular-nums;">
-                                    <span id="lcd-days">00</span><span style="opacity:0.5;">d</span><span style="opacity:0.4;">:</span><span id="lcd-hours">00</span><span style="opacity:0.5;">h</span><span style="opacity:0.4;">:</span><span id="lcd-mins">00</span><span style="opacity:0.5;">m</span><span style="opacity:0.4;">:</span><span id="lcd-secs">00</span><span style="opacity:0.5;">s</span>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="price-block">
-                            <div style="display: flex; align-items: flex-start; justify-content: space-between; margin-bottom: 8px;">
-                                <div>
-                                    <span id="lifetime-price-original" style="font-size:1.5rem; text-decoration:line-through; opacity:0.45; color:var(--text-secondary); margin-right:6px; vertical-align:middle;">$799</span><span id="lifetime-price-amount" class="price-amount price-amount-lifetime" style="background: linear-gradient(135deg, #29A8F1, #EC4899); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text;">$559</span><span class="price-period"> one-time</span>
-                                </div>
-                            </div>
-                            <p class="price-sub">Access for as long as the product exists. No recurring charges.</p>
-                        </div>
-                        <div class="pricing-divider"></div>
-                        <ul class="features-list-new" style="margin-bottom: 28px;">
-                            <li><span class="check-icon-lifetime">✓</span> Quantum Ribbon Pro indicator</li>
-                            <li><span class="check-icon-lifetime">✓</span> TP RSI Pro indicator <span class="new-badge">New</span></li>
-                            <li><span class="check-icon-lifetime">✓</span> Quantum STS indicator <span class="new-badge">New</span></li>
-                            <li><span class="check-icon-lifetime">✓</span> Q-STS Backtester <span class="new-badge">New</span></li>
-                            <li><span class="check-icon-lifetime">✓</span> QR Pro Multi-Instrument Scanner</li>
-                            <li><span class="check-icon-lifetime">✓</span> QR Pro Backtester</li>
-                            <li><span class="check-icon-lifetime">✓</span> Bot-ready alerts</li>
-                            <li><span class="check-icon-lifetime">✓</span> Setup guides & resources</li>
-                            <li><span class="check-icon-lifetime">✓</span> Discord community access</li>
-                            <li><span class="check-icon-lifetime">✓</span> Free updates</li>
-                        </ul>
-                        <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/76fcac28-443c-49db-b0f7-4aaf882415b7" class="btn pricing-cta-btn btn-lifetime-cta">Get Lifetime Access</a>
-                    </div>
-                </div><!-- end pro column -->
-            </div><!-- end pricing-grid -->
+                </div>
+            </div>
         </div>
     </section>
     <!-- GET ACCESS & START TRADING -->
@@ -729,59 +704,68 @@
         </div>
     </footer>
     <script>
-        const ANNUAL_LINK = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/910d7802-ed89-4def-b04a-a1c0b9a7739c';
-        const MONTHLY_LINK = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/c3a6010f-ceaf-4d56-be73-1d33d101bb6e';
-        const ANNUAL_PROMO_DEADLINE = new Date('2026-04-16T23:59:59');
-        const annualPromoActive = new Date() < ANNUAL_PROMO_DEADLINE;
+        const PRICE_GRADIENT = 'linear-gradient(135deg, #29A8F1, #EC4899)';
+        function applyPriceGradient(on) {
+            const pa = document.getElementById('price-amount');
+            if (!pa) return;
+            if (on) {
+                pa.style.background = PRICE_GRADIENT;
+                pa.style.webkitBackgroundClip = 'text';
+                pa.style.webkitTextFillColor = 'transparent';
+                pa.style.backgroundClip = 'text';
+            } else {
+                pa.style.background = 'none';
+                pa.style.webkitTextFillColor = '';
+                pa.style.color = 'var(--accent)';
+            }
+        }
+        const ANNUAL_PROMO_DEADLINE = new Date('2026-07-05T23:59:59');
+        function annualPromoActive() { return new Date() < ANNUAL_PROMO_DEADLINE; }
         function setPricing(plan) {
             const priceAmount = document.getElementById('price-amount');
             const priceOriginal = document.getElementById('price-original');
+            const pricePeriod = document.getElementById('price-period');
             const priceSub = document.getElementById('price-sub');
             const cta = document.getElementById('pricing-cta');
             const btnMonthly = document.getElementById('btn-monthly');
             const btnAnnual = document.getElementById('btn-annual');
             const btnLifetime = document.getElementById('btn-lifetime');
-            const saveBadge = document.getElementById('save-badge');
-            const pricingGrid = document.getElementById('pricing-grid');
-            const cardLifetime = document.getElementById('card-lifetime');
-            const annualStrip = document.getElementById('annual-promo-strip');
+            const annualPromo = document.getElementById('annual-promo');
             btnMonthly.classList.remove('active');
             btnAnnual.classList.remove('active');
             btnLifetime.classList.remove('active');
-            const cardPro = document.getElementById('card-pro');
-            if (plan === 'lifetime') {
-                cardPro.style.display = 'none';
-                cardLifetime.style.display = 'block';
-                pricingGrid.style.display = 'grid';
+            if (plan === 'monthly') {
+                btnMonthly.classList.add('active');
+                priceAmount.textContent = '$99'; pricePeriod.textContent = '/month';
+                priceOriginal.style.display = 'none';
+                priceSub.textContent = 'Billed monthly · Cancel anytime';
+                cta.textContent = 'Get Pro Suite'; cta.href = '#';
+                annualPromo.style.display = 'none';
+                applyPriceGradient(false);
+            } else if (plan === 'lifetime') {
                 btnLifetime.classList.add('active');
+                priceAmount.textContent = '$799'; pricePeriod.textContent = ' one-time';
+                priceOriginal.style.display = 'none';
+                priceSub.textContent = 'One payment. Lifetime access.';
+                cta.textContent = 'Get Lifetime Access'; cta.href = '#';
+                annualPromo.style.display = 'none';
+                applyPriceGradient(true);
             } else {
-                cardPro.style.display = 'block';
-                cardLifetime.style.display = 'none';
-                pricingGrid.style.display = 'grid';
-                if (plan === 'annual') {
-                    document.getElementById('monthly-promo-strip').style.display = 'none';
-                    document.getElementById('pro-monthly-code').style.display = 'none';
-                    if (annualPromoActive) {
-                        priceAmount.textContent = '$47'; priceOriginal.textContent = '$59'; priceOriginal.style.display = 'inline';
-                        priceSub.textContent = '$564 billed annually — was $708'; saveBadge.style.display = 'none'; annualStrip.style.display = 'block';
-                    } else {
-                        priceAmount.textContent = '$59'; priceOriginal.style.display = 'none';
-                        priceSub.textContent = '$708 billed annually'; saveBadge.style.display = 'none'; annualStrip.style.display = 'none';
-                    }
-                    cta.href = ANNUAL_LINK; btnAnnual.classList.add('active'); saveBadge.style.display = 'none';
+                btnAnnual.classList.add('active');
+                pricePeriod.textContent = '/month';
+                cta.textContent = 'Get Pro Suite'; cta.href = '#';
+                if (annualPromoActive()) {
+                    priceAmount.textContent = '$44';
+                    priceOriginal.textContent = '$59'; priceOriginal.style.display = 'inline';
+                    priceSub.textContent = '$531 billed annually — was $708';
+                    annualPromo.style.display = 'block';
+                    applyPriceGradient(true);
                 } else {
-                    annualStrip.style.display = 'none';
-                    if (annualPromoActive) {
-                        priceAmount.textContent = '$89'; priceOriginal.textContent = '$99'; priceOriginal.style.display = 'inline';
-                        priceSub.textContent = 'Billed monthly · Cancel anytime'; saveBadge.textContent = '10% Off';
-                        document.getElementById('monthly-promo-strip').style.display = 'block';
-                    } else {
-                        priceAmount.textContent = '$99'; priceOriginal.style.display = 'none';
-                        priceSub.textContent = 'Billed monthly · Cancel anytime'; saveBadge.textContent = 'Save 40%';
-                        document.getElementById('monthly-promo-strip').style.display = 'none';
-                    }
-                    cta.href = MONTHLY_LINK; btnMonthly.classList.add('active'); saveBadge.style.display = 'none'; annualStrip.style.display = 'none';
-                    document.getElementById('pro-monthly-code').style.display = 'block';
+                    priceAmount.textContent = '$59';
+                    priceOriginal.style.display = 'none';
+                    priceSub.textContent = '$708 billed annually';
+                    annualPromo.style.display = 'none';
+                    applyPriceGradient(false);
                 }
             }
         }
@@ -833,64 +817,33 @@
             document.querySelectorAll('a[href*="discord.gg"]').forEach(function(btn) { btn.addEventListener('click', function() { gtag('event', 'discord_click', { 'event_category': 'community', 'event_label': 'discord_button' }); }); });
             document.querySelectorAll('a[href*="youtube.com"]').forEach(function(btn) { btn.addEventListener('click', function() { gtag('event', 'youtube_click', { 'event_category': 'social', 'event_label': 'footer_youtube' }); }); });
         });
-    </script>
-    <script>
         (function() {
-            const deadline = new Date('2026-04-16T23:59:59');
-            const lifetimeDeadline = new Date('2026-06-15T23:59:59');
-            function updateCountdowns() {
+            function updateAnnualCountdown() {
                 const now = new Date();
-                // existing annual/monthly promo
-                const diff = deadline - now;
+                const diff = ANNUAL_PROMO_DEADLINE - now;
                 if (diff <= 0) {
-                    const as = document.getElementById('annual-promo-strip');
-                    const ms = document.getElementById('monthly-promo-strip');
-                    if (as) as.style.display = 'none';
-                    if (ms) ms.style.display = 'none';
-                    const pa = document.getElementById('price-amount');
-                    const po = document.getElementById('price-original');
-                    const ps = document.getElementById('price-sub');
-                    const btnA = document.getElementById('btn-annual');
-                    if (btnA && btnA.classList.contains('active') && pa) {
-                        pa.textContent = '$59'; if (po) po.style.display = 'none';
+                    const strip = document.getElementById('annual-promo');
+                    if (strip) strip.style.display = 'none';
+                    if (document.getElementById('btn-annual').classList.contains('active')) {
+                        const pa = document.getElementById('price-amount');
+                        const po = document.getElementById('price-original');
+                        const ps = document.getElementById('price-sub');
+                        if (pa) pa.textContent = '$59';
+                        if (po) po.style.display = 'none';
                         if (ps) ps.textContent = '$708 billed annually';
+                        applyPriceGradient(false);
                     }
-                    const btnM = document.getElementById('btn-monthly');
-                    if (btnM && btnM.classList.contains('active') && pa) {
-                        pa.textContent = '$99'; if (po) po.style.display = 'none';
-                        if (ps) ps.textContent = 'Billed monthly · Cancel anytime';
-                    }
-                } else {
-                    const days = String(Math.floor(diff / 86400000)).padStart(2, '0');
-                    const hours = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-                    const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-                    const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-                    ['acd', 'mcd'].forEach(function(prefix) {
-                        const d = document.getElementById(prefix + '-days'); const h = document.getElementById(prefix + '-hours'); const m = document.getElementById(prefix + '-mins'); const s = document.getElementById(prefix + '-secs');
-                        if (d) d.textContent = days; if (h) h.textContent = hours; if (m) m.textContent = mins; if (s) s.textContent = secs;
-                    });
+                    return;
                 }
-                // lifetime promo countdown
-                const ldiff = lifetimeDeadline - now;
-                const lstrip = document.getElementById('lifetime-promo-strip');
-                if (ldiff <= 0) {
-                    if (lstrip) lstrip.style.display = 'none';
-                    const loriginal = document.getElementById('lifetime-price-original');
-                    const lprice = document.getElementById('lifetime-price-amount');
-                    if (loriginal) loriginal.style.display = 'none';
-                    if (lprice) lprice.textContent = '$799';
-                } else {
-                    const ld = String(Math.floor(ldiff / 86400000)).padStart(2, '0');
-                    const lh = String(Math.floor((ldiff % 86400000) / 3600000)).padStart(2, '0');
-                    const lm = String(Math.floor((ldiff % 3600000) / 60000)).padStart(2, '0');
-                    const ls = String(Math.floor((ldiff % 60000) / 1000)).padStart(2, '0');
-                    const lcd_d = document.getElementById('lcd-days'); const lcd_h = document.getElementById('lcd-hours');
-                    const lcd_m = document.getElementById('lcd-mins'); const lcd_s = document.getElementById('lcd-secs');
-                    if (lcd_d) lcd_d.textContent = ld; if (lcd_h) lcd_h.textContent = lh;
-                    if (lcd_m) lcd_m.textContent = lm; if (lcd_s) lcd_s.textContent = ls;
-                }
+                const days = String(Math.floor(diff / 86400000)).padStart(2, '0');
+                const hours = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+                const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+                const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+                const d = document.getElementById('acd-days'); const h = document.getElementById('acd-hours');
+                const m = document.getElementById('acd-mins'); const s = document.getElementById('acd-secs');
+                if (d) d.textContent = days; if (h) h.textContent = hours; if (m) m.textContent = mins; if (s) s.textContent = secs;
             }
-            updateCountdowns(); setInterval(updateCountdowns, 1000);
+            updateAnnualCountdown(); setInterval(updateAnnualCountdown, 1000);
         })();
     </script>
     <div id="cookieConsent" class="cookie-consent">
