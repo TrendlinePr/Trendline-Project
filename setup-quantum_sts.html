@@ -158,11 +158,12 @@
                 <a href="terms-of-service.html">Terms of Service</a>
                 <a href="contact.html">Contact</a>
             </div>
-            <p class="copyright">© 2025 Quantum Ribbon Pro. Built by Trendline Project.</p>
+            <p class="copyright">© <span id="copyright-year"></span> Quantum Pro Suite. Built by Trendline Project.</p>
         </div>
     </footer>
 
     <script>
+        document.getElementById('copyright-year').textContent = new Date().getFullYear();
         document.getElementById('setup-form').addEventListener('submit', async function(e) {
             e.preventDefault();
             const btn = document.getElementById('submit-btn');
@@ -175,7 +176,7 @@
                     headers: { 'Accept': 'application/json' }
                 });
                 if (response.ok) {
-                    window.location.href = 'thank-you-starter.html';
+                    window.location.href = 'thank-you-quantum_sts.html';
                 } else {
                     btn.disabled = false;
                     btn.textContent = 'Submit & Get Access';
