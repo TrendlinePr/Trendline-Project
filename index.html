@@ -704,6 +704,9 @@
         </div>
     </footer>
     <script>
+        const SUITE_MONTHLY_LINK = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/c3a6010f-ceaf-4d56-be73-1d33d101bb6e';
+        const SUITE_ANNUAL_LINK = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/910d7802-ed89-4def-b04a-a1c0b9a7739c';
+        const SUITE_LIFETIME_LINK = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/76fcac28-443c-49db-b0f7-4aaf882415b7';
         const PRICE_GRADIENT = 'linear-gradient(135deg, #29A8F1, #EC4899)';
         function applyPriceGradient(on) {
             const pa = document.getElementById('price-amount');
@@ -739,7 +742,7 @@
                 priceAmount.textContent = '$99'; pricePeriod.textContent = '/month';
                 priceOriginal.style.display = 'none';
                 priceSub.textContent = 'Billed monthly · Cancel anytime';
-                cta.textContent = 'Get Pro Suite'; cta.href = '#';
+                cta.textContent = 'Get Pro Suite'; cta.href = SUITE_MONTHLY_LINK;
                 annualPromo.style.display = 'none';
                 applyPriceGradient(false);
             } else if (plan === 'lifetime') {
@@ -747,13 +750,13 @@
                 priceAmount.textContent = '$799'; pricePeriod.textContent = ' one-time';
                 priceOriginal.style.display = 'none';
                 priceSub.textContent = 'One payment. Lifetime access.';
-                cta.textContent = 'Get Lifetime Access'; cta.href = '#';
+                cta.textContent = 'Get Lifetime Access'; cta.href = SUITE_LIFETIME_LINK;
                 annualPromo.style.display = 'none';
                 applyPriceGradient(true);
             } else {
                 btnAnnual.classList.add('active');
                 pricePeriod.textContent = '/month';
-                cta.textContent = 'Get Pro Suite'; cta.href = '#';
+                cta.textContent = 'Get Pro Suite'; cta.href = SUITE_ANNUAL_LINK;
                 if (annualPromoActive()) {
                     priceAmount.textContent = '$44';
                     priceOriginal.textContent = '$59'; priceOriginal.style.display = 'inline';
