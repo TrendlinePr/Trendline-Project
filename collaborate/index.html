@@ -470,6 +470,7 @@
       <input type="hidden" name="_subject" value="New Creator Agreement Submission — Trendline Project" />
       <input type="hidden" name="_next" value="" />
       <input type="hidden" name="agreed_fee" id="agreedFee" value="" />
+      <input type="hidden" name="agreement_url" id="agreementUrl" value="" />
 
       <div class="form-row">
         <div class="form-group">
@@ -546,6 +547,7 @@
       document.getElementById('feeDisplay').textContent = '$' + fee;
       document.getElementById('agreedFee').value = '$' + fee;
     }
+    document.getElementById('agreementUrl').value = window.location.href;
 
     const form = document.getElementById('agreementForm');
     const submitBtn = document.getElementById('submitBtn');
