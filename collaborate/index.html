@@ -38,7 +38,7 @@
       height: 64px;
       display: flex;
       align-items: center;
-      justify-content: center;
+      justify-content: space-between;
       position: sticky;
       top: 0;
       background: rgba(10,10,10,0.95);
@@ -61,7 +61,10 @@
     .nav-logo-text {
       font-size: 15px;
       font-weight: 600;
-      color: #F0F0F0;
+      background: var(--gradient);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
     }
 
     /* HERO */
@@ -355,17 +358,40 @@
   <!-- NAV -->
   <nav>
     <a href="https://trendlineproject.com" class="nav-logo">
-      <!-- Replace src with your actual logo path -->
-      <img src="logo.png" class="nav-logo-icon" alt="Trendline Project" />
+      <img src="logo.png" alt="Trendline Project" class="nav-logo-icon" />
       <span class="nav-logo-text">Trendline Project</span>
     </a>
   </nav>
 
-  <!-- AGREEMENT HEADER -->
-  <div style="max-width:720px;margin:48px auto 32px;padding:0 2rem;text-align:center;">
-    <div class="hero-badge">Creator Collaboration Agreement</div>
-    <h1 style="font-size:clamp(22px,4vw,32px);font-weight:700;color:var(--text);margin:16px 0 8px;">Trendline Project <span style="background:var(--gradient);-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">× Creator</span></h1>
-    <p style="color:var(--text-muted);font-size:15px;margin:0;">Please review the terms below and complete the form to confirm your participation.</p>
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-badge">Creator Partnership</div>
+    <h1>Feature <span>Quantum Pro Suite</span><br/>on Your Channel</h1>
+    <p>We pay you upfront, give you full indicator access, and you earn commissions on every sale you drive.</p>
+  </section>
+
+  <!-- OFFER CARDS -->
+  <div class="offer-grid">
+    <div class="offer-card">
+      <div class="offer-icon">💵</div>
+      <div class="offer-value" id="feeDisplay">$—</div>
+      <div class="offer-label">Flat fee on invoice</div>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon">🔗</div>
+      <div class="offer-value">30%</div>
+      <div class="offer-label">Affiliate commission</div>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon">📈</div>
+      <div class="offer-value">Full Access</div>
+      <div class="offer-label">Quantum Pro Suite on TradingView</div>
+    </div>
+    <div class="offer-card">
+      <div class="offer-icon">🗓️</div>
+      <div class="offer-value">21 Days</div>
+      <div class="offer-label">To publish your video</div>
+    </div>
   </div>
 
   <!-- AGREEMENT TERMS -->
@@ -375,67 +401,61 @@
 
       <div class="term">
         <div class="term-title">1. Deliverable</div>
-        <p>You agree to publish one in-depth video review featuring Quantum Ribbon Pro on your YouTube channel within 21 days of submitting this form. The video must be at least 8 minutes and cover the following: a review of the key features, how the tools can be combined together, and a live demonstration showing them in action.</p>
+        <p>You agree to publish one dedicated long-form video (posted on YouTube) featuring Quantum Pro Suite within 21 days of submitting this form.</p>
+        <br/>
+        <p><strong style="color:var(--text);">Posting Requirements:</strong></p>
+        <ul style="margin-top:8px;padding-left:20px;color:var(--text-secondary);font-size:14px;line-height:2;">
+          <li>Video must include visuals of Quantum Pro Suite indicators in action</li>
+          <li>Your unique affiliate link must be placed in the video description</li>
+          <li>The video must include a clear verbal call-to-action directing viewers to use your affiliate link</li>
+          <li>The video must be a minimum of 8 minutes in length</li>
+          <li>The video must remain publicly available on your YouTube channel for a minimum of 12 months from the date of posting unless prior written consent is given for its removal</li>
+        </ul>
       </div>
 
       <div class="term">
         <div class="term-title">2. Flat Fee</div>
-        <p>We will pay a total flat fee of $200 USD, split as follows: <strong style="color:var(--text);">$100 upon agreement submission</strong> and <strong style="color:var(--text);">$100 after your video is published and verified live.</strong> Please send your invoice directly via PayPal to <strong style="color: var(--text);">info.trendlineproject@gmail.com</strong> — use the standard PayPal invoice feature from your PayPal account. Each payment will be processed within 5 business days of the respective milestone.</p>
+        <p>We will pay the agreed flat fee upon receipt of your PayPal invoice. Send your invoice to <strong style="color: var(--text);">info.trendlineproject@gmail.com</strong>. Payment will be processed within 24 hours of invoice receipt.</p>
       </div>
 
       <div class="term">
         <div class="term-title">3. Affiliate Commission</div>
-        <p>You earn 30% commission on every sale — including subscription renewals — made through your unique affiliate link, paid monthly. To receive your link, apply to our affiliate programme at <a href="https://trendlineproject.lemonsqueezy.com/affiliates" target="_blank" style="color: var(--accent);">trendlineproject.lemonsqueezy.com/affiliates</a>. Once approved, you will receive your personal tracking link automatically.</p>
+        <p>You will receive a unique affiliate link via LemonSqueezy. You earn 30% commission on every sale made through your link, paid monthly, with no expiry.</p>
       </div>
 
       <div class="term">
         <div class="term-title">4. TradingView Access</div>
-        <p>We will grant you full access to Quantum Ribbon Pro on TradingView after this form is submitted. Access is tied to the TradingView username you provide below.</p>
+        <p>We will grant you full access to Quantum Pro Suite on TradingView after this form is submitted. Access is tied to the TradingView username provided below.</p>
       </div>
 
       <div class="term">
-        <div class="term-title">5. Content Requirements</div>
-        <p>Your video must be at least 8 minutes and include: a walkthrough of Quantum Ribbon Pro's key features, a demonstration of how the tools work together, and a live example showing them in action on a chart. You must disclose this as a paid collaboration in both the video and description, in line with FTC/ASA guidelines.</p>
+        <div class="term-title">5. Content & Disclosure</div>
+        <p>You must clearly disclose the paid collaboration in your video and description in line with FTC/ASA guidelines.</p>
       </div>
 
       <div class="term">
-        <div class="term-title">6. No Exclusivity</div>
-        <p>This agreement does not prevent you from reviewing other indicators or tools.</p>
+        <div class="term-title">6. Confidentiality</div>
+        <p>You agree not to disclose any proprietary information about Quantum Pro Suite's code, strategy logic, or business details shared with you outside of your public review.</p>
       </div>
 
       <div class="term">
-        <div class="term-title">7. Video Availability</div>
-        <p>Your video must remain publicly available on your YouTube channel for a minimum of 1 year from the date of posting. Removal before this period without prior written consent from Trendline Project constitutes a breach of this agreement.</p>
+        <div class="term-title">7. Termination</div>
+        <p>Either party may terminate this agreement with 14 days written notice. We may terminate immediately if this agreement is breached or if content is published that materially damages the Trendline Project brand.</p>
       </div>
 
       <div class="term">
-        <div class="term-title">8. Confidentiality</div>
-        <p>You agree to keep confidential any non-public information shared by Trendline Project, including but not limited to business strategies, sales data, pricing, customer information, and marketing materials. This obligation continues after the termination of this agreement.</p>
+        <div class="term-title">8. Indemnification</div>
+        <p>You agree to indemnify and hold Trendline Project harmless from any claims or damages arising from your content or breach of this agreement.</p>
       </div>
 
       <div class="term">
-        <div class="term-title">9. Usage Rights</div>
-        <p>By submitting this form, you grant Trendline Project a perpetual, worldwide, non-exclusive licence to use, reproduce, and repurpose your video content and associated materials (including clips, thumbnails, and quotes) for marketing and promotional purposes across all channels.</p>
-      </div>
-
-      <div class="term">
-        <div class="term-title">10. Indicator Confidentiality & Restrictions</div>
-        <p>Access to Quantum Ribbon Pro is granted solely for the purpose of producing the agreed video content. You may not share, reproduce, resell, redistribute, copy, reverse-engineer, or use the indicator or any part of it for any commercial purpose. Access is personal and non-transferable. Breach of this clause will result in immediate termination of access and may result in legal action.</p>
-      </div>
-
-      <div class="term">
-        <div class="term-title">11. Termination</div>
-        <p>Trendline Project reserves the right to terminate this agreement immediately in the event of a breach of any of these terms. In the event of termination due to breach, the initial $100 payment already made must be returned in full within 14 days. The second $100 payment will not be issued. TradingView access will be revoked immediately upon termination.</p>
-      </div>
-
-      <div class="term">
-        <div class="term-title">12. Independent Contractor</div>
-        <p>You are an independent contractor. Nothing in this agreement creates an employment, agency, or partnership relationship between you and Trendline Project.</p>
+        <div class="term-title">9. Independent Contractor</div>
+        <p>You are an independent contractor. Nothing in this agreement creates an employer-employee relationship.</p>
       </div>
 
       <div class="term" style="margin-bottom:0;">
-        <div class="term-title">13. Acceptance</div>
-        <p>Submitting this form constitutes your agreement to these terms.</p>
+        <div class="term-title">10. Entire Agreement</div>
+        <p>This agreement constitutes the entire understanding between the parties. Any amendments must be agreed in writing by both parties. Submitting this form constitutes your acceptance of these terms.</p>
       </div>
     </div>
   </div>
@@ -444,13 +464,12 @@
   <div class="form-section">
     <h2>Your <span>Details</span></h2>
 
-    <form id="agreementForm" action="https://formspree.io/f/YOUR_FORMSPREE_ID" method="POST">
+    <form id="agreementForm" action="https://formspree.io/f/mnjkjjeb" method="POST">
 
       <!-- Hidden fields -->
       <input type="hidden" name="_subject" value="New Creator Agreement Submission — Trendline Project" />
-      <input type="hidden" name="_replyto" id="replyToField" value="" />
-      <input type="hidden" name="_cc" value="[YOUR EMAIL]" />
-      <input type="hidden" name="_next" value="" /> <!-- handled by JS -->
+      <input type="hidden" name="_next" value="" />
+      <input type="hidden" name="agreed_fee" id="agreedFee" value="" />
 
       <div class="form-row">
         <div class="form-group">
@@ -483,15 +502,26 @@
         <input type="email" id="paypal" name="paypal_email" placeholder="jane@paypal.com" required />
       </div>
 
+      <div class="form-row">
+        <div class="form-group">
+          <label for="country">Country</label>
+          <input type="text" id="country" name="country" placeholder="United States" required />
+        </div>
+        <div class="form-group">
+          <label for="company">Company / Business Name <span style="color:var(--text-muted);font-weight:400;text-transform:none;letter-spacing:0;">(optional)</span></label>
+          <input type="text" id="company" name="company_name" placeholder="LLC or trading name (if applicable)" />
+        </div>
+      </div>
+
       <div class="checkbox-group">
         <input type="checkbox" id="agreeTerms" name="agreed_to_terms" value="yes" required />
         <label for="agreeTerms">
-          I have read and agree to the collaboration terms above, including the video requirements, payment process, and disclosure obligations.
+          I have read and agree to the collaboration terms above. I understand I must publish my video within 21 days, send a PayPal invoice to receive my $200 flat fee, and disclose this as a paid collaboration.
         </label>
       </div>
 
-      <button type="submit" class="submit-btn" id="submitBtn">Accept & Submit →</button>
-      <p class="form-note">After submitting, you'll receive a document to sign electronically. TradingView access and your first payment will follow once signed.</p>
+      <button type="submit" class="submit-btn" id="submitBtn">Accept Agreement & Submit Details →</button>
+      <p class="form-note">You'll receive a confirmation email with your affiliate link and TradingView access instructions.</p>
 
     </form>
 
@@ -499,7 +529,7 @@
     <div class="success-box" id="successBox">
       <div class="success-icon">✅</div>
       <h3>You're in — welcome aboard!</h3>
-      <p>Check your inbox for next steps including your affiliate link and TradingView access. Send your $200 PayPal invoice to <strong>[YOUR PAYPAL EMAIL]</strong> whenever you're ready.</p>
+      <p>Check your inbox for next steps including your affiliate link and TradingView access. Send your PayPal invoice to <strong>info.trendlineproject@gmail.com</strong> whenever you're ready.</p>
     </div>
   </div>
 
@@ -509,16 +539,17 @@
   </footer>
 
   <script>
+    // Read fee from URL param e.g. ?fee=100
+    const params = new URLSearchParams(window.location.search);
+    const fee = params.get('fee');
+    if (fee) {
+      document.getElementById('feeDisplay').textContent = '$' + fee;
+      document.getElementById('agreedFee').value = '$' + fee;
+    }
+
     const form = document.getElementById('agreementForm');
     const submitBtn = document.getElementById('submitBtn');
     const successBox = document.getElementById('successBox');
-    const emailInput = document.getElementById('email');
-    const replyToField = document.getElementById('replyToField');
-
-    // Keep _replyto in sync with email field so Formspree sends copy to creator
-    emailInput.addEventListener('input', function() {
-      replyToField.value = emailInput.value;
-    });
 
     form.addEventListener('submit', async function(e) {
       e.preventDefault();
