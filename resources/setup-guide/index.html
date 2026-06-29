@@ -3,10 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="theme-color" content="#1C1F26">
+    <meta name="theme-color" content="#0D1117">
     <title>Setup Guide — Trendline Project</title>
     <meta name="description" content="How to get access to your Quantum Ribbon tools and start trading on TradingView. Step-by-step setup guide.">
     <link rel="icon" type="image/x-icon" href="../../favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLKJNZ6GZV"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -16,58 +19,66 @@
     </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { overflow-x: hidden; width: 100%; scroll-behavior: smooth; background: #0D1117; }
         :root {
-            --surface: #1C1F26; --accent: #29A8F1; --text: #F0F0F0;
-            --text-secondary: #C5CBD3; --text-muted: #8B92A0; --border: rgba(255,255,255,0.06);
+            --surface: #14171E; --surface-2: #1A1E27; --surface-hover: #23262E;
+            --accent: #29A8F1; --cyan: #00D4FF; --pink: #EC4899; --pink-hot: #FF3D80;
+            --text: #F4F6F8; --text-secondary: #C5CBD3; --text-muted: #8B92A0;
+            --border: rgba(255, 255, 255, 0.07); --border-hover: rgba(74, 159, 216, 0.35);
+            --display: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            --grad: linear-gradient(135deg, #29A8F1 0%, #8CA8CE 50%, #EC4899 100%);
         }
         body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
-            background: linear-gradient(180deg, #1E2A3A 0%, #050608 50%, #0D1117 100%);
+            font-family: var(--display);
+            background:
+                radial-gradient(ellipse 90% 50% at 50% -8%, rgba(41,168,241,0.10) 0%, transparent 55%),
+                linear-gradient(180deg, #131A24 0%, #0A0C10 40%, #0D1117 100%);
             background-attachment: fixed; color: var(--text); line-height: 1.6;
-            -webkit-font-smoothing: antialiased; min-height: 100vh;
+            -webkit-font-smoothing: antialiased; overflow-x: hidden; min-height: 100vh;
         }
         .container { max-width: 760px; margin: 0 auto; padding: 0 32px; }
 
         /* Nav */
-        nav { padding: 20px 0; position: fixed; top: 0; left: 0; right: 0; background: transparent; z-index: 1000; transition: background 0.3s ease; }
-        nav.scrolled { background: rgba(28,31,38,0.85); backdrop-filter: blur(10px); }
+        nav { padding: 20px 0; position: fixed; top: 0; left: 0; right: 0; background: transparent; z-index: 1000; transition: background 0.3s ease, backdrop-filter 0.3s ease; }
+        nav.scrolled { background: rgba(20,23,30,0.85); backdrop-filter: blur(10px); -webkit-backdrop-filter: blur(10px); }
         .nav-inner { max-width: 900px; margin: 0 auto; padding: 0 32px; display: flex; justify-content: space-between; align-items: center; position: relative; }
         .nav-social { position: absolute; left: 50%; transform: translateX(-50%); display: flex; gap: 12px; align-items: center; }
+        .logo { font-size: 1.0625rem; font-weight: 600; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; letter-spacing: -0.02em; }
+        .logo img { width: 28px; height: 28px; }
         .nav-right { display: flex; gap: 20px; align-items: center; }
         .nav-right a { color: var(--text-secondary); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
         .nav-right a:hover { color: var(--accent); }
-        .nav-right .btn-nav { color: var(--accent); border: 1px solid var(--accent); border-radius: 8px; padding: 8px 20px; }
-        .logo { font-size: 1.0625rem; font-weight: 600; color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; }
-        .logo img { width: 28px; height: 28px; }
-        .nav-right { display: flex; gap: 20px; align-items: center; }
-        .nav-right a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
-        .nav-right a:hover { color: var(--accent); }
-        .nav-right .btn-nav { color: var(--accent); border: 1px solid var(--accent); border-radius: 6px; padding: 6px 14px; font-size: 0.8125rem; }
+        /* Get Access — gradient-outline ghost (accent at rest; pink->blue outline + glow + gradient text on hover) */
+        .nav-right .btn-nav { position: relative; display: inline-block; padding: 10px 21px; border-radius: 10px; font-family: var(--display); font-size: 0.875rem; font-weight: 600; color: var(--accent); background: transparent; border: none; text-decoration: none; transition: transform .2s, box-shadow .25s; }
+        .nav-right .btn-nav::before { content: ''; position: absolute; inset: 0; border-radius: 10px; padding: 1px; background: var(--accent); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; transition: background .25s; }
+        .nav-right .btn-nav:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(236,72,153,0.22), 0 0 20px rgba(41,168,241,0.22); background: linear-gradient(120deg,#EC4899,#29A8F1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .nav-right .btn-nav:hover::before { background: linear-gradient(120deg,#EC4899,#29A8F1); }
 
         /* Header */
-        .page-header { padding: 120px 0 60px; text-align: center; }
+        .page-header { padding: 140px 0 60px; text-align: center; }
         .breadcrumb { display: none; }
-        h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 700; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.15; }
-        .accent-text { color: var(--accent); }
+        h1 { font-size: clamp(2rem, 4vw, 3rem); font-weight: 600; letter-spacing: -0.03em; margin-bottom: 16px; line-height: 1.15; }
+        .accent-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
         .page-subtitle { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.7; max-width: 600px; margin: 0 auto; }
 
         /* Overview steps */
         .overview { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin: 48px 0; }
-        .overview-step { background: rgba(41,168,241,0.05); border: 1px solid rgba(41,168,241,0.15); border-radius: 12px; padding: 20px; text-align: center; }
-        .overview-num { font-size: 1.5rem; font-weight: 700; color: var(--accent); margin-bottom: 8px; }
+        .overview-step { background: rgba(41,168,241,0.05); border: 1px solid rgba(41,168,241,0.15); border-radius: 12px; padding: 20px; text-align: center; transition: all 0.3s ease; }
+        .overview-step:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 12px 36px rgba(41,168,241,0.12); }
+        .overview-num { font-size: 1.5rem; font-weight: 600; color: var(--accent); margin-bottom: 8px; }
         .overview-label { font-size: 0.875rem; color: var(--text-secondary); }
 
         /* Sections */
         .guide-section { margin-bottom: 64px; }
         .section-header { display: flex; align-items: center; gap: 16px; margin-bottom: 32px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
-        .section-num { width: 40px; height: 40px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 700; color: #000; flex-shrink: 0; }
+        .section-num { width: 40px; height: 40px; border-radius: 50%; background: var(--accent); display: flex; align-items: center; justify-content: center; font-size: 1rem; font-weight: 600; color: #001018; flex-shrink: 0; }
         .section-title { font-size: 1.375rem; font-weight: 600; letter-spacing: -0.02em; }
         .section-subtitle { font-size: 0.9375rem; color: var(--text-muted); margin-top: 2px; }
 
         /* Steps within section */
         .steps-list { display: flex; flex-direction: column; gap: 20px; }
         .step-item { display: flex; gap: 16px; align-items: flex-start; }
-        .step-dot { width: 28px; height: 28px; border-radius: 50%; background: rgba(41,168,241,0.1); border: 1px solid rgba(41,168,241,0.25); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 700; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
+        .step-dot { width: 28px; height: 28px; border-radius: 50%; background: rgba(41,168,241,0.1); border: 1px solid rgba(41,168,241,0.25); display: flex; align-items: center; justify-content: center; font-size: 0.75rem; font-weight: 600; color: var(--accent); flex-shrink: 0; margin-top: 2px; }
         .step-content { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.65; }
         .step-content strong { color: var(--text); }
 
@@ -77,7 +88,7 @@
 
         /* Plan cards */
         .plan-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin: 24px 0; }
-        .plan-card { border-radius: 10px; padding: 20px; border: 1px solid var(--border); }
+        .plan-card { border-radius: 12px; padding: 20px; border: 1px solid var(--border); }
         .plan-card.starter { background: rgba(20,112,168,0.08); border-color: rgba(20,112,168,0.2); }
         .plan-card.pro { background: rgba(41,168,241,0.06); border-color: rgba(41,168,241,0.2); }
         .plan-card-title { font-size: 0.9375rem; font-weight: 600; margin-bottom: 10px; color: var(--text); }
@@ -90,8 +101,8 @@
 
         /* Resource links */
         .resource-links { display: flex; flex-direction: column; gap: 12px; margin-top: 16px; }
-        .resource-link { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); transition: all 0.2s; }
-        .resource-link:hover { border-color: var(--accent); background: rgba(41,168,241,0.05); }
+        .resource-link { display: flex; align-items: center; justify-content: space-between; padding: 16px 20px; background: var(--surface); border: 1px solid var(--border); border-radius: 12px; text-decoration: none; color: var(--text); transition: all 0.3s ease; }
+        .resource-link:hover { border-color: var(--border-hover); transform: translateY(-2px); box-shadow: 0 12px 36px rgba(41,168,241,0.12); }
         .resource-link-text { font-size: 0.9375rem; font-weight: 500; }
         .resource-link-sub { font-size: 0.8125rem; color: var(--text-muted); margin-top: 2px; }
         .resource-link-arrow { color: var(--accent); font-size: 1.1rem; flex-shrink: 0; }
@@ -101,15 +112,20 @@
         .cta-box::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: linear-gradient(90deg, #29A8F1, #EC4899); }
         .cta-box h2 { font-size: 1.5rem; font-weight: 600; letter-spacing: -0.02em; margin-bottom: 12px; }
         .cta-box p { color: var(--text-secondary); margin-bottom: 24px; font-size: 0.9375rem; }
-        .btn { display: inline-block; padding: 14px 32px; border-radius: 8px; font-size: 0.9375rem; font-weight: 600; text-decoration: none; transition: all 0.2s; cursor: pointer; }
-        .btn-primary { background: var(--accent); color: #000; border: none; }
-        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 25px rgba(41,168,241,0.4); }
+        .btn { display: inline-block; padding: 14px 32px; border-radius: 10px; font-size: 0.9375rem; font-weight: 600; text-decoration: none; transition: all 0.2s; cursor: pointer; letter-spacing: -0.01em; }
+        .btn-primary { background: var(--accent); color: #001018; border: none; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 28px rgba(41,168,241,0.45); }
 
-        footer { padding: 40px 0; border-top: 1px solid var(--border); text-align: center; margin-top: 40px; }
-        .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 16px; flex-wrap: wrap; }
+        /* footer */
+        footer { padding: 60px 0 40px; border-top: 1px solid var(--border); text-align: center; margin-top: 40px; }
+        .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; flex-wrap: wrap; }
         .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
         .footer-links a:hover { color: var(--accent); }
         .copyright { color: var(--text-muted); font-size: 0.875rem; }
+        .social-icons { display: flex; justify-content: center; gap: 16px; margin-bottom: 24px; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); color: var(--text-muted); transition: all 0.2s; text-decoration: none; }
+        .social-icons a:hover { background: rgba(41, 168, 241, 0.1); color: var(--accent); transform: translateY(-2px); }
+        .social-icons svg { width: 20px; height: 20px; fill: currentColor; }
 
         @media (max-width: 768px) {
             .container { padding: 0 20px; }
@@ -118,15 +134,10 @@
             .plan-cards { grid-template-columns: 1fr; }
             .logo span { display: none; }
             .nav-social { position: static; transform: none; gap: 8px; }
-
+            .nav-right { gap: 12px; }
+            .nav-right .btn-nav { padding: 6px 14px; font-size: 0.75rem; }
+            .page-header { padding: 110px 0 50px; }
         }
-    
-        .social-icons { display: flex; justify-content: center; gap: 16px; margin-bottom: 24px; }
-        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); color: var(--text-muted); transition: all 0.2s; text-decoration: none; }
-        .social-icons a:hover { background: rgba(41, 168, 241, 0.1); color: var(--accent); transform: translateY(-2px); }
-        .social-icons svg { width: 20px; height: 20px; fill: currentColor; }
-        .nav-social-icons { display: flex; gap: 12px; align-items: center; }
-        @media (max-width: 768px) { .nav-social-icons { display: none !important; } .nav-get-access { display: inline-block !important; } }
     </style>
 </head>
 <body>
@@ -162,7 +173,7 @@
                 <span>›</span>
                 <span style="color: var(--text-secondary);">Setup Guide</span>
             </div>
-            <h1>Setup Guide —<br><span class="accent-text">Quantum Ribbon</span></h1>
+            <h1>Setup Guide —<br><span class="accent-text">Quantum Pro Suite</span></h1>
             <p class="page-subtitle">Everything you need to go from purchase to your first trade — step by step.</p>
         </div>
 
@@ -188,13 +199,13 @@
                 <div class="section-num">1</div>
                 <div>
                     <div class="section-title">Choose your plan</div>
-                    <div class="section-subtitle">Starter for beginners. Pro for the complete toolkit.</div>
+                    <div class="section-subtitle">Two ways to trade — pick what fits.</div>
                 </div>
             </div>
             <div class="steps-list">
                 <div class="step-item">
                     <div class="step-dot">→</div>
-                    <div class="step-content">Go to the <a href="../../#pricing" style="color: var(--accent); text-decoration: none;">pricing section</a> and choose between <strong>QR Starter</strong> or <strong>QR Pro</strong>.</div>
+                    <div class="step-content">Go to the <a href="../../#pricing" style="color: var(--accent); text-decoration: none;">pricing section</a> and choose your plan.</div>
                 </div>
                 <div class="step-item">
                     <div class="step-dot">→</div>
@@ -208,19 +219,19 @@
 
             <div class="plan-cards">
                 <div class="plan-card starter">
-                    <div class="plan-card-title">QR Starter — 2 tools</div>
+                    <div class="plan-card-title">Quantum STS — 2 tools</div>
                     <ul>
-                        <li>QR Starter indicator</li>
-                        <li>QR Starter Backtester</li>
+                        <li>Quantum STS indicator</li>
+                        <li>Q-STS Backtester</li>
                     </ul>
                 </div>
                 <div class="plan-card pro">
                     <div class="plan-card-title">QR Pro — 4 tools</div>
                     <ul>
                         <li>QR Pro indicator</li>
-                        <li>TP RSI Pro</li>
-                        <li>Scanner</li>
                         <li>QR Pro Backtester</li>
+                        <li>Scanner</li>
+                        <li>TP RSI Pro</li>
                     </ul>
                 </div>
             </div>
@@ -296,27 +307,6 @@
                 </div>
             </div>
             <div class="resource-links">
-                <a href="../qr-starter/" class="resource-link">
-                    <div>
-                        <div class="resource-link-text">QR Starter — Full Guide</div>
-                        <div class="resource-link-sub">Every feature explained, from signals to presets</div>
-                    </div>
-                    <span class="resource-link-arrow">→</span>
-                </a>
-                <a href="../qr-starter-backtester/" class="resource-link">
-                    <div>
-                        <div class="resource-link-text">QR Starter Backtester Guide</div>
-                        <div class="resource-link-sub">Test your settings before going live</div>
-                    </div>
-                    <span class="resource-link-arrow">→</span>
-                </a>
-                <a href="../bst-system/" class="resource-link">
-                    <div>
-                        <div class="resource-link-text">The BST System</div>
-                        <div class="resource-link-sub">QR Pro users — the complete Backtest → Scan → Trade workflow</div>
-                    </div>
-                    <span class="resource-link-arrow">→</span>
-                </a>
                 <a href="../quantum-ribbon-pro/" class="resource-link">
                     <div>
                         <div class="resource-link-text">QR Pro — Full Guide</div>
@@ -345,6 +335,20 @@
                     </div>
                     <span class="resource-link-arrow">→</span>
                 </a>
+                <a href="../quantum-sts/" class="resource-link">
+                    <div>
+                        <div class="resource-link-text">Quantum STS Indicator</div>
+                        <div class="resource-link-sub">Session levels, opening range, and trend context</div>
+                    </div>
+                    <span class="resource-link-arrow">→</span>
+                </a>
+                <a href="../quantum-sts/#backtester" class="resource-link">
+                    <div>
+                        <div class="resource-link-text">Q-STS Backtester Guide</div>
+                        <div class="resource-link-sub">Validate every setting before trading live</div>
+                    </div>
+                    <span class="resource-link-arrow">→</span>
+                </a>
             </div>
         </div>
 
@@ -369,11 +373,12 @@
                 <a href="../../terms-of-service.html">Terms of Service</a>
                 <a href="../../contact.html">Contact</a>
             </div>
-            <p class="copyright">© 2025 Quantum Ribbon Pro. Built by Trendline Project.</p>
+            <p class="copyright">© <span id="yr"></span> Quantum Pro Suite. Built by Trendline Project.</p>
         </div>
     </footer>
 
     <script>
+        document.getElementById('yr').textContent = new Date().getFullYear();
         const nav = document.getElementById('nav');
         window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
     </script>
