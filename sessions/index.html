@@ -94,7 +94,8 @@
 
         /* HOW */
         .edge-visuals { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 20px; }
-        .edge-shot { border-radius: 16px; border: 1px solid var(--border); overflow: hidden; background: var(--surface); }
+        .edge-shot { position: relative; border-radius: 16px; overflow: hidden; background: var(--surface); box-shadow: -12px 0 40px rgba(41,168,241,0.13), 12px 0 40px rgba(236,72,153,0.13), 0 14px 40px rgba(0,0,0,0.35); }
+        .edge-shot::before { content: ''; position: absolute; inset: 0; border-radius: 16px; padding: 1px; background: linear-gradient(120deg, #29A8F1, #EC4899); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; z-index: 2; }
         .edge-shot img { display: block; width: 100%; }
         .edge-ph { aspect-ratio: 16/9; display: flex; align-items: center; justify-content: center; color: var(--text-muted); font-size: 0.9rem; border: 1px dashed var(--border-hover); border-radius: 16px; background: rgba(41,168,241,0.02); }
         .steps-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 46px; }
