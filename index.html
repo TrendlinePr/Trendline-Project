@@ -79,7 +79,7 @@
         h1, h2, h3, .display { font-family: var(--display); letter-spacing: -0.02em; }
 
         nav { padding: 20px 0; position: fixed; top: 0; left: 0; right: 0; background: transparent; z-index: 1000; transition: background 0.3s ease, backdrop-filter 0.3s ease; }
-        nav.scrolled { background: rgba(13, 17, 23, 0.85); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); }
+        nav.scrolled { background: rgba(13, 17, 23, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         /* Get Access — gradient-outline ghost (nav) */
         .nav-get { position: relative; display: inline-block; padding: 10px 21px; border-radius: 10px; font-family: var(--display); font-size: 0.875rem; font-weight: 600; color: var(--accent); background: transparent; text-decoration: none; transition: transform .2s, box-shadow .25s; }
@@ -272,12 +272,13 @@
             .diag-side .motif { opacity: 0.06; }
         }
         @media (max-width: 768px) {
-            nav { padding: 12px 0; }
+            nav { padding: 14px 0; }
             .nav-content { gap: 12px; }
             .logo span { display: none; }
             .logo img { width: 28px !important; height: 28px !important; }
-            .nav-links { gap: 4px; }
-            .nav-links a { font-size: 0.8125rem; padding: 6px 8px; white-space: nowrap; }
+            .nav-links { gap: 10px; }
+            .nav-links a { font-size: 0.8rem; padding: 6px 4px; white-space: nowrap; }
+            .nav-links a[href="resources/"] { display: none; }
             .nav-social-icons { display: none !important; }
             .nav-get-access { display: inline-block !important; padding: 6px 14px !important; font-size: 0.75rem !important; background: transparent !important; color: var(--accent) !important; border: 1px solid var(--accent) !important; box-shadow: none !important; }
             .nav-get { padding: 6px 14px !important; font-size: 0.75rem !important; }
@@ -306,7 +307,8 @@
                     </a>
                 </div>
                 <div class="nav-links">
-                    <a href="#tools">Tools</a>
+                    <a href="trend/">Trend</a>
+                    <a href="sessions/">Sessions</a>
                     <a href="resources/">Resources</a>
                     <a href="pricing/">Pricing</a>
                     <a href="#pricing" class="nav-get">Get Access</a>
