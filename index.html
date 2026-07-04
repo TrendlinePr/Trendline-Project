@@ -78,7 +78,14 @@
         .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
         h1, h2, h3, .display { font-family: var(--display); letter-spacing: -0.02em; }
 
-        nav { padding: 20px 0; position: fixed; top: 0; left: 0; right: 0; background: transparent; z-index: 1000; transition: background 0.3s ease, backdrop-filter 0.3s ease; }
+        :root { --banner-h: 44px; }
+        .sale-banner { position: fixed; top: 0; left: 0; right: 0; z-index: 1001; height: var(--banner-h); background: linear-gradient(120deg, #29A8F1, #EC4899); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .sale-banner a { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: center; padding: 0 16px; color: #0B0E13; text-decoration: none; font-size: 0.85rem; font-weight: 600; }
+        .sale-banner .cd-d, .sale-banner .cd-h, .sale-banner .cd-m, .sale-banner .cd-s { font-variant-numeric: tabular-nums; }
+        .sale-banner .sale-arrow { transition: transform 0.2s; }
+        .sale-banner a:hover .sale-arrow { transform: translateX(3px); }
+        @media (max-width: 560px) { :root { --banner-h: 64px; } .sale-banner a { font-size: 0.75rem; line-height: 1.4; } }
+        nav { padding: 20px 0; position: fixed; top: var(--banner-h); left: 0; right: 0; background: transparent; z-index: 1000; transition: background 0.3s ease, backdrop-filter 0.3s ease, top 0.3s ease; }
         nav.scrolled { background: rgba(13, 17, 23, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         /* Get Access — gradient-outline ghost (nav) */
@@ -95,7 +102,7 @@
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 28px rgba(41, 168, 241, 0.45); }
 
         /* ===== HERO / DIAGNOSTIC SPLIT ===== */
-        .hero { padding: 132px 0 60px; }
+        .hero { padding: calc(132px + var(--banner-h)) 0 60px; }
         .diag-intro { text-align: center; margin-bottom: 38px; }
         .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; background: rgba(41,168,241,0.08); border: 1px solid rgba(41,168,241,0.2); border-radius: 100px; font-size: 0.75rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px; }
         .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); animation: livePulse 1.8s ease-in-out infinite; }
@@ -284,7 +291,7 @@
             .nav-get-access { display: inline-block !important; padding: 6px 14px !important; font-size: 0.75rem !important; background: transparent !important; color: var(--accent) !important; border: 1px solid var(--accent) !important; box-shadow: none !important; }
             .nav-get { padding: 6px 14px !important; font-size: 0.75rem !important; }
             .container { padding: 0 20px; }
-            .hero { padding: 104px 0 40px; }
+            .hero { padding: calc(104px + var(--banner-h)) 0 40px; }
             .stats { grid-template-columns: 1fr; max-width: 320px; }
             .bestvalue-inner { padding: 30px 24px; }
             .bv-toggle { margin-left: 0; width: 100%; }
@@ -297,6 +304,13 @@
     </style>
 </head>
 <body>
+    <div class="sale-banner" id="saleBanner">
+        <a href="#pricing">
+            🎆 <strong>4th of July Sale</strong> — 30% off all plans · Ends in
+            <span class="cd-d">00</span>d <span class="cd-h">00</span>h <span class="cd-m">00</span>m <span class="cd-s">00</span>s
+            <span class="sale-arrow">→</span>
+        </a>
+    </div>
     <div class="bg-fixed" aria-hidden="true"></div>
     <nav>
         <div class="container">
@@ -393,8 +407,9 @@
             <a href="pricing/" class="suite-slim" data-reveal>
                 <div class="suite-slim-left">
                     <span class="bv-badge">★ Best Value</span>
+                    <span class="bv-badge" style="background: linear-gradient(120deg, #29A8F1, #EC4899); color: #0B0E13; border: none;">30% OFF · Ends Jul 8</span>
                     <h2 class="suite-slim-h">Want it all? Get the full Pro Suite.</h2>
-                    <p class="suite-slim-sub">All six tools — both systems, one price. Save over buying each separately.</p>
+                    <p class="suite-slim-sub">All six tools — both systems, one price. Save over buying each separately — plus 30% off for the 4th of July.</p>
                 </div>
                 <span class="suite-slim-btn">Get Pro Suite</span>
             </a>
@@ -636,6 +651,27 @@
                 if (d) d.textContent = days; if (h) h.textContent = hours; if (m) m.textContent = mins; if (s) s.textContent = secs;
             }
             updateAnnualCountdown(); setInterval(updateAnnualCountdown, 1000);
+        })();
+        (function() {
+            const SALE_END = new Date('2026-07-08T00:00:00');
+            function tick() {
+                const diff = SALE_END - new Date();
+                const banner = document.getElementById('saleBanner');
+                if (diff <= 0) {
+                    if (banner) banner.style.display = 'none';
+                    document.documentElement.style.setProperty('--banner-h', '0px');
+                    return;
+                }
+                const d = String(Math.floor(diff / 86400000)).padStart(2, '0');
+                const h = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+                const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+                const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+                document.querySelectorAll('.cd-d').forEach(e => e.textContent = d);
+                document.querySelectorAll('.cd-h').forEach(e => e.textContent = h);
+                document.querySelectorAll('.cd-m').forEach(e => e.textContent = m);
+                document.querySelectorAll('.cd-s').forEach(e => e.textContent = s);
+            }
+            tick(); setInterval(tick, 1000);
         })();
     </script>
 
