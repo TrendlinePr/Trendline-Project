@@ -20,6 +20,7 @@
             --border: rgba(255, 255, 255, 0.07); --border-hover: rgba(74, 159, 216, 0.35);
             --display: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
             --grad: linear-gradient(135deg, #29A8F1 0%, #8CA8CE 50%, #EC4899 100%);
+            --banner-h: 44px;
         }
         body {
             font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
@@ -34,7 +35,13 @@
         .grad-text { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
 
         /* NAV */
-        nav { padding: 20px 0; position: fixed; top: 0; left: 0; right: 0; background: transparent; z-index: 1000; transition: background 0.3s ease, backdrop-filter 0.3s ease; }
+        .sale-banner { position: fixed; top: 0; left: 0; right: 0; z-index: 1001; height: var(--banner-h); background: linear-gradient(120deg, #29A8F1, #EC4899); display: flex; align-items: center; justify-content: center; overflow: hidden; }
+        .sale-banner a { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: center; padding: 0 16px; color: #0B0E13; text-decoration: none; font-size: 0.85rem; font-weight: 600; }
+        .sale-banner .cd-d, .sale-banner .cd-h, .sale-banner .cd-m, .sale-banner .cd-s { font-variant-numeric: tabular-nums; }
+        .sale-banner .sale-arrow { transition: transform 0.2s; }
+        .sale-banner a:hover .sale-arrow { transform: translateX(3px); }
+        @media (max-width: 560px) { :root { --banner-h: 64px; } .sale-banner a { font-size: 0.75rem; line-height: 1.4; } }
+        nav { padding: 20px 0; position: fixed; top: var(--banner-h); left: 0; right: 0; background: transparent; z-index: 1000; transition: background 0.3s ease, backdrop-filter 0.3s ease, top 0.3s ease; }
         nav.scrolled { background: rgba(13, 17, 23, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
         .nav-inner { display: flex; align-items: center; justify-content: space-between; }
         .brand { display: flex; align-items: center; gap: 10px; font-family: var(--display); font-weight: 600; font-size: 1.125rem; letter-spacing: -0.02em; text-decoration: none; color: var(--text); }
@@ -73,7 +80,7 @@
         [data-reveal].in { opacity: 1; transform: none; }
 
         /* HERO */
-        .hero { padding: 112px 0 56px; }
+        .hero { padding: calc(112px + var(--banner-h)) 0 56px; }
         .hero-center { max-width: 820px; margin: 0 auto; text-align: center; }
         .hero h1 { font-size: clamp(2rem, 4.4vw, 3.2rem); font-weight: 600; line-height: 1.08; margin: 20px 0 18px; }
         .hero-sub { font-size: 1.0625rem; color: var(--text-secondary); line-height: 1.6; max-width: 620px; margin: 0 auto 30px; }
@@ -185,6 +192,10 @@
         .price-amt { font-family: var(--display); font-size: 3rem; font-weight: 600; letter-spacing: -0.03em; }
         .price-per { font-size: 1rem; color: var(--text-muted); }
         .price-day { font-size: 0.85rem; color: var(--text-muted); margin: 6px 0 24px; }
+        .price-orig { font-size: 1.4rem; text-decoration: line-through; color: var(--text-muted); opacity: 0.6; margin-right: 8px; display: none; }
+        .promo-sale { margin: 0 0 18px; border-radius: 10px; padding: 9px 12px; background: linear-gradient(135deg, rgba(41,168,241,0.12), rgba(236,72,153,0.12)); border: 1px solid rgba(236,72,153,0.25); font-size: 0.72rem; color: var(--text); display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
+        .promo-sale .tag { background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.3); color: #FF9CC6; font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 7px; border-radius: 100px; }
+        .promo-sale .cd { color: #FF9CC6; font-weight: 700; font-variant-numeric: tabular-nums; }
         .price-feats { list-style: none; text-align: left; max-width: 300px; margin: 0 auto 26px; display: flex; flex-direction: column; gap: 11px; }
         .price-feats li { font-size: 0.92rem; color: var(--text-secondary); display: flex; gap: 10px; }
         .price-feats .ck { color: var(--pink); }
@@ -210,7 +221,7 @@
         .footer-links a:hover { color: var(--accent); }
         .copyright { font-size: 0.875rem; color: var(--text-muted); }
         @media (prefers-reduced-motion: reduce) { [data-reveal] { opacity: 1; transform: none; transition: none; } }
-        @media (max-width: 768px) { .hero { padding: 92px 0 40px; } }
+        @media (max-width: 768px) { .hero { padding: calc(92px + var(--banner-h)) 0 40px; } }
         /* Get Access — gradient-outline ghost (nav) */
         .nav-get { position: relative; display: inline-block; padding: 10px 21px; border-radius: 10px; font-family: var(--display); font-size: 0.875rem; font-weight: 600; color: var(--accent); background: transparent; text-decoration: none; transition: transform .2s, box-shadow .25s; }
         .nav-get::before { content: ''; position: absolute; inset: 0; border-radius: 10px; padding: 1px; background: var(--accent); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; transition: background .25s; }
@@ -227,6 +238,13 @@
     </script>
 </head>
 <body>
+    <div class="sale-banner" id="saleBanner">
+        <a href="#get">
+            🎆 <strong>4th of July Sale</strong> — 30% off · Ends in
+            <span class="cd-d">00</span>d <span class="cd-h">00</span>h <span class="cd-m">00</span>m <span class="cd-s">00</span>s
+            <span class="sale-arrow">→</span>
+        </a>
+    </div>
     <nav>
         <div class="container nav-inner">
             <a href="../" class="brand"><img src="../logo.png" alt="Trendline Project" class="logo"> <span class="brand-text">Trendline Project</span></a>
@@ -439,8 +457,11 @@
                 <h2 class="section-h">Start trading with a plan.</h2>
             </div>
             <div class="price-card" data-reveal>
-                <div><span class="price-amt">$56</span><span class="price-per">/mo</span></div>
-                <div class="price-day">~$1.87/day · billed monthly · cancel anytime</div>
+                <div class="promo-sale" id="promo">
+                    <span><span class="tag">Sale</span> 30% off — 4th of July</span>
+                </div>
+                <div><span class="price-orig" id="orig">$56</span><span class="price-amt" id="amt">$56</span><span class="price-per">/mo</span></div>
+                <div class="price-day" id="sub">~$1.87/day · billed monthly · cancel anytime</div>
                 <ul class="price-feats">
                     <li><span class="ck">✓</span> Quantum STS indicator</li>
                     <li><span class="ck">✓</span> Q-STS Backtester</li>
@@ -541,6 +562,38 @@
             });
         });
         document.getElementById('yr').textContent = new Date().getFullYear();
+        (function(){
+            const SALE_END = new Date('2026-07-08T00:00:00');
+            const saleActive = () => new Date() < SALE_END;
+            function applySale(){
+                const active = saleActive();
+                const orig = document.getElementById('orig'), amt = document.getElementById('amt'), sub = document.getElementById('sub');
+                const promo = document.getElementById('promo');
+                if (promo) promo.style.display = active ? 'flex' : 'none';
+                if (active) {
+                    orig.style.display = 'inline'; amt.textContent = '$39.20'; sub.textContent = '~$1.31/day · billed monthly · cancel anytime';
+                } else {
+                    orig.style.display = 'none'; amt.textContent = '$56'; sub.textContent = '~$1.87/day · billed monthly · cancel anytime';
+                }
+            }
+            function tick(){
+                const diff = SALE_END - new Date();
+                if (diff <= 0) {
+                    const banner = document.getElementById('saleBanner');
+                    if (banner) banner.style.display = 'none';
+                    document.documentElement.style.setProperty('--banner-h', '0px');
+                    applySale();
+                    return;
+                }
+                const d=Math.floor(diff/86400000), h=Math.floor(diff%86400000/3600000), m=Math.floor(diff%3600000/60000), s=Math.floor(diff%60000/1000);
+                const pad = v => String(v).padStart(2,'0');
+                document.querySelectorAll('.cd-d').forEach(e => e.textContent = pad(d));
+                document.querySelectorAll('.cd-h').forEach(e => e.textContent = pad(h));
+                document.querySelectorAll('.cd-m').forEach(e => e.textContent = pad(m));
+                document.querySelectorAll('.cd-s').forEach(e => e.textContent = pad(s));
+            }
+            applySale(); tick(); setInterval(tick, 1000);
+        })();
     </script>
 
     <!-- VIDEO LIGHTBOX -->
