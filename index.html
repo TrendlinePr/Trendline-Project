@@ -552,54 +552,6 @@
 
     <script>
         const SUITE_MONTHLY_LINK = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/c3a6010f-ceaf-4d56-be73-1d33d101bb6e';
-        const SUITE_ANNUAL_LINK = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/910d7802-ed89-4def-b04a-a1c0b9a7739c';
-        const SUITE_LIFETIME_LINK = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/76fcac28-443c-49db-b0f7-4aaf882415b7';
-        const ANNUAL_PROMO_DEADLINE = new Date('2026-07-05T23:59:59');
-        function annualPromoActive() { return new Date() < ANNUAL_PROMO_DEADLINE; }
-        function setPricing(plan) {
-            const priceAmount = document.getElementById('price-amount');
-            const priceOriginal = document.getElementById('price-original');
-            const pricePeriod = document.getElementById('price-period');
-            const priceSub = document.getElementById('price-sub');
-            const cta = document.getElementById('pricing-cta');
-            const btnMonthly = document.getElementById('btn-monthly');
-            const btnAnnual = document.getElementById('btn-annual');
-            const btnLifetime = document.getElementById('btn-lifetime');
-            const annualPromo = document.getElementById('annual-promo');
-            btnMonthly.classList.remove('active');
-            btnAnnual.classList.remove('active');
-            btnLifetime.classList.remove('active');
-            if (plan === 'monthly') {
-                btnMonthly.classList.add('active');
-                priceAmount.textContent = '$109'; pricePeriod.textContent = '/month';
-                priceOriginal.style.display = 'none';
-                priceSub.textContent = 'Billed monthly · Cancel anytime';
-                cta.textContent = 'Get Pro Suite'; cta.href = SUITE_MONTHLY_LINK;
-                annualPromo.style.display = 'none';
-            } else if (plan === 'lifetime') {
-                btnLifetime.classList.add('active');
-                priceAmount.textContent = '$799'; pricePeriod.textContent = ' one-time';
-                priceOriginal.style.display = 'none';
-                priceSub.textContent = 'One payment. Lifetime access.';
-                cta.textContent = 'Get Lifetime Access'; cta.href = SUITE_LIFETIME_LINK;
-                annualPromo.style.display = 'none';
-            } else {
-                btnAnnual.classList.add('active');
-                pricePeriod.textContent = '/month';
-                cta.textContent = 'Get Pro Suite'; cta.href = SUITE_ANNUAL_LINK;
-                if (annualPromoActive()) {
-                    priceAmount.textContent = '$44';
-                    priceOriginal.textContent = '$59'; priceOriginal.style.display = 'inline';
-                    priceSub.textContent = '$531 billed annually — was $708';
-                    annualPromo.style.display = 'block';
-                } else {
-                    priceAmount.textContent = '$59';
-                    priceOriginal.style.display = 'none';
-                    priceSub.textContent = '$708 billed annually';
-                    annualPromo.style.display = 'none';
-                }
-            }
-        }
         document.querySelectorAll('.faq-question').forEach(question => {
             question.addEventListener('click', () => {
                 const item = question.parentElement;
@@ -625,33 +577,6 @@
             document.querySelectorAll('a[href*="discord.gg"]').forEach(function(btn) { btn.addEventListener('click', function() { gtag('event', 'discord_click', { 'event_category': 'community', 'event_label': 'discord_button' }); }); });
             document.querySelectorAll('.diag-side').forEach(function(card) { card.addEventListener('click', function() { gtag('event', 'path_click', { 'event_category': 'navigation', 'event_label': card.getAttribute('href') }); }); });
         });
-        (function() {
-            function updateAnnualCountdown() {
-                const now = new Date();
-                const diff = ANNUAL_PROMO_DEADLINE - now;
-                if (diff <= 0) {
-                    const strip = document.getElementById('annual-promo');
-                    if (strip) strip.style.display = 'none';
-                    if (document.getElementById('btn-annual').classList.contains('active')) {
-                        const pa = document.getElementById('price-amount');
-                        const po = document.getElementById('price-original');
-                        const ps = document.getElementById('price-sub');
-                        if (pa) pa.textContent = '$59';
-                        if (po) po.style.display = 'none';
-                        if (ps) ps.textContent = '$708 billed annually';
-                    }
-                    return;
-                }
-                const days = String(Math.floor(diff / 86400000)).padStart(2, '0');
-                const hours = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
-                const mins = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
-                const secs = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-                const d = document.getElementById('acd-days'); const h = document.getElementById('acd-hours');
-                const m = document.getElementById('acd-mins'); const s = document.getElementById('acd-secs');
-                if (d) d.textContent = days; if (h) h.textContent = hours; if (m) m.textContent = mins; if (s) s.textContent = secs;
-            }
-            updateAnnualCountdown(); setInterval(updateAnnualCountdown, 1000);
-        })();
         (function() {
             const SALE_END = new Date('2026-07-08T00:00:00');
             function tick() {
