@@ -407,9 +407,9 @@
             <a href="pricing/" class="suite-slim" data-reveal>
                 <div class="suite-slim-left">
                     <span class="bv-badge">★ Best Value</span>
-                    <span class="bv-badge" style="background: linear-gradient(120deg, #29A8F1, #EC4899); color: #0B0E13; border: none;">30% OFF · Ends Jul 8</span>
+                    <span class="bv-badge" id="suiteSaleBadge" style="background: linear-gradient(120deg, #29A8F1, #EC4899); color: #0B0E13; border: none;">30% OFF · Ends Jul 8</span>
                     <h2 class="suite-slim-h">Want it all? Get the full Pro Suite.</h2>
-                    <p class="suite-slim-sub">All six tools — both systems, one price. Save over buying each separately — plus 30% off for the 4th of July.</p>
+                    <p class="suite-slim-sub" id="suiteSaleSub">All six tools — both systems, one price. Save over buying each separately — plus 30% off for the 4th of July.</p>
                 </div>
                 <span class="suite-slim-btn">Get Pro Suite</span>
             </a>
@@ -584,6 +584,10 @@
                 const banner = document.getElementById('saleBanner');
                 if (diff <= 0) {
                     if (banner) banner.style.display = 'none';
+                    const badge = document.getElementById('suiteSaleBadge');
+                    if (badge) badge.style.display = 'none';
+                    const sub = document.getElementById('suiteSaleSub');
+                    if (sub) sub.textContent = 'All six tools — both systems, one price. Save over buying each separately.';
                     document.documentElement.style.setProperty('--banner-h', '0px');
                     return;
                 }
