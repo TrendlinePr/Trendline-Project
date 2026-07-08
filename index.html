@@ -4,12 +4,28 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#0D1117">
-    <title>Pricing - Quantum Pro Suite</title>
-    <meta name="description" content="Pick a side or get the full Pro Suite. Session trading, trend trading, or all six TradingView tools in one — monthly, annual, or lifetime.">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <title>Quantum Pro Suite - TradingView Tools for Futures, Prop Firms & Trend Trading</title>
+    <meta name="description" content="Two TradingView systems, one for each kind of trader: a complete trend-trading suite, and a futures & prop-firm session system. Pick your side — or get everything for the best value.">
+    <meta name="keywords" content="TradingView indicator, prop firm, futures trading, session trading, trend following, multi-timeframe analysis, trading signals, backtester">
+    <meta name="author" content="Trendline Project">
     <meta name="robots" content="index, follow">
-    <link rel="icon" type="image/x-icon" href="../favicon.ico">
-    <link rel="icon" type="image/png" sizes="32x32" href="../favicon-32x32.png">
-    <link rel="apple-touch-icon" sizes="180x180" href="../favicon-180x180.png">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://trendlineproject.com/">
+    <meta property="og:title" content="Quantum Pro Suite - TradingView Tools for Futures, Prop Firms & Trend Trading">
+    <meta property="og:description" content="Two systems, one for each kind of trader. Pick your side — or get everything for the best value.">
+    <meta property="og:image" content="https://trendlineproject.com/chart-showcase.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:url" content="https://trendlineproject.com/">
+    <meta name="twitter:title" content="Quantum Pro Suite - TradingView Tools for Futures, Prop Firms & Trend Trading">
+    <meta name="twitter:description" content="Two systems, one for each kind of trader. Pick your side — or get everything for the best value.">
+    <meta name="twitter:image" content="https://trendlineproject.com/chart-showcase.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="favicon-180x180.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="favicon-512x512.png">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -22,364 +38,602 @@
     </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
-        html { overflow-x: hidden; width: 100%; scroll-behavior: smooth; background: #0D1117; }
+        html { overflow-x: hidden; width: 100%; scroll-behavior: smooth; background: #0D1117; margin: 0; padding: 0; }
         :root {
-            --surface: #14171E; --surface-2: #1A1E27; --accent: #29A8F1; --cyan: #00D4FF;
-            --pink: #EC4899; --pink-hot: #FF3D80; --text: #F4F6F8; --text-secondary: #C5CBD3;
-            --text-muted: #8B92A0; --border: rgba(255,255,255,0.07); --border-hover: rgba(74,159,216,0.35);
+            --surface: #14171E; --surface-2: #1A1E27; --surface-hover: #23262E;
+            --accent: #29A8F1; --cyan: #00D4FF; --pink: #EC4899; --pink-hot: #FF3D80;
+            --text: #F4F6F8; --text-secondary: #C5CBD3; --text-muted: #8B92A0;
+            --border: rgba(255, 255, 255, 0.07); --border-hover: rgba(74, 159, 216, 0.35);
             --display: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
             --grad: linear-gradient(135deg, #29A8F1 0%, #8CA8CE 50%, #EC4899 100%);
-            --banner-h: 44px;
         }
+        body {
+            font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
+            background: transparent;
+            color: var(--text); line-height: 1.6;
+            -webkit-font-smoothing: antialiased; overflow-x: hidden; width: 100%; max-width: 100vw; min-height: 100vh; margin: 0; padding: 0;
+        }
+        .bg-fixed { position: fixed; inset: 0; z-index: -1; overflow: hidden; pointer-events: none; background: #0D1117; }
+        .bg-fixed::before {
+            content: ''; position: absolute; inset: 0;
+            background: url("sts-page-bg.webp") center top / cover no-repeat;
+            transform-origin: 88% 13%;
+            animation: bgZoomIn 50s ease-in-out infinite;
+            will-change: transform;
+        }
+        .bg-fixed::after {
+            content: ''; position: absolute; inset: 0;
+            background:
+                radial-gradient(ellipse 80% 50% at 50% -10%, rgba(41,168,241,0.10) 0%, transparent 60%),
+                linear-gradient(180deg, rgba(19,26,36,0.82) 0%, rgba(10,12,16,0.86) 45%, rgba(13,17,23,0.9) 100%);
+        }
+        @keyframes bgZoomIn {
+            0%   { transform: scale(1.0); }
+            50%  { transform: scale(1.5); }
+            100% { transform: scale(1.0); }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            .bg-fixed::before { animation: none; transform: scale(1.0); }
+        }
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
+        h1, h2, h3, .display { font-family: var(--display); letter-spacing: -0.02em; }
+
+        :root { --banner-h: 44px; }
         .sale-banner { position: fixed; top: 0; left: 0; right: 0; z-index: 1001; height: var(--banner-h); background: linear-gradient(120deg, #29A8F1, #EC4899); display: flex; align-items: center; justify-content: center; overflow: hidden; }
         .sale-banner a { display: inline-flex; align-items: center; gap: 6px; flex-wrap: wrap; justify-content: center; padding: 0 16px; color: #0B0E13; text-decoration: none; font-size: 0.85rem; font-weight: 600; }
         .sale-banner .cd-d, .sale-banner .cd-h, .sale-banner .cd-m, .sale-banner .cd-s { font-variant-numeric: tabular-nums; }
         .sale-banner .sale-arrow { transition: transform 0.2s; }
         .sale-banner a:hover .sale-arrow { transform: translateX(3px); }
         @media (max-width: 560px) { :root { --banner-h: 64px; } .sale-banner a { font-size: 0.75rem; line-height: 1.4; } }
-        body {
-            font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
-            background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(41,168,241,0.10) 0%, transparent 60%), linear-gradient(180deg, #131A24 0%, #0A0C10 45%, #0D1117 100%);
-            background-attachment: fixed; color: var(--text); line-height: 1.6; -webkit-font-smoothing: antialiased; min-height: 100vh;
-        }
-        h1, h2, h3 { font-family: var(--display); letter-spacing: -0.02em; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 32px; }
-        a { color: inherit; }
-        b, strong { font-weight: 600; }
-
         nav { padding: 20px 0; position: fixed; top: var(--banner-h); left: 0; right: 0; background: transparent; z-index: 1000; transition: background 0.3s ease, backdrop-filter 0.3s ease, top 0.3s ease; }
-        nav.scrolled { background: rgba(13,17,23,0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
+        nav.scrolled { background: rgba(13, 17, 23, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
-        .logo a { color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; font-family: var(--display); font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em; }
-        .nav-links { display: flex; gap: 32px; align-items: center; }
-        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; }
-        .nav-links a:hover { color: var(--accent); }
         /* Get Access — gradient-outline ghost (nav) */
         .nav-get { position: relative; display: inline-block; padding: 10px 21px; border-radius: 10px; font-family: var(--display); font-size: 0.875rem; font-weight: 600; color: var(--accent); background: transparent; text-decoration: none; transition: transform .2s, box-shadow .25s; }
         .nav-get::before { content: ''; position: absolute; inset: 0; border-radius: 10px; padding: 1px; background: var(--accent); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; transition: background .25s; }
         .nav-get:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(236,72,153,0.22), 0 0 20px rgba(41,168,241,0.22); background: linear-gradient(120deg,#EC4899,#29A8F1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
         .nav-get:hover::before { background: linear-gradient(120deg,#EC4899,#29A8F1); }
-        @media (max-width: 768px) { .nav-get { padding: 6px 14px !important; font-size: 0.75rem !important; } }
+        .logo { font-family: var(--display); font-size: 1.125rem; font-weight: 600; color: var(--text); letter-spacing: -0.02em; }
+        .nav-links { display: flex; gap: 32px; align-items: center; }
+        .nav-links a { color: var(--text-secondary); text-decoration: none; font-size: 0.9375rem; transition: color 0.2s; }
+        .nav-links a:hover { color: var(--accent); }
+        .btn { padding: 14px 32px; border-radius: 10px; font-size: 0.9375rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; text-decoration: none; display: inline-block; letter-spacing: -0.01em; }
+        .btn-primary { background: var(--accent); color: #001018; border: none; }
+        .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 0 28px rgba(41, 168, 241, 0.45); }
 
-        .pricing-hero { padding: calc(150px + var(--banner-h)) 0 30px; text-align: center; }
+        /* ===== HERO / DIAGNOSTIC SPLIT ===== */
+        .hero { padding: calc(132px + var(--banner-h)) 0 60px; }
+        .diag-intro { text-align: center; margin-bottom: 38px; }
         .eyebrow { display: inline-flex; align-items: center; gap: 8px; padding: 7px 14px; background: rgba(41,168,241,0.08); border: 1px solid rgba(41,168,241,0.2); border-radius: 100px; font-size: 0.75rem; font-weight: 600; color: var(--accent); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 20px; }
-        /* FAQ accordion */
-        .eyebrow.section-eyebrow { background: none; border: none; padding: 0; }
-        .pf-sec { padding: 56px 0 24px; }
-        .pf-head { text-align: center; margin-bottom: 32px; }
-        .pf-h { font-family: var(--display); font-size: clamp(1.6rem, 3vw, 2.1rem); font-weight: 600; letter-spacing: -0.02em; }
-        .faq-wrap { max-width: 720px; margin: 0 auto; }
-        .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 12px; overflow: hidden; }
-        .faq-q { padding: 18px 24px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; gap: 16px; font-size: 0.98rem; font-weight: 500; }
-        .faq-ic { color: var(--accent); font-size: 1.25rem; transition: transform 0.3s ease; flex-shrink: 0; }
-        .faq-item.active .faq-ic { transform: rotate(45deg); }
-        .faq-a { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding: 0 24px; }
-        .faq-item.active .faq-a { max-height: 320px; padding: 0 24px 18px; }
-        .faq-a p { font-size: 0.9rem; color: var(--text-secondary); line-height: 1.7; }
-        .pricing-hero h1 { font-size: clamp(2rem, 4.4vw, 3rem); font-weight: 600; line-height: 1.1; margin-bottom: 14px; }
-        .pricing-hero p { font-size: 1.0625rem; color: var(--text-secondary); max-width: 560px; margin: 0 auto; }
+        .eyebrow .dot { width: 6px; height: 6px; border-radius: 50%; background: var(--cyan); box-shadow: 0 0 8px var(--cyan); animation: livePulse 1.8s ease-in-out infinite; }
+        @keyframes livePulse { 0%,100% { opacity: 1; } 50% { opacity: 0.35; } }
+        .diag-intro h1 { font-size: clamp(2rem, 4.4vw, 3.2rem); font-weight: 700; line-height: 1.08; }
+        .diag-intro h1 .you { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .diag-intro p { font-size: 1.0625rem; color: var(--text-secondary); max-width: 560px; margin: 14px auto 0; line-height: 1.6; }
 
-        .cards { display: grid; grid-template-columns: 1fr 1fr 1.15fr; gap: 22px; align-items: stretch; padding: 40px 0 30px; }
-        .card { display: flex; flex-direction: column; border: 1px solid var(--border); border-radius: 18px; padding: 34px 28px 30px; position: relative; overflow: hidden; transition: transform 0.35s cubic-bezier(.16,.84,.44,1), border-color 0.35s ease, box-shadow 0.35s ease; }
-        .card::before { content: ''; position: absolute; top: 0; left: 0; right: 0; height: 2px; }
-        .card-fut { background: radial-gradient(ellipse at 50% 0%, rgba(236,72,153,0.08), transparent 55%), linear-gradient(180deg, var(--surface) 0%, #11141B 100%); }
-        .card-fut::before { background: linear-gradient(90deg, #ffffff, #EC4899); }
-        .card-trd { background: radial-gradient(ellipse at 50% 0%, rgba(41,168,241,0.08), transparent 55%), linear-gradient(180deg, var(--surface) 0%, #11141B 100%); }
-        .card-trd::before { background: linear-gradient(90deg, #29A8F1, #ffffff); }
-        .card-suite { border-color: var(--border); box-shadow: -22px 0 55px rgba(41,168,241,0.08), 22px 0 55px rgba(236,72,153,0.10); background: radial-gradient(ellipse 60% 55% at 0% 0%, rgba(41,168,241,0.10), transparent 60%), radial-gradient(ellipse 60% 55% at 100% 0%, rgba(236,72,153,0.10), transparent 60%), linear-gradient(180deg, #13151D 0%, #0E121A 100%); }
-        .card-suite::before { background: linear-gradient(90deg, #29A8F1, #EC4899); }
-        .card:hover { transform: translateY(-6px); }
-        .card-fut:hover { border-color: rgba(236,72,153,0.45); box-shadow: 0 22px 56px rgba(236,72,153,0.16); }
-        .card-trd:hover { border-color: rgba(41,168,241,0.45); box-shadow: 0 22px 56px rgba(41,168,241,0.16); }
-        .card-suite:hover { border-color: rgba(150,115,205,0.55); box-shadow: -26px 10px 70px rgba(41,168,241,0.18), 26px 12px 70px rgba(236,72,153,0.20); }
-        .card-flag { position: absolute; top: 16px; right: 16px; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; color: #fff; background: linear-gradient(135deg, #29A8F1, #EC4899); padding: 4px 11px; border-radius: 100px; }
-        .card-kicker .ico { width: 15px; height: 15px; flex-shrink: 0; }
-        .card-kicker { display: inline-flex; align-items: center; gap: 8px; font-size: 0.72rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.12em; margin-bottom: 8px; }
-        .card-fut .card-kicker { color: var(--pink); }
-        .card-trd .card-kicker { color: var(--accent); }
-        .card-suite .card-kicker { background: linear-gradient(90deg, #29A8F1, #EC4899); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-        .card h2 { font-size: 1.4rem; font-weight: 600; margin-bottom: 6px; }
-        .card-desc { font-size: 0.875rem; color: var(--text-muted); line-height: 1.5; margin-bottom: 20px; min-height: 40px; }
-        .price { margin-bottom: 18px; }
-        .price .amt { font-size: 2.8rem; font-weight: 700; letter-spacing: -0.03em; }
-        .card-suite .price .amt { background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-        .card-fut .price .amt { background: linear-gradient(90deg, #EC4899, #ffffff); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-        .card-trd .price .amt { background: linear-gradient(90deg, #ffffff, #29A8F1); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
-        .price .per { font-size: 1rem; color: var(--text-muted); }
-        .price .orig { font-size: 1.2rem; text-decoration: line-through; color: var(--text-muted); opacity: 0.6; margin-right: 8px; display: none; }
-        .price-sub { font-size: 0.8rem; color: var(--text-muted); margin-top: 4px; min-height: 18px; }
-        .toggle { display: flex; gap: 6px; margin-bottom: 18px; }
-        .toggle-btn { flex: 1; padding: 8px 6px; border-radius: 9px; font-size: 0.8rem; font-weight: 600; cursor: pointer; border: 1px solid var(--border); background: rgba(255,255,255,0.02); color: var(--text-muted); font-family: var(--display); transition: all 0.2s; }
+        .diag-split { position: relative; display: grid; grid-template-columns: 1fr 1fr; border: 1px solid var(--border); border-radius: 24px; overflow: hidden; background: var(--surface); box-shadow: 0 40px 110px rgba(0,0,0,0.55); }
+        .diag-split::after { content: ''; position: absolute; top: 10%; bottom: 10%; left: 50%; width: 1px; background: linear-gradient(180deg, transparent, rgba(255,255,255,0.14), transparent); z-index: 4; }
+        .diag-or { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 6; width: 56px; height: 56px; border-radius: 50%; background: var(--surface-2); border: 1px solid var(--border); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-weight: 700; font-size: 0.78rem; letter-spacing: 0.06em; color: var(--text-muted); box-shadow: 0 0 0 8px rgba(10,12,16,0.7); }
+
+        .diag-side { position: relative; padding: 46px 42px 40px; min-height: 420px; display: flex; flex-direction: column; overflow: hidden; text-decoration: none; color: inherit; transition: background 0.4s ease; isolation: isolate; }
+        .diag-side .motif { position: absolute; right: -10px; top: 24px; width: 220px; height: 150px; opacity: 0.08; z-index: 0; pointer-events: none; transition: opacity 0.4s ease; }
+        .diag-side > * { position: relative; z-index: 1; }
+        .diag-trend { background: radial-gradient(ellipse at 75% 12%, rgba(41,168,241,0.14), transparent 62%); }
+        .diag-fut { background: radial-gradient(ellipse at 25% 12%, rgba(236,72,153,0.14), transparent 62%); }
+        .diag-trend:hover { background: radial-gradient(ellipse at 75% 12%, rgba(41,168,241,0.24), transparent 66%); }
+        .diag-fut:hover { background: radial-gradient(ellipse at 25% 12%, rgba(236,72,153,0.24), transparent 66%); }
+        .diag-side:hover .motif { opacity: 0.15; }
+
+        .diag-kicker { font-family: var(--display); font-size: 0.74rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.14em; margin-bottom: 18px; display: inline-flex; align-items: center; gap: 8px; }
+        .diag-trend .diag-kicker { color: var(--accent); }
+        .diag-fut .diag-kicker { color: var(--pink); }
+        .diag-kicker .ico { width: 16px; height: 16px; }
+        .diag-q { font-family: var(--display); font-size: clamp(1.35rem, 2.2vw, 1.9rem); font-weight: 700; line-height: 1.2; margin-bottom: 16px; max-width: 22ch; }
+        .diag-reframe { font-size: 1rem; color: var(--text-secondary); line-height: 1.62; margin-bottom: 22px; max-width: 34ch; }
+        .diag-reframe b { color: var(--text); font-weight: 600; }
+        .diag-meta { margin-top: auto; }
+        .diag-product { display: flex; align-items: center; gap: 9px; font-size: 0.9rem; color: var(--text); font-weight: 600; margin-bottom: 18px; }
+        .diag-product .pill { font-size: 0.66rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.05em; padding: 2px 8px; border-radius: 100px; }
+        .diag-trend .diag-product .pill { background: rgba(41,168,241,0.14); border: 1px solid rgba(41,168,241,0.3); color: var(--accent); }
+        .diag-fut .diag-product .pill { background: rgba(236,72,153,0.14); border: 1px solid rgba(236,72,153,0.3); color: #FF9CC6; }
+        .diag-price { font-family: var(--display); margin: 14px 0 20px; }
+        .diag-price .from { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); margin-right: 6px; }
+        .diag-price .amt { font-size: 1.55rem; font-weight: 700; color: var(--text); }
+        .diag-price .per { font-size: 0.9rem; color: var(--text-muted); font-weight: 400; }
+        .diag-cta { display: inline-flex; align-items: center; gap: 9px; padding: 14px 26px; border-radius: 12px; font-weight: 700; font-size: 0.95rem; transition: all 0.28s ease; align-self: flex-start; }
+        .diag-trend .diag-cta { background: linear-gradient(135deg, #29A8F1, #ffffff); color: #001018; }
+        .diag-fut .diag-cta { background: linear-gradient(135deg, #ffffff, #EC4899); color: #14171E; }
+        .diag-side:hover .diag-cta { gap: 14px; }
+        .diag-trend:hover .diag-cta { box-shadow: 0 0 24px rgba(41,168,241,0.4); }
+        .diag-fut:hover .diag-cta { box-shadow: 0 0 24px rgba(236,72,153,0.4); }
+        .diag-meta .diag-product { background: linear-gradient(135deg, var(--g1), var(--g2)); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .diag-trend .diag-meta .diag-product { --g1: #29A8F1; --g2: #ffffff; }
+        .diag-fut .diag-meta .diag-product { --g1: #ffffff; --g2: #EC4899; }
+
+        .hero-trust { display: flex; align-items: center; justify-content: center; gap: 18px; font-size: 0.875rem; color: var(--text-muted); flex-wrap: wrap; margin-top: 26px; }
+        .hero-trust .sep { width: 4px; height: 4px; border-radius: 50%; background: var(--text-muted); opacity: 0.5; }
+        .hero-trust .stars-mini { color: var(--accent); letter-spacing: 2px; }
+
+        /* ===== SECTION SHELL ===== */
+        .section-tag { display: inline-flex; align-items: center; gap: 8px; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.14em; color: var(--accent); font-weight: 700; margin-bottom: 14px; }
+        .section-title { font-size: clamp(1.9rem, 3.4vw, 2.8rem); font-weight: 700; line-height: 1.12; margin-bottom: 16px; }
+        .section-desc { font-size: 1.0625rem; color: var(--text-secondary); max-width: 640px; line-height: 1.6; }
+        .head-center { text-align: center; }
+        .head-center .section-title { margin-left: auto; margin-right: auto; }
+        .head-center .section-desc { margin: 0 auto; }
+
+        /* ===== BEST VALUE ===== */
+        .bestvalue-section { padding: 50px 0 70px; }
+        .bestvalue-card { position: relative; border-radius: 22px; padding: 1px; background: linear-gradient(120deg, rgba(236,72,153,0.6), rgba(41,168,241,0.6)); box-shadow: 0 30px 90px rgba(236,72,153,0.12), 0 0 70px rgba(41,168,241,0.1); }
+        .bestvalue-inner { background: radial-gradient(ellipse at 80% 0%, rgba(236,72,153,0.10), transparent 55%), linear-gradient(180deg, #141823 0%, #0E121A 100%); border-radius: 21px; padding: 40px 44px; }
+        .bv-top { display: flex; align-items: center; gap: 14px; flex-wrap: wrap; margin-bottom: 22px; }
+        .bv-badge { display: inline-flex; align-items: center; gap: 7px; background: linear-gradient(135deg, rgba(236,72,153,0.2), rgba(41,168,241,0.2)); border: 1px solid rgba(236,72,153,0.4); color: #FFA8CE; font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; padding: 6px 14px; border-radius: 100px; }
+        .bv-toggle { display: flex; gap: 8px; margin-left: auto; }
+        .toggle-btn { padding: 8px 18px; border-radius: 9px; font-size: 0.85rem; font-weight: 600; cursor: pointer; transition: all 0.2s ease; border: 1px solid var(--border); background: rgba(255,255,255,0.02); color: var(--text-muted); font-family: var(--display); }
         .toggle-btn.active { background: var(--accent); color: #001018; border-color: var(--accent); }
+        .toggle-btn-lifetime { background: linear-gradient(135deg, rgba(41,168,241,0.15), rgba(236,72,153,0.15)); border: 1px solid rgba(236,72,153,0.4); color: var(--text-secondary); }
         .toggle-btn-lifetime.active { background: linear-gradient(135deg, rgba(41,168,241,0.35), rgba(236,72,153,0.35)); border-color: rgba(236,72,153,0.6); color: var(--text); }
-        .promo { margin-bottom: 16px; border-radius: 10px; padding: 9px 12px; background: linear-gradient(135deg, rgba(41,168,241,0.12), rgba(236,72,153,0.12)); border: 1px solid rgba(236,72,153,0.25); font-size: 0.72rem; color: var(--text); display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
-        .promo .tag { background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.3); color: #FF9CC6; font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 7px; border-radius: 100px; }
-        .promo .cd { color: #FF9CC6; font-weight: 700; font-variant-numeric: tabular-nums; }
-        .features { list-style: none; padding: 0; margin: 4px 0 24px; flex: 1; }
-        .features li { display: flex; align-items: flex-start; gap: 10px; padding: 8px 0; font-size: 0.9rem; color: var(--text-secondary); border-bottom: 1px solid var(--border); }
-        .features li:last-child { border-bottom: none; }
-        .features .ck { color: var(--accent); font-weight: 700; flex-shrink: 0; }
-        .card-fut .features .ck { color: var(--pink); }
-        .card-trd .features .ck { color: var(--accent); }
-        .new-badge { display: inline-block; background: rgba(236,72,153,0.16); border: 1px solid rgba(236,72,153,0.4); color: #FF9CC6; font-size: 0.56rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 6px; border-radius: 100px; margin-left: 5px; }
-        .cta { display: block; text-align: center; padding: 15px; border-radius: 12px; font-weight: 600; font-size: 0.95rem; text-decoration: none; transition: all 0.25s ease; margin-top: auto; }
-        .cta-fut { background: linear-gradient(90deg, #EC4899, #ffffff); color: #14171E; }
-        .cta-trd { background: linear-gradient(90deg, #ffffff, #29A8F1); color: #001018; }
-        .cta-suite { background: linear-gradient(90deg, #29A8F1, #EC4899); color: #fff; }
-        .cta:hover { transform: translateY(-2px); box-shadow: 0 0 26px rgba(41,168,241,0.35); }
-        .cta-disabled { background: rgba(255,255,255,0.05); color: var(--text-muted); border: 1px dashed var(--border); cursor: not-allowed; }
-        .cta-disabled:hover { transform: none; box-shadow: none; }
-        .cta-pending { cursor: not-allowed; opacity: 0.85; }
-        .cta-pending:hover { transform: none; box-shadow: none; }
-        .cta-note { text-align: center; font-size: 0.72rem; color: var(--text-muted); margin-top: 10px; }
+        .bv-grid { display: grid; grid-template-columns: 1.2fr 1fr; gap: 44px; align-items: center; }
+        .bv-h { font-size: clamp(1.6rem, 2.6vw, 2.1rem); font-weight: 700; line-height: 1.14; margin-bottom: 18px; }
+        .bv-equation { display: flex; align-items: baseline; gap: 12px; flex-wrap: wrap; font-family: var(--display); margin-bottom: 18px; }
+        .eq-part { display: flex; flex-direction: column; }
+        .eq-num { font-size: 1.35rem; font-weight: 700; color: var(--text-secondary); }
+        .eq-lab { font-size: 0.66rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-muted); }
+        .eq-op { font-size: 1.2rem; color: var(--text-muted); font-weight: 600; }
+        .eq-strike { font-size: 1.35rem; font-weight: 700; color: var(--text-muted); text-decoration: line-through; text-decoration-color: var(--pink-hot); }
+        .eq-result { font-size: 1.7rem; font-weight: 700; background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; }
+        .bv-save { display: inline-block; background: rgba(236,72,153,0.14); border: 1px solid rgba(236,72,153,0.35); color: #FF9CC6; font-weight: 700; font-size: 0.85rem; padding: 5px 14px; border-radius: 100px; }
+        .bv-tools { list-style: none; padding: 0; margin: 22px 0 0; columns: 2; column-gap: 28px; }
+        .bv-tools li { display: flex; align-items: center; gap: 9px; padding: 6px 0; font-size: 0.9rem; color: var(--text-secondary); break-inside: avoid; }
+        .bv-tools .ck { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+        .new-badge { display: inline-block; background: rgba(236, 72, 153, 0.16); border: 1px solid rgba(236, 72, 153, 0.4); color: #FF9CC6; font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 2px 6px; border-radius: 100px; margin-left: 5px; vertical-align: middle; }
+        .bv-buy { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 26px; }
+        .bv-price-amount { font-family: var(--display); font-size: 3.2rem; font-weight: 700; background: var(--grad); -webkit-background-clip: text; background-clip: text; -webkit-text-fill-color: transparent; letter-spacing: -0.03em; }
+        .bv-price-period { font-size: 1rem; color: var(--text-muted); font-weight: 400; }
+        .bv-price-sub { color: var(--text-muted); font-size: 0.85rem; margin: 6px 0 0; }
+        .bv-price-original { font-size: 1.3rem; text-decoration: line-through; opacity: 0.45; color: var(--text-secondary); margin-right: 8px; vertical-align: middle; display: none; }
+        .pricing-cta-btn { display: block; width: 100%; text-align: center; padding: 16px; font-size: 1rem; font-weight: 700; border: none; border-radius: 12px; margin-top: 20px; background: linear-gradient(135deg, #29A8F1, #EC4899); color: #fff; transition: all 0.25s ease; }
+        .pricing-cta-btn:hover { transform: translateY(-2px); box-shadow: 0 0 30px rgba(236,72,153,0.4); }
 
-        .pricing-foot { text-align: center; padding: 20px 0 70px; color: var(--text-muted); font-size: 0.85rem; }
-        .pricing-foot a { color: var(--accent); text-decoration: none; }
+        /* ===== SLIM SUITE CTA ===== */
+        .suite-slim-section { padding: 24px 0 56px; scroll-margin-top: 88px; }
+        .suite-slim { position: relative; display: flex; align-items: center; justify-content: space-between; gap: 28px; flex-wrap: wrap; text-decoration: none; color: inherit; background: radial-gradient(ellipse at 92% 0%, rgba(236,72,153,0.10), transparent 60%), linear-gradient(180deg, #141823 0%, #0E121A 100%); background-clip: padding-box; border: 1px solid transparent; border-radius: 18px; padding: 28px 34px; box-shadow: -10px 0 36px rgba(41,168,241,0.16), 10px 0 36px rgba(236,72,153,0.18), 0 12px 36px rgba(0,0,0,0.35); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .suite-slim::before { content: ''; position: absolute; inset: 0; border-radius: inherit; padding: 1px; background: linear-gradient(120deg, #29A8F1, #EC4899); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+        .suite-slim:hover { transform: translateY(-3px); box-shadow: -14px 0 48px rgba(41,168,241,0.30), 14px 0 48px rgba(236,72,153,0.34), 0 14px 40px rgba(0,0,0,0.40); }
+        .suite-slim-left { display: flex; flex-direction: column; gap: 8px; }
+        .suite-slim-left .bv-badge { align-self: flex-start; }
+        .suite-slim-h { font-size: clamp(1.3rem, 2.2vw, 1.7rem); font-weight: 600; line-height: 1.2; }
+        .suite-slim-sub { font-size: 0.95rem; color: var(--text-secondary); }
+        .suite-slim-btn { display: inline-flex; align-items: center; gap: 8px; white-space: nowrap; padding: 14px 26px; border-radius: 12px; font-weight: 600; background: linear-gradient(135deg, #29A8F1, #EC4899); color: #fff; transition: gap 0.2s ease, box-shadow 0.25s ease; }
+        .suite-slim:hover .suite-slim-btn { gap: 12px; box-shadow: 0 0 26px rgba(236,72,153,0.4); }
+        @media (max-width: 640px) { .suite-slim { padding: 24px; } .suite-slim-btn { width: 100%; justify-content: center; } }
 
-        footer { padding: 50px 0 40px; border-top: 1px solid var(--border); text-align: center; }
-        .footer-links { display: flex; justify-content: center; gap: 28px; margin-bottom: 20px; flex-wrap: wrap; }
+        /* ===== GET ACCESS / SETUP STEPS ===== */
+        .access-section { padding: 8px 0 56px; }
+        .access-card { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; background: radial-gradient(ellipse at 8% 0%, rgba(41,168,241,0.07), transparent 55%), linear-gradient(180deg, #141823 0%, #0E121A 100%); border: 1px solid var(--border); border-radius: 20px; padding: 48px 52px; }
+        .access-h { font-family: var(--display); font-size: clamp(1.7rem, 3vw, 2.4rem); font-weight: 700; line-height: 1.1; letter-spacing: -0.02em; margin-bottom: 16px; }
+        .access-sub { font-size: 1rem; color: var(--text-secondary); line-height: 1.6; max-width: 38ch; margin-bottom: 28px; }
+        .access-guide-btn { display: inline-block; padding: 13px 26px; border-radius: 11px; font-family: var(--display); font-size: 0.9375rem; font-weight: 600; color: var(--text-secondary); background: rgba(255,255,255,0.03); border: 1px solid var(--border); text-decoration: none; transition: all 0.25s ease; }
+        .access-guide-btn:hover { color: var(--text); border-color: rgba(41,168,241,0.5); background: rgba(41,168,241,0.06); box-shadow: 0 0 24px rgba(41,168,241,0.30); }
+        .access-steps { display: flex; flex-direction: column; gap: 30px; }
+        .access-step { display: flex; align-items: center; gap: 22px; }
+        .step-num { flex-shrink: 0; width: 52px; height: 52px; border-radius: 50%; border: 1.5px solid rgba(41,168,241,0.45); display: flex; align-items: center; justify-content: center; font-family: var(--display); font-size: 1.15rem; font-weight: 600; color: var(--accent); }
+        .step-label { font-family: var(--display); font-size: 1.0625rem; font-weight: 600; color: var(--text); }
+        @media (max-width: 820px) { .access-card { grid-template-columns: 1fr; gap: 36px; padding: 36px 30px; } }
+
+        /* ===== STATS / TESTIMONIALS ===== */
+        .stats-strip { padding: 40px 0 56px; }
+        .stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; max-width: 760px; margin: 0 auto; }
+        .stat { text-align: center; padding: 22px; background: rgba(255,255,255,0.015); border: 1px solid var(--border); border-radius: 14px; }
+        .stat-number { font-family: var(--display); font-size: 2.3rem; font-weight: 700; color: var(--accent); margin-bottom: 4px; letter-spacing: -0.03em; }
+        .stat-label { font-size: 0.875rem; color: var(--text-secondary); }
+        .testimonials-section { padding: 60px 0; }
+        .testimonials-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 22px; margin-top: 48px; }
+        .testimonial-card { background: var(--surface); border: 1px solid var(--border); border-radius: 16px; padding: 30px; text-align: left; transition: all 0.3s ease; }
+        .testimonial-card:hover { border-color: var(--border-hover); transform: translateY(-3px); box-shadow: 0 12px 36px rgba(41, 168, 241, 0.12); }
+        .stars { display: flex; gap: 3px; margin-bottom: 18px; }
+        .star { color: var(--accent); font-size: 1.15rem; }
+        .testimonial-text { font-size: 0.925rem; color: var(--text-secondary); line-height: 1.7; margin-bottom: 22px; }
+        .testimonial-footer { display: flex; justify-content: space-between; align-items: flex-end; }
+        .author-name { font-size: 0.95rem; font-weight: 600; color: var(--text); margin-bottom: 2px; }
+        .author-location { font-size: 0.825rem; color: var(--text-muted); }
+        .verified-badge { display: flex; align-items: center; gap: 5px; color: var(--accent); font-size: 0.8rem; font-weight: 500; }
+        .verified-badge svg { width: 15px; height: 15px; }
+
+        /* ===== FAQ ===== */
+        .faq-section { padding: 70px 0 90px; }
+        .faq-container { max-width: 800px; margin: 44px auto 0; }
+        .faq-item { background: var(--surface); border: 1px solid var(--border); border-radius: 14px; margin-bottom: 14px; overflow: hidden; transition: all 0.3s ease; }
+        .faq-item:hover { border-color: var(--border-hover); }
+        .faq-question { padding: 22px 28px; cursor: pointer; display: flex; justify-content: space-between; align-items: center; font-size: 1.0312rem; font-weight: 500; color: var(--text); user-select: none; }
+        .faq-icon { font-size: 1.25rem; color: var(--accent); transition: transform 0.3s ease; flex-shrink: 0; margin-left: 16px; }
+        .faq-item.active .faq-icon { transform: rotate(45deg); }
+        .faq-answer { max-height: 0; overflow: hidden; transition: max-height 0.3s ease; padding: 0 28px; }
+        .faq-item.active .faq-answer { max-height: 520px; padding: 0 28px 22px; }
+        .faq-answer p { color: var(--text-secondary); line-height: 1.7; margin: 0; }
+
+        /* ===== FOOTER ===== */
+        footer { padding: 60px 0 40px; border-top: 1px solid var(--border); text-align: center; }
+        .footer-links { display: flex; justify-content: center; gap: 32px; margin-bottom: 24px; flex-wrap: wrap; }
         .footer-links a { color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s; }
         .footer-links a:hover { color: var(--accent); }
-        .copyright { color: var(--text-muted); font-size: 0.85rem; }
+        .copyright { color: var(--text-muted); font-size: 0.875rem; }
+        .social-icons { display: flex; justify-content: center; gap: 16px; margin-bottom: 24px; }
+        .social-icons a { display: inline-flex; align-items: center; justify-content: center; width: 40px; height: 40px; border-radius: 50%; background: rgba(255, 255, 255, 0.05); color: var(--text-muted); transition: all 0.2s; text-decoration: none; }
+        .social-icons a:hover { background: rgba(41, 168, 241, 0.1); color: var(--accent); transform: translateY(-2px); }
+        .social-icons svg { width: 20px; height: 20px; fill: currentColor; }
 
-        @media (max-width: 900px) { .cards { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; } }
+        /* ===== REVEAL ===== */
+        [data-reveal] { opacity: 0; transform: translateY(26px); transition: opacity 0.7s cubic-bezier(.16,.84,.44,1), transform 0.7s cubic-bezier(.16,.84,.44,1); }
+        [data-reveal].in { opacity: 1; transform: none; }
+
+        /* weight calibration — lighter, easier to read on dark */
+        b, strong { font-weight: 600; }
+        .diag-intro h1, .diag-q, .section-title, .bv-h, .stat-number,
+        .eq-num, .eq-strike, .eq-result, .bv-price-amount { font-weight: 600; }
+
+        @media (max-width: 960px) {
+            .bv-grid { grid-template-columns: 1fr; gap: 30px; }
+        }
+        @media (max-width: 820px) {
+            .diag-split { grid-template-columns: 1fr; }
+            .diag-split::after { top: auto; bottom: auto; left: 10%; right: 10%; top: 50%; width: auto; height: 1px; background: linear-gradient(90deg, transparent, rgba(255,255,255,0.14), transparent); }
+            .diag-side { min-height: 0; padding: 38px 30px; }
+            .diag-side .motif { opacity: 0.06; }
+        }
         @media (max-width: 768px) {
-            .logo span { display: none; } .logo img { width: 28px !important; height: 28px !important; } .nav-links { gap: 10px; }
-            .nav-links a { font-size: 0.8rem; padding: 6px 4px; } .container { padding: 0 20px; } .pricing-hero { padding: calc(110px + var(--banner-h)) 0 20px; }
+            .nav-content { gap: 12px; }
+            .logo span { display: none; }
+            .logo img { width: 28px !important; height: 28px !important; }
+            .nav-links { gap: 10px; }
+            .nav-links a { font-size: 0.8rem; padding: 6px 4px; white-space: nowrap; }
+            .nav-social-icons { display: none !important; }
+            .nav-get-access { display: inline-block !important; padding: 6px 14px !important; font-size: 0.75rem !important; background: transparent !important; color: var(--accent) !important; border: 1px solid var(--accent) !important; box-shadow: none !important; }
+            .nav-get { padding: 6px 14px !important; font-size: 0.75rem !important; }
+            .container { padding: 0 20px; }
+            .hero { padding: calc(104px + var(--banner-h)) 0 40px; }
+            .stats { grid-template-columns: 1fr; max-width: 320px; }
+            .bestvalue-inner { padding: 30px 24px; }
+            .bv-toggle { margin-left: 0; width: 100%; }
+            .bv-tools { columns: 1; }
+        }
+        @media (prefers-reduced-motion: reduce) {
+            [data-reveal] { opacity: 1; transform: none; transition: none; }
+            .eyebrow .dot { animation: none; }
         }
     </style>
 </head>
 <body>
     <div class="sale-banner" id="saleBanner">
-        <a href="#cards">
+        <a href="#pricing">
             🎆 <strong>4th of July Sale</strong> — 30% off all plans · Ends in
             <span class="cd-d">00</span>d <span class="cd-h">00</span>h <span class="cd-m">00</span>m <span class="cd-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
     </div>
+    <div class="bg-fixed" aria-hidden="true"></div>
     <nav>
         <div class="container">
             <div class="nav-content">
-                <div class="logo"><a href="../"><img src="../logo.png" alt="Trendline Project" style="width:32px;height:32px;"><span>Trendline Project</span></a></div>
+                <div class="logo">
+                    <a href="/" style="color: inherit; text-decoration: none; display: flex; align-items: center; gap: 10px;">
+                        <img src="logo.png" alt="Trendline Project Logo" style="width: 32px; height: 32px;">
+                        <span>Trendline Project</span>
+                    </a>
+                </div>
                 <div class="nav-links">
-                    <a href="../trend/">Trend</a>
-                    <a href="../sessions/">Sessions</a>
-                    <a href="../resources/">Resources</a>
-                    <a href="#cards" class="nav-get">Get Access</a>
+                    <a href="trend/">Trend</a>
+                    <a href="sessions/">Sessions</a>
+                    <a href="pricing/">Pricing</a>
+                    <a href="resources/">Resources</a>
+                    <a href="#pricing" class="nav-get">Get Access</a>
                 </div>
             </div>
         </div>
     </nav>
 
-    <section class="pricing-hero">
+    <!-- ===== HERO: DIAGNOSTIC SPLIT ===== -->
+    <section class="hero" id="tools">
         <div class="container">
-            <span class="eyebrow">Pricing</span>
-            <h1>Pick a side, or get everything.</h1>
-            <p>Each one is a complete system. The Pro Suite gives you all six tools for less than buying both.</p>
-            <p style="font-size:0.85rem; color:var(--text-muted); margin-top:10px;">Built by a trader, for traders.</p>
+            <div class="diag-intro" data-reveal>
+                <span class="eyebrow"><span class="dot"></span> Pro TradingView Tools</span>
+                <h1>Trading shouldn't feel like <span class="you">guessing.</span></h1>
+                <p>Two systems that give you a clear plan. Which one fits you?</p>
+            </div>
+
+            <div class="diag-split" data-reveal style="transition-delay: 0.08s;">
+                <!-- LEFT: SESSION -->
+                <a href="sessions/" class="diag-side diag-fut">
+                    <svg class="motif" viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <defs><linearGradient id="mFut" x1="0" y1="0" x2="1" y2="1"><stop offset="0%" stop-color="#EC4899"/><stop offset="100%" stop-color="#FF3D80"/></linearGradient></defs>
+                        <line x1="120" y1="36" x2="120" y2="124" stroke="url(#mFut)" stroke-width="1.4" stroke-linecap="round"/>
+                        <line x1="186" y1="36" x2="186" y2="124" stroke="url(#mFut)" stroke-width="1.4" stroke-linecap="round"/>
+                        <rect x="138" y="74" width="9" height="34" rx="2" fill="url(#mFut)"/>
+                        <rect x="159" y="58" width="9" height="44" rx="2" fill="url(#mFut)"/>
+                    </svg>
+                    <div class="diag-kicker">
+                        <svg class="ico" viewBox="0 0 24 24" fill="none"><line x1="5" y1="3" x2="5" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="3" x2="19" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="9" y="9" width="2.4" height="7" rx="0.6" fill="currentColor"/><rect x="13" y="6" width="2.4" height="9" rx="0.6" fill="currentColor"/></svg>
+                        Session Trading
+                    </div>
+                    <div class="diag-product diag-product-top"><span class="pill">Q-STS</span></div>
+                    <h2 class="diag-q">Keep failing prop challenges? Getting faked out by the big players?</h2>
+                    <p class="diag-reframe">The big players push price around the session open. Use <b>Session Levels</b> and the <b>Opening Range Breakout</b> to trade with them — your entry, risk, and targets mapped out before the move.</p>
+                    <div class="diag-meta">
+                        <div class="diag-product">Quantum STS + Backtester</div>
+                        <span class="diag-cta">This is me — Session tools</span>
+                    </div>
+                </a>
+
+                <!-- RIGHT: TREND -->
+                <a href="trend/" class="diag-side diag-trend">
+                    <svg class="motif" viewBox="0 0 220 150" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+                        <defs><linearGradient id="mTrend" x1="0" y1="1" x2="1" y2="0"><stop offset="0%" stop-color="#29A8F1"/><stop offset="100%" stop-color="#8CA8CE"/></linearGradient></defs>
+                        <polyline points="6,118 46,96 78,104 116,66 152,74 214,18" stroke="url(#mTrend)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <polyline points="160,18 214,18 214,60" stroke="url(#mTrend)" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"/>
+                        <circle cx="116" cy="66" r="2.6" fill="#29A8F1"/>
+                    </svg>
+                    <div class="diag-kicker">
+                        <svg class="ico" viewBox="0 0 24 24" fill="none"><polyline points="3,17 9,11 13,14 21,5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                        Trend Trading
+                    </div>
+                    <div class="diag-product diag-product-top"><span class="pill">QR Pro</span></div>
+                    <h2 class="diag-q">Still hunting for a trend system you can actually trust — and stick to?</h2>
+                    <p class="diag-reframe">Stop second-guessing. <b>Backtest, scan, and trade</b> in one system — clear signals and the same steps every time, so you ride the trend instead of chasing it.</p>
+                    <div class="diag-meta">
+                        <div class="diag-product">Quantum Ribbon Pro + 3 tools</div>
+                        <span class="diag-cta">This is me — Trend tools</span>
+                    </div>
+                </a>
+
+                <div class="diag-or">OR</div>
+            </div>
         </div>
     </section>
 
-    <section class="container" id="cards">
-        <div class="cards">
-            <!-- SESSION -->
-            <div class="card card-fut">
-                <div class="card-kicker"><svg class="ico" viewBox="0 0 24 24" fill="none"><line x1="5" y1="3" x2="5" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="3" x2="19" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="9" y="9" width="2.4" height="7" rx="0.6" fill="currentColor"/><rect x="13" y="6" width="2.4" height="9" rx="0.6" fill="currentColor"/></svg> Session Trading</div>
-                <h2>Quantum STS</h2>
-                <p class="card-desc">For futures &amp; prop firm traders. Session levels and the Opening Range Breakout.</p>
-                <div class="promo promo-sale">
-                    <span><span class="tag">Sale</span> 30% off — 4th of July</span>
-                </div>
-                <div class="price"><span class="orig" id="orig-fut">$56</span><span class="amt" id="amt-fut">$56</span><span class="per">/mo</span><p class="price-sub" id="sub-fut">~$1.87/day · billed monthly · cancel anytime</p></div>
-                <ul class="features">
-                    <li><span class="ck">✓</span> Quantum STS indicator</li>
-                    <li><span class="ck">✓</span> Q-STS Backtester</li>
-                    <li><span class="ck">✓</span> Bot-ready alerts</li>
-                    <li><span class="ck">✓</span> Setup guides</li>
-                    <li><span class="ck">✓</span> Free updates</li>
-                    <li><span class="ck">✓</span> Members-only Discord access</li>
-                </ul>
-                <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/19ba3ae9-a9bd-4c8e-a543-ce111ec1bd86" class="cta cta-fut">Get Quantum STS</a>
-            </div>
-
-            <!-- TREND -->
-            <div class="card card-trd">
-                <div class="card-kicker"><svg class="ico" viewBox="0 0 24 24" fill="none"><polyline points="3,17 9,11 13,14 21,5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Trend Trading</div>
-                <h2>Quantum Ribbon Pro</h2>
-                <p class="card-desc">For trend traders. Backtest, Scan, Trade — one connected system.</p>
-                <div class="promo promo-sale">
-                    <span><span class="tag">Sale</span> 30% off — 4th of July</span>
-                </div>
-                <div class="price"><span class="orig" id="orig-trd">$88</span><span class="amt" id="amt-trd">$88</span><span class="per">/mo</span><p class="price-sub" id="sub-trd">~$2.93/day · billed monthly · cancel anytime</p></div>
-                <ul class="features">
-                    <li><span class="ck">✓</span> Quantum Ribbon Pro</li>
-                    <li><span class="ck">✓</span> QR Pro Backtester</li>
-                    <li><span class="ck">✓</span> Multi-Instrument Scanner</li>
-                    <li><span class="ck">✓</span> TP RSI Pro</li>
-                    <li><span class="ck">✓</span> Bot-ready alerts</li>
-                    <li><span class="ck">✓</span> Setup guides</li>
-                    <li><span class="ck">✓</span> Free updates</li>
-                    <li><span class="ck">✓</span> Members-only Discord access</li>
-                </ul>
-                <a href="https://trendlineproject.lemonsqueezy.com/checkout/buy/8c11aeef-6d3e-4501-8e84-398ed4efd511" class="cta cta-trd">Get QR Pro</a>
-            </div>
-
-            <!-- SUITE -->
-            <div class="card card-suite">
-                <span class="card-flag">Most popular</span>
-                <div class="card-kicker">★ Best Value — Pro Suite</div>
-                <h2>Quantum Pro Suite</h2>
-                <p class="card-desc">All six tools — both systems. Save over buying each separately.</p>
-                <div class="toggle">
-                    <button class="toggle-btn" id="btn-monthly" onclick="setPricing('monthly')">Monthly</button>
-                    <button class="toggle-btn active" id="btn-annual" onclick="setPricing('annual')">Annual</button>
-                    <button class="toggle-btn toggle-btn-lifetime" id="btn-lifetime" onclick="setPricing('lifetime')">Lifetime</button>
-                </div>
-                <div class="promo promo-sale" id="promo">
-                    <span><span class="tag">Sale</span> 30% off — 4th of July</span>
-                </div>
-                <div class="price"><span class="orig" id="orig">$59</span><span class="amt" id="amt">$44</span><span class="per" id="per">/mo</span><p class="price-sub" id="sub">$531 billed annually — was $708 · ~$1.45/day</p></div>
-                <ul class="features">
-                    <li><span class="ck">✓</span> Quantum Ribbon Pro</li>
-                    <li><span class="ck">✓</span> QR Pro Backtester</li>
-                    <li><span class="ck">✓</span> Multi-Instrument Scanner</li>
-                    <li><span class="ck">✓</span> TP RSI Pro</li>
-                    <li><span class="ck">✓</span> Quantum STS <span class="new-badge">New</span></li>
-                    <li><span class="ck">✓</span> Q-STS Backtester <span class="new-badge">New</span></li>
-                    <li><span class="ck">✓</span> Bot-ready alerts</li>
-                    <li><span class="ck">✓</span> Setup guides</li>
-                    <li><span class="ck">✓</span> Free updates</li>
-                    <li><span class="ck">✓</span> Members-only Discord access</li>
-                </ul>
-                <a href="#" id="suite-cta" class="cta cta-suite">Get Pro Suite</a>
+    <!-- ===== STATS ===== -->
+    <section class="stats-strip">
+        <div class="container">
+            <div class="stats" data-reveal>
+                <div class="stat"><div class="stat-number">500+</div><div class="stat-label">Active Traders</div></div>
+                <div class="stat"><div class="stat-number">1,000+</div><div class="stat-label">TradingView Community</div></div>
+                <div class="stat"><div class="stat-number">4.9★</div><div class="stat-label">Average Rating</div></div>
             </div>
         </div>
-        <p class="pricing-foot">Every plan runs on TradingView — works on the free plan. Questions? <a href="../contact.html">Contact us</a> or check the <a href="#faq">FAQ</a> below.</p>
     </section>
 
-    <!-- FAQ -->
-    <section class="pf-sec" id="faq">
+    <!-- ===== SUITE SLIM CTA ===== -->
+    <section class="suite-slim-section" id="pricing">
         <div class="container">
-            <div class="pf-head">
-                <span class="eyebrow section-eyebrow">FAQ</span>
-                <h2 class="pf-h">Before you buy</h2>
+            <a href="pricing/" class="suite-slim" data-reveal>
+                <div class="suite-slim-left">
+                    <span class="bv-badge">★ Best Value</span>
+                    <span class="bv-badge" style="background: linear-gradient(120deg, #29A8F1, #EC4899); color: #0B0E13; border: none;">30% OFF · Ends Jul 8</span>
+                    <h2 class="suite-slim-h">Want it all? Get the full Pro Suite.</h2>
+                    <p class="suite-slim-sub">All six tools — both systems, one price. Save over buying each separately — plus 30% off for the 4th of July.</p>
+                </div>
+                <span class="suite-slim-btn">Get Pro Suite</span>
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== GET ACCESS / SETUP ===== -->
+    <section class="access-section">
+        <div class="container">
+            <div class="access-card" data-reveal>
+                <div class="access-left">
+                    <h2 class="access-h">Get Access &amp; Start Trading</h2>
+                    <p class="access-sub">Runs on TradingView — the world's most popular chart analysis platform. Works on the free TradingView plan.</p>
+                    <a href="resources/setup-guide/" class="access-guide-btn">See the full setup guide</a>
+                </div>
+                <div class="access-steps">
+                    <div class="access-step"><span class="step-num">1</span><span class="step-label">Choose your plan</span></div>
+                    <div class="access-step"><span class="step-num">2</span><span class="step-label">Enter your TradingView username</span></div>
+                    <div class="access-step"><span class="step-num">3</span><span class="step-label">Access your tools on TradingView</span></div>
+                </div>
             </div>
-            <div class="faq-wrap">
-                <div class="faq-item"><div class="faq-q"><span>Can I cancel anytime?</span><span class="faq-ic">+</span></div><div class="faq-a"><p>Yes. Cancel whenever you like and you keep access until the end of your billing period. Annual subscribers can cancel to stop auto-renewal at the end of their year.</p></div></div>
-                <div class="faq-item"><div class="faq-q"><span>Do you offer refunds?</span><span class="faq-ic">+</span></div><div class="faq-a"><p>No. You get instant access to proprietary software, so all purchases are non-refundable. Try the free Quantum Ribbon Lite on TradingView and review the live examples and demo videos before you buy.</p></div></div>
-                <div class="faq-item"><div class="faq-q"><span>How do I get access after paying?</span><span class="faq-ic">+</span></div><div class="faq-a"><p>You'll get an email confirmation. Reply with your TradingView username and access is granted within 24 hours — the tools appear in your "Invite-Only Scripts" folder on TradingView.</p></div></div>
-                <div class="faq-item"><div class="faq-q"><span>Do I need a paid TradingView plan?</span><span class="faq-ic">+</span></div><div class="faq-a"><p>No. All Pro Suite tools run on the free TradingView plan.</p></div></div>
-                <div class="faq-item"><div class="faq-q"><span>Can I buy just one side — Session or Trend?</span><span class="faq-ic">+</span></div><div class="faq-a"><p>Yes. Quantum STS (Session) and Quantum Ribbon Pro (Trend) are sold separately. The Pro Suite simply bundles both for less than buying them individually.</p></div></div>
-                <div class="faq-item"><div class="faq-q"><span>Can I upgrade or switch plans later?</span><span class="faq-ic">+</span></div><div class="faq-a"><p>Yes. You can move up to the Pro Suite or change your billing at any time.</p></div></div>
-                <div class="faq-item"><div class="faq-q"><span>What's the difference between monthly, annual, and lifetime?</span><span class="faq-ic">+</span></div><div class="faq-a"><p>Monthly bills each month and cancels anytime. Annual is paid once a year at a lower effective rate. Lifetime is a single payment for permanent access — no recurring billing.</p></div></div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="testimonials-section">
+        <div class="container">
+            <div class="head-center" data-reveal>
+                <div class="section-tag" style="justify-content:center;">What Traders Say</div>
+                <h2 class="section-title">Trusted by active traders</h2>
             </div>
+            <div class="testimonials-grid">
+                <div class="testimonial-card" data-reveal>
+                    <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+                    <p class="testimonial-text">"Really solid indicator. I love the process-oriented approach—it helps massively with managing emotions and staying disciplined. Also, huge props to the developer: he responds very quickly to messages and implements feature requests in record time. Top-tier support!"</p>
+                    <div class="testimonial-footer">
+                        <div><div class="author-name">Christian</div><div class="author-location">TradingView User</div></div>
+                        <div class="verified-badge"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Verified</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-reveal style="transition-delay:0.08s;">
+                    <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+                    <p class="testimonial-text">"I've gotta say, the S/R auto detection has been very good at giving me winning swing trades lately. I think you've really done fantastic work with that latest addition so thank you for that."</p>
+                    <div class="testimonial-footer">
+                        <div><div class="author-name">Discord Member</div><div class="author-location">Active Community User</div></div>
+                        <div class="verified-badge"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Verified</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-reveal style="transition-delay:0.16s;">
+                    <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+                    <p class="testimonial-text">"Great tool, thanks! Really helpful."</p>
+                    <div class="testimonial-footer">
+                        <div><div class="author-name">Zetas</div><div class="author-location">TradingView User</div></div>
+                        <div class="verified-badge"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Verified</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-reveal>
+                    <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+                    <p class="testimonial-text">"Good indicator. Does exactly what I need."</p>
+                    <div class="testimonial-footer">
+                        <div><div class="author-name">Josh_K</div><div class="author-location">TradingView User</div></div>
+                        <div class="verified-badge"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Verified</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-reveal style="transition-delay:0.08s;">
+                    <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+                    <p class="testimonial-text">"I'm on QR Pro and enjoy it. It's well thought out and works for you as long as you understand what you're doing. Support is good overall, and the community keeps growing. Can't complain."</p>
+                    <div class="testimonial-footer">
+                        <div><div class="author-name">Zydrunas</div><div class="author-location">GB · Trustpilot</div></div>
+                        <div class="verified-badge"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Verified</span></div>
+                    </div>
+                </div>
+                <div class="testimonial-card" data-reveal style="transition-delay:0.16s;">
+                    <div class="stars"><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span><span class="star">★</span></div>
+                    <p class="testimonial-text">"Great indicators, worth every penny. I've used indicators like this in the past — this is by far the easiest to work with. Accurate backtester, scanner is awesome, and Ribbon Pro is well thought out. Asked for a feature, it was installed within a day. Can't say enough good about the purchase."</p>
+                    <div class="testimonial-footer">
+                        <div><div class="author-name">tim gove</div><div class="author-location">US · Trustpilot</div></div>
+                        <div class="verified-badge"><svg viewBox="0 0 16 16" fill="none"><path d="M13.5 4.5L6 12L2.5 8.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg><span>Verified</span></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FAQ ===== -->
+    <section class="faq-section" id="faq">
+        <div class="container">
+            <div class="head-center" data-reveal>
+                <div class="section-tag" style="justify-content:center;">FAQ</div>
+                <h2 class="section-title">Everything you need to know</h2>
+            </div>
+            <div class="faq-container">
+                <div class="faq-item"><div class="faq-question"><span>Which one is right for me?</span><span class="faq-icon">+</span></div><div class="faq-answer"><p>If you trade futures or are working through a prop firm challenge, start with the <strong>Session</strong> system built around <a href="https://www.tradingview.com/script/YMHfO0lX-Quantum-STS/" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none;">Quantum STS</a>. If you trade trends, swings, or positions on any market, start with the <strong>Trend</strong> system built around <a href="https://www.tradingview.com/script/87vUKIrk-Quantum-Ribbon-Pro/" target="_blank" rel="noopener" style="color: var(--accent); text-decoration: none;">Quantum Ribbon Pro</a>. If you do both — or just want the best value — the Quantum Pro Suite gives you every tool for less than buying the two systems separately.</p></div></div>
+                <div class="faq-item"><div class="faq-question"><span>Do you offer a free trial?</span><span class="faq-icon">+</span></div><div class="faq-answer"><p><a href="https://www.tradingview.com/script/49ak1Mix-Quantum-Ribbon-Lite/" target="_blank" style="color: var(--accent); text-decoration: none;">Quantum Ribbon Lite</a> (free version) is available on TradingView for testing the core ribbon system before deciding on the Trend system.</p></div></div>
+                <div class="faq-item"><div class="faq-question"><span>What platforms does this work on?</span><span class="faq-icon">+</span></div><div class="faq-answer"><p>These are Pine Script indicators and strategies designed for the TradingView platform, and they work on the free TradingView plan.</p></div></div>
+                <div class="faq-item"><div class="faq-question"><span>How do I get access after I buy?</span><span class="faq-icon">+</span></div><div class="faq-answer"><p>After you buy, you'll receive an email confirmation. Email us your TradingView username and access will be granted within 24 hours. All tools will appear in your "Invite-Only Scripts" folder on TradingView. Check your spam folder if you don't see confirmation emails.</p></div></div>
+                <div class="faq-item"><div class="faq-question"><span>Can I cancel anytime?</span><span class="faq-icon">+</span></div><div class="faq-answer"><p>Yes. Monthly subscribers can cancel anytime and retain access until the end of the billing period. Annual subscribers can cancel to stop auto-renewal at the end of their year.</p></div></div>
+                <div class="faq-item"><div class="faq-question"><span>Do you offer refunds?</span><span class="faq-icon">+</span></div><div class="faq-answer"><p>No. Due to the digital nature of this product (instant access to proprietary software), we do not offer refunds. Please review the <a href="https://www.tradingview.com/script/49ak1Mix-Quantum-Ribbon-Lite/" target="_blank" style="color: var(--accent); text-decoration: none;">Lite version</a>, live examples, and demo videos carefully before you buy.</p></div></div>
+                <div class="faq-item"><div class="faq-question"><span>Is this guaranteed to make me profitable?</span><span class="faq-icon">+</span></div><div class="faq-answer"><p>No. This is a tool to assist your trading decisions, not a guarantee of profits. Past performance does not guarantee future results. Always use proper risk management and never trade with money you cannot afford to lose.</p></div></div>
+                <div class="faq-item"><div class="faq-question"><span>Can I use this with trading bots?</span><span class="faq-icon">+</span></div><div class="faq-answer"><p>Yes. The tools include direction-specific JSON alerts designed for webhook integration with popular bot platforms and custom webhook services.</p></div></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== COMMUNITY ===== -->
+    <section style="padding: 30px 0 70px; text-align: center;">
+        <div class="container" data-reveal>
+            <h2 style="font-size: 2rem; margin-bottom: 14px;">Join our community</h2>
+            <p style="color: var(--text-secondary); margin-bottom: 30px;">Connect with other traders, get support, and stay updated</p>
+            <a href="https://discord.gg/hZp4NsjpwT" target="_blank" class="btn btn-primary" style="display: inline-block; width: auto;">Join our Discord</a>
         </div>
     </section>
 
     <footer>
         <div class="container">
-            <div class="footer-links">
-                <a href="../resources/">Resources</a>
-                <a href="../privacy-policy.html">Privacy Policy</a>
-                <a href="../terms-of-service.html">Terms of Service</a>
-                <a href="../cookie-policy.html">Cookie Policy</a>
-                <a href="../contact.html">Contact</a>
+            <div class="social-icons">
+                <a href="https://discord.gg/hZp4NsjpwT" target="_blank" rel="noopener noreferrer" aria-label="Discord">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0 12.64 12.64 0 0 0-.617-1.25.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057c.002.022.015.043.03.056a19.9 19.9 0 0 0 5.993 3.03.078.078 0 0 0 .084-.028 14.09 14.09 0 0 0 1.226-1.994.076.076 0 0 0-.041-.106 13.107 13.107 0 0 1-1.872-.892.077.077 0 0 1-.008-.128 10.2 10.2 0 0 0 .372-.292.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127 12.299 12.299 0 0 1-1.873.892.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028 19.839 19.839 0 0 0 6.002-3.03.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.956-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419 0-1.333.955-2.419 2.157-2.419 1.21 0 2.176 1.096 2.157 2.42 0 1.333-.946 2.418-2.157 2.418z"/></svg>
+                </a>
+                <a href="https://www.youtube.com/@TrendlineProject" target="_blank" rel="noopener noreferrer" aria-label="YouTube Channel">
+                    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
+                </a>
+                <a href="https://www.tradingview.com/u/TrendlineProject/" target="_blank" rel="noopener noreferrer" aria-label="TradingView Profile">
+                    <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" style="width:20px;height:20px;fill:currentColor;"><path d="M15.8654 8.2789c0 1.3541-1.0978 2.4519-2.452 2.4519-1.354 0-2.4519-1.0978-2.4519-2.452 0-1.354 1.0978-2.4518 2.452-2.4518 1.3541 0 2.4519 1.0977 2.4519 2.4519zM9.75 6H0v4.9038h4.8462v7.2692H9.75Zm8.5962 0H24l-5.1058 12.173h-5.6538z"/></svg>
+                </a>
             </div>
-            <div style="margin: 6px 0 24px; text-align: center;">
-                <a href="#cards" class="nav-get">Get Access</a>
+            <div class="footer-links">
+                <a href="resources/">Resources</a>
+                <a href="privacy-policy.html">Privacy Policy</a>
+                <a href="terms-of-service.html">Terms of Service</a>
+                <a href="cookie-policy.html">Cookie Policy</a>
+                <a href="contact.html">Contact</a>
+            </div>
+            <div style="margin-bottom: 24px;">
+                <a href="pricing/" class="btn btn-primary" style="display: inline-block; width: auto; padding: 12px 28px;">Get Access</a>
             </div>
             <p class="copyright">© <span id="yr"></span> Quantum Pro Suite. Built by Trendline Project.</p>
         </div>
     </footer>
 
     <script>
-        const SUITE_MONTHLY = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/f4f477ca-9352-4dea-95b6-475bd3938744';
-        const SUITE_ANNUAL = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/910d7802-ed89-4def-b04a-a1c0b9a7739c';
-        const SUITE_LIFETIME = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/76fcac28-443c-49db-b0f7-4aaf882415b7';
-        const SALE_END = new Date('2026-07-08T00:00:00');
-        const saleActive = () => new Date() < SALE_END;
-        function setPricing(plan) {
-            const amt = document.getElementById('amt'), orig = document.getElementById('orig'), per = document.getElementById('per'),
-                  sub = document.getElementById('sub'), cta = document.getElementById('suite-cta'), promo = document.getElementById('promo');
-            ['btn-monthly','btn-annual','btn-lifetime'].forEach(id => document.getElementById(id).classList.remove('active'));
-            const active = saleActive();
-            if (plan === 'monthly') {
-                document.getElementById('btn-monthly').classList.add('active');
-                per.textContent = '/mo'; cta.href = SUITE_MONTHLY;
-                if (active) {
-                    amt.textContent = '$75.60'; orig.textContent = '$108'; orig.style.display = 'inline';
-                    sub.textContent = '~$2.52/day · billed monthly · cancel anytime'; promo.style.display = 'flex';
-                } else {
-                    amt.textContent = '$108'; orig.style.display = 'none';
-                    sub.textContent = '~$3.60/day · billed monthly · cancel anytime'; promo.style.display = 'none';
-                }
-            } else if (plan === 'lifetime') {
-                document.getElementById('btn-lifetime').classList.add('active');
-                per.textContent = ' one-time'; cta.href = SUITE_LIFETIME;
-                if (active) {
-                    amt.textContent = '$559.30'; orig.textContent = '$799'; orig.style.display = 'inline';
-                    sub.textContent = 'One payment. Lifetime access.'; promo.style.display = 'flex';
-                } else {
-                    amt.textContent = '$799'; orig.style.display = 'none';
-                    sub.textContent = 'One payment. Lifetime access.'; promo.style.display = 'none';
-                }
-            } else {
-                document.getElementById('btn-annual').classList.add('active'); per.textContent = '/mo'; cta.href = SUITE_ANNUAL;
-                if (active) {
-                    amt.textContent = '$40.60'; orig.textContent = '$58'; orig.style.display = 'inline';
-                    sub.textContent = '$487.20 billed annually — was $696 · ~$1.33/day'; promo.style.display = 'flex';
-                } else {
-                    amt.textContent = '$58'; orig.style.display = 'none';
-                    sub.textContent = '~$1.91/day · $696 billed annually · save $600/yr vs monthly'; promo.style.display = 'none';
-                }
-            }
-        }
-        function applyStaticSale() {
-            const active = saleActive();
-            const of = document.getElementById('orig-fut'), af = document.getElementById('amt-fut'), sf = document.getElementById('sub-fut');
-            const ot = document.getElementById('orig-trd'), at = document.getElementById('amt-trd'), st = document.getElementById('sub-trd');
-            document.querySelectorAll('.promo-sale').forEach(p => p.style.display = active ? 'flex' : 'none');
-            if (active) {
-                of.style.display = 'inline'; af.textContent = '$39.20'; sf.textContent = '~$1.31/day · billed monthly · cancel anytime';
-                ot.style.display = 'inline'; at.textContent = '$61.60'; st.textContent = '~$2.05/day · billed monthly · cancel anytime';
-            } else {
-                of.style.display = 'none'; af.textContent = '$56'; sf.textContent = '~$1.87/day · billed monthly · cancel anytime';
-                ot.style.display = 'none'; at.textContent = '$88'; st.textContent = '~$2.93/day · billed monthly · cancel anytime';
-            }
-        }
-        const nav = document.querySelector('nav');
-        window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
-        document.getElementById('yr').textContent = new Date().getFullYear();
-        setPricing('annual');
-        applyStaticSale();
-        document.querySelectorAll('a[href*="lemonsqueezy.com"]').forEach(b => b.addEventListener('click', () => gtag('event','checkout_click',{event_category:'conversion',event_label:'pricing_page'})));
-        document.querySelectorAll('.faq-item').forEach(item => {
-            item.querySelector('.faq-q').addEventListener('click', () => {
-                const open = item.classList.contains('active');
-                document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('active'));
-                if (!open) item.classList.add('active');
+        const SUITE_MONTHLY_LINK = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/c3a6010f-ceaf-4d56-be73-1d33d101bb6e';
+        document.querySelectorAll('.faq-question').forEach(question => {
+            question.addEventListener('click', () => {
+                const item = question.parentElement;
+                const isActive = item.classList.contains('active');
+                document.querySelectorAll('.faq-item').forEach(faqItem => faqItem.classList.remove('active'));
+                if (!isActive) item.classList.add('active');
             });
         });
-        (function(){
-            function tick(){
+        const nav = document.querySelector('nav');
+        window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 50); });
+        const revealEls = document.querySelectorAll('[data-reveal]');
+        if ('IntersectionObserver' in window) {
+            const io = new IntersectionObserver((entries) => {
+                entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+            }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+            revealEls.forEach(el => io.observe(el));
+        } else {
+            revealEls.forEach(el => el.classList.add('in'));
+        }
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('yr').textContent = new Date().getFullYear();
+            document.querySelectorAll('a[href*="lemonsqueezy.com"]').forEach(function(btn) { btn.addEventListener('click', function() { gtag('event', 'checkout_click', { 'event_category': 'conversion', 'event_label': 'lemonsqueezy_checkout' }); }); });
+            document.querySelectorAll('a[href*="discord.gg"]').forEach(function(btn) { btn.addEventListener('click', function() { gtag('event', 'discord_click', { 'event_category': 'community', 'event_label': 'discord_button' }); }); });
+            document.querySelectorAll('.diag-side').forEach(function(card) { card.addEventListener('click', function() { gtag('event', 'path_click', { 'event_category': 'navigation', 'event_label': card.getAttribute('href') }); }); });
+        });
+        (function() {
+            const SALE_END = new Date('2026-07-08T00:00:00');
+            function tick() {
                 const diff = SALE_END - new Date();
+                const banner = document.getElementById('saleBanner');
                 if (diff <= 0) {
-                    document.querySelectorAll('.promo-sale').forEach(p => p.style.display = 'none');
-                    const banner = document.getElementById('saleBanner');
                     if (banner) banner.style.display = 'none';
                     document.documentElement.style.setProperty('--banner-h', '0px');
-                    if (document.getElementById('btn-annual').classList.contains('active')) setPricing('annual');
-                    applyStaticSale();
                     return;
                 }
-                const d=Math.floor(diff/86400000), h=Math.floor(diff%86400000/3600000), m=Math.floor(diff%3600000/60000), s=Math.floor(diff%60000/1000);
-                const pad = v => String(v).padStart(2,'0');
-                document.querySelectorAll('.cd-d').forEach(e => e.textContent = pad(d));
-                document.querySelectorAll('.cd-h').forEach(e => e.textContent = pad(h));
-                document.querySelectorAll('.cd-m').forEach(e => e.textContent = pad(m));
-                document.querySelectorAll('.cd-s').forEach(e => e.textContent = pad(s));
+                const d = String(Math.floor(diff / 86400000)).padStart(2, '0');
+                const h = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
+                const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
+                const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
+                document.querySelectorAll('.cd-d').forEach(e => e.textContent = d);
+                document.querySelectorAll('.cd-h').forEach(e => e.textContent = h);
+                document.querySelectorAll('.cd-m').forEach(e => e.textContent = m);
+                document.querySelectorAll('.cd-s').forEach(e => e.textContent = s);
             }
             tick(); setInterval(tick, 1000);
+        })();
+    </script>
+
+    <div id="cookieConsent" class="cookie-consent">
+        <div class="cookie-content">
+            <h3>We Use Cookies</h3>
+            <p>We use cookies to improve your experience. By clicking "Accept", you consent to our use of cookies.</p>
+            <div class="cookie-buttons">
+                <button id="acceptCookies" class="cookie-btn cookie-btn-accept">Accept All</button>
+                <button id="rejectCookies" class="cookie-btn cookie-btn-reject">Reject Non-Essential</button>
+                <a href="cookie-policy.html" style="color: var(--text-muted); text-decoration: none; font-size: 0.875rem; transition: color 0.2s;" onmouseover="this.style.color='#29A8F1'" onmouseout="this.style.color='var(--text-muted)'">Learn More</a>
+            </div>
+        </div>
+    </div>
+    <style>
+        .cookie-consent { position: fixed; bottom: 0; left: 0; right: 0; background: var(--surface); border-top: 1px solid var(--border); padding: 24px; z-index: 9999; display: none; animation: slideUp 0.3s ease; }
+        .cookie-consent.show { display: block; }
+        @keyframes slideUp { from { transform: translateY(100%); } to { transform: translateY(0); } }
+        .cookie-content { max-width: 1200px; margin: 0 auto; display: flex; align-items: center; gap: 24px; flex-wrap: wrap; }
+        .cookie-content h3 { font-size: 1.125rem; font-weight: 600; margin: 0; color: var(--text); min-width: fit-content; }
+        .cookie-content p { flex: 1; margin: 0; color: var(--text-secondary); font-size: 0.9375rem; line-height: 1.6; min-width: 300px; }
+        .cookie-buttons { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
+        .cookie-btn { padding: 12px 24px; border-radius: 8px; font-size: 0.9375rem; font-weight: 500; cursor: pointer; transition: all 0.2s ease; border: none; font-family: inherit; }
+        .cookie-btn-accept { background: var(--accent); color: #000; }
+        .cookie-btn-accept:hover { transform: translateY(-2px); box-shadow: 0 0 20px rgba(91, 201, 245, 0.4); }
+        .cookie-btn-reject { background: transparent; color: var(--text); border: 1px solid var(--border); }
+        .cookie-btn-reject:hover { border-color: var(--accent); color: var(--accent); }
+        @media (max-width: 768px) { .cookie-content { flex-direction: column; align-items: flex-start; gap: 16px; } .cookie-content p { min-width: 100%; } .cookie-buttons { width: 100%; flex-direction: column; } .cookie-btn { width: 100%; } }
+    </style>
+    <script>
+        (function() {
+            const cookieConsent = document.getElementById('cookieConsent');
+            const acceptBtn = document.getElementById('acceptCookies');
+            const rejectBtn = document.getElementById('rejectCookies');
+            if (!localStorage.getItem('cookieConsent')) { setTimeout(() => cookieConsent.classList.add('show'), 1000); }
+            acceptBtn.addEventListener('click', () => { localStorage.setItem('cookieConsent', 'accepted'); cookieConsent.classList.remove('show'); });
+            rejectBtn.addEventListener('click', () => { localStorage.setItem('cookieConsent', 'rejected'); cookieConsent.classList.remove('show'); });
         })();
     </script>
 </body>
