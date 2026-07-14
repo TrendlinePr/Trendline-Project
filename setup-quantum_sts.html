@@ -14,6 +14,28 @@
         gtag('js', new Date());
         gtag('config', 'G-RLKJNZ6GZV');
     </script>
+    <script>
+    (function () {
+        const PLANS = {
+            'sts':            { id: 'q-sts',          name: 'Quantum STS',        value: 56  },
+            'qrpro':          { id: 'qr-pro',         name: 'Quantum Ribbon Pro', value: 88  },
+            'suite-monthly':  { id: 'suite-monthly',  name: 'Pro Suite Monthly',  value: 108 },
+            'suite-annual':   { id: 'suite-annual',   name: 'Pro Suite Annual',   value: 696 },
+            'suite-lifetime': { id: 'suite-lifetime', name: 'Pro Suite Lifetime', value: 799 }
+        };
+        const plan = new URLSearchParams(location.search).get('plan');
+        const p = PLANS[plan];
+        if (!p) return;
+        if (sessionStorage.getItem('purchase_fired_' + plan)) return;
+        sessionStorage.setItem('purchase_fired_' + plan, '1');
+        gtag('event', 'purchase', {
+            transaction_id: 'ls_' + plan + '_' + Date.now(),
+            value: p.value,
+            currency: 'USD',
+            items: [{ item_id: p.id, item_name: p.name, price: p.value, quantity: 1 }]
+        });
+    })();
+    </script>
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         :root {
@@ -136,7 +158,7 @@
                 </div>
                 <input type="hidden" name="plan" value="Quantum STS">
                 <input type="hidden" name="_subject" value="New Quantum STS Setup — TradingView Access Request">
-                <button type="submit" class="btn-submit" id="submit-btn">Submit & Get Access</button>
+                <button type="submit" class="btn-submit" id="submit-btn">Submit &amp; Get Access</button>
             </form>
 
             <div class="thank-you" id="thank-you">

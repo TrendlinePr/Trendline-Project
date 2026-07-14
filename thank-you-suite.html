@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="theme-color" content="#1C1F26">
-    <title>You're In — QR Pro</title>
+    <title>You're In — Quantum Pro Suite</title>
     <meta name="robots" content="noindex, nofollow">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-RLKJNZ6GZV"></script>
@@ -59,10 +59,14 @@
         .instruction-text { font-size: 0.9375rem; color: var(--text-secondary); line-height: 1.6; }
         .instruction-text strong { color: var(--text); }
 
-        .screenshot-placeholder { background: rgba(255,255,255,0.03); border: 1px dashed rgba(255,255,255,0.1); border-radius: 8px; padding: 32px; text-align: center; margin-top: 16px; color: var(--text-muted); font-size: 0.875rem; }
+        .tool-list { list-style: none; padding: 0; margin: 20px 0 0; columns: 2; column-gap: 24px; }
+        .tool-list li { display: flex; align-items: center; gap: 9px; padding: 6px 0; font-size: 0.875rem; color: var(--text-secondary); break-inside: avoid; }
+        .tool-list .ck { color: var(--accent); font-weight: 700; flex-shrink: 0; }
+        @media (max-width: 640px) { .tool-list { columns: 1; } }
 
         .next-steps { margin-bottom: 24px; }
         .next-steps-title { font-size: 0.875rem; font-weight: 600; text-transform: uppercase; letter-spacing: 0.1em; color: var(--text-muted); margin-bottom: 16px; }
+        .next-steps-title.sub { margin-top: 28px; }
         .next-link { display: flex; align-items: center; justify-content: space-between; padding: 16px; background: rgba(255,255,255,0.03); border: 1px solid var(--border); border-radius: 10px; text-decoration: none; color: var(--text); transition: all 0.2s; margin-bottom: 10px; }
         .next-link:hover { border-color: var(--accent); background: rgba(41,168,241,0.05); }
         .next-link-text { font-size: 0.9375rem; font-weight: 500; }
@@ -136,16 +140,28 @@
             </div>
             <div class="instruction-step">
                 <div class="instruction-num">4</div>
-                <div class="instruction-text">Your <strong>QR Pro</strong> tools will appear here once access is activated — if you don't see them yet, check back shortly or refresh TradingView</div>
+                <div class="instruction-text">All six <strong>Quantum Pro Suite</strong> tools will appear here once access is activated — if you don't see them yet, check back shortly or refresh TradingView</div>
             </div>
         </div>
 
+        <div class="card">
+            <div class="card-title">What's included</div>
+            <ul class="tool-list">
+                <li><span class="ck">✓</span> Quantum Ribbon Pro</li>
+                <li><span class="ck">✓</span> QR Pro Backtester</li>
+                <li><span class="ck">✓</span> Multi-Instrument Scanner</li>
+                <li><span class="ck">✓</span> TP RSI Pro</li>
+                <li><span class="ck">✓</span> Quantum STS</li>
+                <li><span class="ck">✓</span> Q-STS Backtester</li>
+            </ul>
+        </div>
+
         <div class="next-steps">
-            <div class="next-steps-title">While you wait</div>
+            <div class="next-steps-title">Trend tools — while you wait</div>
             <a href="resources/bst-system/" class="next-link">
                 <div>
-                    <div class="next-link-text">Getting Started Guide</div>
-                    <div class="next-link-sub">The full BST workflow — backtest, scan, trade</div>
+                    <div class="next-link-text">The BST System</div>
+                    <div class="next-link-sub">How to backtest, scan, and trade with QR Pro</div>
                 </div>
                 <span class="next-link-arrow">→</span>
             </a>
@@ -163,13 +179,17 @@
                 </div>
                 <span class="next-link-arrow">→</span>
             </a>
-            <a href="resources/bst-system/" class="next-link">
+
+            <div class="next-steps-title sub">Session tools</div>
+            <a href="resources/quantum-sts/" class="next-link">
                 <div>
-                    <div class="next-link-text">The BST System</div>
-                    <div class="next-link-sub">How to backtest, scan, and trade with QR Pro</div>
+                    <div class="next-link-text">Quantum STS — Full Guide</div>
+                    <div class="next-link-sub">Session levels and the Opening Range Breakout</div>
                 </div>
                 <span class="next-link-arrow">→</span>
             </a>
+
+            <div class="next-steps-title sub">Community</div>
             <a href="https://discord.gg/hZp4NsjpwT" target="_blank" class="next-link">
                 <div>
                     <div class="next-link-text">Join our Discord</div>
@@ -189,7 +209,7 @@
                 <a href="terms-of-service.html">Terms of Service</a>
                 <a href="contact.html">Contact</a>
             </div>
-            <p class="copyright">© <span id="copyright-year"></span> Quantum Ribbon Pro. Built by Trendline Project.</p>
+            <p class="copyright">© <span id="copyright-year"></span> Quantum Pro Suite. Built by Trendline Project.</p>
         </div>
     </footer>
     <script>document.getElementById('copyright-year').textContent = new Date().getFullYear();</script>
