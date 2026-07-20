@@ -273,9 +273,9 @@
 </head>
 <body>
     <div class="sale-banner" id="saleBanner">
-        <a href="#get">
-            🎆 <strong>4th of July Sale</strong> — 30% off · Ends in
-            <span class="cd-d">00</span>d <span class="cd-h">00</span>h <span class="cd-m">00</span>m <span class="cd-s">00</span>s
+        <a href="../pricing/#lifetime">
+            🔥 <strong>Lifetime Sale</strong> — 25% off Pro Suite Lifetime · Ends in
+            <span class="lt-d">00</span>d <span class="lt-h">00</span>h <span class="lt-m">00</span>m <span class="lt-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
     </div>
@@ -674,21 +674,21 @@
                     orig.style.display = 'none'; amt.textContent = '$88'; sub.textContent = '~$2.93/day · billed monthly · cancel anytime';
                 }
             }
+            const LIFETIME_SALE_END = new Date('2026-08-03T00:00:00');
             function tick(){
-                const diff = SALE_END - new Date();
+                const diff = LIFETIME_SALE_END - new Date();
                 if (diff <= 0) {
                     const banner = document.getElementById('saleBanner');
                     if (banner) banner.style.display = 'none';
                     document.documentElement.style.setProperty('--banner-h', '0px');
-                    applySale();
                     return;
                 }
                 const d=Math.floor(diff/86400000), h=Math.floor(diff%86400000/3600000), m=Math.floor(diff%3600000/60000), s=Math.floor(diff%60000/1000);
                 const pad = v => String(v).padStart(2,'0');
-                document.querySelectorAll('.cd-d').forEach(e => e.textContent = pad(d));
-                document.querySelectorAll('.cd-h').forEach(e => e.textContent = pad(h));
-                document.querySelectorAll('.cd-m').forEach(e => e.textContent = pad(m));
-                document.querySelectorAll('.cd-s').forEach(e => e.textContent = pad(s));
+                document.querySelectorAll('.lt-d').forEach(e => e.textContent = pad(d));
+                document.querySelectorAll('.lt-h').forEach(e => e.textContent = pad(h));
+                document.querySelectorAll('.lt-m').forEach(e => e.textContent = pad(m));
+                document.querySelectorAll('.lt-s').forEach(e => e.textContent = pad(s));
             }
             applySale(); tick(); setInterval(tick, 1000);
         })();
