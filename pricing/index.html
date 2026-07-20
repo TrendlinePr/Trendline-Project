@@ -48,6 +48,7 @@
         b, strong { font-weight: 600; }
 
         nav { padding: 20px 0; position: fixed; top: var(--banner-h); left: 0; right: 0; background: transparent; z-index: 1000; transition: background 0.3s ease, backdrop-filter 0.3s ease, top 0.3s ease; }
+        #cards { scroll-margin-top: calc(96px + var(--banner-h)); }
         nav.scrolled { background: rgba(13,17,23,0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
         .logo a { color: var(--text); text-decoration: none; display: flex; align-items: center; gap: 10px; font-family: var(--display); font-size: 1.125rem; font-weight: 600; letter-spacing: -0.02em; }
@@ -150,10 +151,10 @@
     </style>
 </head>
 <body>
-    <div class="sale-banner" id="saleBanner">
-        <a href="#cards">
-            🎆 <strong>4th of July Sale</strong> — 30% off all plans · Ends in
-            <span class="cd-d">00</span>d <span class="cd-h">00</span>h <span class="cd-m">00</span>m <span class="cd-s">00</span>s
+    <div class="sale-banner" id="ltBanner">
+        <a href="#cards" onclick="setPricing('lifetime')">
+            🔥 <strong>Lifetime Sale</strong> — 25% off Pro Suite Lifetime · Ends in
+            <span class="lt-d">00</span>d <span class="lt-h">00</span>h <span class="lt-m">00</span>m <span class="lt-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
     </div>
@@ -236,7 +237,8 @@
                     <button class="toggle-btn toggle-btn-lifetime" id="btn-lifetime" onclick="setPricing('lifetime')">Lifetime</button>
                 </div>
                 <div class="promo promo-sale" id="promo">
-                    <span><span class="tag">Sale</span> 30% off — 4th of July</span>
+                    <span><span class="tag">Sale</span> 25% off Lifetime</span>
+                    <span class="cd">Ends in <span class="lt-d">00</span>d <span class="lt-h">00</span>h <span class="lt-m">00</span>m <span class="lt-s">00</span>s</span>
                 </div>
                 <div class="price"><span class="orig" id="orig">$59</span><span class="amt" id="amt">$44</span><span class="per" id="per">/mo</span><p class="price-sub" id="sub">$531 billed annually — was $708 · ~$1.45/day</p></div>
                 <ul class="features">
@@ -298,6 +300,8 @@
         const SUITE_LIFETIME = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/76fcac28-443c-49db-b0f7-4aaf882415b7';
         const SALE_END = new Date('2026-07-08T00:00:00');
         const saleActive = () => new Date() < SALE_END;
+        const LIFETIME_SALE_END = new Date('2026-08-03T00:00:00');
+        const lifetimeSaleActive = () => new Date() < LIFETIME_SALE_END;
         function setPricing(plan) {
             const amt = document.getElementById('amt'), orig = document.getElementById('orig'), per = document.getElementById('per'),
                   sub = document.getElementById('sub'), cta = document.getElementById('suite-cta'), promo = document.getElementById('promo');
@@ -306,18 +310,14 @@
             if (plan === 'monthly') {
                 document.getElementById('btn-monthly').classList.add('active');
                 per.textContent = '/mo'; cta.href = SUITE_MONTHLY;
-                if (active) {
-                    amt.textContent = '$75.60'; orig.textContent = '$108'; orig.style.display = 'inline';
-                    sub.textContent = '~$2.52/day · billed monthly · cancel anytime'; promo.style.display = 'flex';
-                } else {
-                    amt.textContent = '$108'; orig.style.display = 'none';
-                    sub.textContent = '~$3.60/day · billed monthly · cancel anytime'; promo.style.display = 'none';
-                }
+                promo.style.display = 'none';
+                amt.textContent = '$108'; orig.style.display = 'none';
+                sub.textContent = '~$3.60/day · billed monthly · cancel anytime';
             } else if (plan === 'lifetime') {
                 document.getElementById('btn-lifetime').classList.add('active');
                 per.textContent = ' one-time'; cta.href = SUITE_LIFETIME;
-                if (active) {
-                    amt.textContent = '$559.30'; orig.textContent = '$799'; orig.style.display = 'inline';
+                if (lifetimeSaleActive()) {
+                    amt.textContent = '$599.25'; orig.textContent = '$799'; orig.style.display = 'inline';
                     sub.textContent = 'One payment. Lifetime access.'; promo.style.display = 'flex';
                 } else {
                     amt.textContent = '$799'; orig.style.display = 'none';
@@ -325,13 +325,9 @@
                 }
             } else {
                 document.getElementById('btn-annual').classList.add('active'); per.textContent = '/mo'; cta.href = SUITE_ANNUAL;
-                if (active) {
-                    amt.textContent = '$40.60'; orig.textContent = '$58'; orig.style.display = 'inline';
-                    sub.textContent = '$487.20 billed annually — was $696 · ~$1.33/day'; promo.style.display = 'flex';
-                } else {
-                    amt.textContent = '$58'; orig.style.display = 'none';
-                    sub.textContent = '~$1.91/day · $696 billed annually · save $600/yr vs monthly'; promo.style.display = 'none';
-                }
+                promo.style.display = 'none';
+                amt.textContent = '$58'; orig.style.display = 'none';
+                sub.textContent = '~$1.91/day · $696 billed annually · save $600/yr vs monthly';
             }
         }
         function applyStaticSale() {
@@ -361,26 +357,31 @@
             });
         });
         (function(){
-            function tick(){
-                const diff = SALE_END - new Date();
+            function ltTick(){
+                const diff = LIFETIME_SALE_END - new Date();
+                const banner = document.getElementById('ltBanner');
                 if (diff <= 0) {
-                    document.querySelectorAll('.promo-sale').forEach(p => p.style.display = 'none');
-                    const banner = document.getElementById('saleBanner');
                     if (banner) banner.style.display = 'none';
                     document.documentElement.style.setProperty('--banner-h', '0px');
-                    if (document.getElementById('btn-annual').classList.contains('active')) setPricing('annual');
-                    applyStaticSale();
+                    if (document.getElementById('btn-lifetime').classList.contains('active')) setPricing('lifetime');
                     return;
                 }
                 const d=Math.floor(diff/86400000), h=Math.floor(diff%86400000/3600000), m=Math.floor(diff%3600000/60000), s=Math.floor(diff%60000/1000);
                 const pad = v => String(v).padStart(2,'0');
-                document.querySelectorAll('.cd-d').forEach(e => e.textContent = pad(d));
-                document.querySelectorAll('.cd-h').forEach(e => e.textContent = pad(h));
-                document.querySelectorAll('.cd-m').forEach(e => e.textContent = pad(m));
-                document.querySelectorAll('.cd-s').forEach(e => e.textContent = pad(s));
+                document.querySelectorAll('.lt-d').forEach(e => e.textContent = pad(d));
+                document.querySelectorAll('.lt-h').forEach(e => e.textContent = pad(h));
+                document.querySelectorAll('.lt-m').forEach(e => e.textContent = pad(m));
+                document.querySelectorAll('.lt-s').forEach(e => e.textContent = pad(s));
             }
-            tick(); setInterval(tick, 1000);
+            ltTick(); setInterval(ltTick, 1000);
         })();
+        if (location.hash === '#lifetime') {
+            setPricing('lifetime');
+            setTimeout(() => {
+                const el = document.getElementById('cards');
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
     </script>
 </body>
 </html>
