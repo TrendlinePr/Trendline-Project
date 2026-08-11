@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Q-STS Backtest Explorer — MNQ</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500;600&family=IBM+Plex+Sans+Condensed:wght@600;700&family=IBM+Plex+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ground:#0d1620; --panel:#141f2c; --panel-2:#1a2836;
+  --rule:#243546; --rule-soft:#1d2b3a;
+  --ink:#e8eff7; --ink-dim:#93a8bf; --ink-faint:#5f7288;
+  --long:#29A8F1; --short:#EC4899;
+  --warn:#E8A33D; --good:#3FBF9F; --bad:#E2607A;
+}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0}
+body{background:var(--ground);color:var(--ink);font-family:'IBM Plex Sans',system-ui,sans-serif;
+  font-size:14px;line-height:1.5;-webkit-font-smoothing:antialiased}
+.wrap{max-width:1320px;margin:0 auto;padding:28px 20px 72px}
+
+.mast{border-bottom:1px solid var(--rule);padding-bottom:20px;margin-bottom:30px}
+.eyebrow{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.16em;
+  text-transform:uppercase;color:var(--ink-faint);margin-bottom:10px}
+h1{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;
+  font-size:clamp(28px,5vw,44px);line-height:1.02;margin:0 0 12px;letter-spacing:-.01em}
+h1 em{font-style:normal;color:var(--ink-faint)}
+.meta{display:flex;flex-wrap:wrap;gap:8px 26px;font-family:'IBM Plex Mono',monospace;font-size:12px;color:var(--ink-dim)}
+.meta b{color:var(--ink);font-weight:500}
+
+h2{font-family:'IBM Plex Sans Condensed',sans-serif;font-weight:700;font-size:19px;margin:0 0 6px}
+.sub{color:var(--ink-dim);font-size:13px;margin:0 0 18px;max-width:80ch}
+.sub b{color:var(--ink);font-weight:600}
+section{margin-bottom:46px}
+
+.card{background:var(--panel);border:1px solid var(--rule);border-radius:3px;padding:20px 18px 14px}
+.chartwrap{overflow-x:auto}
+svg{display:block;min-width:660px}
+.readout{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-dim);
+  border-top:1px solid var(--rule-soft);margin-top:12px;padding-top:11px;line-height:1.8}
+.readout b{color:var(--ink);font-weight:500}
+
+.legend{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:14px}
+.lgd{display:flex;align-items:center;gap:7px;background:var(--panel-2);border:1px solid var(--rule);
+  border-radius:2px;padding:5px 10px;cursor:pointer;font-family:'IBM Plex Mono',monospace;
+  font-size:11px;color:var(--ink-dim);transition:.12s}
+.lgd:hover{border-color:var(--ink-faint)}
+.lgd[aria-pressed="false"]{opacity:.38}
+.lgd.on{color:var(--ink)}
+.swatch{width:16px;height:2px;flex:none}
+
+.filters{display:flex;flex-wrap:wrap;gap:18px;align-items:flex-end;margin-bottom:16px}
+.fgroup{display:flex;flex-direction:column;gap:7px}
+.flabel{font-family:'IBM Plex Mono',monospace;font-size:10px;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--ink-faint)}
+.chips{display:flex;flex-wrap:wrap;gap:5px}
+.chip{font-family:'IBM Plex Mono',monospace;font-size:11.5px;padding:6px 12px;background:transparent;
+  border:1px solid var(--rule);color:var(--ink-dim);border-radius:2px;cursor:pointer;transition:.12s}
+.chip:hover{border-color:var(--ink-faint);color:var(--ink)}
+.chip[aria-pressed="true"]{background:var(--ink);border-color:var(--ink);color:var(--ground);font-weight:500}
+.chip.long[aria-pressed="true"]{background:var(--long);border-color:var(--long);color:#06121c}
+.chip.short[aria-pressed="true"]{background:var(--short);border-color:var(--short);color:#1c0512}
+button:focus-visible,.lgd:focus-visible{outline:2px solid var(--warn);outline-offset:2px}
+
+.tablewrap{overflow-x:auto;border:1px solid var(--rule);border-radius:3px;max-height:640px}
+table{border-collapse:collapse;width:100%;min-width:1180px}
+thead th{position:sticky;top:0;z-index:2;background:var(--panel-2);font-family:'IBM Plex Mono',monospace;
+  font-weight:500;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--ink-dim);
+  padding:11px 9px;text-align:right;white-space:nowrap;cursor:pointer;border-bottom:1px solid var(--rule);user-select:none}
+thead th:first-child,thead th:nth-child(2){text-align:left}
+thead th:hover{color:var(--ink)}
+thead th .arw{opacity:.35;font-size:9px;margin-left:3px}
+thead th.sorted{color:var(--ink)}
+thead th.sorted .arw{opacity:1;color:var(--warn)}
+tbody td{padding:8px 9px;text-align:right;border-bottom:1px solid var(--rule-soft);
+  font-family:'IBM Plex Mono',monospace;font-size:12.5px;white-space:nowrap}
+tbody td:first-child,tbody td:nth-child(2){text-align:left}
+tbody tr:hover td{background:var(--panel)}
+.dir{font-weight:600}
+.dir.Long{color:var(--long)} .dir.Short{color:var(--short)}
+.grp{color:var(--ink-dim);font-family:'IBM Plex Sans',sans-serif;font-size:12px}
+.pos{color:var(--good)} .neg{color:var(--bad)} .dim{color:var(--ink-faint)}
+.flag{display:inline-block;padding:1px 7px;border-radius:2px;font-size:10.5px;border:1px solid;letter-spacing:.03em}
+.flag.low{color:var(--ink-faint);border-color:var(--rule)}
+.flag.med{color:var(--warn);border-color:rgba(232,163,61,.4)}
+.flag.high{color:var(--bad);border-color:rgba(226,96,122,.45);background:rgba(226,96,122,.08)}
+.bar{display:inline-block;height:3px;background:var(--good);vertical-align:middle;margin-right:6px;border-radius:1px}
+.bar.n{background:var(--bad)}
+.count{font-family:'IBM Plex Mono',monospace;font-size:11.5px;color:var(--ink-faint);margin-top:10px}
+.count b{color:var(--good);font-weight:500} .count b.warnc{color:var(--bad)}
+
+.notes{display:grid;grid-template-columns:repeat(auto-fit,minmax(290px,1fr));gap:1px;background:var(--rule);
+  border:1px solid var(--rule);border-radius:3px}
+.note{background:var(--panel);padding:18px}
+.note h3{font-family:'IBM Plex Mono',monospace;font-size:11px;letter-spacing:.1em;text-transform:uppercase;
+  margin:0 0 9px;color:var(--warn);font-weight:500}
+.note.alert h3{color:var(--bad)}
+.note p{margin:0 0 9px;font-size:13px;color:var(--ink-dim);line-height:1.55}
+.note p:last-child{margin-bottom:0}
+.note strong{color:var(--ink);font-weight:600}
+code{font-family:'IBM Plex Mono',monospace;font-size:11.5px;background:var(--panel-2);padding:1px 5px;
+  border-radius:2px;color:var(--ink)}
+.tools{display:flex;gap:8px;margin-top:14px;flex-wrap:wrap}
+.tool{font-family:'IBM Plex Mono',monospace;font-size:11.5px;padding:7px 14px;background:transparent;
+  border:1px solid var(--rule);color:var(--ink-dim);border-radius:2px;cursor:pointer}
+.tool:hover{border-color:var(--ink-faint);color:var(--ink)}
+footer{margin-top:40px;padding-top:18px;border-top:1px solid var(--rule);font-size:12px;
+  color:var(--ink-faint);max-width:84ch;line-height:1.6}
+body.simple .adv{display:none}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+<header class="mast">
+  <div class="eyebrow">Quantum STS · Session Fakeout module · 1-minute bars</div>
+  <h1>Session fade backtest <em>— MNQ</em></h1>
+  <div class="meta">
+    <span>Sessions <b>Asia · London · Premarket · NY AM · NY PM</b></span>
+    <span>Configs <b id="m-configs">—</b></span>
+    <span>Point value <b>$2</b></span>
+  </div>
+</header>
+
+<!-- ============ SCOREBOARD ============ -->
+<section>
+  <h2>Which sessions actually hold up</h2>
+  <p class="sub">The best configuration each session and direction can offer. The solid bar is the <b>conservative estimate</b> — expected value after discounting for how many trades it rests on. The dashed outline behind it is the raw number; a wide gap means a thin sample. Stops of 20 points or less are excluded here. Sessions run left to right in the order they open.</p>
+  <div class="card">
+    <div class="chartwrap"><svg id="score" viewBox="0 0 900 340" role="img" aria-label="Best confidence-adjusted expected value per session and direction"></svg></div>
+    <div class="readout" id="score-read"></div>
+  </div>
+</section>
+
+<!-- ============ TP SWEEP ============ -->
+<section>
+  <h2>Single-variable sweeps</h2>
+  <p class="sub">A top-five list gives you numbers; a sweep gives you a <b>shape</b>, and shape is what tells you whether a result is real. Smooth curve with a broad plateau: structure. Jagged curve with an isolated spike: noise. Only runs that hold one variable fixed and move the other appear here.</p>
+  <div class="card">
+    <div class="filters" style="margin-bottom:14px">
+      <div class="fgroup"><span class="flabel">Sweep</span><div class="chips" id="f-mode"></div></div>
+    </div>
+    <div class="legend" id="legend"></div>
+    <div class="chartwrap"><svg id="chart" viewBox="0 0 860 380" role="img" aria-label="Expected value against take-profit distance at a fixed 50-point stop"></svg></div>
+    <div class="readout" id="readout"></div>
+  </div>
+</section>
+
+<!-- ============ TABLE ============ -->
+<section>
+  <h2>Every configuration</h2>
+  <p class="sub">Sorted by the conservative estimate. Click any column to re-sort. Switch to full detail for the extra analysis columns.</p>
+
+  <div class="filters">
+    <div class="fgroup"><span class="flabel">Session</span><div class="chips" id="f-session"></div></div>
+    <div class="fgroup"><span class="flabel">Direction</span><div class="chips" id="f-dir"></div></div>
+    <div class="fgroup"><span class="flabel">Untradeable rows</span><div class="chips" id="f-risk"></div></div>
+    <div class="fgroup"><span class="flabel">Columns</span><div class="chips" id="f-detail"></div></div>
+  </div>
+
+  <div class="tablewrap">
+    <table id="tbl"><thead><tr id="thr"></tr></thead><tbody id="tb"></tbody></table>
+  </div>
+  <div class="count" id="count"></div>
+  <div class="tools">
+    <button class="tool" id="csv">Download as CSV</button>
+    <button class="tool" id="reset">Reset filters</button>
+  </div>
+</section>
+
+<!-- ============ NOTES ============ -->
+<section>
+  <h2>Reading the numbers</h2>
+  <p class="sub">Every column is computed in the page from the raw win and loss counts.</p>
+  <div class="notes">
+    <div class="note">
+      <h3>EV — expected points per trade</h3>
+      <p><code>EV = WinRate × TP − (1 − WinRate) × SL</code></p>
+      <p>Multiply by $2 for dollars per contract. This is the only column that answers whether a setup makes money — a high win rate on its own does not.</p>
+    </div>
+    <div class="note">
+      <h3>EV low — the conservative number</h3>
+      <p>A 96% win rate from 5 losses in 159 trades and a 96% win rate from 40 losses in 1000 trades are not the same claim. This column takes the pessimistic end of what the sample supports and recomputes EV from it.</p>
+      <p><strong>Rank by this, not by EV.</strong> It penalises small samples automatically.</p>
+    </div>
+    <div class="note">
+      <h3>Rows that aren't real results</h3>
+      <p>On 1-minute bars, when a single bar contains both the stop and the target, the backtest has to guess which was hit first — and it guesses in your favour.</p>
+      <p>Any configuration with a stop of <strong>20 points or less</strong> is inside ordinary bar noise on MNQ, so its win rate measures that guess rather than the market. Those rows are <strong>hidden by default</strong>; the toggle above the table brings them back if you want to see what was excluded.</p>
+    </div>
+    <div class="note">
+      <h3>Drawdown — the missing number</h3>
+      <p>EV tells you where the equity curve ends, not how ugly the path is. With fixed stops and targets the path is a random walk of known step sizes, so an estimate can be derived from win rate, SL, TP and trade count. Switch the table to full detail for <strong>Est. max DD</strong> and <strong>Ret/DD</strong>.</p>
+      <p>It reorders things sharply. Two configs near 11–12 EV can differ by <strong>six times</strong> in expected drawdown, because a 62% win rate on a 120-point stop strings losses together in a way a 94% win rate never does.</p>
+      <p>Treat it as a <strong>floor, not a forecast</strong>. It assumes trades are independent; real losses cluster by regime, so live drawdown runs worse. A proper equity curve from the backtest is still the thing to build.</p>
+    </div>
+    <div class="note alert">
+      <h3>NY PM has no edge</h3>
+      <p>Every NY PM configuration with a realistic stop lost money. The search collapsed almost the whole PM grid to a 10-point stop — what happens when there is nothing worth risking.</p>
+      <p>Five PM short rows sit at 75–77% win rate and carry EV between <strong>−4.65 and −6.26 points</strong>. The clearest possible proof that win rate is not an edge.</p>
+    </div>
+    <div class="note adv">
+      <h3>Edge — margin above break-even</h3>
+      <p><code>Break-even = SL ÷ (SL + TP)</code></p>
+      <p>Almost everything here risks more than it targets, so the win rate carries the whole edge. Edge is how many points of win rate you can lose before EV reaches zero.</p>
+    </div>
+    <div class="note adv">
+      <h3>EV/Risk — capital efficiency</h3>
+      <p><code>EV ÷ SL</code></p>
+      <p>A 12-point EV on a 105-point stop and a 9-point EV on a 25-point stop are not comparable until you normalise. At equal dollar risk you trade four times the size on the tighter stop.</p>
+    </div>
+  </div>
+</section>
+
+<footer>
+  Backtested in Python on 1-minute MNQ data, first touch only, one trade per level per session. No commission or slippage applied; MNQ round-trip runs roughly $1 per contract. Trade counts fall as the offset widens and as the stop widens within the same entry, which suggests unresolved trades are dropped at the session boundary rather than force-closed — if so, wide-stop rows are flattered, because the dropped trades are the slow indecisive ones rather than a random sample. Historical behaviour, not a prediction.
+</footer>
+
+</div>
+
+<script>
+/* ══════════════════════════════════════════════════════════════
+   DATA — append a block to add a run.
+   rows: [offset, SL, TP, wins, total, EV_printed_in_source]
+   ══════════════════════════════════════════════════════════════ */
+const DATA=[
+/* ---------- ASIA ---------- */
+{s:'Asia',d:'Short',g:'Offset 0',rows:[[0,120,75,251,389,5.82],[0,100,75,239,396,5.62],[0,115,75,249,393,5.38],[0,120,80,241,385,5.19],[0,110,75,245,394,5.04]]},
+{s:'Asia',d:'Short',g:'SL 60–70, small TP',rows:[[31,70,10,344,364,5.60],[30,70,10,344,365,5.40],[28,70,10,343,364,5.38],[28,60,10,340,364,5.38],[28,70,15,321,363,5.17],[27,70,15,320,362,5.14],[13,70,15,347,393,5.05],[31,70,15,317,360,4.85]]},
+{s:'Asia',d:'Short',g:'Wide SL, big TP',rows:[[8,120,90,224,359,11.03],[6,120,80,243,371,11.00],[8,120,80,240,367,10.79],[10,120,85,230,361,10.61],[6,120,75,249,372,10.52]]},
+{s:'Asia',d:'Short',g:'Tight stop',rows:[[13,30,15,308,393,5.27],[31,30,15,280,363,4.71],[27,30,15,283,367,4.70],[12,30,15,304,395,4.63]]},
+{s:'Asia',d:'Long',g:'Offset 0',rows:[[0,115,70,250,376,8.01],[0,105,70,244,378,7.96],[0,120,70,251,373,7.86],[0,110,35,322,397,7.61],[0,105,35,320,398,7.56],[0,115,35,324,397,7.42]]},
+{s:'Asia',d:'Long',g:'SL 60–70, small TP',rows:[[29,70,20,310,343,11.34],[29,60,20,306,343,11.37],[30,70,20,307,341,11.03],[28,70,20,311,346,10.90],[29,60,15,324,343,10.85],[29,70,15,325,343,10.54],[28,60,15,325,346,10.45],[28,70,15,327,346,10.33]]},
+{s:'Asia',d:'Long',g:'Wide SL, small TP',rows:[[29,105,20,319,340,12.28],[29,100,20,318,340,12.24],[29,80,20,314,341,12.08],[29,85,20,315,341,11.99],[29,120,20,320,340,11.76]]},
+{s:'Asia',d:'Long',g:'Tight stop',rows:[[31,30,15,297,341,9.19],[29,30,15,291,343,8.18],[30,30,15,290,342,8.16],[29,40,20,288,343,10.38],[31,25,15,285,341,8.43]]},
+
+/* ---------- LONDON ---------- */
+{s:'London',d:'Short',g:'Small SL',rows:[[10,30,20,295,382,8.61],[10,30,15,320,382,7.70],[10,25,20,276,382,7.51],[10,15,20,246,383,7.48],[10,20,20,261,383,7.26],[20,25,20,263,357,8.15],[20,30,20,269,356,7.78],[20,20,20,247,357,7.68],[20,25,15,290,358,7.40],[20,30,15,296,358,7.21],[30,30,15,288,336,8.57],[30,20,15,273,337,8.35],[30,25,15,279,336,8.21],[30,15,15,261,338,8.17],[30,15,20,220,338,7.78]]},
+{s:'London',d:'Short',g:'Medium SL',rows:[[10,70,45,256,369,9.78],[10,40,45,220,376,9.73],[10,65,45,251,370,9.62],[10,70,40,270,373,9.62],[10,70,35,284,375,9.52],[20,70,40,254,343,11.46],[20,60,40,246,345,11.30],[20,65,40,248,343,10.92],[20,55,40,239,345,10.81],[20,70,35,266,346,10.72],[30,70,50,219,318,12.64],[30,65,50,212,318,11.67],[30,70,40,236,320,11.13],[30,70,45,224,318,11.01],[30,60,50,207,322,10.71]]},
+{s:'London',d:'Short',g:'Wide SL',rows:[[10,95,65,236,347,13.82],[10,120,65,241,334,13.49],[10,90,65,233,349,13.48],[10,115,65,239,336,13.04],[10,100,65,237,346,13.02]]},
+{s:'London',d:'Short',g:'SL 50 — TP sweep',rows:[[20,50,10,338,359,6.49],[20,50,15,319,357,8.08],[20,50,20,300,355,9.15],[20,50,25,278,352,9.23],[20,50,30,262,352,9.55],[20,50,35,245,349,9.67],[20,50,40,231,348,9.74],[20,50,45,213,347,8.31],[20,50,50,197,346,6.94],[20,50,55,183,343,6.02],[20,50,60,173,343,5.48],[30,50,10,314,336,6.07],[30,50,15,299,334,8.19],[30,50,20,272,333,7.18],[30,50,25,251,331,6.87],[30,50,30,240,330,8.18],[30,50,35,226,328,8.57],[30,50,40,216,326,9.63],[30,50,45,203,324,9.52],[30,50,50,196,324,10.49],[30,50,55,184,322,10.00],[30,50,60,168,320,7.75]]},
+{s:'London',d:'Short',g:'Offset 0',rows:[[0,105,35,304,374,8.80],[0,105,55,256,360,8.78],[0,100,55,254,362,8.76],[0,100,35,302,375,8.72],[0,110,35,305,373,8.57]]},
+{s:'London',d:'Long',g:'Small SL',rows:[[10,10,20,213,341,8.74],[10,5,20,187,341,8.71],[10,20,20,242,340,8.47],[10,15,20,227,341,8.30],[10,5,15,224,341,8.14],[20,5,15,217,328,8.23],[20,10,15,235,328,7.91],[20,15,15,249,328,7.77],[20,5,20,165,328,7.58],[20,20,15,257,328,7.42],[30,5,15,224,318,9.09],[30,10,15,240,318,8.87],[30,25,15,268,318,8.71],[30,5,20,173,317,8.64],[30,30,15,272,317,8.61]]},
+{s:'London',d:'Long',g:'Medium SL',rows:[[10,65,30,249,338,4.99],[10,65,25,263,339,4.82],[10,45,25,242,340,4.82],[10,60,25,258,339,4.69],[10,50,25,247,339,4.65],[20,70,25,261,324,6.53],[20,40,25,234,327,6.51],[20,35,25,226,327,6.47],[20,65,25,257,324,6.39],[20,40,30,215,326,6.17],[30,60,25,259,314,10.11],[30,55,25,255,314,9.97],[30,65,25,260,314,9.52],[30,70,25,261,313,9.22],[30,60,30,241,314,9.08]]},
+{s:'London',d:'Long',g:'SL 50 — TP sweep',rows:[[20,50,10,312,328,7.07],[20,50,15,290,328,7.47],[20,50,20,265,327,6.73],[20,50,25,244,327,5.96],[20,50,30,226,326,5.46],[20,50,35,209,325,4.66],[20,50,40,195,325,4.00],[20,50,45,181,325,2.91],[20,50,50,165,324,0.93],[20,50,55,153,322,-0.11],[20,50,60,144,322,-0.81],[30,50,10,310,318,8.49],[30,50,15,288,317,9.05],[30,50,20,268,316,9.37],[30,50,25,246,316,8.39],[30,50,30,225,316,6.96],[30,50,35,202,315,4.51],[30,50,40,191,315,4.57],[30,50,45,186,315,6.10],[30,50,50,175,315,5.56],[30,50,55,163,314,4.51],[30,50,60,148,310,2.52]]},
+{s:'London',d:'Long',g:'Offset 0',rows:[[0,20,15,289,359,8.18],[0,15,15,277,359,8.15],[0,10,15,259,359,8.04],[0,25,15,295,359,7.87],[0,5,15,234,359,8.04]]},
+
+/* ---------- PREMARKET ---------- */
+{s:'Premarket',d:'Short',g:'Offset 0',rows:[[0,45,15,356,400,8.40],[0,40,15,350,400,8.12],[0,50,15,356,400,7.85],[0,15,15,306,403,7.78],[0,10,15,286,403,7.74]]},
+{s:'Premarket',d:'Short',g:'Offset 10',rows:[[10,30,15,345,377,11.18],[10,45,15,352,377,11.02],[10,55,15,354,376,10.90],[10,60,15,355,376,10.81],[10,40,15,348,377,10.77],[10,35,15,345,377,10.76],[10,50,15,352,377,10.69]]},
+{s:'Premarket',d:'Short',g:'High win rate',rows:[[5,60,10,384,389,9.10],[8,60,10,377,382,9.08],[5,50,10,383,389,9.07],[5,55,10,383,389,9.00],[8,55,10,375,382,8.81],[5,40,10,382,389,9.10],[5,45,10,382,389,9.01]]},
+{s:'Premarket',d:'Short',g:'Offset 20',rows:[[20,35,25,261,349,9.87],[20,20,25,232,350,9.83],[20,30,20,278,350,9.71],[20,35,20,284,350,9.63],[20,20,20,259,350,9.60]]},
+{s:'Premarket',d:'Short',g:'Offset 30',rows:[[30,40,15,286,328,7.96],[30,25,15,271,329,7.95],[30,45,15,287,327,7.66],[30,20,15,260,330,7.58],[30,15,15,248,330,7.55]]},
+{s:'Premarket',d:'Long',g:'Offset 0',rows:[[0,50,15,362,392,10.03],[0,45,15,359,392,9.95],[0,25,15,343,393,9.91],[0,35,15,352,392,9.90],[0,15,15,326,393,9.89]]},
+{s:'Premarket',d:'Long',g:'Offset 10',rows:[[10,15,15,332,372,11.77],[10,20,15,337,372,11.71],[10,25,15,340,371,11.66],[10,15,20,283,372,11.63],[10,30,15,342,371,11.48]]},
+{s:'Premarket',d:'Long',g:'High win rate',rows:[[16,60,10,356,359,9.42],[11,55,10,364,368,9.29],[11,50,10,364,368,9.35],[11,60,10,364,368,9.24],[11,45,10,364,368,9.40],[11,40,10,364,368,9.46]]},
+{s:'Premarket',d:'Long',g:'Offset 20',rows:[[20,55,20,307,346,11.55],[20,60,15,331,347,11.54],[20,60,20,309,346,11.45],[20,10,20,248,347,11.44],[20,55,15,329,347,11.37]]},
+{s:'Premarket',d:'Long',g:'Offset 30',rows:[[30,25,20,271,328,12.18],[30,45,20,287,328,11.88],[30,30,20,274,328,11.77],[30,50,20,289,328,11.68],[30,60,20,293,327,11.68]]},
+
+/* ---------- NY AM ---------- */
+{s:'NY AM',d:'Short',g:'Offset 0',rows:[[0,40,20,162,217,4.79],[0,40,15,180,222,4.59],[0,45,15,183,222,4.46],[0,35,15,176,223,4.46],[0,45,20,164,216,4.35]]},
+{s:'NY AM',d:'Short',g:'Offset 10',rows:[[10,60,10,182,194,5.67],[10,25,10,173,198,5.58],[10,30,10,176,198,5.56],[10,20,10,170,200,5.50],[10,35,10,177,197,5.43]]},
+{s:'NY AM',d:'Short',g:'High win rate (off 16–24)',rows:[[24,60,10,154,159,7.80],[23,50,10,157,163,7.79],[23,60,10,157,163,7.42],[23,55,10,157,163,7.61],[24,50,10,153,159,7.74],[16,60,30,120,157,8.79],[16,60,25,132,165,8.00],[16,60,20,145,171,7.84]]},
+{s:'NY AM',d:'Short',g:'Offset 20',rows:[[20,55,35,103,151,6.39],[20,60,35,103,148,6.11],[20,55,30,112,156,6.03],[20,55,25,122,160,6.00],[20,55,10,164,176,5.57]]},
+{s:'NY AM',d:'Short',g:'Offset 30',rows:[[30,60,45,75,116,7.89],[30,60,40,80,119,7.23],[30,45,45,72,124,7.26],[30,60,55,63,108,7.08],[30,60,80,44,91,7.69]]},
+{s:'NY AM',d:'Long',g:'Offset 0',rows:[[0,60,10,175,178,8.82],[0,30,10,172,178,8.65],[0,40,10,173,178,8.60],[0,35,10,172,178,8.48],[0,45,10,173,178,8.46]]},
+{s:'NY AM',d:'Long',g:'Offset 5',rows:[[5,25,15,162,173,12.46],[5,20,15,160,173,12.37],[5,55,15,166,173,12.17],[5,30,15,162,173,12.14],[5,35,15,163,173,12.11],[5,60,15,166,173,11.97],[5,45,15,164,173,11.88],[5,40,15,163,173,11.82]]},
+{s:'NY AM',d:'Long',g:'Offset 10',rows:[[10,20,20,133,167,11.86],[10,25,20,136,167,11.65],[10,30,20,139,167,11.62],[10,15,20,127,168,11.46],[10,35,20,140,167,11.11]]},
+{s:'NY AM',d:'Long',g:'High win rate (off 4–20)',rows:[[16,60,10,155,156,9.55],[17,60,10,149,150,9.53],[4,55,10,172,174,9.25],[4,60,10,172,174,9.20],[14,60,10,159,161,9.13],[20,60,10,144,146,9.04]]},
+{s:'NY AM',d:'Long',g:'Offset 20',rows:[[20,15,15,119,145,9.62],[20,60,15,134,145,9.31],[20,20,15,121,145,9.21],[20,10,15,111,145,9.14],[20,15,30,77,141,9.57]]},
+{s:'NY AM',d:'Long',g:'Offset 30',rows:[[30,60,20,115,130,10.77],[30,60,25,107,129,10.50],[30,55,20,113,130,10.19],[30,50,20,112,131,9.85],[30,60,15,121,130,9.81]]},
+
+/* ---------- NY PM ---------- */
+{s:'NY PM',d:'Short',g:'Offset 0',rows:[[0,10,20,98,289,0.17],[0,10,35,65,289,0.12],[0,10,25,83,289,0.05],[0,10,30,72,289,-0.03],[0,10,10,142,289,-0.17]]},
+{s:'NY PM',d:'Short',g:'Offset 10',rows:[[10,10,10,133,276,-0.36],[10,10,20,85,275,-0.73],[10,10,15,99,275,-1.00],[10,10,25,68,275,-1.35],[10,10,30,58,275,-1.56]]},
+{s:'NY PM',d:'Short',g:'Offset 20',rows:[[20,10,10,140,262,0.69],[20,10,15,111,262,0.59],[20,10,20,85,262,-0.27],[20,10,25,72,262,-0.38],[20,10,30,62,261,-0.50]]},
+{s:'NY PM',d:'Short',g:'Offset 30',rows:[[30,10,10,156,253,2.33],[29,10,10,156,255,2.24],[28,10,10,152,257,1.83],[22,10,10,152,261,1.65],[30,10,85,32,253,2.02]]},
+{s:'NY PM',d:'Short',g:'High win rate',rows:[[30,60,10,194,252,-6.11],[29,60,10,195,254,-6.26],[29,55,10,193,254,-5.61],[29,50,10,192,254,-4.65],[30,55,10,190,252,-5.99]]},
+{s:'NY PM',d:'Long',g:'Offset 0',rows:[[0,10,10,150,252,1.90],[0,10,15,118,252,1.71],[0,10,20,96,252,1.43],[0,10,25,78,251,0.88],[0,15,10,155,252,0.38]]},
+{s:'NY PM',d:'Long',g:'Offset 10',rows:[[10,10,15,122,242,2.60],[10,10,20,100,241,2.45],[10,10,10,148,242,2.23],[10,10,25,81,241,1.76],[10,15,20,113,241,1.41]]},
+{s:'NY PM',d:'Long',g:'Offset 20',rows:[[20,10,15,133,230,4.46],[20,10,20,106,230,3.83],[20,10,10,153,230,3.30],[20,15,15,138,230,3.00],[20,60,85,96,222,2.70]]},
+{s:'NY PM',d:'Long',g:'Offset 21–23',rows:[[21,10,15,135,228,4.80],[21,10,20,112,228,4.74],[23,10,20,111,226,4.73],[22,10,15,132,227,4.54],[22,10,20,108,227,4.27]]},
+{s:'NY PM',d:'Long',g:'Offset 30',rows:[[30,50,90,83,213,4.55],[30,50,85,85,213,3.87],[30,50,80,88,213,3.71],[30,55,90,85,211,3.41],[30,10,10,141,219,2.88]]},
+];
+
+const SESSIONS=['Asia','London','Premarket','NY AM','NY PM'];
+
+/* Wilson score lower bound on a proportion */
+function wilsonLo(wins,n,z=1.96){
+  const p=wins/n, z2=z*z;
+  const d=1+z2/n;
+  const c=p+z2/(2*n);
+  const m=z*Math.sqrt(p*(1-p)/n + z2/(4*n*n));
+  return Math.max(0,(c-m)/d);
+}
+
+const ROWS=[];
+for(const blk of DATA) for(const r of blk.rows){
+  const [off,sl,tp,wins,total,srcEV]=r;
+  const wr=wins/total, ev=wr*tp-(1-wr)*sl, be=sl/(sl+tp);
+  const lo=wilsonLo(wins,total), evLo=lo*tp-(1-lo)*sl;
+  // expected maximum drawdown of the equity path, in points.
+  // Steps are +TP with prob wr, -SL otherwise, so variance per trade is known.
+  const varT=wr*(1-wr)*Math.pow(tp+sl,2), sd=Math.sqrt(varT);
+  const ddZero=1.2533*sd*Math.sqrt(total);          // driftless random walk
+  let dd;
+  if(ev>0){
+    const arg=2*ev*ev*total/varT;
+    const ddDrift=arg>1.5 ? (varT/(2*ev))*(Math.log(arg)+0.5772) : ddZero;
+    dd=Math.min(ddZero,Math.max(ddDrift,sl));        // never less than one full stop
+  } else {
+    dd=ddZero+Math.abs(ev)*total;                    // losing systems just bleed down
+  }
+  const retDD=ev>0 ? (ev*total)/dd : 0;
+  ROWS.push({s:blk.s,d:blk.d,g:blk.g,off,sl,tp,
+    wins,losses:total-wins,n:total,rr:tp/sl,wr:wr*100,
+    ev,evLo,usd:ev*2,edge:(wr-be)*100,eff:ev/sl*100,dd,retDD,
+    srcEV,delta:Math.abs(ev-srcEV),
+    risk: sl<=20?'high':(sl<=30||tp<=15)?'med':'low'});
+}
+
+const F=(v,n=2)=>v.toFixed(n).replace('-','\u2212');
+let detail=false;
+const COLS=[
+ {k:'s',t:'Session',f:r=>r.s},
+ {k:'g',t:'Group',f:r=>`<span class="dir ${r.d}">${r.d}</span> <span class="grp">· ${r.g}</span>`},
+ {k:'off',t:'Off',f:r=>r.off},
+ {k:'sl',t:'SL',f:r=>r.sl},
+ {k:'tp',t:'TP',f:r=>r.tp},
+ {k:'rr',t:'R:R',adv:1,f:r=>`<span class="dim">${F(r.rr)}</span>`},
+ {k:'wr',t:'Win %',f:r=>F(r.wr,1)},
+ {k:'losses',t:'Losses',adv:1,f:r=>`<span class="${r.losses<10?'neg':'dim'}">${r.losses}</span>`},
+ {k:'n',t:'Trades',f:r=>`<span class="${r.n<150?'neg':'dim'}">${r.n}</span>`},
+ {k:'ev',t:'EV pts',f:r=>{const w=Math.min(Math.abs(r.ev)*3.6,50);
+   return `<span class="bar ${r.ev<0?'n':''}" style="width:${w}px"></span><span class="${r.ev<0?'neg':'pos'}">${F(r.ev)}</span>`}},
+ {k:'evLo',t:'EV low',f:r=>`<span class="${r.evLo<0?'neg':'pos'}">${F(r.evLo)}</span>`},
+ {k:'usd',t:'EV $',adv:1,f:r=>`<span class="${r.usd<0?'neg':''}">${F(r.usd,1)}</span>`},
+ {k:'edge',t:'Edge pp',adv:1,f:r=>`<span class="${r.edge<0?'neg':''}">${F(r.edge,1)}</span>`},
+ {k:'eff',t:'EV/Risk %',adv:1,f:r=>F(r.eff,1)},
+ {k:'dd',t:'Est. max DD',adv:1,f:r=>`<span class="${r.dd>r.ev*r.n?'neg':''}">${F(r.dd,0)}</span>`},
+ {k:'retDD',t:'Ret/DD',adv:1,f:r=>r.retDD?`<span class="${r.retDD<2?'neg':'pos'}">${F(r.retDD,1)}</span>`:`<span class="neg">—</span>`},
+ {k:'risk',t:'Fill',adv:1,f:r=>`<span class="flag ${r.risk}">${{low:'ok',med:'check',high:'unreliable'}[r.risk]}</span>`},
+ {k:'delta',t:'Audit',adv:1,f:r=>r.delta<=0.15?`<span class="dim">✓</span>`:`<span class="neg">Δ${F(r.delta)}</span>`},
+];
+const cols=()=>COLS.filter(c=>detail||!c.adv);
+
+let sortK='evLo',sortD=-1,showUnreliable=false;
+const sel={s:new Set(SESSIONS),d:new Set(['Long','Short'])};
+
+function chips(host,key,vals,labels,cls){
+  host.innerHTML='';
+  vals.forEach((v,i)=>{
+    const b=document.createElement('button');
+    b.className='chip'+(cls?' '+v.toLowerCase():'');
+    b.textContent=labels[i];
+    b.setAttribute('aria-pressed',sel[key].has(v));
+    b.onclick=()=>{
+      sel[key].has(v)?sel[key].delete(v):sel[key].add(v);
+      if(!sel[key].size)sel[key].add(v);
+      [...host.children].forEach((c,j)=>c.setAttribute('aria-pressed',sel[key].has(vals[j])));
+      render();
+    };
+    host.appendChild(b);
+  });
+}
+function visible(){
+  return ROWS.filter(r=>sel.s.has(r.s)&&sel.d.has(r.d)&&(showUnreliable||r.risk!=='high'))
+    .sort((a,b)=>(a[sortK]>b[sortK]?1:a[sortK]<b[sortK]?-1:0)*sortD);
+}
+function render(){
+  const C=cols();
+  if(!C.some(c=>c.k===sortK)){sortK='evLo';sortD=-1;}
+  const thr=document.getElementById('thr');
+  thr.innerHTML=C.map(c=>`<th data-k="${c.k}" class="${c.k===sortK?'sorted':''}">${c.t}<span class="arw">${c.k===sortK?(sortD<0?'▼':'▲'):'▼'}</span></th>`).join('');
+  thr.querySelectorAll('th').forEach(th=>th.onclick=()=>{
+    const k=th.dataset.k;
+    if(k===sortK)sortD*=-1;else{sortK=k;sortD=-1;}
+    render();
+  });
+  const rows=visible();
+  document.getElementById('tbl').style.minWidth=(detail?1180:820)+'px';
+  document.getElementById('tb').innerHTML=rows.map(r=>'<tr>'+C.map(c=>`<td>${c.f(r)}</td>`).join('')+'</tr>').join('');
+  const hidden=showUnreliable?0:ROWS.filter(r=>r.risk==='high'&&sel.s.has(r.s)&&sel.d.has(r.d)).length;
+  const bad=rows.filter(r=>r.delta>0.15).length;
+  document.getElementById('count').innerHTML=`${rows.length} of ${ROWS.length} configurations shown`+
+    (hidden?` · <b class="warnc">${hidden} hidden</b> — stop too tight for 1-minute data to resolve honestly`:'')+
+    (detail?` · EV recomputed from raw counts: `+(bad?`<b class="warnc">${bad} mismatch${bad>1?'es':''}</b>`:`<b>all match the source sheet</b>`):'');
+}
+
+/* ---------- scoreboard ---------- */
+function drawScore(){
+  const W=900,H=340,L=54,R=16,T=20,B=52;
+  const pool=ROWS.filter(r=>r.risk!=='high');
+  const best={};
+  for(const s of SESSIONS) for(const d of ['Long','Short']){
+    const c=pool.filter(r=>r.s===s&&r.d===d);
+    best[s+d]=c.length?c.reduce((a,b)=>b.evLo>a.evLo?b:a):null;
+  }
+  const vals=Object.values(best).filter(Boolean);
+  const hi=Math.max(11,...vals.map(v=>Math.max(v.ev,v.evLo)));
+  const lo=Math.min(-6,...vals.map(v=>v.evLo));
+  const y=v=>T+(hi-v)/(hi-lo)*(H-T-B);
+  const bandW=(W-L-R)/SESSIONS.length;
+  let g='';
+  for(let v=Math.ceil(lo/2)*2;v<=hi;v+=2){
+    const yy=y(v),zero=v===0;
+    g+=`<line x1="${L}" x2="${W-R}" y1="${yy}" y2="${yy}" stroke="${zero?'#3a5069':'#1d2b3a'}" stroke-width="${zero?1.3:1}"/>`;
+    g+=`<text x="${L-9}" y="${yy+4}" text-anchor="end" fill="#5f7288" font-family="IBM Plex Mono,monospace" font-size="10">${v}</text>`;
+  }
+  const read=[];
+  SESSIONS.forEach((s,i)=>{
+    const x0=L+i*bandW;
+    g+=`<text x="${x0+bandW/2}" y="${H-B+22}" text-anchor="middle" fill="#e8eff7" font-family="IBM Plex Sans Condensed,sans-serif" font-size="13" font-weight="600">${s}</text>`;
+    ['Long','Short'].forEach((d,j)=>{
+      const r=best[s+d]; if(!r)return;
+      const col=d==='Long'?'#29A8F1':'#EC4899';
+      const bw=bandW*0.3, x=x0+bandW*0.14+j*(bw+bandW*0.12);
+      const yz=y(0),y1=y(r.ev),y2=y(r.evLo);
+      g+=`<rect x="${x}" y="${Math.min(yz,y1)}" width="${bw}" height="${Math.abs(y1-yz)}" fill="none" stroke="${col}" stroke-width="1" stroke-dasharray="3 3" opacity=".55"/>`;
+      g+=`<rect x="${x}" y="${Math.min(yz,y2)}" width="${bw}" height="${Math.abs(y2-yz)}" fill="${col}" opacity="${r.evLo<0?.5:.85}"/>`;
+      g+=`<text x="${x+bw/2}" y="${r.evLo<0?y2+14:y2-7}" text-anchor="middle" fill="${col}" font-family="IBM Plex Mono,monospace" font-size="11" font-weight="600">${F(r.evLo,1)}</text>`;
+      read.push(`<span style="color:${col}">■</span> <b>${s} ${d}</b> — ${r.sl}/${r.tp} @ off ${r.off} · ${F(r.wr,1)}% of ${r.n} · EV ${F(r.ev)} → <b>${F(r.evLo)} low</b>`);
+    });
+  });
+  g+=`<text x="14" y="${T+8}" fill="#93a8bf" font-family="IBM Plex Mono,monospace" font-size="10" letter-spacing="1.5" transform="rotate(-90 14 ${T+8})" text-anchor="end">EV (POINTS)</text>`;
+  document.getElementById('score').innerHTML=g;
+  document.getElementById('score-read').innerHTML=read.join('<br>');
+}
+
+/* ---------- sweeps, auto-detected ---------- */
+const DASH=['','5 4','2 3','9 3','1 3','6 2 2 2'];
+let mode='tp';                       // 'tp' = vary target, stop fixed; 'sl' = vary stop, target fixed
+let SERIES=[], shown=new Set();
+
+function detectSweeps(md){
+  const m=new Map();
+  for(const r of ROWS){
+    const k = md==='tp' ? `${r.s}|${r.d}|${r.off}|${r.sl}` : `${r.s}|${r.d}|${r.off}|${r.tp}`;
+    if(!m.has(k)) m.set(k,[]);
+    m.get(k).push(r);
+  }
+  const out=[];
+  for(const [k,v] of m){
+    const seen=new Set(), pts=[];
+    for(const r of v.sort((a,b)=>(md==='tp'?a.tp-b.tp:a.sl-b.sl))){
+      const xv = md==='tp'?r.tp:r.sl;
+      if(seen.has(xv)) continue;
+      seen.add(xv); pts.push(r);
+    }
+    if(pts.length<5) continue;
+    const [s,d,off,fixed]=k.split('|');
+    out.push({id:k,s,d,off:+off,fixed:+fixed,pts,
+      hex:d==='Long'?'#29A8F1':'#EC4899',
+      lab:`${s} ${d} · off ${off} · ${md==='tp'?'SL':'TP'} ${fixed}`});
+  }
+  out.sort((a,b)=>SESSIONS.indexOf(a.s)-SESSIONS.indexOf(b.s)||a.d.localeCompare(b.d)||a.off-b.off);
+  let li=0,si=0;
+  for(const o of out) o.dash = DASH[(o.d==='Long'?li++:si++)%DASH.length];
+  return out;
+}
+
+function drawChart(){
+  const W=860,H=380,L=54,R=18,T=18,B=48;
+  const vis=SERIES.filter(S=>shown.has(S.id));
+  const src=vis.length?vis:SERIES;
+  const xs=src.flatMap(S=>S.pts.map(p=>mode==='tp'?p.tp:p.sl));
+  const es=src.flatMap(S=>S.pts.map(p=>p.ev));
+  if(!xs.length){document.getElementById('chart').innerHTML='';document.getElementById('readout').textContent='No sweep runs in the data yet — add a run that holds the stop fixed and moves the target across five or more values.';return;}
+  const x0=Math.min(...xs), x1=Math.max(...xs);
+  const e1=Math.ceil(Math.max(...es,1)+1), e0=Math.floor(Math.min(...es,0)-1);
+  const X=v=>L+(x1===x0?0.5:(v-x0)/(x1-x0))*(W-L-R);
+  const Y=v=>T+(e1-v)/(e1-e0)*(H-T-B);
+  const step=(e1-e0)>18?4:2;
+  let g='',notes=[];
+  for(let ev=Math.ceil(e0/step)*step;ev<=e1;ev+=step){
+    const yy=Y(ev);
+    g+=`<line x1="${L}" x2="${W-R}" y1="${yy}" y2="${yy}" stroke="#1d2b3a"/>`;
+    g+=`<text x="${L-9}" y="${yy+4}" text-anchor="end" fill="#5f7288" font-family="IBM Plex Mono,monospace" font-size="10">${ev}</text>`;
+  }
+  if(e0<0&&e1>0) g+=`<line x1="${L}" x2="${W-R}" y1="${Y(0)}" y2="${Y(0)}" stroke="#3a5069" stroke-width="1.3"/>`;
+  const ticks=[...new Set(xs)].sort((a,b)=>a-b);
+  for(const t of ticks){
+    g+=`<line x1="${X(t)}" x2="${X(t)}" y1="${T}" y2="${H-B}" stroke="#1d2b3a"/>`;
+    g+=`<text x="${X(t)}" y="${H-B+20}" text-anchor="middle" fill="#5f7288" font-family="IBM Plex Mono,monospace" font-size="10">${t}</text>`;
+  }
+  g+=`<text x="${(L+W-R)/2}" y="${H-10}" text-anchor="middle" fill="#93a8bf" font-family="IBM Plex Mono,monospace" font-size="10" letter-spacing="1.5">${mode==='tp'?'TAKE PROFIT (POINTS) — STOP HELD FIXED':'STOP (POINTS) — TARGET HELD FIXED'}</text>`;
+  g+=`<text x="14" y="${T+8}" fill="#93a8bf" font-family="IBM Plex Mono,monospace" font-size="10" letter-spacing="1.5" transform="rotate(-90 14 ${T+8})" text-anchor="end">EV (POINTS)</text>`;
+  for(const S of SERIES){
+    const peak=S.pts.reduce((a,b)=>b.ev>a.ev?b:a);
+    const spread=Math.max(...S.pts.map(p=>p.ev))-Math.min(...S.pts.map(p=>p.ev));
+    notes.push(`<span style="color:${S.hex}">■</span> ${S.lab} — peak <b>${F(peak.ev)} at ${mode==='tp'?'TP':'SL'} ${mode==='tp'?peak.tp:peak.sl}</b>, range across sweep ${F(spread,1)} pts`);
+    if(!shown.has(S.id))continue;
+    const xv=p=>mode==='tp'?p.tp:p.sl;
+    g+=`<path d="${S.pts.map((p,i)=>`${i?'L':'M'}${X(xv(p)).toFixed(1)},${Y(p.ev).toFixed(1)}`).join(' ')}" fill="none" stroke="${S.hex}" stroke-width="2" stroke-dasharray="${S.dash}" stroke-linejoin="round"/>`;
+    for(const p of S.pts)g+=`<circle cx="${X(xv(p))}" cy="${Y(p.ev)}" r="${p===peak?4.5:2.6}" fill="${p===peak?S.hex:'#0d1620'}" stroke="${S.hex}" stroke-width="1.6"/>`;
+    g+=`<text x="${X(xv(peak))}" y="${Y(peak.ev)-11}" text-anchor="middle" fill="${S.hex}" font-family="IBM Plex Mono,monospace" font-size="10.5" font-weight="600">${F(peak.ev)}</text>`;
+  }
+  document.getElementById('chart').innerHTML=g;
+  document.getElementById('readout').innerHTML=notes.join('<br>');
+}
+
+function buildSweepUI(){
+  const mh=document.getElementById('f-mode');
+  mh.innerHTML='';
+  [['tp','vary target'],['sl','vary stop']].forEach(([v,lab])=>{
+    const b=document.createElement('button');
+    b.className='chip';b.textContent=lab;b.setAttribute('aria-pressed',mode===v);
+    b.onclick=()=>{mode=v;buildSweepUI();};
+    mh.appendChild(b);
+  });
+  SERIES=detectSweeps(mode);
+  shown=new Set(SERIES.slice(0,SERIES.length<=6?SERIES.length:4).map(s=>s.id));
+  const host=document.getElementById('legend');host.innerHTML='';
+  for(const S of SERIES){
+    const b=document.createElement('button');
+    const on=shown.has(S.id);
+    b.className='lgd'+(on?' on':'');b.setAttribute('aria-pressed',on);
+    const sw=S.dash?`background:repeating-linear-gradient(90deg,${S.hex} 0 5px,transparent 5px 9px)`:`background:${S.hex}`;
+    b.innerHTML=`<span class="swatch" style="${sw}"></span>${S.lab}`;
+    b.onclick=()=>{shown.has(S.id)?shown.delete(S.id):shown.add(S.id);
+      b.setAttribute('aria-pressed',shown.has(S.id));b.classList.toggle('on',shown.has(S.id));drawChart();};
+    host.appendChild(b);
+  }
+  drawChart();
+}
+
+document.getElementById('csv').onclick=()=>{
+  const head=['Session','Direction','Group','Offset','SL','TP','RR','Win%','Wins','Losses','Trades','EV_pts','EV_low_95','EV_usd','Edge_pp','EV_per_risk_%','Est_max_DD_pts','Return_over_DD','Fill_reliability'];
+  const body=visible().map(r=>[r.s,r.d,r.g,r.off,r.sl,r.tp,r.rr.toFixed(2),r.wr.toFixed(1),r.wins,r.losses,r.n,
+    r.ev.toFixed(2),r.evLo.toFixed(2),r.usd.toFixed(1),r.edge.toFixed(1),r.eff.toFixed(1),
+    r.dd.toFixed(0),r.retDD?r.retDD.toFixed(2):'',r.risk]);
+  const csv=[head,...body].map(l=>l.map(c=>/[",]/.test(String(c))?`"${c}"`:c).join(',')).join('\n');
+  const a=document.createElement('a');
+  a.href=URL.createObjectURL(new Blob([csv],{type:'text/csv'}));
+  a.download='q-sts-backtest.csv';a.click();URL.revokeObjectURL(a.href);
+};
+document.getElementById('reset').onclick=()=>{
+  sel.s=new Set(SESSIONS);sel.d=new Set(['Long','Short']);showUnreliable=false;
+  init();render();
+};
+function init(){
+  chips(document.getElementById('f-session'),'s',SESSIONS,SESSIONS,false);
+  chips(document.getElementById('f-dir'),'d',['Long','Short'],['Long','Short'],true);
+  const rh=document.getElementById('f-risk');
+  rh.innerHTML='';
+  const rb=document.createElement('button');
+  rb.className='chip';rb.textContent='show unreliable fills';
+  rb.setAttribute('aria-pressed',showUnreliable);
+  rb.onclick=()=>{showUnreliable=!showUnreliable;rb.setAttribute('aria-pressed',showUnreliable);render();};
+  rh.appendChild(rb);
+  const dh=document.getElementById('f-detail');
+  dh.innerHTML='';
+  [['essential',false],['full detail',true]].forEach(([lab,v])=>{
+    const b=document.createElement('button');
+    b.className='chip';b.textContent=lab;b.setAttribute('aria-pressed',detail===v);
+    b.onclick=()=>{detail=v;document.body.classList.toggle('simple',!detail);
+      [...dh.children].forEach((c,j)=>c.setAttribute('aria-pressed',detail===(j===1)));render();};
+    dh.appendChild(b);
+  });
+}
+document.body.classList.add('simple');
+document.getElementById('m-configs').textContent=ROWS.length;
+init();buildSweepUI();drawScore();render();
+</script>
+</body>
+</html>
