@@ -153,7 +153,7 @@
 <body>
     <div class="sale-banner" id="ltBanner">
         <a href="#cards" onclick="setPricing('lifetime')">
-            🔥 <strong>Lifetime Sale</strong> — 25% off Pro Suite Lifetime · Ends in
+            🔥 <strong>Lifetime Sale</strong> — 20% off Pro Suite Lifetime · Ends in
             <span class="lt-d">00</span>d <span class="lt-h">00</span>h <span class="lt-m">00</span>m <span class="lt-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
@@ -237,7 +237,7 @@
                     <button class="toggle-btn toggle-btn-lifetime" id="btn-lifetime" onclick="setPricing('lifetime')">Lifetime</button>
                 </div>
                 <div class="promo promo-sale" id="promo">
-                    <span><span class="tag">Sale</span> 25% off Lifetime</span>
+                    <span><span class="tag">Sale</span> 20% off Lifetime</span>
                     <span class="cd">Ends in <span class="lt-d">00</span>d <span class="lt-h">00</span>h <span class="lt-m">00</span>m <span class="lt-s">00</span>s</span>
                 </div>
                 <div class="price"><span class="orig" id="orig">$59</span><span class="amt" id="amt">$44</span><span class="per" id="per">/mo</span><p class="price-sub" id="sub">$531 billed annually — was $708 · ~$1.45/day</p></div>
@@ -300,7 +300,7 @@
         const SUITE_LIFETIME = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/76fcac28-443c-49db-b0f7-4aaf882415b7';
         const SALE_END = new Date('2026-07-08T00:00:00');
         const saleActive = () => new Date() < SALE_END;
-        const LIFETIME_SALE_END = new Date('2026-08-03T00:00:00');
+        const LIFETIME_SALE_END = new Date('2026-08-25T00:00:00');
         const lifetimeSaleActive = () => new Date() < LIFETIME_SALE_END;
         function setPricing(plan) {
             const amt = document.getElementById('amt'), orig = document.getElementById('orig'), per = document.getElementById('per'),
@@ -317,7 +317,7 @@
                 document.getElementById('btn-lifetime').classList.add('active');
                 per.textContent = ' one-time'; cta.href = SUITE_LIFETIME;
                 if (lifetimeSaleActive()) {
-                    amt.textContent = '$599.25'; orig.textContent = '$799'; orig.style.display = 'inline';
+                    amt.textContent = '$639.20'; orig.textContent = '$799'; orig.style.display = 'inline';
                     sub.textContent = 'One payment. Lifetime access.'; promo.style.display = 'flex';
                 } else {
                     amt.textContent = '$799'; orig.style.display = 'none';
