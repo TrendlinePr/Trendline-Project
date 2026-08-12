@@ -14,12 +14,12 @@
     <meta property="og:url" content="https://trendlineproject.com/">
     <meta property="og:title" content="Quantum Pro Suite - TradingView Tools for Futures, Prop Firms & Trend Trading">
     <meta property="og:description" content="Two systems, one for each kind of trader. Pick your side — or get everything for the best value.">
-    <meta property="og:image" content="https://trendlineproject.com/chart-showcase.png">
+    <meta property="og:image" content="https://trendlineproject.com/og-homepage.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:url" content="https://trendlineproject.com/">
     <meta name="twitter:title" content="Quantum Pro Suite - TradingView Tools for Futures, Prop Firms & Trend Trading">
     <meta name="twitter:description" content="Two systems, one for each kind of trader. Pick your side — or get everything for the best value.">
-    <meta name="twitter:image" content="https://trendlineproject.com/chart-showcase.png">
+    <meta name="twitter:image" content="https://trendlineproject.com/og-homepage.png">
     <link rel="icon" type="image/x-icon" href="favicon.ico">
     <link rel="icon" type="image/png" sizes="16x16" href="favicon-16x16.png">
     <link rel="icon" type="image/png" sizes="32x32" href="favicon-32x32.png">
@@ -306,7 +306,7 @@
 <body>
     <div class="sale-banner" id="saleBanner">
         <a href="pricing/#lifetime">
-            🔥 <strong>Lifetime Sale</strong> — 25% off Pro Suite Lifetime · Ends in
+            🔥 <strong>Lifetime Sale</strong> — 20% off Pro Suite Lifetime · Ends in
             <span class="lt-d">00</span>d <span class="lt-h">00</span>h <span class="lt-m">00</span>m <span class="lt-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
@@ -404,12 +404,12 @@
     <!-- ===== SUITE SLIM CTA ===== -->
     <section class="suite-slim-section" id="pricing">
         <div class="container">
-            <a href="pricing/" class="suite-slim" data-reveal>
+            <a href="pricing/#lifetime" class="suite-slim" data-reveal>
                 <div class="suite-slim-left">
                     <span class="bv-badge">★ Best Value</span>
-                    <span class="bv-badge" id="suiteSaleBadge" style="background: linear-gradient(120deg, #29A8F1, #EC4899); color: #0B0E13; border: none;">25% OFF LIFETIME</span>
+                    <span class="bv-badge" id="suiteSaleBadge" style="background: linear-gradient(120deg, #29A8F1, #EC4899); color: #0B0E13; border: none;">20% OFF LIFETIME</span>
                     <h2 class="suite-slim-h">Want it all? Get the full Pro Suite.</h2>
-                    <p class="suite-slim-sub" id="suiteSaleSub">All six tools — both systems, one price. Save over buying each separately — plus 25% off Lifetime access right now.</p>
+                    <p class="suite-slim-sub" id="suiteSaleSub">All six tools — both systems, one price. Save over buying each separately — plus 20% off Lifetime access right now.</p>
                 </div>
                 <span class="suite-slim-btn">Get Pro Suite</span>
             </a>
@@ -578,7 +578,7 @@
             document.querySelectorAll('.diag-side').forEach(function(card) { card.addEventListener('click', function() { gtag('event', 'path_click', { 'event_category': 'navigation', 'event_label': card.getAttribute('href') }); }); });
         });
         (function() {
-            const LIFETIME_SALE_END = new Date('2026-08-03T00:00:00');
+            const LIFETIME_SALE_END = new Date('2026-08-25T00:00:00');
             function tick() {
                 const diff = LIFETIME_SALE_END - new Date();
                 const banner = document.getElementById('saleBanner');
