@@ -305,9 +305,9 @@
 </head>
 <body>
     <div class="sale-banner" id="saleBanner">
-        <a href="pricing/#lifetime">
-            🔥 <strong>Lifetime Sale</strong> — 20% off Pro Suite Lifetime · Ends in
-            <span class="lt-d">00</span>d <span class="lt-h">00</span>h <span class="lt-m">00</span>m <span class="lt-s">00</span>s
+        <a href="pricing/">
+            🏷️ <strong>Labour Day Sale</strong> — 33% off everything · Ends in
+            <span class="ld-d">00</span>d <span class="ld-h">00</span>h <span class="ld-m">00</span>m <span class="ld-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
     </div>
@@ -404,12 +404,12 @@
     <!-- ===== SUITE SLIM CTA ===== -->
     <section class="suite-slim-section" id="pricing">
         <div class="container">
-            <a href="pricing/#lifetime" class="suite-slim" data-reveal>
+            <a href="pricing/" class="suite-slim" data-reveal>
                 <div class="suite-slim-left">
                     <span class="bv-badge">★ Best Value</span>
-                    <span class="bv-badge" id="suiteSaleBadge" style="background: linear-gradient(120deg, #29A8F1, #EC4899); color: #0B0E13; border: none;">20% OFF LIFETIME</span>
+                    <span class="bv-badge" id="suiteSaleBadge" style="background: linear-gradient(120deg, #29A8F1, #EC4899); color: #0B0E13; border: none;">33% OFF · LABOUR DAY</span>
                     <h2 class="suite-slim-h">Want it all? Get the full Pro Suite.</h2>
-                    <p class="suite-slim-sub" id="suiteSaleSub">All six tools — both systems, one price. Save over buying each separately — plus 20% off Lifetime access right now.</p>
+                    <p class="suite-slim-sub" id="suiteSaleSub">All six tools — both systems, one price. Save over buying each separately — plus 33% off everything for Labour Day.</p>
                 </div>
                 <span class="suite-slim-btn">Get Pro Suite</span>
             </a>
@@ -578,27 +578,33 @@
             document.querySelectorAll('.diag-side').forEach(function(card) { card.addEventListener('click', function() { gtag('event', 'path_click', { 'event_category': 'navigation', 'event_label': card.getAttribute('href') }); }); });
         });
         (function() {
-            const LIFETIME_SALE_END = new Date('2026-08-25T00:00:00');
+            const SALE_START = new Date('2026-09-04T00:00:00');
+            const SALE_END = new Date('2026-09-09T00:00:00');
+            const badge = document.getElementById('suiteSaleBadge');
+            const sub = document.getElementById('suiteSaleSub');
+            const normalSub = 'All six tools — both systems, one price. Save over buying each separately.';
             function tick() {
-                const diff = LIFETIME_SALE_END - new Date();
+                const now = new Date();
                 const banner = document.getElementById('saleBanner');
-                if (diff <= 0) {
+                if (now < SALE_START || now >= SALE_END) {
                     if (banner) banner.style.display = 'none';
-                    const badge = document.getElementById('suiteSaleBadge');
                     if (badge) badge.style.display = 'none';
-                    const sub = document.getElementById('suiteSaleSub');
-                    if (sub) sub.textContent = 'All six tools — both systems, one price. Save over buying each separately.';
+                    if (sub) sub.textContent = normalSub;
                     document.documentElement.style.setProperty('--banner-h', '0px');
                     return;
                 }
+                if (banner) banner.style.display = 'flex';
+                if (badge) badge.style.display = 'inline-flex';
+                document.documentElement.style.setProperty('--banner-h', '44px');
+                const diff = SALE_END - now;
                 const d = String(Math.floor(diff / 86400000)).padStart(2, '0');
                 const h = String(Math.floor((diff % 86400000) / 3600000)).padStart(2, '0');
                 const m = String(Math.floor((diff % 3600000) / 60000)).padStart(2, '0');
                 const s = String(Math.floor((diff % 60000) / 1000)).padStart(2, '0');
-                document.querySelectorAll('.lt-d').forEach(e => e.textContent = d);
-                document.querySelectorAll('.lt-h').forEach(e => e.textContent = h);
-                document.querySelectorAll('.lt-m').forEach(e => e.textContent = m);
-                document.querySelectorAll('.lt-s').forEach(e => e.textContent = s);
+                document.querySelectorAll('.ld-d').forEach(e => e.textContent = d);
+                document.querySelectorAll('.ld-h').forEach(e => e.textContent = h);
+                document.querySelectorAll('.ld-m').forEach(e => e.textContent = m);
+                document.querySelectorAll('.ld-s').forEach(e => e.textContent = s);
             }
             tick(); setInterval(tick, 1000);
         })();
