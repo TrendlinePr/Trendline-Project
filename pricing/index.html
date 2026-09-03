@@ -37,6 +37,11 @@
         .sale-banner .sale-arrow { transition: transform 0.2s; }
         .sale-banner a:hover .sale-arrow { transform: translateX(3px); }
         @media (max-width: 560px) { :root { --banner-h: 64px; } .sale-banner a { font-size: 0.75rem; line-height: 1.4; } }
+        .promo-code { display: inline-flex; align-items: center; gap: 5px; background: rgba(11,14,19,0.35); border: 1px solid rgba(11,14,19,0.4); border-radius: 6px; padding: 2px 9px; font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; cursor: pointer; transition: background 0.2s; }
+        .promo-code:hover { background: rgba(11,14,19,0.5); }
+        .promo-code .copy-icon { font-size: 0.85em; opacity: 0.8; }
+        .card-code { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 2px 9px; font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; color: var(--text); cursor: pointer; transition: background 0.2s; font-size: 0.8rem; }
+        .card-code:hover { background: rgba(255,255,255,0.12); }
         body {
             font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
             background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(41,168,241,0.10) 0%, transparent 60%), linear-gradient(180deg, #131A24 0%, #0A0C10 45%, #0D1117 100%);
@@ -153,7 +158,7 @@
 <body>
     <div class="sale-banner" id="saleBanner">
         <a href="#cards">
-            🏷️ <strong>Labour Day Sale</strong> — 33% off everything · Ends in
+            🏷️ <strong>Labour Day Sale</strong> — 33% off everything · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LABOURDAY33</span> · Ends in
             <span class="ld-d">00</span>d <span class="ld-h">00</span>h <span class="ld-m">00</span>m <span class="ld-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
@@ -189,7 +194,7 @@
                 <h2>Quantum STS</h2>
                 <p class="card-desc">For futures &amp; prop firm traders. Session levels and the Opening Range Breakout.</p>
                 <div class="promo promo-sale">
-                    <span><span class="tag">Sale</span> 33% off — Labour Day</span>
+                    <span><span class="tag">Sale</span> 33% off — Labour Day</span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LABOURDAY33</span>
                 </div>
                 <div class="price"><span class="orig" id="orig-fut">$56</span><span class="amt" id="amt-fut">$56</span><span class="per">/mo</span><p class="price-sub" id="sub-fut">~$1.87/day · billed monthly · cancel anytime</p></div>
                 <ul class="features">
@@ -209,7 +214,7 @@
                 <h2>Quantum Ribbon Pro</h2>
                 <p class="card-desc">For trend traders. Backtest, Scan, Trade — one connected system.</p>
                 <div class="promo promo-sale">
-                    <span><span class="tag">Sale</span> 33% off — Labour Day</span>
+                    <span><span class="tag">Sale</span> 33% off — Labour Day</span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LABOURDAY33</span>
                 </div>
                 <div class="price"><span class="orig" id="orig-trd">$88</span><span class="amt" id="amt-trd">$88</span><span class="per">/mo</span><p class="price-sub" id="sub-trd">~$2.93/day · billed monthly · cancel anytime</p></div>
                 <ul class="features">
@@ -237,7 +242,7 @@
                     <button class="toggle-btn toggle-btn-lifetime" id="btn-lifetime" onclick="setPricing('lifetime')">Lifetime</button>
                 </div>
                 <div class="promo promo-sale" id="promo">
-                    <span><span class="tag">Sale</span> 33% off — Labour Day</span>
+                    <span><span class="tag">Sale</span> 33% off — Labour Day</span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LABOURDAY33</span>
                 </div>
                 <div class="price"><span class="orig" id="orig">$59</span><span class="amt" id="amt">$44</span><span class="per" id="per">/mo</span><p class="price-sub" id="sub">$531 billed annually — was $708 · ~$1.45/day</p></div>
                 <ul class="features">
@@ -362,6 +367,13 @@
                 if (!open) item.classList.add('active');
             });
         });
+        function copyCode(btn) {
+            navigator.clipboard.writeText('LABOURDAY33').then(() => {
+                const original = btn.innerHTML;
+                btn.innerHTML = '✓ Copied!';
+                setTimeout(() => { btn.innerHTML = original; }, 1500);
+            });
+        }
         (function(){
             function tick(){
                 const now = new Date();
