@@ -85,11 +85,13 @@
         .sale-banner .sale-arrow { transition: transform 0.2s; }
         .sale-banner a:hover .sale-arrow { transform: translateX(3px); }
         @media (max-width: 560px) { :root { --banner-h: 64px; } .sale-banner a { font-size: 0.75rem; line-height: 1.4; } }
-        .promo-code { display: inline-flex; align-items: center; gap: 5px; background: rgba(11,14,19,0.35); border: 1px solid rgba(11,14,19,0.4); border-radius: 6px; padding: 2px 9px; font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; cursor: pointer; transition: background 0.2s; }
-        .promo-code:hover { background: rgba(11,14,19,0.5); }
+        .promo-code { position: relative; display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.55); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: none; border-radius: 6px; padding: 2px 9px; font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; color: #0B0E13; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+        .promo-code::before { content: ''; position: absolute; inset: 0; border-radius: 6px; padding: 1.5px; background: linear-gradient(120deg,#EC4899,#29A8F1); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+        .promo-code:hover { background: rgba(255,255,255,0.75); transform: translateY(-1px); }
         .promo-code .copy-icon { font-size: 0.85em; opacity: 0.8; }
-        .card-code { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 2px 9px; font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; color: var(--text); cursor: pointer; transition: background 0.2s; font-size: 0.8rem; }
-        .card-code:hover { background: rgba(255,255,255,0.12); }
+        .card-code { position: relative; display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.55); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: none; border-radius: 6px; padding: 2px 9px; font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; color: #0B0E13; cursor: pointer; transition: background 0.2s, transform 0.15s; font-size: 0.8rem; }
+        .card-code::before { content: ''; position: absolute; inset: 0; border-radius: 6px; padding: 1.5px; background: linear-gradient(120deg,#EC4899,#29A8F1); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+        .card-code:hover { background: rgba(255,255,255,0.75); transform: translateY(-1px); }
         nav { padding: 20px 0; position: fixed; top: var(--banner-h); left: 0; right: 0; background: transparent; z-index: 1000; transition: background 0.3s ease, backdrop-filter 0.3s ease, top 0.3s ease; }
         nav.scrolled { background: rgba(13, 17, 23, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
         .nav-content { display: flex; justify-content: space-between; align-items: center; }
@@ -310,8 +312,8 @@
 </head>
 <body>
     <div class="sale-banner" id="saleBanner">
-        <a href="pricing/">
-            🏷️ <strong>Labour Day Sale</strong> — 33% off everything · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LABOURDAY33</span> · Ends in
+        <a href="pricing/#lifetime">
+            🔥 <strong>Lifetime Sale</strong> — 25% off Pro Suite Lifetime · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LIFETIME25</span> · Ends in
             <span class="ld-d">00</span>d <span class="ld-h">00</span>h <span class="ld-m">00</span>m <span class="ld-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
@@ -409,12 +411,12 @@
     <!-- ===== SUITE SLIM CTA ===== -->
     <section class="suite-slim-section" id="pricing">
         <div class="container">
-            <a href="pricing/" class="suite-slim" data-reveal>
+            <a href="pricing/#lifetime" class="suite-slim" data-reveal>
                 <div class="suite-slim-left">
                     <span class="bv-badge">★ Best Value</span>
-                    <span class="bv-badge" id="suiteSaleBadge" style="background: linear-gradient(120deg, #29A8F1, #EC4899); color: #0B0E13; border: none;">33% OFF · LABOUR DAY</span>
+                    <span class="bv-badge" id="suiteSaleBadge" style="background: linear-gradient(120deg, #29A8F1, #EC4899); color: #0B0E13; border: none;">25% OFF LIFETIME</span>
                     <h2 class="suite-slim-h">Want it all? Get the full Pro Suite.</h2>
-                    <p class="suite-slim-sub" id="suiteSaleSub">All six tools — both systems, one price. Save over buying each separately — plus 33% off everything for Labour Day.</p>
+                    <p class="suite-slim-sub" id="suiteSaleSub">All six tools — both systems, one price. Save over buying each separately — plus 25% off Lifetime access right now.</p>
                 </div>
                 <span class="suite-slim-btn">Get Pro Suite</span>
             </a>
@@ -583,22 +585,21 @@
             document.querySelectorAll('.diag-side').forEach(function(card) { card.addEventListener('click', function() { gtag('event', 'path_click', { 'event_category': 'navigation', 'event_label': card.getAttribute('href') }); }); });
         });
         function copyCode(btn) {
-            navigator.clipboard.writeText('LABOURDAY33').then(() => {
+            navigator.clipboard.writeText('LIFETIME25').then(() => {
                 const original = btn.innerHTML;
                 btn.innerHTML = '✓ Copied!';
                 setTimeout(() => { btn.innerHTML = original; }, 1500);
             });
         }
         (function() {
-            const SALE_START = new Date('2026-09-04T00:00:00');
-            const SALE_END = new Date('2026-09-09T00:00:00');
+            const SALE_END = new Date('2026-10-03T00:00:00');
             const badge = document.getElementById('suiteSaleBadge');
             const sub = document.getElementById('suiteSaleSub');
             const normalSub = 'All six tools — both systems, one price. Save over buying each separately.';
             function tick() {
                 const now = new Date();
                 const banner = document.getElementById('saleBanner');
-                if (now < SALE_START || now >= SALE_END) {
+                if (now >= SALE_END) {
                     if (banner) banner.style.display = 'none';
                     if (badge) badge.style.display = 'none';
                     if (sub) sub.textContent = normalSub;
