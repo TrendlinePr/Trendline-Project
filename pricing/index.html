@@ -37,11 +37,13 @@
         .sale-banner .sale-arrow { transition: transform 0.2s; }
         .sale-banner a:hover .sale-arrow { transform: translateX(3px); }
         @media (max-width: 560px) { :root { --banner-h: 64px; } .sale-banner a { font-size: 0.75rem; line-height: 1.4; } }
-        .promo-code { display: inline-flex; align-items: center; gap: 5px; background: rgba(11,14,19,0.35); border: 1px solid rgba(11,14,19,0.4); border-radius: 6px; padding: 2px 9px; font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; cursor: pointer; transition: background 0.2s; }
-        .promo-code:hover { background: rgba(11,14,19,0.5); }
+        .promo-code { position: relative; display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.55); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: none; border-radius: 6px; padding: 2px 9px; font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; color: #0B0E13; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+        .promo-code::before { content: ''; position: absolute; inset: 0; border-radius: 6px; padding: 1.5px; background: linear-gradient(120deg,#EC4899,#29A8F1); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+        .promo-code:hover { background: rgba(255,255,255,0.75); transform: translateY(-1px); }
         .promo-code .copy-icon { font-size: 0.85em; opacity: 0.8; }
-        .card-code { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 2px 9px; font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; color: var(--text); cursor: pointer; transition: background 0.2s; font-size: 0.8rem; }
-        .card-code:hover { background: rgba(255,255,255,0.12); }
+        .card-code { position: relative; display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.55); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: none; border-radius: 6px; padding: 2px 9px; font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; color: #0B0E13; cursor: pointer; transition: background 0.2s, transform 0.15s; font-size: 0.8rem; }
+        .card-code::before { content: ''; position: absolute; inset: 0; border-radius: 6px; padding: 1.5px; background: linear-gradient(120deg,#EC4899,#29A8F1); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+        .card-code:hover { background: rgba(255,255,255,0.75); transform: translateY(-1px); }
         body {
             font-family: 'Geist', -apple-system, BlinkMacSystemFont, 'Inter', 'Segoe UI', sans-serif;
             background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(41,168,241,0.10) 0%, transparent 60%), linear-gradient(180deg, #131A24 0%, #0A0C10 45%, #0D1117 100%);
@@ -157,8 +159,8 @@
 </head>
 <body>
     <div class="sale-banner" id="saleBanner">
-        <a href="#cards">
-            🏷️ <strong>Labour Day Sale</strong> — 33% off everything · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LABOURDAY33</span> · Ends in
+        <a href="#cards" onclick="setPricing('lifetime')">
+            🔥 <strong>Lifetime Sale</strong> — 25% off Pro Suite Lifetime · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LIFETIME25</span> · Ends in
             <span class="ld-d">00</span>d <span class="ld-h">00</span>h <span class="ld-m">00</span>m <span class="ld-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
@@ -193,10 +195,7 @@
                 <div class="card-kicker"><svg class="ico" viewBox="0 0 24 24" fill="none"><line x1="5" y1="3" x2="5" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="3" x2="19" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="9" y="9" width="2.4" height="7" rx="0.6" fill="currentColor"/><rect x="13" y="6" width="2.4" height="9" rx="0.6" fill="currentColor"/></svg> Session Trading</div>
                 <h2>Quantum STS</h2>
                 <p class="card-desc">For futures &amp; prop firm traders. Session levels and the Opening Range Breakout.</p>
-                <div class="promo promo-sale">
-                    <span><span class="tag">Sale</span> 33% off — Labour Day</span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LABOURDAY33</span>
-                </div>
-                <div class="price"><span class="orig" id="orig-fut">$56</span><span class="amt" id="amt-fut">$56</span><span class="per">/mo</span><p class="price-sub" id="sub-fut">~$1.87/day · billed monthly · cancel anytime</p></div>
+                <div class="price"><span class="amt">$56</span><span class="per">/mo</span><p class="price-sub">~$1.87/day · billed monthly · cancel anytime</p></div>
                 <ul class="features">
                     <li><span class="ck">✓</span> Quantum STS indicator</li>
                     <li><span class="ck">✓</span> Q-STS Backtester</li>
@@ -213,10 +212,7 @@
                 <div class="card-kicker"><svg class="ico" viewBox="0 0 24 24" fill="none"><polyline points="3,17 9,11 13,14 21,5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Trend Trading</div>
                 <h2>Quantum Ribbon Pro</h2>
                 <p class="card-desc">For trend traders. Backtest, Scan, Trade — one connected system.</p>
-                <div class="promo promo-sale">
-                    <span><span class="tag">Sale</span> 33% off — Labour Day</span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LABOURDAY33</span>
-                </div>
-                <div class="price"><span class="orig" id="orig-trd">$88</span><span class="amt" id="amt-trd">$88</span><span class="per">/mo</span><p class="price-sub" id="sub-trd">~$2.93/day · billed monthly · cancel anytime</p></div>
+                <div class="price"><span class="amt">$88</span><span class="per">/mo</span><p class="price-sub">~$2.93/day · billed monthly · cancel anytime</p></div>
                 <ul class="features">
                     <li><span class="ck">✓</span> Quantum Ribbon Pro</li>
                     <li><span class="ck">✓</span> QR Pro Backtester</li>
@@ -242,7 +238,7 @@
                     <button class="toggle-btn toggle-btn-lifetime" id="btn-lifetime" onclick="setPricing('lifetime')">Lifetime</button>
                 </div>
                 <div class="promo promo-sale" id="promo">
-                    <span><span class="tag">Sale</span> 33% off — Labour Day</span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LABOURDAY33</span>
+                    <span><span class="tag">Sale</span> 25% off Lifetime</span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LIFETIME25</span>
                 </div>
                 <div class="price"><span class="orig" id="orig">$59</span><span class="amt" id="amt">$44</span><span class="per" id="per">/mo</span><p class="price-sub" id="sub">$531 billed annually — was $708 · ~$1.45/day</p></div>
                 <ul class="features">
@@ -302,29 +298,23 @@
         const SUITE_MONTHLY = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/f4f477ca-9352-4dea-95b6-475bd3938744';
         const SUITE_ANNUAL = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/910d7802-ed89-4def-b04a-a1c0b9a7739c';
         const SUITE_LIFETIME = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/76fcac28-443c-49db-b0f7-4aaf882415b7';
-        const SALE_START = new Date('2026-09-04T00:00:00');
-        const SALE_END = new Date('2026-09-09T00:00:00');
-        const saleActive = () => { const n = new Date(); return n >= SALE_START && n < SALE_END; };
+        const SALE_END = new Date('2026-10-03T00:00:00');
+        const saleActive = () => new Date() < SALE_END;
         function setPricing(plan) {
             const amt = document.getElementById('amt'), orig = document.getElementById('orig'), per = document.getElementById('per'),
                   sub = document.getElementById('sub'), cta = document.getElementById('suite-cta'), promo = document.getElementById('promo');
             ['btn-monthly','btn-annual','btn-lifetime'].forEach(id => document.getElementById(id).classList.remove('active'));
-            const active = saleActive();
             if (plan === 'monthly') {
                 document.getElementById('btn-monthly').classList.add('active');
                 per.textContent = '/mo'; cta.href = SUITE_MONTHLY;
-                if (active) {
-                    amt.textContent = '$72.36'; orig.textContent = '$108'; orig.style.display = 'inline';
-                    sub.textContent = '~$2.41/day · billed monthly · cancel anytime'; promo.style.display = 'flex';
-                } else {
-                    amt.textContent = '$108'; orig.style.display = 'none';
-                    sub.textContent = '~$3.60/day · billed monthly · cancel anytime'; promo.style.display = 'none';
-                }
+                promo.style.display = 'none';
+                amt.textContent = '$108'; orig.style.display = 'none';
+                sub.textContent = '~$3.60/day · billed monthly · cancel anytime';
             } else if (plan === 'lifetime') {
                 document.getElementById('btn-lifetime').classList.add('active');
                 per.textContent = ' one-time'; cta.href = SUITE_LIFETIME;
-                if (active) {
-                    amt.textContent = '$535.33'; orig.textContent = '$799'; orig.style.display = 'inline';
+                if (saleActive()) {
+                    amt.textContent = '$599.25'; orig.textContent = '$799'; orig.style.display = 'inline';
                     sub.textContent = 'One payment. Lifetime access.'; promo.style.display = 'flex';
                 } else {
                     amt.textContent = '$799'; orig.style.display = 'none';
@@ -332,33 +322,15 @@
                 }
             } else {
                 document.getElementById('btn-annual').classList.add('active'); per.textContent = '/mo'; cta.href = SUITE_ANNUAL;
-                if (active) {
-                    amt.textContent = '$38.86'; orig.textContent = '$58'; orig.style.display = 'inline';
-                    sub.textContent = '~$1.28/day · $466.32 billed annually'; promo.style.display = 'flex';
-                } else {
-                    amt.textContent = '$58'; orig.style.display = 'none';
-                    sub.textContent = '~$1.91/day · $696 billed annually · save $600/yr vs monthly'; promo.style.display = 'none';
-                }
-            }
-        }
-        function applyStaticSale() {
-            const active = saleActive();
-            const of = document.getElementById('orig-fut'), af = document.getElementById('amt-fut'), sf = document.getElementById('sub-fut');
-            const ot = document.getElementById('orig-trd'), at = document.getElementById('amt-trd'), st = document.getElementById('sub-trd');
-            document.querySelectorAll('.promo-sale').forEach(p => p.style.display = active ? 'flex' : 'none');
-            if (active) {
-                of.style.display = 'inline'; af.textContent = '$37.52'; sf.textContent = '~$1.25/day · billed monthly · cancel anytime';
-                ot.style.display = 'inline'; at.textContent = '$58.96'; st.textContent = '~$1.97/day · billed monthly · cancel anytime';
-            } else {
-                of.style.display = 'none'; af.textContent = '$56'; sf.textContent = '~$1.87/day · billed monthly · cancel anytime';
-                ot.style.display = 'none'; at.textContent = '$88'; st.textContent = '~$2.93/day · billed monthly · cancel anytime';
+                promo.style.display = 'none';
+                amt.textContent = '$58'; orig.style.display = 'none';
+                sub.textContent = '~$1.91/day · $696 billed annually · save $600/yr vs monthly';
             }
         }
         const nav = document.querySelector('nav');
         window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 50));
         document.getElementById('yr').textContent = new Date().getFullYear();
         setPricing('annual');
-        applyStaticSale();
         document.querySelectorAll('a[href*="lemonsqueezy.com"]').forEach(b => b.addEventListener('click', () => gtag('event','checkout_click',{event_category:'conversion',event_label:'pricing_page'})));
         document.querySelectorAll('.faq-item').forEach(item => {
             item.querySelector('.faq-q').addEventListener('click', () => {
@@ -368,7 +340,7 @@
             });
         });
         function copyCode(btn) {
-            navigator.clipboard.writeText('LABOURDAY33').then(() => {
+            navigator.clipboard.writeText('LIFETIME25').then(() => {
                 const original = btn.innerHTML;
                 btn.innerHTML = '✓ Copied!';
                 setTimeout(() => { btn.innerHTML = original; }, 1500);
@@ -378,18 +350,11 @@
             function tick(){
                 const now = new Date();
                 const banner = document.getElementById('saleBanner');
-                if (now < SALE_START) {
-                    if (banner) banner.style.display = 'none';
-                    document.documentElement.style.setProperty('--banner-h', '0px');
-                    return;
-                }
                 if (now >= SALE_END) {
                     if (banner) banner.style.display = 'none';
                     document.documentElement.style.setProperty('--banner-h', '0px');
-                    document.querySelectorAll('.promo-sale').forEach(p => p.style.display = 'none');
                     const active = document.querySelector('.toggle-btn.active');
                     if (active) setPricing(active.id.replace('btn-', ''));
-                    applyStaticSale();
                     return;
                 }
                 if (banner) banner.style.display = 'flex';
@@ -403,10 +368,16 @@
                 document.querySelectorAll('.ld-s').forEach(e => e.textContent = pad(s));
                 const active = document.querySelector('.toggle-btn.active');
                 if (active) setPricing(active.id.replace('btn-', ''));
-                applyStaticSale();
             }
             tick(); setInterval(tick, 1000);
         })();
+        if (location.hash === '#lifetime') {
+            setPricing('lifetime');
+            setTimeout(() => {
+                const el = document.getElementById('cards');
+                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }, 100);
+        }
     </script>
     <script>window.lemonSqueezyAffiliateConfig = { store: "trendlineproject" };</script>
     <script src="https://lmsqueezy.com/affiliate.js" defer></script>
