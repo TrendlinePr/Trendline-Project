@@ -41,11 +41,13 @@
         .sale-banner .sale-arrow { transition: transform 0.2s; }
         .sale-banner a:hover .sale-arrow { transform: translateX(3px); }
         @media (max-width: 560px) { :root { --banner-h: 64px; } .sale-banner a { font-size: 0.75rem; line-height: 1.4; } }
-        .promo-code { display: inline-flex; align-items: center; gap: 5px; background: rgba(11,14,19,0.35); border: 1px solid rgba(11,14,19,0.4); border-radius: 6px; padding: 2px 9px; font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; cursor: pointer; transition: background 0.2s; }
-        .promo-code:hover { background: rgba(11,14,19,0.5); }
+        .promo-code { position: relative; display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.55); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: none; border-radius: 6px; padding: 2px 9px; font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; color: #0B0E13; cursor: pointer; transition: background 0.2s, transform 0.15s; }
+        .promo-code::before { content: ''; position: absolute; inset: 0; border-radius: 6px; padding: 1.5px; background: linear-gradient(120deg,#EC4899,#29A8F1); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+        .promo-code:hover { background: rgba(255,255,255,0.75); transform: translateY(-1px); }
         .promo-code .copy-icon { font-size: 0.85em; opacity: 0.8; }
-        .card-code { display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.12); border-radius: 6px; padding: 2px 9px; font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; color: var(--text); cursor: pointer; transition: background 0.2s; font-size: 0.8rem; }
-        .card-code:hover { background: rgba(255,255,255,0.12); }
+        .card-code { position: relative; display: inline-flex; align-items: center; gap: 5px; background: rgba(255,255,255,0.55); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); border: none; border-radius: 6px; padding: 2px 9px; font-family: var(--display); font-weight: 700; letter-spacing: 0.02em; color: #0B0E13; cursor: pointer; transition: background 0.2s, transform 0.15s; font-size: 0.8rem; }
+        .card-code::before { content: ''; position: absolute; inset: 0; border-radius: 6px; padding: 1.5px; background: linear-gradient(120deg,#EC4899,#29A8F1); -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0); -webkit-mask-composite: xor; mask-composite: exclude; pointer-events: none; }
+        .card-code:hover { background: rgba(255,255,255,0.75); transform: translateY(-1px); }
         nav { padding: 20px 0; position: fixed; top: var(--banner-h); left: 0; right: 0; background: transparent; z-index: 1000; transition: background 0.3s ease, backdrop-filter 0.3s ease, top 0.3s ease; }
         nav.scrolled { background: rgba(13, 17, 23, 0.65); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); }
         .nav-inner { display: flex; align-items: center; justify-content: space-between; }
@@ -244,8 +246,8 @@
 </head>
 <body>
     <div class="sale-banner" id="saleBanner">
-        <a href="../pricing/">
-            🏷️ <strong>Labour Day Sale</strong> — 33% off · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LABOURDAY33</span> · Ends in
+        <a href="../pricing/#lifetime">
+            🔥 <strong>Lifetime Sale</strong> — 25% off Pro Suite Lifetime · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LIFETIME25</span> · Ends in
             <span class="ld-d">00</span>d <span class="ld-h">00</span>h <span class="ld-m">00</span>m <span class="ld-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
@@ -462,11 +464,8 @@
                 <h2 class="section-h">Start trading with a plan.</h2>
             </div>
             <div class="price-card" data-reveal>
-                <div class="promo-sale" id="promo">
-                    <span><span class="tag">Sale</span> 33% off — Labour Day</span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LABOURDAY33</span>
-                </div>
-                <div><span class="price-orig" id="orig">$56</span><span class="price-amt" id="amt">$56</span><span class="price-per">/mo</span></div>
-                <div class="price-day" id="sub">~$1.87/day · billed monthly · cancel anytime</div>
+                <div><span class="price-amt">$56</span><span class="price-per">/mo</span></div>
+                <div class="price-day">~$1.87/day · billed monthly · cancel anytime</div>
                 <ul class="price-feats">
                     <li><span class="ck">✓</span> Quantum STS indicator</li>
                     <li><span class="ck">✓</span> Q-STS Backtester</li>
@@ -568,34 +567,20 @@
         });
         document.getElementById('yr').textContent = new Date().getFullYear();
         function copyCode(btn) {
-            navigator.clipboard.writeText('LABOURDAY33').then(() => {
+            navigator.clipboard.writeText('LIFETIME25').then(() => {
                 const original = btn.innerHTML;
                 btn.innerHTML = '✓ Copied!';
                 setTimeout(() => { btn.innerHTML = original; }, 1500);
             });
         }
         (function(){
-            const SALE_START = new Date('2026-09-04T00:00:00');
-            const SALE_END = new Date('2026-09-09T00:00:00');
-            const saleActive = () => { const n = new Date(); return n >= SALE_START && n < SALE_END; };
-            function applySale(){
-                const active = saleActive();
-                const orig = document.getElementById('orig'), amt = document.getElementById('amt'), sub = document.getElementById('sub');
-                const promo = document.getElementById('promo');
-                if (promo) promo.style.display = active ? 'flex' : 'none';
-                if (active) {
-                    orig.style.display = 'inline'; amt.textContent = '$37.52'; sub.textContent = '~$1.25/day · billed monthly · cancel anytime';
-                } else {
-                    orig.style.display = 'none'; amt.textContent = '$56'; sub.textContent = '~$1.87/day · billed monthly · cancel anytime';
-                }
-            }
+            const SALE_END = new Date('2026-10-03T00:00:00');
             function tick(){
                 const now = new Date();
                 const banner = document.getElementById('saleBanner');
-                if (now < SALE_START || now >= SALE_END) {
+                if (now >= SALE_END) {
                     if (banner) banner.style.display = 'none';
                     document.documentElement.style.setProperty('--banner-h', '0px');
-                    applySale();
                     return;
                 }
                 if (banner) banner.style.display = 'flex';
@@ -607,9 +592,8 @@
                 document.querySelectorAll('.ld-h').forEach(e => e.textContent = pad(h));
                 document.querySelectorAll('.ld-m').forEach(e => e.textContent = pad(m));
                 document.querySelectorAll('.ld-s').forEach(e => e.textContent = pad(s));
-                applySale();
             }
-            applySale(); tick(); setInterval(tick, 1000);
+            tick(); setInterval(tick, 1000);
         })();
     </script>
 
