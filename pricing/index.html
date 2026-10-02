@@ -160,7 +160,7 @@
 <body>
     <div class="sale-banner" id="saleBanner">
         <a href="#cards" onclick="setPricing('lifetime')">
-            🔥 <strong>Lifetime Sale</strong> — 25% off Pro Suite Lifetime · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LIFETIME25</span> · Ends in
+            🔥 <strong>Lifetime Sale</strong> — 50% off Pro Suite Lifetime · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LIFETIME50</span> · Ends in
             <span class="ld-d">00</span>d <span class="ld-h">00</span>h <span class="ld-m">00</span>m <span class="ld-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
@@ -238,7 +238,7 @@
                     <button class="toggle-btn toggle-btn-lifetime" id="btn-lifetime" onclick="setPricing('lifetime')">Lifetime</button>
                 </div>
                 <div class="promo promo-sale" id="promo">
-                    <span><span class="tag">Sale</span> 25% off Lifetime</span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LIFETIME25</span>
+                    <span><span class="tag">Sale</span> 50% off Lifetime</span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LIFETIME50</span>
                 </div>
                 <div class="price"><span class="orig" id="orig">$59</span><span class="amt" id="amt">$44</span><span class="per" id="per">/mo</span><p class="price-sub" id="sub">$531 billed annually — was $708 · ~$1.45/day</p></div>
                 <ul class="features">
@@ -298,7 +298,7 @@
         const SUITE_MONTHLY = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/f4f477ca-9352-4dea-95b6-475bd3938744';
         const SUITE_ANNUAL = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/910d7802-ed89-4def-b04a-a1c0b9a7739c';
         const SUITE_LIFETIME = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/76fcac28-443c-49db-b0f7-4aaf882415b7';
-        const SALE_END = new Date('2026-10-03T00:00:00');
+        const SALE_END = new Date('2026-10-16T00:00:00');
         const saleActive = () => new Date() < SALE_END;
         function setPricing(plan) {
             const amt = document.getElementById('amt'), orig = document.getElementById('orig'), per = document.getElementById('per'),
@@ -314,7 +314,7 @@
                 document.getElementById('btn-lifetime').classList.add('active');
                 per.textContent = ' one-time'; cta.href = SUITE_LIFETIME;
                 if (saleActive()) {
-                    amt.textContent = '$599.25'; orig.textContent = '$799'; orig.style.display = 'inline';
+                    amt.textContent = '$399.50'; orig.textContent = '$799'; orig.style.display = 'inline';
                     sub.textContent = 'One payment. Lifetime access.'; promo.style.display = 'flex';
                 } else {
                     amt.textContent = '$799'; orig.style.display = 'none';
@@ -340,7 +340,7 @@
             });
         });
         function copyCode(btn) {
-            navigator.clipboard.writeText('LIFETIME25').then(() => {
+            navigator.clipboard.writeText('LIFETIME50').then(() => {
                 const original = btn.innerHTML;
                 btn.innerHTML = '✓ Copied!';
                 setTimeout(() => { btn.innerHTML = original; }, 1500);
