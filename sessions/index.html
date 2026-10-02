@@ -247,7 +247,7 @@
 <body>
     <div class="sale-banner" id="saleBanner">
         <a href="../pricing/#lifetime">
-            🔥 <strong>Lifetime Sale</strong> — 25% off Pro Suite Lifetime · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LIFETIME25</span> · Ends in
+            🔥 <strong>Lifetime Sale</strong> — 50% off Pro Suite Lifetime · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> LIFETIME50</span> · Ends in
             <span class="ld-d">00</span>d <span class="ld-h">00</span>h <span class="ld-m">00</span>m <span class="ld-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
@@ -567,14 +567,14 @@
         });
         document.getElementById('yr').textContent = new Date().getFullYear();
         function copyCode(btn) {
-            navigator.clipboard.writeText('LIFETIME25').then(() => {
+            navigator.clipboard.writeText('LIFETIME50').then(() => {
                 const original = btn.innerHTML;
                 btn.innerHTML = '✓ Copied!';
                 setTimeout(() => { btn.innerHTML = original; }, 1500);
             });
         }
         (function(){
-            const SALE_END = new Date('2026-10-03T00:00:00');
+            const SALE_END = new Date('2026-10-16T00:00:00');
             function tick(){
                 const now = new Date();
                 const banner = document.getElementById('saleBanner');
