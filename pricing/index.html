@@ -160,7 +160,7 @@
 <body>
     <div class="sale-banner" id="saleBanner">
         <a href="#cards" onclick="setPricing('annual')">
-            🔥 <strong>Sale</strong> — 25% off Annual &amp; Lifetime · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> SAVE25</span> · Ends in
+            🔥 <strong class="s-label">Sale</strong> — <span class="s-pct">25</span>% off Annual &amp; Lifetime · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> <span class="s-code">SAVE25</span></span> · Ends in
             <span class="ld-d">00</span>d <span class="ld-h">00</span>h <span class="ld-m">00</span>m <span class="ld-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
@@ -238,7 +238,7 @@
                     <button class="toggle-btn toggle-btn-lifetime" id="btn-lifetime" onclick="setPricing('lifetime')">Lifetime</button>
                 </div>
                 <div class="promo promo-sale" id="promo">
-                    <span><span class="tag">Sale</span> 25% off Annual &amp; Lifetime</span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> SAVE25</span>
+                    <span><span class="tag">Sale</span> <span class="s-pct">25</span>% off Annual &amp; Lifetime</span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> <span class="s-code">SAVE25</span></span>
                 </div>
                 <div class="price"><span class="orig" id="orig">$59</span><span class="amt" id="amt">$44</span><span class="per" id="per">/mo</span><p class="price-sub" id="sub">$531 billed annually — was $708 · ~$1.45/day</p></div>
                 <ul class="features">
@@ -298,11 +298,25 @@
         const SUITE_MONTHLY = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/f4f477ca-9352-4dea-95b6-475bd3938744';
         const SUITE_ANNUAL = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/910d7802-ed89-4def-b04a-a1c0b9a7739c';
         const SUITE_LIFETIME = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/76fcac28-443c-49db-b0f7-4aaf882415b7';
-        const SALE_END = new Date('2026-11-20T00:00:00');
-        const saleActive = () => new Date() < SALE_END;
+        const SALES = [
+            { start: '2026-10-30T00:00:00', end: '2026-11-07T00:00:00', pct: 25, code: 'SAVE25', label: 'Sale' },
+            { start: '2026-11-20T00:00:00', end: '2026-11-27T00:00:00', pct: 33, code: 'SAVE33', label: 'Sale' },
+            { start: '2026-11-27T00:00:00', end: '2026-12-01T00:00:00', pct: 50, code: 'SAVE50', label: 'Black Friday Sale' }
+        ];
+        function currentSale() { const n = new Date(); return SALES.find(s => n >= new Date(s.start) && n < new Date(s.end)) || null; }
+        function copyCode(btn) {
+            const sale = currentSale(); if (!sale) return;
+            navigator.clipboard.writeText(sale.code).then(() => {
+                const original = btn.innerHTML;
+                btn.innerHTML = '✓ Copied!';
+                setTimeout(() => { btn.innerHTML = original; }, 1500);
+            });
+        }
+        const money = n => '$' + (Math.round(n * 100) / 100).toFixed(2).replace(/\.00$/, '');
         function setPricing(plan) {
             const amt = document.getElementById('amt'), orig = document.getElementById('orig'), per = document.getElementById('per'),
                   sub = document.getElementById('sub'), cta = document.getElementById('suite-cta'), promo = document.getElementById('promo');
+            const sale = currentSale();
             ['btn-monthly','btn-annual','btn-lifetime'].forEach(id => document.getElementById(id).classList.remove('active'));
             if (plan === 'monthly') {
                 document.getElementById('btn-monthly').classList.add('active');
@@ -313,21 +327,18 @@
             } else if (plan === 'lifetime') {
                 document.getElementById('btn-lifetime').classList.add('active');
                 per.textContent = ' one-time'; cta.href = SUITE_LIFETIME;
-                if (saleActive()) {
-                    amt.textContent = '$599.25'; orig.textContent = '$799'; orig.style.display = 'inline';
-                    sub.textContent = 'One payment. Lifetime access.'; promo.style.display = 'flex';
-                } else {
-                    amt.textContent = '$799'; orig.style.display = 'none';
-                    sub.textContent = 'One payment. Lifetime access.'; promo.style.display = 'none';
-                }
+                sub.textContent = 'One payment. Lifetime access.';
+                if (sale) { amt.textContent = money(799 * (1 - sale.pct / 100)); orig.textContent = '$799'; orig.style.display = 'inline'; promo.style.display = 'flex'; }
+                else { amt.textContent = '$799'; orig.style.display = 'none'; promo.style.display = 'none'; }
             } else {
                 document.getElementById('btn-annual').classList.add('active'); per.textContent = '/mo'; cta.href = SUITE_ANNUAL;
-                if (saleActive()) {
-                    amt.textContent = '$43.50'; orig.textContent = '$58'; orig.style.display = 'inline';
-                    sub.textContent = '$522 billed annually — was $696 · ~$1.43/day'; promo.style.display = 'flex';
+                if (sale) {
+                    const total = 696 * (1 - sale.pct / 100);
+                    amt.textContent = money(total / 12); orig.textContent = '$58'; orig.style.display = 'inline';
+                    sub.textContent = money(total) + ' billed annually — was $696 · ~$' + (total / 365).toFixed(2) + '/day'; promo.style.display = 'flex';
                 } else {
-                    amt.textContent = '$58'; orig.style.display = 'none';
-                    sub.textContent = '~$1.91/day · $696 billed annually · save $600/yr vs monthly'; promo.style.display = 'none';
+                    amt.textContent = '$58'; orig.style.display = 'none'; promo.style.display = 'none';
+                    sub.textContent = '~$1.91/day · $696 billed annually · save $600/yr vs monthly';
                 }
             }
         }
@@ -343,44 +354,32 @@
                 if (!open) item.classList.add('active');
             });
         });
-        function copyCode(btn) {
-            navigator.clipboard.writeText('SAVE25').then(() => {
-                const original = btn.innerHTML;
-                btn.innerHTML = '✓ Copied!';
-                setTimeout(() => { btn.innerHTML = original; }, 1500);
-            });
-        }
+        function saleHook() { const active = document.querySelector('.toggle-btn.active'); if (active) setPricing(active.id.replace('btn-', '')); }
         (function(){
+            const pad = v => String(v).padStart(2,'0');
+            const root = document.documentElement;
+            function setAll(sel, txt) { document.querySelectorAll(sel).forEach(e => e.textContent = txt); }
             function tick(){
-                const now = new Date();
-                const banner = document.getElementById('saleBanner');
-                if (now >= SALE_END) {
+                const now = new Date(), sale = currentSale(), banner = document.getElementById('saleBanner');
+                if (!sale) {
                     if (banner) banner.style.display = 'none';
-                    document.documentElement.style.setProperty('--banner-h', '0px');
-                    const active = document.querySelector('.toggle-btn.active');
-                    if (active) setPricing(active.id.replace('btn-', ''));
+                    root.style.setProperty('--banner-h', '0px');
+                    saleHook(null);
                     return;
                 }
                 if (banner) banner.style.display = 'flex';
-                document.documentElement.style.setProperty('--banner-h', '44px');
-                const diff = SALE_END - now;
-                const d=Math.floor(diff/86400000), h=Math.floor(diff%86400000/3600000), m=Math.floor(diff%3600000/60000), s=Math.floor(diff%60000/1000);
-                const pad = v => String(v).padStart(2,'0');
-                document.querySelectorAll('.ld-d').forEach(e => e.textContent = pad(d));
-                document.querySelectorAll('.ld-h').forEach(e => e.textContent = pad(h));
-                document.querySelectorAll('.ld-m').forEach(e => e.textContent = pad(m));
-                document.querySelectorAll('.ld-s').forEach(e => e.textContent = pad(s));
-                const active = document.querySelector('.toggle-btn.active');
-                if (active) setPricing(active.id.replace('btn-', ''));
+                root.style.removeProperty('--banner-h');
+                setAll('.s-label', sale.label); setAll('.s-pct', sale.pct); setAll('.s-code', sale.code);
+                const diff = new Date(sale.end) - now;
+                setAll('.ld-d', pad(Math.floor(diff/86400000))); setAll('.ld-h', pad(Math.floor(diff%86400000/3600000)));
+                setAll('.ld-m', pad(Math.floor(diff%3600000/60000))); setAll('.ld-s', pad(Math.floor(diff%60000/1000)));
+                saleHook(sale);
             }
             tick(); setInterval(tick, 1000);
         })();
         if (location.hash === '#lifetime') {
             setPricing('lifetime');
-            setTimeout(() => {
-                const el = document.getElementById('cards');
-                if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-            }, 100);
+            setTimeout(() => { const el = document.getElementById('cards'); if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' }); }, 100);
         }
     </script>
     <script>window.lemonSqueezyAffiliateConfig = { store: "trendlineproject" };</script>
