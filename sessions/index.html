@@ -247,7 +247,7 @@
 <body>
     <div class="sale-banner" id="saleBanner">
         <a href="../pricing/#cards">
-            🔥 <strong>Sale</strong> — 25% off Annual &amp; Lifetime · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> SAVE25</span> · Ends in
+            🔥 <strong class="s-label">Sale</strong> — <span class="s-pct">25</span>% off Annual &amp; Lifetime · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> <span class="s-code">SAVE25</span></span> · Ends in
             <span class="ld-d">00</span>d <span class="ld-h">00</span>h <span class="ld-m">00</span>m <span class="ld-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
@@ -566,32 +566,40 @@
             });
         });
         document.getElementById('yr').textContent = new Date().getFullYear();
+        const SALES = [
+            { start: '2026-10-30T00:00:00', end: '2026-11-07T00:00:00', pct: 25, code: 'SAVE25', label: 'Sale' },
+            { start: '2026-11-20T00:00:00', end: '2026-11-27T00:00:00', pct: 33, code: 'SAVE33', label: 'Sale' },
+            { start: '2026-11-27T00:00:00', end: '2026-12-01T00:00:00', pct: 50, code: 'SAVE50', label: 'Black Friday Sale' }
+        ];
+        function currentSale() { const n = new Date(); return SALES.find(s => n >= new Date(s.start) && n < new Date(s.end)) || null; }
         function copyCode(btn) {
-            navigator.clipboard.writeText('SAVE25').then(() => {
+            const sale = currentSale(); if (!sale) return;
+            navigator.clipboard.writeText(sale.code).then(() => {
                 const original = btn.innerHTML;
                 btn.innerHTML = '✓ Copied!';
                 setTimeout(() => { btn.innerHTML = original; }, 1500);
             });
         }
+        function saleHook() {}
         (function(){
-            const SALE_END = new Date('2026-11-20T00:00:00');
+            const pad = v => String(v).padStart(2,'0');
+            const root = document.documentElement;
+            function setAll(sel, txt) { document.querySelectorAll(sel).forEach(e => e.textContent = txt); }
             function tick(){
-                const now = new Date();
-                const banner = document.getElementById('saleBanner');
-                if (now >= SALE_END) {
+                const now = new Date(), sale = currentSale(), banner = document.getElementById('saleBanner');
+                if (!sale) {
                     if (banner) banner.style.display = 'none';
-                    document.documentElement.style.setProperty('--banner-h', '0px');
+                    root.style.setProperty('--banner-h', '0px');
+                    saleHook(null);
                     return;
                 }
                 if (banner) banner.style.display = 'flex';
-                document.documentElement.style.setProperty('--banner-h', '44px');
-                const diff = SALE_END - now;
-                const d=Math.floor(diff/86400000), h=Math.floor(diff%86400000/3600000), m=Math.floor(diff%3600000/60000), s=Math.floor(diff%60000/1000);
-                const pad = v => String(v).padStart(2,'0');
-                document.querySelectorAll('.ld-d').forEach(e => e.textContent = pad(d));
-                document.querySelectorAll('.ld-h').forEach(e => e.textContent = pad(h));
-                document.querySelectorAll('.ld-m').forEach(e => e.textContent = pad(m));
-                document.querySelectorAll('.ld-s').forEach(e => e.textContent = pad(s));
+                root.style.removeProperty('--banner-h');
+                setAll('.s-label', sale.label); setAll('.s-pct', sale.pct); setAll('.s-code', sale.code);
+                const diff = new Date(sale.end) - now;
+                setAll('.ld-d', pad(Math.floor(diff/86400000))); setAll('.ld-h', pad(Math.floor(diff%86400000/3600000)));
+                setAll('.ld-m', pad(Math.floor(diff%3600000/60000))); setAll('.ld-s', pad(Math.floor(diff%60000/1000)));
+                saleHook(sale);
             }
             tick(); setInterval(tick, 1000);
         })();
