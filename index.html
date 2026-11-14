@@ -313,7 +313,7 @@
 <body>
     <div class="sale-banner" id="saleBanner">
         <a href="pricing/#cards">
-            🔥 <strong class="s-label">Sale</strong> — <span class="s-pct">25</span>% off Annual &amp; Lifetime · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> <span class="s-code">SAVE25</span></span> · Ends in
+            🔥 <strong class="s-label">Sale</strong> — <span class="s-pct">25</span>% off Annual &amp; Lifetime · Code: <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> <span class="s-code">EVERYTHING25</span></span> · Ends in
             <span class="ld-d">00</span>d <span class="ld-h">00</span>h <span class="ld-m">00</span>m <span class="ld-s">00</span>s
             <span class="sale-arrow">→</span>
         </a>
@@ -585,8 +585,8 @@
             document.querySelectorAll('.diag-side').forEach(function(card) { card.addEventListener('click', function() { gtag('event', 'path_click', { 'event_category': 'navigation', 'event_label': card.getAttribute('href') }); }); });
         });
         const SALES = [
-            { start: '2026-10-30T00:00:00', end: '2026-11-07T00:00:00', pct: 25, code: 'SAVE25', label: 'Sale' },
-            { start: '2026-11-14T00:00:00', end: '2026-11-20T00:00:00', pct: 25, code: 'SAVE25', label: 'Sale' },
+            { start: '2026-10-30T00:00:00', end: '2026-11-07T00:00:00', pct: 25, code: 'EVERYTHING25', label: 'Sale' },
+            { start: '2026-11-14T00:00:00', end: '2026-11-20T00:00:00', pct: 25, code: 'EVERYTHING25', label: 'Sale' },
             { start: '2026-11-20T00:00:00', end: '2026-11-27T00:00:00', pct: 33, code: 'SAVE33', label: 'Sale' },
             { start: '2026-11-27T00:00:00', end: '2026-12-01T00:00:00', pct: 50, code: 'SAVE50', label: 'Black Friday Sale' }
         ];
