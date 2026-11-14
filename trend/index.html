@@ -198,6 +198,8 @@
         .price-amt { font-family: var(--display); font-size: 3rem; font-weight: 600; letter-spacing: -0.03em; }
         .price-per { font-size: 1rem; color: var(--text-muted); }
         .price-day { font-size: 0.85rem; color: var(--text-muted); margin: 6px 0 24px; }
+        .price-promo { display: none; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; margin: 0 0 18px; border-radius: 10px; padding: 9px 12px; background: linear-gradient(135deg, rgba(41,168,241,0.12), rgba(236,72,153,0.12)); border: 1px solid rgba(236,72,153,0.25); font-size: 0.78rem; color: var(--text); text-align: left; }
+        .price-promo .tag { background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.3); color: #FF9CC6; font-size: 0.6rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 8px; border-radius: 100px; margin-right: 4px; }
         .price-orig { font-size: 1.4rem; text-decoration: line-through; color: var(--text-muted); opacity: 0.6; margin-right: 8px; display: none; }
         .promo-sale { margin: 0 0 18px; border-radius: 10px; padding: 9px 12px; background: linear-gradient(135deg, rgba(41,168,241,0.12), rgba(236,72,153,0.12)); border: 1px solid rgba(236,72,153,0.25); font-size: 0.72rem; color: var(--text); display: flex; align-items: center; justify-content: space-between; gap: 8px; flex-wrap: wrap; }
         .promo-sale .tag { background: rgba(236,72,153,0.15); border: 1px solid rgba(236,72,153,0.3); color: #FF9CC6; font-size: 0.58rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em; padding: 3px 7px; border-radius: 100px; }
@@ -560,6 +562,7 @@
                 <h2 class="section-h">Start trading the trend.</h2>
             </div>
             <div class="price-card" data-reveal>
+                <div class="price-promo" id="pPromo" style="display:none"><span><span class="tag">Sale</span> <span class="s-pct">25</span>% off <span class="s-what">everything</span></span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> <span class="s-code">EVERYTHING25</span></span></div>
                 <div><span class="price-orig" id="pOrig">$88</span><span class="price-amt" id="pAmt">$88</span><span class="price-per">/mo</span></div>
                 <div class="price-day" id="pDay">~$2.93/day · billed monthly · cancel anytime</div>
                 <ul class="price-feats">
@@ -683,6 +686,7 @@
             const money = n => '$' + (Math.round(n * 100) / 100).toFixed(2).replace(/\.00$/, '');
             const o = document.getElementById('pOrig'), a = document.getElementById('pAmt'), d = document.getElementById('pDay');
             if (!o || !a || !d) return;
+            const pr = document.getElementById('pPromo'); if (pr) pr.style.display = (sale && sale.what === 'everything') ? 'flex' : 'none';
             if (sale && sale.what === 'everything') {
                 a.textContent = money(88 * (1 - sale.pct / 100)); o.style.display = 'inline';
                 d.textContent = 'First month, then $88/mo · cancel anytime';
