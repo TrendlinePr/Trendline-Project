@@ -195,6 +195,7 @@
                 <div class="card-kicker"><svg class="ico" viewBox="0 0 24 24" fill="none"><line x1="5" y1="3" x2="5" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="3" x2="19" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="9" y="9" width="2.4" height="7" rx="0.6" fill="currentColor"/><rect x="13" y="6" width="2.4" height="9" rx="0.6" fill="currentColor"/></svg> Session Trading</div>
                 <h2>Quantum STS</h2>
                 <p class="card-desc">For futures &amp; prop firm traders. Session levels and the Opening Range Breakout.</p>
+                <div class="promo promo-sale" id="stsPromo" style="display:none"><span><span class="tag">Sale</span> <span class="s-pct">25</span>% off <span class="s-what">everything</span></span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> <span class="s-code">EVERYTHING25</span></span></div>
                 <div class="price"><span class="orig" id="stsOrig">$56</span><span class="amt" id="stsAmt">$56</span><span class="per">/mo</span><p class="price-sub" id="stsSub">~$1.87/day · billed monthly · cancel anytime</p></div>
                 <ul class="features">
                     <li><span class="ck">✓</span> Quantum STS indicator</li>
@@ -212,6 +213,7 @@
                 <div class="card-kicker"><svg class="ico" viewBox="0 0 24 24" fill="none"><polyline points="3,17 9,11 13,14 21,5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Trend Trading</div>
                 <h2>Quantum Ribbon Pro</h2>
                 <p class="card-desc">For trend traders. Backtest, Scan, Trade — one connected system.</p>
+                <div class="promo promo-sale" id="qrPromo" style="display:none"><span><span class="tag">Sale</span> <span class="s-pct">25</span>% off <span class="s-what">everything</span></span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> <span class="s-code">EVERYTHING25</span></span></div>
                 <div class="price"><span class="orig" id="qrOrig">$88</span><span class="amt" id="qrAmt">$88</span><span class="per">/mo</span><p class="price-sub" id="qrSub">~$2.93/day · billed monthly · cancel anytime</p></div>
                 <ul class="features">
                     <li><span class="ck">✓</span> Quantum Ribbon Pro</li>
@@ -361,7 +363,8 @@
         });
         function renderSingles(sale) {
             [['sts', 56, '~$1.87/day · billed monthly · cancel anytime'], ['qr', 88, '~$2.93/day · billed monthly · cancel anytime']].forEach(([k, base, day]) => {
-                const o = document.getElementById(k + 'Orig'), a = document.getElementById(k + 'Amt'), d = document.getElementById(k + 'Sub');
+                const o = document.getElementById(k + 'Orig'), a = document.getElementById(k + 'Amt'), d = document.getElementById(k + 'Sub'), pr = document.getElementById(k + 'Promo');
+                pr.style.display = (sale && sale.what === 'everything') ? 'flex' : 'none';
                 if (sale && sale.what === 'everything') { a.textContent = money(base * (1 - sale.pct / 100)); o.style.display = 'inline'; d.textContent = 'First month, then $' + base + '/mo · cancel anytime'; }
                 else { a.textContent = '$' + base; o.style.display = 'none'; d.textContent = day; }
             });
