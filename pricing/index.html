@@ -160,8 +160,7 @@
 <body>
     <div class="sale-banner" id="saleBanner">
         <a href="#cards" onclick="setPricing('annual')">
-            🔥 <strong class="s-label">Sale</strong> <span>— <span class="s-pct">25</span>% off <span class="s-what">everything</span> · Code:</span> <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> <span class="s-code">EVERYTHING25</span></span> · Ends in
-            <span class="ld-d">00</span>d <span class="ld-h">00</span>h <span class="ld-m">00</span>m <span class="ld-s">00</span>s
+            🔥 <strong class="s-label">Black Friday Sale</strong> <span>— up to <span class="s-max">50</span>% off all plans</span> <span class="s-count" style="display:none"> · Ends in <span class="ld-d">00</span>d <span class="ld-h">00</span>h <span class="ld-m">00</span>m <span class="ld-s">00</span>s</span>
             <span class="sale-arrow">→</span>
         </a>
     </div>
@@ -195,7 +194,6 @@
                 <div class="card-kicker"><svg class="ico" viewBox="0 0 24 24" fill="none"><line x1="5" y1="3" x2="5" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><line x1="19" y1="3" x2="19" y2="21" stroke="currentColor" stroke-width="2" stroke-linecap="round"/><rect x="9" y="9" width="2.4" height="7" rx="0.6" fill="currentColor"/><rect x="13" y="6" width="2.4" height="9" rx="0.6" fill="currentColor"/></svg> Session Trading</div>
                 <h2>Quantum STS</h2>
                 <p class="card-desc">For futures &amp; prop firm traders. Session levels and the Opening Range Breakout.</p>
-                <div class="promo promo-sale" id="stsPromo" style="display:none"><span><span class="tag">Sale</span> <span class="s-pct">25</span>% off <span class="s-what">everything</span></span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> <span class="s-code">EVERYTHING25</span></span></div>
                 <div class="price"><span class="orig" id="stsOrig">$56</span><span class="amt" id="stsAmt">$56</span><span class="per">/mo</span><p class="price-sub" id="stsSub">~$1.87/day · billed monthly · cancel anytime</p></div>
                 <ul class="features">
                     <li><span class="ck">✓</span> Quantum STS indicator</li>
@@ -213,7 +211,6 @@
                 <div class="card-kicker"><svg class="ico" viewBox="0 0 24 24" fill="none"><polyline points="3,17 9,11 13,14 21,5" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg> Trend Trading</div>
                 <h2>Quantum Ribbon Pro</h2>
                 <p class="card-desc">For trend traders. Backtest, Scan, Trade — one connected system.</p>
-                <div class="promo promo-sale" id="qrPromo" style="display:none"><span><span class="tag">Sale</span> <span class="s-pct">25</span>% off <span class="s-what">everything</span></span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> <span class="s-code">EVERYTHING25</span></span></div>
                 <div class="price"><span class="orig" id="qrOrig">$88</span><span class="amt" id="qrAmt">$88</span><span class="per">/mo</span><p class="price-sub" id="qrSub">~$2.93/day · billed monthly · cancel anytime</p></div>
                 <ul class="features">
                     <li><span class="ck">✓</span> Quantum Ribbon Pro</li>
@@ -238,9 +235,6 @@
                     <button class="toggle-btn" id="btn-monthly" onclick="setPricing('monthly')">Monthly</button>
                     <button class="toggle-btn active" id="btn-annual" onclick="setPricing('annual')">Annual</button>
                     <button class="toggle-btn toggle-btn-lifetime" id="btn-lifetime" onclick="setPricing('lifetime')">Lifetime</button>
-                </div>
-                <div class="promo promo-sale" id="promo">
-                    <span><span class="tag">Sale</span> <span class="s-pct">25</span>% off <span class="s-what">everything</span></span><span class="card-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> <span class="s-code">EVERYTHING25</span></span>
                 </div>
                 <div class="price"><span class="orig" id="orig">$59</span><span class="amt" id="amt">$44</span><span class="per" id="per">/mo</span><p class="price-sub" id="sub">$531 billed annually — was $708 · ~$1.45/day</p></div>
                 <ul class="features">
@@ -301,51 +295,43 @@
         const SUITE_ANNUAL = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/910d7802-ed89-4def-b04a-a1c0b9a7739c';
         const SUITE_LIFETIME = 'https://trendlineproject.lemonsqueezy.com/checkout/buy/76fcac28-443c-49db-b0f7-4aaf882415b7';
         const SALES = [
-            { start: '2026-10-30T00:00:00', end: '2026-11-07T00:00:00', pct: 25, code: 'EVERYTHING25', label: 'Sale', what: 'everything' },
-            { start: '2026-11-14T00:00:00', end: '2026-11-20T00:00:00', pct: 25, code: 'EVERYTHING25', label: 'Sale', what: 'everything' },
-            { start: '2026-11-20T00:00:00', end: '2026-11-27T00:00:00', pct: 33, code: 'SAVE33', label: 'Sale', what: 'Annual & Lifetime' },
-            { start: '2026-11-27T00:00:00', end: '2026-12-01T00:00:00', pct: 50, code: 'SAVE50', label: 'Black Friday Sale', what: 'Annual & Lifetime' }
+            { start: '2026-11-18T00:00:00', end: '2026-12-02T00:00:00', label: 'Black Friday Sale', countdownFrom: '2026-11-27T00:00:00', monthly: 20, annual: 40, lifetime: 50 }
         ];
         function currentSale() { const n = new Date(); return SALES.find(s => n >= new Date(s.start) && n < new Date(s.end)) || null; }
-        function copyCode(btn) {
-            const sale = currentSale(); if (!sale) return;
-            navigator.clipboard.writeText(sale.code).then(() => {
-                const original = btn.innerHTML;
-                btn.innerHTML = '✓ Copied!';
-                setTimeout(() => { btn.innerHTML = original; }, 1500);
-            });
-        }
         const money = n => '$' + (Math.round(n * 100) / 100).toFixed(2).replace(/\.00$/, '');
         function setPricing(plan) {
             const amt = document.getElementById('amt'), orig = document.getElementById('orig'), per = document.getElementById('per'),
-                  sub = document.getElementById('sub'), cta = document.getElementById('suite-cta'), promo = document.getElementById('promo');
+                  sub = document.getElementById('sub'), cta = document.getElementById('suite-cta');
             const sale = currentSale();
             ['btn-monthly','btn-annual','btn-lifetime'].forEach(id => document.getElementById(id).classList.remove('active'));
             if (plan === 'monthly') {
                 document.getElementById('btn-monthly').classList.add('active');
                 per.textContent = '/mo'; cta.href = SUITE_MONTHLY;
-                if (sale && sale.what === 'everything') {
-                    amt.textContent = money(108 * (1 - sale.pct / 100)); orig.textContent = '$108'; orig.style.display = 'inline';
-                    sub.textContent = 'First month, then $108/mo · cancel anytime'; promo.style.display = 'flex';
+                if (sale) {
+                    const m = sale.monthly;
+                    amt.textContent = money(108 * (1 - m / 100)); orig.textContent = '$108'; orig.style.display = 'inline';
+                    sub.textContent = '~$' + (108 * (1 - m / 100) / 30).toFixed(2) + '/day · billed monthly · cancel anytime';
                 } else {
-                    amt.textContent = '$108'; orig.style.display = 'none'; promo.style.display = 'none';
-                    sub.textContent = '~$3.60/day · billed monthly · cancel anytime';
+                    amt.textContent = '$108'; orig.style.display = 'none';
+                    sub.textContent = '~$3.60/day · billed monthly · cancel anytime'; 
                 }
             } else if (plan === 'lifetime') {
                 document.getElementById('btn-lifetime').classList.add('active');
                 per.textContent = ' one-time'; cta.href = SUITE_LIFETIME;
                 sub.textContent = 'One payment. Lifetime access.';
-                if (sale) { amt.textContent = money(799 * (1 - sale.pct / 100)); orig.textContent = '$799'; orig.style.display = 'inline'; promo.style.display = 'flex'; }
-                else { amt.textContent = '$799'; orig.style.display = 'none'; promo.style.display = 'none'; }
+                if (sale) {
+                    const l = sale.lifetime;
+                    amt.textContent = money(799 * (1 - l / 100)); orig.textContent = '$799'; orig.style.display = 'inline';
+                } else { amt.textContent = '$799'; orig.style.display = 'none';  }
             } else {
                 document.getElementById('btn-annual').classList.add('active'); per.textContent = '/mo'; cta.href = SUITE_ANNUAL;
                 if (sale) {
-                    const total = 696 * (1 - sale.pct / 100);
+                    const l = sale.annual, total = 696 * (1 - l / 100);
                     amt.textContent = money(total / 12); orig.textContent = '$58'; orig.style.display = 'inline';
-                    sub.textContent = money(total) + ' billed annually — was $696 · ~$' + (total / 365).toFixed(2) + '/day'; promo.style.display = 'flex';
+                    sub.textContent = money(total) + ' billed annually — was $696 · ~$' + (total / 365).toFixed(2) + '/day';
                 } else {
-                    amt.textContent = '$58'; orig.style.display = 'none'; promo.style.display = 'none';
-                    sub.textContent = '~$1.91/day · $696 billed annually · save $600/yr vs monthly';
+                    amt.textContent = '$58'; orig.style.display = 'none';
+                    sub.textContent = '~$1.91/day · $696 billed annually · save $600/yr vs monthly'; 
                 }
             }
         }
@@ -363,9 +349,8 @@
         });
         function renderSingles(sale) {
             [['sts', 56, '~$1.87/day · billed monthly · cancel anytime'], ['qr', 88, '~$2.93/day · billed monthly · cancel anytime']].forEach(([k, base, day]) => {
-                const o = document.getElementById(k + 'Orig'), a = document.getElementById(k + 'Amt'), d = document.getElementById(k + 'Sub'), pr = document.getElementById(k + 'Promo');
-                pr.style.display = (sale && sale.what === 'everything') ? 'flex' : 'none';
-                if (sale && sale.what === 'everything') { a.textContent = money(base * (1 - sale.pct / 100)); o.style.display = 'inline'; d.textContent = 'First month, then $' + base + '/mo · cancel anytime'; }
+                const o = document.getElementById(k + 'Orig'), a = document.getElementById(k + 'Amt'), d = document.getElementById(k + 'Sub');
+                if (sale) { a.textContent = money(base * (1 - sale.monthly / 100)); o.style.display = 'inline'; d.textContent = '~$' + (base * (1 - sale.monthly / 100) / 30).toFixed(2) + '/day · billed monthly · cancel anytime'; }
                 else { a.textContent = '$' + base; o.style.display = 'none'; d.textContent = day; }
             });
         }
@@ -384,10 +369,12 @@
                 }
                 if (banner) banner.style.display = 'flex';
                 root.style.removeProperty('--banner-h');
-                setAll('.s-label', sale.label); setAll('.s-what', sale.what); setAll('.s-pct', sale.pct); setAll('.s-code', sale.code);
+                setAll('.s-label', sale.label); setAll('.s-max', Math.max(sale.monthly, sale.annual, sale.lifetime));
+                setAll('.t-m', sale.monthly + '% off Monthly');
                 const diff = new Date(sale.end) - now;
                 setAll('.ld-d', pad(Math.floor(diff/86400000))); setAll('.ld-h', pad(Math.floor(diff%86400000/3600000)));
                 setAll('.ld-m', pad(Math.floor(diff%3600000/60000))); setAll('.ld-s', pad(Math.floor(diff%60000/1000)));
+                document.querySelectorAll('.s-count').forEach(e => e.style.display = now >= new Date(sale.countdownFrom) ? 'inline' : 'none');
                 saleHook(sale);
             }
             tick(); setInterval(tick, 1000);
