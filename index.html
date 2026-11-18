@@ -313,8 +313,7 @@
 <body>
     <div class="sale-banner" id="saleBanner">
         <a href="pricing/#cards">
-            🔥 <strong class="s-label">Sale</strong> <span>— <span class="s-pct">25</span>% off <span class="s-what">everything</span> · Code:</span> <span class="promo-code" onclick="event.stopPropagation(); event.preventDefault(); copyCode(this)"><span class="copy-icon">⧉</span> <span class="s-code">EVERYTHING25</span></span> · Ends in
-            <span class="ld-d">00</span>d <span class="ld-h">00</span>h <span class="ld-m">00</span>m <span class="ld-s">00</span>s
+            🔥 <strong class="s-label">Black Friday Sale</strong> <span>— up to <span class="s-max">50</span>% off all plans</span> <span class="s-count" style="display:none"> · Ends in <span class="ld-d">00</span>d <span class="ld-h">00</span>h <span class="ld-m">00</span>m <span class="ld-s">00</span>s</span>
             <span class="sale-arrow">→</span>
         </a>
     </div>
@@ -585,26 +584,16 @@
             document.querySelectorAll('.diag-side').forEach(function(card) { card.addEventListener('click', function() { gtag('event', 'path_click', { 'event_category': 'navigation', 'event_label': card.getAttribute('href') }); }); });
         });
         const SALES = [
-            { start: '2026-10-30T00:00:00', end: '2026-11-07T00:00:00', pct: 25, code: 'EVERYTHING25', label: 'Sale', what: 'everything' },
-            { start: '2026-11-14T00:00:00', end: '2026-11-20T00:00:00', pct: 25, code: 'EVERYTHING25', label: 'Sale', what: 'everything' },
-            { start: '2026-11-20T00:00:00', end: '2026-11-27T00:00:00', pct: 33, code: 'SAVE33', label: 'Sale', what: 'Annual & Lifetime' },
-            { start: '2026-11-27T00:00:00', end: '2026-12-01T00:00:00', pct: 50, code: 'SAVE50', label: 'Black Friday Sale', what: 'Annual & Lifetime' }
+            { start: '2026-11-18T00:00:00', end: '2026-12-02T00:00:00', label: 'Black Friday Sale', countdownFrom: '2026-11-27T00:00:00', monthly: 20, annual: 40, lifetime: 50 }
         ];
         function currentSale() { const n = new Date(); return SALES.find(s => n >= new Date(s.start) && n < new Date(s.end)) || null; }
-        function copyCode(btn) {
-            const sale = currentSale(); if (!sale) return;
-            navigator.clipboard.writeText(sale.code).then(() => {
-                const original = btn.innerHTML;
-                btn.innerHTML = '✓ Copied!';
-                setTimeout(() => { btn.innerHTML = original; }, 1500);
-            });
-        }
+        const money = n => '$' + (Math.round(n * 100) / 100).toFixed(2).replace(/\.00$/, '');
         function saleHook(sale) {
             const badge = document.getElementById('suiteSaleBadge'), sub = document.getElementById('suiteSaleSub');
             const normal = 'All six tools — both systems, one price. Save over buying each separately.';
             if (!sale) { if (badge) badge.style.display = 'none'; if (sub) sub.textContent = normal; return; }
-            if (badge) { badge.textContent = sale.pct + '% OFF ' + sale.what.toUpperCase(); badge.style.display = 'inline-flex'; }
-            if (sub) sub.textContent = normal.replace(/\.$/, '') + ' — plus ' + sale.pct + '% off ' + (sale.what === 'everything' ? 'everything' : 'Annual and Lifetime') + ' right now.';
+            if (badge) { badge.textContent = 'UP TO ' + Math.max(sale.monthly, sale.annual, sale.lifetime) + '% OFF ALL PLANS'; badge.style.display = 'inline-flex'; }
+            if (sub) sub.textContent = normal.replace(/\.$/, '') + ' — plus up to ' + Math.max(sale.monthly, sale.annual, sale.lifetime) + '% off right now.';
         }
         (function(){
             const pad = v => String(v).padStart(2,'0');
@@ -620,10 +609,12 @@
                 }
                 if (banner) banner.style.display = 'flex';
                 root.style.removeProperty('--banner-h');
-                setAll('.s-label', sale.label); setAll('.s-what', sale.what); setAll('.s-pct', sale.pct); setAll('.s-code', sale.code);
+                setAll('.s-label', sale.label); setAll('.s-max', Math.max(sale.monthly, sale.annual, sale.lifetime));
+                setAll('.t-m', sale.monthly + '% off Monthly');
                 const diff = new Date(sale.end) - now;
                 setAll('.ld-d', pad(Math.floor(diff/86400000))); setAll('.ld-h', pad(Math.floor(diff%86400000/3600000)));
                 setAll('.ld-m', pad(Math.floor(diff%3600000/60000))); setAll('.ld-s', pad(Math.floor(diff%60000/1000)));
+                document.querySelectorAll('.s-count').forEach(e => e.style.display = now >= new Date(sale.countdownFrom) ? 'inline' : 'none');
                 saleHook(sale);
             }
             tick(); setInterval(tick, 1000);
